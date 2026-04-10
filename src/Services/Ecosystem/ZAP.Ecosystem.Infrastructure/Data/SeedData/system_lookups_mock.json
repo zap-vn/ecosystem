@@ -1,0 +1,14 @@
+[
+  {
+    "code": "ACTIVE",
+    "name": "Active Status",
+    "description": "Indicates active component",
+    "is_system": true
+  },
+  {
+    "code": "INACTIVE",
+    "name": "Inactive Status",
+    "description": "Indicates inactive or disabled component",
+    "is_system": true
+  }
+]
