@@ -12,10 +12,12 @@
   <Folder Name="/src/Services/Ecosystem/App/">
     <Project Path="src/Services/Ecosystem/App/ZAP.Ecosystem.API.App/ZAP.Ecosystem.API.App.csproj" />
     <Project Path="src/Services/Ecosystem/App/ZAP.Ecosystem.Application.App/ZAP.Ecosystem.Application.App.csproj" />
+    <Project Path="src/Services/Ecosystem/App/ZAP.Ecosystem.App.UnitTests/ZAP.Ecosystem.App.UnitTests.csproj" />
   </Folder>
   <Folder Name="/src/Services/Ecosystem/CRM/">
     <Project Path="src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/ZAP.Ecosystem.API.CRM.csproj" />
     <Project Path="src/Services/Ecosystem/CRM/ZAP.Ecosystem.Application.CRM/ZAP.Ecosystem.Application.CRM.csproj" />
+    <Project Path="src/Services/Ecosystem/CRM/ZAP.Ecosystem.CRM.UnitTests/ZAP.Ecosystem.CRM.UnitTests.csproj" />
   </Folder>
   <Folder Name="/src/Services/Identity/">
     <Project Path="src/Services/Identity/ZAP.Ecosystem.API.Identity/ZAP.Ecosystem.API.Identity.csproj" />
