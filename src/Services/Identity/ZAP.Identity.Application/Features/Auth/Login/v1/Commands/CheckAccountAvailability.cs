@@ -1,6 +1,6 @@
 using MediatR;
 using System.Text.Json.Serialization;
-using ZAP.Identity.Application.Features.Auth.AppAuth.v1.DTOs;
+using ZAP.Identity.Application.Features.Auth.Login.v1.DTOs;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using ZAP.Identity.Application.Common.Models;
 using ZAP.Identity.Application.Common.Interfaces;
 
-namespace ZAP.Identity.Application.Features.Auth.AppAuth.v1.Commands.CheckAccountAvailability
+namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.CheckAccountAvailability
 {
     // COMMAND
     public class CheckAccountAvailabilityCommand : IRequest<ApiResponse<CheckAccountDataDto>>

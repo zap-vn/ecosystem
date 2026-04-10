@@ -3,16 +3,18 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-using ZAP.Identity.Application.Features.Auth.AppAuth.v1.Commands.LoginUser;
-using ZAP.Identity.Application.Features.Auth.AppAuth.v1.Commands.CheckAccountAvailability;
-using ZAP.Identity.Application.Features.Auth.AppAuth.v1.Commands.SendOtp;
+using ZAP.Identity.Application.Features.Auth.Login.v1.Commands.LoginUser;
+using ZAP.Identity.Application.Features.Auth.Login.v1.Commands.CheckAccountAvailability;
+using ZAP.Identity.Application.Features.Auth.Login.v1.Commands.SendOtp;
+using ZAP.Identity.API.Features.Shared.Controllers;
+using Asp.Versioning;
 
-namespace ZAP.Identity.API.Controllers
+namespace ZAP.Identity.API.Features.Auth.Login.v1.Controllers
 {
-    [ApiController]
-    [Route("api/auth")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/auth/login")]
     [AllowAnonymous]
-    public class LoginController : ControllerBase
+    public class LoginController : BaseApiController
     {
         private readonly IMediator _mediator;
 
@@ -27,11 +29,7 @@ namespace ZAP.Identity.API.Controllers
         [HttpPost("check-account")]
         public async Task<IActionResult> CheckAccount([FromBody] CheckAccountAvailabilityCommand command)
         {
-            // command.IsLogin = true; 
             var result = await _mediator.Send(command);
-            
-            // Giả định kiểu dữ liệu trả về theo wrapper tiêu chuẩn của ZAP
-            // return result.Success ? Ok(...) : BadRequest(...);
             return Ok(result);
         }
 

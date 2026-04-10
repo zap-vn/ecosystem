@@ -91,11 +91,11 @@ builder.Services.AddApiVersioning(options =>
 });
 
 builder.Services.AddMediatR(cfg => {
-    cfg.RegisterServicesFromAssembly(typeof(ZAP.Identity.Application.Features.Auth.AppAuth.v1.Commands.LoginUser.LoginUserCommand).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(ZAP.Identity.Application.Features.Auth.Login.v1.Commands.LoginUser.LoginUserCommand).Assembly);
     // cfg.AddOpenBehavior(typeof(ZAP.Identity.Application.Behaviors.ValidationBehavior<,>));
 });
 
-// builder.Services.AddValidatorsFromAssembly(typeof(ZAP.Identity.Application.Features.Auth.AppAuth.V1.Queries.LoginCustomerQueryValidator).Assembly);
+// builder.Services.AddValidatorsFromAssembly(typeof(ZAP.Identity.Application.Features.Auth.Login.V1.Queries.LoginCustomerQueryValidator).Assembly);
 
 builder.Services.AddDbContext<IdentityDbContext>(options =>
 {

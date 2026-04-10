@@ -1,6 +1,6 @@
 using MediatR;
 using System.Text.Json.Serialization;
-using ZAP.Identity.Application.Features.Auth.AppAuth.v1.DTOs;
+using ZAP.Identity.Application.Features.Auth.Login.v1.DTOs;
 using System.Threading;
 using System.Threading.Tasks;
 using System;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using ZAP.Identity.Application.Common.Models;
 using ZAP.Identity.Application.Common.Interfaces;
 
-namespace ZAP.Identity.Application.Features.Auth.AppAuth.v1.Commands.LoginUser
+namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.LoginUser
 {
     // COMMAND
     public class LoginUserCommand : IRequest<ApiResponse<LoginDataDto>>

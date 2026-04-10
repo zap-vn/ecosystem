@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
-namespace ZAP.Identity.Application.Features.Auth.AppAuth.v1.DTOs
+namespace ZAP.Identity.Application.Features.Auth.Login.v1.DTOs
 {
     public class CheckAccountResponseDto
     {

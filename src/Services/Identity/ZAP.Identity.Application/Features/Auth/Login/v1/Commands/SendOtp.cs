@@ -7,7 +7,7 @@ using System;
 using ZAP.Identity.Application.Common.Models;
 using ZAP.Identity.Application.Common.Interfaces;
 
-namespace ZAP.Identity.Application.Features.Auth.AppAuth.v1.Commands.SendOtp
+namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.SendOtp
 {
     // COMMAND
     public class SendOtpCommand : IRequest<ApiResponse>
