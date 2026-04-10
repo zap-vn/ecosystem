@@ -7,6 +7,7 @@
   <Folder Name="/src/Services/Ecosystem/">
     <Project Path="src/Services/Ecosystem/ZAP.Ecosystem.Domain/ZAP.Ecosystem.Domain.csproj" />
     <Project Path="src/Services/Ecosystem/ZAP.Ecosystem.Infrastructure/ZAP.Ecosystem.Infrastructure.csproj" />
+    <Project Path="src/Services/Ecosystem/ZAP.Ecosystem.Shared/ZAP.Ecosystem.Shared.csproj" />
   </Folder>
   <Folder Name="/src/Services/Ecosystem/App/">
     <Project Path="src/Services/Ecosystem/App/ZAP.Ecosystem.API.App/ZAP.Ecosystem.API.App.csproj" />
@@ -23,5 +24,6 @@
     <Project Path="src/Services/Identity/ZAP.Identity.Application/ZAP.Identity.Application.csproj" />
     <Project Path="src/Services/Identity/ZAP.Identity.Domain/ZAP.Identity.Domain.csproj" />
     <Project Path="src/Services/Identity/ZAP.Identity.Infrastructure/ZAP.Identity.Infrastructure.csproj" />
+    <Project Path="src/Services/Identity/ZAP.Identity.UnitTests/ZAP.Identity.UnitTests.csproj" />
   </Folder>
 </Solution>

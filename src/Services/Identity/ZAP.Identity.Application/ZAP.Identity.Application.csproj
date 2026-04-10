@@ -10,4 +10,15 @@
   <ItemGroup>
     <Folder Include="Modules\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZAP.Identity.Domain\ZAP.Identity.Domain.csproj" />
+    <ProjectReference Include="..\..\Ecosystem\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="14.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.17.0" />
+  </ItemGroup>
 </Project>
