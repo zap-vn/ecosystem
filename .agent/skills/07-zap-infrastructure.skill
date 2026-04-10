@@ -1,0 +1,15 @@
+# ZAP Infrastructure Skill
+
+## 1. Hosting & Containerization
+- **Docker**: All services, workers, and databases must define isolated `Dockerfile`s. Local development is orchestrated via `docker-compose`.
+- **Microservices Deployment**: Distributed pods/services deployment targeting Kubernetes/GCP.
+
+## 2. Core Infrastructure Components
+- **Message Broker (RabbitMQ & MassTransit)**: Backbone for all async integrations, inter-service events (Outbox processing, Hub integration).
+- **Relational Database**: PostgreSQL / AlloyDB handling strict transaction domains. Migration automation configured properly.
+- **Caching**: Redis used for session, token blacklisting, and high-read/low-write distributed caching (e.g., Menu catalogs, configuration lookups).
+
+## 3. Observability & Telemetry
+- **Centralized Logging**: Structured logging via Serilog (sinks to ELK/Seq).
+- **APM**: OpenTelemetry for tracing cross-service requests, DB queries, and RabbitMQ message flows.
+- **Metrics**: Exposing `/health` and `/metrics` (Prometheus) on all worker and API nodes.

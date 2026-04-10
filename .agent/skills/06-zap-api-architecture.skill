@@ -1,0 +1,17 @@
+# ZAP API Architecture Skill
+
+## 1. Minimal & Feature-Oriented Endpoints
+- **Pattern**: APIs are exposed via Controllers or Minimal APIs but must immediately delegate to a CQRS Mediator (e.g., MediatR) inside the explicit Feature Folder.
+- **RESTful standard**: Resources must be named as nouns, HTTP verbs (GET, POST, PUT, DELETE, PATCH) dictate the action.
+- **Payloads**: Use strictly typed DTOs (Request / Response). Never return raw database entities directly.
+
+## 2. API Gateway & BFF (Backend for Frontend)
+- **Routing**: API Gateway/BFF handles external routing. Internal microservices do not communicate directly with the frontend.
+- **Standardization**:
+  - Response wrapper is unified globally (e.g., `Success`, `Data`, `Errors`, `Meta`).
+  - Validation errors return standardized 400 Bad Request with ProblemDetails format.
+
+## 3. Middleware & Cross-Cutting Concerns
+- **Authentication**: JWT validation at the API edge.
+- **Logging**: All requests must have a `CorrelationId` attached, propagated across all API and RabbitMQ calls.
+- **Rate Limiting & CORS**: Configured globally at the Gateway level to protect downstream services.

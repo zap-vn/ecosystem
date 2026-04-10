@@ -1,0 +1,19 @@
+# ZAP Dev & CI/CD Workflows Skill
+
+## 1. Local Development Workflow
+- **Migrations**: 
+  - Code-first: Changes are made to EF Core entities in the Feature Folder.
+  - Run `dotnet ef migrations add` -> Review SQL output.
+  - Validate against the established strict Database Schema (Hardening guidelines).
+- **Mock Data**: Update JSON files automatically alongside schema modifications.
+
+## 2. Asynchronous Processing Workflow (Outbox)
+1. **Transaction Phase**: API/Feature handler writes business data AND an `outbox_message` to the DB in the same transaction.
+2. **Publish Phase**: A background worker (Hangfire / Quartz / MassTransit Background Service) polls `outbox_message` or gets notified to publish over RabbitMQ.
+3. **Consume Phase**: Target service consumes, processes idempotently, and acknowledges.
+
+## 3. CI/CD & Testing
+- **Branching**: Feature branch -> PR to `develop`.
+- **Unit Tests**: Required for Domain Logic and CQRS Handlers.
+- **Integration Tests**: Using TestContainers (Postgres + RabbitMQ) to validate actual database read/writes and event propagation.
+- **Pipeline**: Automate building, testing, checking schema compliance, and containerizing on push.

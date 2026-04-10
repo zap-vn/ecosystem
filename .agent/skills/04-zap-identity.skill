@@ -1,0 +1,16 @@
+# ZAP Identity & Auth Skill
+
+## 1. Identity Service Architecture
+- **Centralized Service**: The Identity service is an independent module using EF Core 8 and PostgreSQL.
+- **Dual Support**: 
+  - Customer-facing Apps (Shared Identity).
+  - CRM / Portal Apps (Tenant-Aware Identity utilizing multi-tenant claims).
+
+## 2. Implementation Rules
+- Always utilize standard JWT generation routines.
+- Append `tenant_id` and role claims implicitly for CRM portal tokens.
+- Cross-database queries from other microservices should NOT bypass the Identity endpoints.
+
+## Action Guidelines for Anti:
+- Provide multi-tenant context when writing logic in the Identity Feature folder.
+- Follow CQRS for user creation: Command for `CreateUser`, Query for `GetUserClaims`.

@@ -1,0 +1,11 @@
+# ZAP Core Workflow Instructions
+
+## 1. Core Operating Procedure for Anti
+- ALWAYS verify the physical SQL implementation when modifying a C# entity.
+- ALWAYS use MCP queries to inspect live tables before assuming column setups: `mcp_zap-gcp-postgres_query`.
+- Write idempotent implementation.
+- Prioritize updating `system.lookups` for dropdowns/options instead of hardcoded mappings or new tables.
+
+## 2. Collaboration
+- Act autonomously but respect the strict directory map: `d:\Working\01-Project\COMPANY\ZAP\...`
+- Notify the user of any side-effects related to schema altering.

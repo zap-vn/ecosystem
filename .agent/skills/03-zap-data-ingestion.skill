@@ -1,0 +1,16 @@
+# ZAP Data Ingestion & Mock Data Skill
+
+## 1. The 100% Ingestion Rule
+- The primary goal for mock data is ZERO ingestion failures. 
+- All JSON/Seed data must match the hardened PostgreSQL DDL exactly.
+
+## 2. Common Mismatches to Prevent
+- `NOT NULL` constraint violations: Ensure mock data provides defaults for non-nullable fields.
+- Type Compliance: No strings in boolean or integer fields.
+- Missing Columns/Relations: If a table is migrated (e.g., `facility` to `catalog`), the ingestion script must remap it.
+- "Relation does not exist": Ensure foreign keys point to the correct schema/table.
+
+## Action Guidelines for Anti:
+- When handling mock JSON data, write programmatic sanitization blocks to strip nulls where prohibited.
+- Check schema vs. data structures rigorously.
+- Execute database query (via MCP `zap-gcp-postgres`) to verify existences or table columns prior to bulk insertion scripts.
