@@ -1,0 +1,6 @@
+@ZAP.Identity.API_HostAddress = http://localhost:5178
+
+GET {{ZAP.Identity.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,27 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Gateway/">
+    <Project Path="src/Gateway/ZAP.Gateway/ZAP.Gateway.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/" />
+  <Folder Name="/src/Services/Ecosystem/">
+    <Project Path="src/Services/Ecosystem/ZAP.Ecosystem.Domain/ZAP.Ecosystem.Domain.csproj" />
+    <Project Path="src/Services/Ecosystem/ZAP.Ecosystem.Infrastructure/ZAP.Ecosystem.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Ecosystem/App/">
+    <Project Path="src/Services/Ecosystem/App/ZAP.Ecosystem.API.App/ZAP.Ecosystem.API.App.csproj" />
+    <Project Path="src/Services/Ecosystem/App/ZAP.Ecosystem.Application.App/ZAP.Ecosystem.Application.App.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Ecosystem/CRM/">
+    <Project Path="src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/ZAP.Ecosystem.API.CRM.csproj" />
+    <Project Path="src/Services/Ecosystem/CRM/ZAP.Ecosystem.Application.CRM/ZAP.Ecosystem.Application.CRM.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Identity/">
+    <Project Path="src/Services/Identity/ZAP.Ecosystem.API.Identity/ZAP.Ecosystem.API.Identity.csproj" />
+    <Project Path="src/Services/Identity/ZAP.Ecosystem.Application.Identity/ZAP.Ecosystem.Application.Identity.csproj" />
+    <Project Path="src/Services/Identity/ZAP.Identity.API/ZAP.Identity.API.csproj" />
+    <Project Path="src/Services/Identity/ZAP.Identity.Application/ZAP.Identity.Application.csproj" />
+    <Project Path="src/Services/Identity/ZAP.Identity.Domain/ZAP.Identity.Domain.csproj" />
+    <Project Path="src/Services/Identity/ZAP.Identity.Infrastructure/ZAP.Identity.Infrastructure.csproj" />
+  </Folder>
+</Solution>
