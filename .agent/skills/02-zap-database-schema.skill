@@ -1,0 +1,20 @@
+# ZAP Database Schema Hardening Skill
+
+## 1. Schema Modules
+- The PostgreSQL database is structured into domain-driven functional namespaces (schemas):
+  - `system`: System configurations, `system.lookups` for standardizing reference data.
+  - `catalog`: Product & menu definitions.
+  - `commerce`: Checkout, cart, and orders.
+  - `facility` / `logistics`: Centralized locations, tracking.
+  - `marketing`: Campaigns, promotions, and discounts.
+  - `platform`, `pos`, `worker` ...
+
+## 2. Structural Guidelines
+- **Zero Redundancy**: If a table can be replaced by a `system.lookups` entity (e.g., status, types), migrate it to `system.lookups` rather than creating dedicated reference tables.
+- **Naming Conventions**: Use `snake_case` strictly for tables, columns, constraints across PostgreSQL.
+- **Foreign Keys**: Must perfectly align with the actual location of the target table. Do not cross-reference non-existent namespaces.
+
+## Action Guidelines for Anti:
+- Before writing SQL, double-check the module namespace.
+- Ensure that domain consolidation is respected (e.g., Geo entities into `platform.geo_*`).
+- Maintain idempotent SQL scripts (`CREATE TABLE IF NOT EXISTS`, `ON CONFLICT DO NOTHING`).

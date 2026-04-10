@@ -1,0 +1,23 @@
+# ZAP Premium Architecture Skill
+
+## 1. Core Paradigm
+- **Architecture**: Clean Architecture combined with Feature-per-Folder pattern.
+- **Layers**: Domain, Application, Infrastructure, API separated but strictly grouped by Feature where possible.
+- **Pattern**: CQRS (Command Query Responsibility Segregation) for separation of read and write paths.
+- **Messaging**: Outbox Pattern integrated with RabbitMQ (MassTransit) for robust asynchronous communication between microservices.
+
+## 2. Structural Integrity
+- Avoid fragmented generic controllers. Handlers and Controllers must map directly to respective features/modules.
+- Service communications enforce high cohesion and low coupling.
+- Middlewares: Standardized JWT security, Gzip compression, CORS.
+
+## 3. Technology Stack
+- **Backend Framework**: .NET 8 (C#).
+- **ORM**: Entity Framework Core 8 (EF Core 8).
+- **Messaging**: RabbitMQ.
+- **Database**: PostgreSQL (AlloyDB).
+
+## Action Guidelines for Anti:
+- When writing C# code, always package into feature namespaces.
+- Do not build generic repositories if an Outbox/CQRS handler is more appropriate.
+- Verify folder structure before adding new classes to maintain the `Feature-per-Folder` modularity.

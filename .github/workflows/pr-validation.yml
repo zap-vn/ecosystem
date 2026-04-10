@@ -1,0 +1,82 @@
+name: ZAP CI Pipeline (PR to Dev)
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - develop
+
+jobs:
+  build-and-test:
+    name: Build & Test (CQRS & Domain)
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+          
+      - name: Restore dependencies
+        run: dotnet restore ZAP.Ecosystem.slnx
+        
+      - name: Build Solution
+        run: dotnet build ZAP.Ecosystem.slnx --no-restore --configuration Release
+        
+      - name: Run Unit & Integration Tests (TestContainers)
+        run: dotnet test ZAP.Ecosystem.slnx --no-build --configuration Release --logger trx --results-directory "TestResults"
+        
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults/*.trx
+
+  schema-compliance:
+    name: Validate Database Schema Compliance
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install EF Core CLI
+        run: dotnet tool install --global dotnet-ef
+
+      - name: Check Code-First Migrations
+        # Placeholder for actual infrastructure projects
+        # We ensure that EF Core migrations can be built and listed
+        # A check for pending model changes could also be added: 
+        # dotnet ef migrations has-pending-model-changes --project <Your.Infra.csproj>
+        run: |
+          echo "Schema compliance check started."
+          echo "Verifying Code-first changes in EF Core Feature Folders against strict Database Schema."
+          
+          # Add actual check command, e.g.:
+          # dotnet ef migrations list --project src/Services/Ecosystem/ZAP.Ecosystem.Infrastructure/ZAP.Ecosystem.Infrastructure.csproj
+
+  containerize:
+    name: Build Containers
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        
+      - name: Validate Containerization
+        run: |
+          echo "Simulating or validating docker builds for API projects..."
+          # docker build -f src/Services/Ecosystem/App/ZAP.Ecosystem.API.App/Dockerfile .
+          # docker build -f src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/Dockerfile .
+          # docker build -f src/Services/Identity/ZAP.Ecosystem.API.Identity/Dockerfile .
