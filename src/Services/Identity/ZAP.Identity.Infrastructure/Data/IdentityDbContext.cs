@@ -6,6 +6,8 @@ namespace ZAP.Identity.Infrastructure.Data;
 public class IdentityDbContext : DbContext
 {
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<LoyaltyLevel> LoyaltyLevels { get; set; }
+    public DbSet<CustomerMembership> CustomerMemberships { get; set; }
 
     public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
 

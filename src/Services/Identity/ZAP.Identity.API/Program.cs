@@ -13,6 +13,7 @@ using ZAP.Identity.Infrastructure.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHealthChecks();
 builder.Services.AddOpenApi();
 builder.Services.AddControllers(options =>
 {
@@ -64,7 +65,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
         ValidAudience = builder.Configuration["JwtSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!))
+        IssuerSigningKey = new SymmetricSecurityKey(System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!)))
     };
 });
 
@@ -101,6 +102,13 @@ builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => 
 
 var app = builder.Build();
 
+// Automatically Apply EF Core Database Migrations on System Boot
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<IdentityDbContext>();
+    dbContext.Database.Migrate(); // Natively builds standard schema mapped to C# models
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -118,18 +126,31 @@ app.Use(async (context, next) =>
     context.Response.Headers.Append("X-Xss-Protection", "1; mode=block");
     context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
     context.Response.Headers.Append("X-Frame-Options", "DENY"); // Prevent Clickjacking
-    context.Response.Headers.Append("Content-Security-Policy", "default-src 'self';");
+    context.Response.Headers.Append("Content-Security-Policy", "default-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https://validator.swagger.io;");
     context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
     await next();
 });
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.MapGet("/", (HttpContext ctx) => 
+{
+    if (app.Environment.IsDevelopment())
+    {
+        ctx.Response.Redirect("/index.html");
+        return Task.CompletedTask;
+    }
+    ctx.Response.StatusCode = 404;
+    return Task.CompletedTask;
+});
 
 app.UseRateLimiter(); // Apply Rate Limiter
 app.UseCors("StandardSecurityPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHealthChecks("/api/v1/auth/health");
 app.MapControllers();
 
 app.Run();

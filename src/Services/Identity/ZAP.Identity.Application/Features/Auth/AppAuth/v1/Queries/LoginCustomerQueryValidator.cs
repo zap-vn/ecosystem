@@ -6,9 +6,13 @@ public class LoginCustomerQueryValidator : AbstractValidator<LoginCustomerQuery>
 {
     public LoginCustomerQueryValidator()
     {
-        RuleFor(x => x.Username)
-            .NotEmpty().WithMessage("Username is required")
-            .MinimumLength(3).WithMessage("Username must be at least 3 characters");
+        RuleFor(x => x.DialingCode)
+            .NotEmpty().WithMessage("Dialing code is required");
+
+        RuleFor(x => x.PhoneNumber)
+            .NotEmpty().WithMessage("Phone number is required")
+            .MinimumLength(8).WithMessage("Phone number must be at least 8 characters")
+            .Matches(@"^\d+$").WithMessage("Phone number must contain only digits");
 
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password is required")

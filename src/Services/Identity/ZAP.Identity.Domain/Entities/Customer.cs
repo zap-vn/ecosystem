@@ -14,6 +14,14 @@ public class Customer
     [MaxLength(100)]
     public string Username { get; set; } = string.Empty;
 
+    [Column("dialing_code")]
+    [MaxLength(10)]
+    public string DialingCode { get; set; } = string.Empty;
+
+    [Column("phone_number")]
+    [MaxLength(50)]
+    public string PhoneNumber { get; set; } = string.Empty;
+
     [Column("password_hash")]
     [MaxLength(255)]
     public string PasswordHash { get; set; } = string.Empty;
@@ -34,4 +42,6 @@ public class Customer
 
     [Column("refresh_token_expiry_time")]
     public DateTime? RefreshTokenExpiryTime { get; set; }
+
+    public virtual CustomerMembership? Membership { get; set; }
 }

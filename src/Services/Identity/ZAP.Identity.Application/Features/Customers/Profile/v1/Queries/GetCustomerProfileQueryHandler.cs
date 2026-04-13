@@ -19,30 +19,28 @@ public class GetCustomerProfileQueryHandler : IRequestHandler<GetCustomerProfile
         // Trong thực tế, bạn có thể triển khai hàm _customerRepository.GetByIdAsync(...) hoặc
         // Mở rộng Generic Repository để hỗ trợ Include/Join các Relation: query.Include(x => x.Profile)
         
-        var pagedResult = await _customerRepository.GetPagedAsync(
-            pageIndex: 1,
-            pageSize: 1,
-            filter: c => c.Id == request.CustomerId && c.IsActive,
-            cancellationToken: cancellationToken);
-
-        var customer = pagedResult.Items.FirstOrDefault();
-
+        var customer = await _customerRepository.GetByIdAsync(request.CustomerId, cancellationToken);
+        
         if (customer == null)
         {
             throw new Exception("Customer profile not found or inactive.");
         }
 
-        // 2. Map dữ liệu Entiy sang DTO (Bao gồm Join dữ liệu thông tin mở rộng)
+        // 2. Map dữ liệu Entiy sang DTO
         return new CustomerProfileDto
         {
             Id = customer.Id,
             Username = customer.Username,
+            DialingCode = customer.DialingCode,
+            PhoneNumber = customer.PhoneNumber,
             Email = customer.Email,
             IsActive = customer.IsActive,
             CreatedAt = customer.CreatedAt,
-            // Ví dụ Join dữ liệu
-            SubscriptionLevel = "Premium", // Giả lập dữ liệu Join lấy từ bảng CustomerSubscriptions
-            LastLoginAt = DateTime.UtcNow  // Giả lập dữ liệu Join lấy từ bảng CustomerActivityLog
+            // Natively extract real Join references once Eager Loading is executed
+            SubscriptionLevel = customer.Membership?.LoyaltyLevel?.LevelName ?? "Free Tier",
+            LoyaltyPoints = customer.Membership?.CurrentPoints ?? 0,
+            MembershipJoinedAt = customer.Membership?.JoinedAt,
+            LastLoginAt = DateTime.UtcNow  // Placeholder for Activity Log
         };
     }
 }

@@ -27,36 +27,41 @@ public class LoginCustomerQueryHandler : IRequestHandler<LoginCustomerQuery, Log
         var result = await _customerRepository.GetPagedAsync(
             pageIndex: 1, 
             pageSize: 1, 
-            filter: c => c.Username == request.Username && c.IsActive, 
+            filter: c => c.DialingCode == request.DialingCode && c.PhoneNumber == request.PhoneNumber && c.IsActive, 
             cancellationToken: cancellationToken);
             
         var customer = result.Items.FirstOrDefault();
 
-        if (customer == null || customer.PasswordHash != request.Password)
+        var secretKey = _configuration["JwtSettings:SecretKey"] ?? throw new InvalidOperationException("Missing JWT Secret");
+        var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
+        var hashedSecretKey = System.Security.Cryptography.SHA256.HashData(secretKeyBytes);
+
+        using var hmac = new System.Security.Cryptography.HMACSHA256(hashedSecretKey);
+        var computedPasswordHash = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)));
+
+        if (customer == null || customer.PasswordHash != computedPasswordHash)
         {
             throw new UnauthorizedAccessException("Invalid credentials.");
         }
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        var secretKey = _configuration["JwtSettings:SecretKey"] ?? throw new InvalidOperationException("Missing JWT Secret");
         var issuer = _configuration["JwtSettings:Issuer"];
         var audience = _configuration["JwtSettings:Audience"];
         var expiryMinutes = int.TryParse(_configuration["JwtSettings:ExpiryMinutes"], out var minutes) ? minutes : 120;
         
-        var key = Encoding.ASCII.GetBytes(secretKey);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, customer.Id.ToString()),
-                new Claim(ClaimTypes.Name, customer.Username),
+                new Claim(ClaimTypes.Name, $"{customer.DialingCode}{customer.PhoneNumber}"),
                 new Claim("role", "customer_app")
             }),
             Expires = DateTime.UtcNow.AddMinutes(expiryMinutes),
             Issuer = issuer,
             Audience = audience,
             SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key),
+                new SymmetricSecurityKey(hashedSecretKey),
                 SecurityAlgorithms.HmacSha256Signature)
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);

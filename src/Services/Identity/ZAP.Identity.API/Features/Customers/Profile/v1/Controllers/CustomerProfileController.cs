@@ -33,8 +33,7 @@ public class CustomerProfileController : BaseApiController
 
             var query = new GetCustomerProfileQuery { CustomerId = customerId };
             var profile = await _mediator.Send(query);
-
-            return Ok(new { Data = profile });
+            return Ok(ZAP.Ecosystem.Shared.Responses.ApiResponse<CustomerProfileDto>.Ok(profile));
         }
         catch (Exception ex)
         {
