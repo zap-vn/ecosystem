@@ -14,7 +14,12 @@ namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.CheckAccountA
     public class CheckAccountAvailabilityCommand : IRequest<ApiResponse<CheckAccountDataDto>>
     {
         [JsonPropertyName("account")]
-        public string Account { get; set; } = string.Empty;
+        public string? Account { get; set; }
+
+        [JsonPropertyName("email")]
+        public string? Email { get; set; }
+
+        public string GetEffectiveAccount() => (!string.IsNullOrEmpty(Account) ? Account : Email) ?? string.Empty;
 
         [JsonIgnore]
         public string? DialingCode { get; set; } = "+84";
@@ -37,12 +42,13 @@ namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.CheckAccountA
 
         public async Task<ApiResponse<CheckAccountDataDto>> Handle(CheckAccountAvailabilityCommand request, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrWhiteSpace(request.Account))
+            var effectiveAccount = request.GetEffectiveAccount();
+            if (string.IsNullOrWhiteSpace(effectiveAccount))
             {
                 return ApiResponse<CheckAccountDataDto>.ErrorResult("Vui lòng nhập Email hoặc Số điện thoại.");
             }
 
-            string identifier = request.Account.Trim();
+            string identifier = effectiveAccount.Trim();
             bool isEmail = identifier.Contains("@");
 
             // Normalize phone number if dialing_code is present
