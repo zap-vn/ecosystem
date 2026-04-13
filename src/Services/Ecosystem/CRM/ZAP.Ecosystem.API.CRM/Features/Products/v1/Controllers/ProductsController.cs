@@ -12,7 +12,8 @@ using ZAP.Ecosystem.Shared.Data;
 namespace ZAP.Ecosystem.API.CRM.Features.Products.v1.Controllers
 {
     [ApiController]
-    [Route("api/products")]
+    [Asp.Versioning.ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/crm/products")]
     public class ProductsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -46,7 +47,7 @@ namespace ZAP.Ecosystem.API.CRM.Features.Products.v1.Controllers
                 {
                     total_page = result.PageSize > 0 ? (int)Math.Ceiling((double)result.TotalCount / result.PageSize) : 1,
                     total_record = result.TotalCount,
-                    page_index = result.CurrentPage,
+                    page_index = result.PageIndex,
                     page_size = result.PageSize,
                     items = result.Items.Select(x => new
                     {

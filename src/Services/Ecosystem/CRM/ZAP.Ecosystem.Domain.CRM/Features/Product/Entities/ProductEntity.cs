@@ -1,6 +1,4 @@
 using MongoDB.Bson.Serialization.Attributes;
-using CRM.BuildingBlocks;
-using CRM.BuildingBlocks.Interfaces;
 using System.Collections.Generic;
 
 namespace CRM.Product.Domain.Entities
@@ -9,7 +7,7 @@ namespace CRM.Product.Domain.Entities
     public class ProductEntity : BaseEntity, ILocalizable<ProductTranslation>
     {
         [BsonElement("UserGuid")]
-        public override string? UserGuid { get; set; }
+        public string? UserGuid { get; set; }
 
         [BsonElement("EmpGuid")]
         public string? EmpGuid { get; set; }

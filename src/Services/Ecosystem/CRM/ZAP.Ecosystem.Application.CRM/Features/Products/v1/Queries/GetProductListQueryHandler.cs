@@ -1,13 +1,13 @@
-﻿using MediatR;
-using CRM.Product.Application.Features.Products.DTOs;
-using CRM.BuildingBlocks.Models;
+using MediatR;
+
+
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
 using System.Collections.Generic;
-using CRM.Product.Domain.Interfaces;
-using CRM.BuildingBlocks.Interfaces;
+
+
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries
 {

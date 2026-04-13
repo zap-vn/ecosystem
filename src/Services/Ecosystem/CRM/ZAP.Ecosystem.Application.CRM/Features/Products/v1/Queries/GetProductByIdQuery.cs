@@ -1,5 +1,5 @@
-﻿using MediatR;
-using CRM.Product.Application.Features.Products.DTOs;
+using MediatR;
+
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries
 {

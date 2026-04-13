@@ -1,10 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Product.Domain.Entities;
-using CRM.Product.Domain.Interfaces;
+
+
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Commands
 {
@@ -19,7 +19,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Commands
 
         public async Task<string> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var entity = new CRM.Product.Domain.Entities.Product
+            var entity = new global::CRM.Product.Domain.Entities.Product
             {
                 id = Guid.NewGuid(),
                 tenant_id = request.TenantId,

@@ -5,6 +5,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="ZAP.Ecosystem.Shared.Data" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Only include the migrated Product feature - others still use obsolete CRM.BuildingBlocks/MongoDB -->
+    <Compile Remove="Features\**\*.cs" />
+    <Compile Include="Features\Product\**\*.cs" />
+    <Compile Include="Features\Products\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="3.7.1" />
   </ItemGroup>
 </Project>

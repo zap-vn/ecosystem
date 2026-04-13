@@ -1,6 +1,6 @@
-﻿using MediatR;
-using CRM.BuildingBlocks.Models;
-using CRM.Product.Application.Features.Prices.DTOs;
+using MediatR;
+
+
 using System;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries

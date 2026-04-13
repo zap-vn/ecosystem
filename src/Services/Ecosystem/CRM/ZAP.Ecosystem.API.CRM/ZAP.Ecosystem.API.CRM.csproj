@@ -5,15 +5,48 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="ZAP.Ecosystem.Shared.Data" />
+    <Using Include="ZAP.Ecosystem.Shared.Interfaces" />
+    <Using Include="CRM.Product.Domain.Interfaces" />
+    <Using Include="CRM.Product.Domain.Entities" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Http" Version="8.1.1" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.1" />
     <PackageReference Include="MediatR" Version="14.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
-    <PackageReference Include="Scalar.AspNetCore" Version="1.2.73" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.13.21" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\" />
+    <!-- Only exclude controllers whose Application handlers are not yet migrated -->
+    <Compile Remove="Features\Brands\v1\Controllers\BrandsController.cs" />
+    <Compile Remove="Features\Categories\v1\Controllers\CategoriesController.cs" />
+    <Compile Remove="Features\Collections\v1\Controllers\CollectionsController.cs" />
+    <Compile Remove="Features\Customers\v1\Controllers\CustomerGroupsController.cs" />
+    <Compile Remove="Features\Customers\v1\Controllers\CustomersController.cs" />
+    <Compile Remove="Features\Customers\v1\Controllers\ManagementController.cs" />
+    <Compile Remove="Features\DiningOptions\v1\Controllers\DiningOptionsController.cs" />
+    <Compile Remove="Features\HRs\v1\Controllers\EmployeesController.cs" />
+    <Compile Remove="Features\Locations\v1\Controllers\LocationsController.cs" />
+    <Compile Remove="Features\Management\v1\Controllers\ManagementController.cs" />
+    <Compile Remove="Features\Menu\v1\Controllers\MenusController.cs" />
+    <Compile Remove="Features\ModifierGroup\v1\Controllers\ModifierGroupsController.cs" />
+    <Compile Remove="Features\Orders\v1\Controllers\ManagementController.cs" />
+    <Compile Remove="Features\Orders\v1\Controllers\OrdersController.cs" />
+    <Compile Remove="Features\Organizations\v1\Controllers\OrganizationsController.cs" />
+    <Compile Remove="Features\Payments\v1\Controllers\ManagementController.cs" />
+    <Compile Remove="Features\Payments\v1\Controllers\PaymentTermsController.cs" />
+    <Compile Remove="Features\Payments\v1\Controllers\PaymentTypesController.cs" />
+    <Compile Remove="Features\Promotions\v1\Controllers\ManagementController.cs" />
+    <Compile Remove="Features\Promotions\v1\Controllers\PromotionsController.cs" />
+    <Compile Remove="Features\Reports\v1\Controllers\ReportsController.cs" />
+    <Compile Remove="Features\Units\v1\Controllers\UomController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controllers\v1\Orders\" />
+    <Folder Include="Middlewares\" />
     <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>

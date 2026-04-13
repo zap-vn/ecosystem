@@ -1,10 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Product.Domain.Entities;
-using CRM.Product.Domain.Interfaces;
+
+
 using System.Collections.Generic;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Commands

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MediatR;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Commands

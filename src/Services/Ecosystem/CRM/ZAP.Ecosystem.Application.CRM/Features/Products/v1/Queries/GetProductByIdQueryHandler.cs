@@ -1,8 +1,8 @@
-﻿using MediatR;
-using CRM.Product.Application.Features.Products.DTOs;
+using MediatR;
+
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Product.Domain.Interfaces;
+
 using System;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries

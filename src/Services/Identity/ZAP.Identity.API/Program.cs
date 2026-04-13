@@ -122,7 +122,6 @@ if (app.Environment.IsDevelopment())
 {
     app.MapScalarApiReference(); // Add Scalar UI
 }
-else
 {
     app.UseHsts(); 
 }

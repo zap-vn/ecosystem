@@ -1,4 +1,3 @@
-using CRM.BuildingBlocks;
 
 namespace CRM.Product.Domain.Entities
 {

@@ -1,5 +1,5 @@
-﻿using CRM.Product.Application.Features.Products.DTOs;
-using CRM.Product.Domain.Interfaces;
+
+
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,7 @@
-﻿using CRM.BuildingBlocks.Interfaces;
-using CRM.BuildingBlocks.Models;
-using CRM.Product.Application.Features.Products.DTOs;
-using CRM.Product.Domain.Interfaces;
+
+
+
+
 using MediatR;
 using System;
 using System.Collections.Generic;

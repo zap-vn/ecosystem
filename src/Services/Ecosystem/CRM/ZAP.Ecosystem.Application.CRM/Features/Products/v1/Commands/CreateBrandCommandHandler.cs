@@ -1,5 +1,5 @@
-﻿using CRM.Product.Domain.Entities;
-using CRM.Product.Domain.Interfaces;
+
+
 using MediatR;
 using System;
 using System.Threading;
