@@ -1,14 +1,14 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using ZAP.Identity.API.Features.Shared.Controllers;
-using ZAP.Identity.Application.Features.Customers.Profile.V1.Queries;
+using ZAP.Ecosystem.Application.App.Features.Customers.Profile.v1.Queries;
 
-namespace ZAP.Identity.API.Features.Customers.Profile.V1.Controllers;
+namespace ZAP.Ecosystem.API.App.Features.Customers.Profile.v1.Controllers;
 
 [Asp.Versioning.ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/customer")]
-public class CustomerProfileController : BaseApiController
+[ApiController]
+public class CustomerProfileController : ControllerBase
 {
     private readonly IMediator _mediator;
 
@@ -18,12 +18,10 @@ public class CustomerProfileController : BaseApiController
     }
 
     [HttpGet("profile")]
-    // [Authorize] -> Bắt buộc có token (Đã tự động bảo vệ qua Global Filter)
     public async Task<IActionResult> GetProfile()
     {
         try
         {
-            // Trích xuất CustomerId tự động từ JWT Token do Authenticated Middleware xử lý
             var customerIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
             
             if (string.IsNullOrEmpty(customerIdString) || !Guid.TryParse(customerIdString, out var customerId))
@@ -33,6 +31,7 @@ public class CustomerProfileController : BaseApiController
 
             var query = new GetCustomerProfileQuery { CustomerId = customerId };
             var profile = await _mediator.Send(query);
+
             return Ok(ZAP.Ecosystem.Shared.Responses.ApiResponse<CustomerProfileDto>.Ok(profile));
         }
         catch (Exception ex)
