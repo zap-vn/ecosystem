@@ -5,8 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.1" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.1" />
+    <PackageReference Include="MediatR" Version="14.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.13.21" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -17,5 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ZAP.Ecosystem.Infrastructure\ZAP.Ecosystem.Infrastructure.csproj" />
     <ProjectReference Include="..\..\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+    <ProjectReference Include="..\ZAP.Ecosystem.Application.App\ZAP.Ecosystem.Application.App.csproj" />
+    <ProjectReference Include="..\..\..\Identity\ZAP.Identity.Domain\ZAP.Identity.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -5,9 +5,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.1.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Features\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Modules\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ZAP.Ecosystem.Domain\ZAP.Ecosystem.Domain.csproj" />
+    <ProjectReference Include="..\..\ZAP.Ecosystem.Infrastructure\ZAP.Ecosystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Identity\ZAP.Identity.Domain\ZAP.Identity.Domain.csproj" />
   </ItemGroup>
 </Project>

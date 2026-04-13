@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZAP Ecosystem | Developer Portal</title>
+    <title>ZAP Ecosystem | API Gateway Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --bg: #0f172a;
-            --card-bg: #1e293b;
+            --primary-glow: rgba(99, 102, 241, 0.5);
+            --secondary: #a855f7;
+            --bg: #0b0f1a;
+            --card-bg: rgba(30, 41, 59, 0.7);
             --text: #f8fafc;
             --text-dim: #94a3b8;
-            --success: #22c55e;
+            --success: #10b981;
+            --danger: #ef4444;
             --warning: #f59e0b;
         }
 
@@ -27,244 +29,344 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: var(--bg);
+            background: radial-gradient(circle at top right, #1e1b4b, #0b0f1a);
             color: var(--text);
-            line-height: 1.6;
+            min-height: 100vh;
             overflow-x: hidden;
         }
 
+        .glass {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
 
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 4rem;
         }
 
-        .logo {
-            font-size: 1.5rem;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-box {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .brand h2 {
             font-weight: 700;
-            background: linear-gradient(to right, #818cf8, #c084fc);
+            letter-spacing: 1px;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        /* Hero */
+        .hero {
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-
         .hero p {
-            color: var(--text-dim);
             font-size: 1.25rem;
-            max-width: 600px;
-            margin: 0 auto;
+            color: var(--text-dim);
+            max-width: 700px;
         }
 
+        /* Grid Services */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
+        .service-card {
+            border-radius: 2rem;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            overflow: hidden;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.2);
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, #6366f1, #a855f7);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .status-online {
-            background: rgba(34, 197, 94, 0.1);
-            color: var(--success);
-        }
-
-        .pulse {
-            width: 8px;
-            height: 8px;
+        .status-dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: currentColor;
+            display: inline-block;
             margin-right: 8px;
-            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-            animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        .status-online { background: var(--success); box-shadow: 0 0 10px var(--success); }
+        .status-offline { background: var(--danger); box-shadow: 0 0 10px var(--danger); }
+
+        .service-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .tag {
-            font-size: 0.7rem;
-            color: var(--text-dim);
+        .service-tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            color: var(--primary);
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-            display: block;
         }
 
-        .card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .card p {
+        .service-card p {
             color: var(--text-dim);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            min-height: 3rem;
         }
 
-        .actions {
+        .btn-group {
             display: flex;
             gap: 1rem;
         }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.75rem 1.25rem;
-            border-radius: 0.75rem;
-            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
             text-decoration: none;
+            font-weight: 600;
             font-size: 0.9rem;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            text-align: center;
+            flex: 1;
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:hover {
             background: var(--primary-dark);
+            transform: scale(1.05);
         }
 
-        .btn-outline {
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text);
-        }
-
-        .btn-outline:hover {
+        .btn-secondary {
             background: rgba(255,255,255,0.05);
-            border-color: var(--text-dim);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Bottom Section */
+        .bottom-shelf {
+            margin-top: 6rem;
+            padding: 3rem;
+            border-radius: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .shelf-text h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .shelf-text p {
+            color: var(--text-dim);
+        }
+
+        .postman-btn {
+            background: #FF6C37;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            text-decoration: none;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .postman-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 108, 55, 0.4);
         }
 
         footer {
-            margin-top: 5rem;
+            margin-top: 6rem;
             text-align: center;
             color: var(--text-dim);
+            padding-bottom: 3rem;
             font-size: 0.9rem;
-            padding-bottom: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 2rem;
         }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .grid > * {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .grid > *:nth-child(2) { animation-delay: 0.2s; }
+        .grid > *:nth-child(3) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="logo">ZAP ECOSYSTEM</div>
-            <div class="status-badge status-online">
-                <div class="pulse"></div> API Gateway Online
+            <div class="brand">
+                <div class="logo-box">Z</div>
+                <h2>ZAP ECOSYSTEM</h2>
             </div>
+            <nav class="nav-links">
+                <a href="#">Gateway</a>
+                <a href="#">Monitoring</a>
+                <a href="#">Logs</a>
+                <a href="#">Docs</a>
+            </nav>
         </header>
 
         <section class="hero">
-            <span class="tag">Gateway V100</span>
-            <h1>Developer Portal</h1>
-            <p>Centralized entry point for all ZAP Identity & ERP microservices.</p>
+            <h1>API Management Dashboard</h1>
+            <p>Tất cả dịch vụ đang được điều phối qua YARP Gateway tại cổng 7278.</p>
         </section>
 
         <main class="grid">
-            <!-- Identity Service Card -->
-            <div class="card">
-                <span class="tag">Microservice</span>
-                <h2>Identity API</h2>
-                <div class="status-badge status-online">
-                    <div class="pulse"></div> Healthy
-                </div>
-                <p>Handles Authentication, Authorization, OAuth2, and User Management (PostgreSQL).</p>
-                <div class="actions">
-                    <a href="https://localhost:7181/index.html" class="btn btn-primary">Open Portal</a>
-                    <a href="https://localhost:7181/scalar/v1" class="btn btn-outline">Scalar UI</a>
+            <!-- Identity Service -->
+            <div class="service-card glass">
+                <span class="service-tag">Auth & Identity</span>
+                <h3>
+                    Identity API
+                    <span id="status-identity" class="status-dot status-online"></span>
+                </h3>
+                <p>Quản lý tài khoản, đăng ký, đăng nhập và cấp phát JWT Token (PostgreSQL).</p>
+                <div class="btn-group">
+                    <a href="/docs/identity/v1" class="btn btn-primary" target="_blank">Scalar Gateway</a>
+                    <a href="/identity-portal/" class="btn btn-secondary" target="_blank">Portal Identity</a>
                 </div>
             </div>
 
-            <!-- ERP Core (Mock) -->
-            <div class="card" style="opacity: 0.5;">
-                <span class="tag">Coming Soon</span>
-                <h2>ERP Core</h2>
-                <p>Centralized business logic for CRM, Inventory, and Finance modules.</p>
-                <div class="actions">
-                    <span class="btn btn-outline" style="cursor: not-allowed;">Disabled</span>
+            <!-- App API -->
+            <div class="service-card glass">
+                <span class="service-tag">Core App Services</span>
+                <h3>
+                    App API
+                    <span id="status-app" class="status-dot status-online"></span>
+                </h3>
+                <p>Xử lý Profile khách hàng, Thẻ thành viên, Điểm tích lũy và Loyalty Logic.</p>
+                <div class="btn-group">
+                    <a href="/docs/app/v1" class="btn btn-primary" target="_blank">Scalar Gateway</a>
+                    <a href="/app-portal/" class="btn btn-secondary" target="_blank">Portal App</a>
+                </div>
+            </div>
+
+            <!-- CRM API (Future) -->
+            <div class="service-card glass" style="opacity: 0.6;">
+                <span class="service-tag">ERP / CRM</span>
+                <h3>
+                    CRM API
+                    <span class="status-dot" style="background: #64748b;"></span>
+                </h3>
+                <p>Hệ thống quản lý quan hệ khách hàng, Quản lý chi nhánh và Báo cáo (Đang phát triển).</p>
+                <div class="btn-group">
+                    <span class="btn btn-secondary">In Development</span>
                 </div>
             </div>
         </main>
 
+        <section class="bottom-shelf glass">
+            <div class="shelf-text">
+                <h4>Postman Documentation</h4>
+                <p>Tài liệu API luôn được đồng bộ tự động lên Postman Cloud mỗi khi có thay đổi.</p>
+            </div>
+            <a href="https://pendogo-mobile.postman.co/workspace/ecosystem~432e9c04-a50a-48f6-8e45-7ab4d5cb1524/collection/15026203-ec11fa1d-b3ed-4503-b019-e37997f1e4dd?sideView=agentMode" class="postman-btn" target="_blank">
+                <img src="https://run.pstmn.io/button.svg" alt="Postman" style="height: 24px;">
+                View Documentation
+            </a>
+        </section>
+
         <footer>
-            &copy; 2026 ZAP Technology Group. Build with .NET 10 & High Performance YARP.
+            &copy; 2026 ZAP Technology. Premium Architecture Integration System.
         </footer>
     </div>
 
     <script>
-        // Real-time Health Monitor logic can be added here
-        async function checkHealth() {
+        async function checkStatus(url, elementId) {
+            const el = document.getElementById(elementId);
             try {
-                const res = await fetch('https://localhost:7181/api/v1/auth/health');
-                if(!res.ok) throw new Error();
-                console.log('Identity is healthy');
-            } catch(e) {
-                console.warn('Identity health check failed');
+                // Using a simple fetch - note: CORS might need to be enabled on target services
+                const response = await fetch(url, { mode: 'no-cors' });
+                el.className = 'status-dot status-online';
+            } catch (e) {
+                el.className = 'status-dot status-offline';
             }
         }
-        setInterval(checkHealth, 30000);
+
+        // Check health every 15 seconds
+        setInterval(() => {
+            checkStatus('https://localhost:7181', 'status-identity');
+            checkStatus('https://localhost:7049', 'status-app');
+        }, 15000);
     </script>
 </body>
 </html>
