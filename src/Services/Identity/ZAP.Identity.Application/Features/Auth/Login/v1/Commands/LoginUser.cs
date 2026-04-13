@@ -100,8 +100,8 @@ namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.LoginUser
                     Token = token,
                     MerchantId = merchantId,
                     Email = user.email,
-                    Name = user.full_name,
-                    LogoUrl = "https://api.pendogo.vn/logo.png"
+                    FullName = user.full_name,
+                    LogoUrl = user.avatar_id
                 },
                 "Đăng nhập thành công"
             );
