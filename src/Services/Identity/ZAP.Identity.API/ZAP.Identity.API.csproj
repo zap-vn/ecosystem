@@ -17,8 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
