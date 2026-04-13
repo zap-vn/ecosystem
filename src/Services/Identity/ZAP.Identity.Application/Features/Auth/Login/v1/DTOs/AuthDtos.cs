@@ -25,10 +25,19 @@ namespace ZAP.Identity.Application.Features.Auth.Login.v1.DTOs
 
     public class LoginDataDto
     {
+        [JsonPropertyName("token")]
         public string Token { get; set; } = string.Empty;
+        
+        [JsonPropertyName("merchantId")]
         public string MerchantId { get; set; } = string.Empty;
+        
+        [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
+        
+        [JsonPropertyName("fullname")]
+        public string FullName { get; set; } = string.Empty;
+        
+        [JsonPropertyName("logoUrl")]
         public string LogoUrl { get; set; } = string.Empty;
     }
 }

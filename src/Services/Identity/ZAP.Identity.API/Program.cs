@@ -109,7 +109,7 @@ builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => 
 
 // Đăng ký giả lập cho các Interfaces (Do chưa nối vào cơ sở dữ liệu thật)
 builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.IUserRepository, MockUserRepository>();
-builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.ITokenGenerator, MockTokenGenerator>();
+builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.ITokenGenerator, RealTokenGenerator>();
 builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.IOtpRepository, MockOtpRepository>();
 builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.INotificationService, MockNotificationService>();
 
@@ -165,17 +165,54 @@ public class MockUser
     public System.Guid? tenant_id { get; set; }
     public System.Guid id { get; set; }
     public string full_name { get; set; } = string.Empty;
+    public string avatar_id { get; set; } = string.Empty;
 }
 
 public class MockUserRepository : ZAP.Identity.Application.Common.Interfaces.IUserRepository
 {
-    public async Task<dynamic> GetByEmailAsync(string email) => await Task.FromResult<dynamic>(new MockUser { email = email, password_hash = "password123", status_id = 9001, tenant_id = System.Guid.NewGuid(), id = System.Guid.NewGuid(), full_name = "Mock Email User" });
-    public async Task<dynamic> GetByPhoneAsync(string phone) => await Task.FromResult<dynamic>(new MockUser { email = "phone@mock.com", password_hash = "password123", status_id = 9001, tenant_id = System.Guid.NewGuid(), id = System.Guid.NewGuid(), full_name = "Mock Phone User" });
+    public async Task<dynamic> GetByEmailAsync(string email) => await Task.FromResult<dynamic>(new MockUser { email = email, password_hash = "password123", status_id = 9001, tenant_id = System.Guid.Parse("a6b32eee-a14a-4cec-a070-e23b6ea234fb"), id = System.Guid.Parse("a6b32eee-a14a-4cec-a070-e23b6ea234fb"), full_name = "Nguyen Van A", avatar_id = "https://api.pendogo.vn/logo.png" });
+    public async Task<dynamic> GetByPhoneAsync(string phone) => await Task.FromResult<dynamic>(new MockUser { email = "vana@pendo-test-01.vn", password_hash = "password123", status_id = 9001, tenant_id = System.Guid.Parse("a6b32eee-a14a-4cec-a070-e23b6ea234fb"), id = System.Guid.Parse("a6b32eee-a14a-4cec-a070-e23b6ea234fb"), full_name = "Nguyen Van A", avatar_id = "https://api.pendogo.vn/logo.png" });
 }
 
-public class MockTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITokenGenerator
+public class RealTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITokenGenerator
 {
-    public async Task<string> GenerateTokenAsync(dynamic user) => await Task.FromResult("mock_jwt_token_with_tenantId_" + user.tenant_id);
+    private readonly Microsoft.Extensions.Configuration.IConfiguration _config;
+    
+    public RealTokenGenerator(Microsoft.Extensions.Configuration.IConfiguration config)
+    {
+        _config = config;
+    }
+    
+    public async Task<string> GenerateTokenAsync(dynamic user)
+    {
+        var secretKey = _config["JwtSettings:SecretKey"] ?? "a_very_secret_default_key_at_least_32_chars_long";
+        var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretKey));
+        var credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(securityKey, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256);
+
+        var claims = new System.Collections.Generic.List<System.Security.Claims.Claim>
+        {
+            new System.Security.Claims.Claim("UserGuid", user.id.ToString()),
+            new System.Security.Claims.Claim("EmployeeGuid", user.id.ToString()),
+            new System.Security.Claims.Claim("RoleName", "MerchantAdmin"),
+            new System.Security.Claims.Claim("RolePermission_id", "657ab15d54f17333f3d89c65"),
+            new System.Security.Claims.Claim("Language", "vi"),
+            new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub, user.id.ToString()),
+            new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.UniqueName, user.email),
+            new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email, user.email),
+            new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, System.Guid.NewGuid().ToString()),
+            new System.Security.Claims.Claim("fullname", user.full_name),
+            new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "MerchantAdmin")
+        };
+
+        var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
+            issuer: "CRM.Authentication.Api",
+            audience: "CRM.GateWay.Api",
+            claims: claims,
+            expires: System.DateTime.UtcNow.AddMinutes(120),
+            signingCredentials: credentials);
+
+        return await Task.FromResult(new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler().WriteToken(token));
+    }
 }
 
 public class MockOtpRepository : ZAP.Identity.Application.Common.Interfaces.IOtpRepository
