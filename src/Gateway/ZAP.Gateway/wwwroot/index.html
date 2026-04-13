@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAP Ecosystem | Developer Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            color: var(--text-dim);
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #6366f1, #a855f7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-online {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--success);
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            margin-right: 8px;
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--text-dim);
+        }
+
+        footer {
+            margin-top: 5rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            padding-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">ZAP ECOSYSTEM</div>
+            <div class="status-badge status-online">
+                <div class="pulse"></div> API Gateway Online
+            </div>
+        </header>
+
+        <section class="hero">
+            <span class="tag">Gateway V100</span>
+            <h1>Developer Portal</h1>
+            <p>Centralized entry point for all ZAP Identity & ERP microservices.</p>
+        </section>
+
+        <main class="grid">
+            <!-- Identity Service Card -->
+            <div class="card">
+                <span class="tag">Microservice</span>
+                <h2>Identity API</h2>
+                <div class="status-badge status-online">
+                    <div class="pulse"></div> Healthy
+                </div>
+                <p>Handles Authentication, Authorization, OAuth2, and User Management (PostgreSQL).</p>
+                <div class="actions">
+                    <a href="https://localhost:7181/index.html" class="btn btn-primary">Open Portal</a>
+                    <a href="https://localhost:7181/scalar/v1" class="btn btn-outline">Scalar UI</a>
+                </div>
+            </div>
+
+            <!-- ERP Core (Mock) -->
+            <div class="card" style="opacity: 0.5;">
+                <span class="tag">Coming Soon</span>
+                <h2>ERP Core</h2>
+                <p>Centralized business logic for CRM, Inventory, and Finance modules.</p>
+                <div class="actions">
+                    <span class="btn btn-outline" style="cursor: not-allowed;">Disabled</span>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            &copy; 2026 ZAP Technology Group. Build with .NET 10 & High Performance YARP.
+        </footer>
+    </div>
+
+    <script>
+        // Real-time Health Monitor logic can be added here
+        async function checkHealth() {
+            try {
+                const res = await fetch('https://localhost:7181/api/v1/auth/health');
+                if(!res.ok) throw new Error();
+                console.log('Identity is healthy');
+            } catch(e) {
+                console.warn('Identity health check failed');
+            }
+        }
+        setInterval(checkHealth, 30000);
+    </script>
+</body>
+</html>
