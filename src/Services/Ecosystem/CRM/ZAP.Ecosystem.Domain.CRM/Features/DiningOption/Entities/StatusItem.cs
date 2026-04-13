@@ -1,3 +1,4 @@
+using ZAP.Ecosystem.Domain.CRM.Common;
 #nullable enable
 using System;
 using System.Collections.Generic;

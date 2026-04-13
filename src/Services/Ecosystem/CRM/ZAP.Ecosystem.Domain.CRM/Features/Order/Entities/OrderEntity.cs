@@ -1,44 +1,32 @@
-using MongoDB.Bson.Serialization.Attributes;
+using ZAP.Ecosystem.Domain.CRM.Common;
 using System;
 using System.Collections.Generic;
-using CRM.BuildingBlocks;
 
 namespace CRM.Order.Domain.Entities
 {
     public class OrderEntity : BaseEntity
     {
-        [BsonElement("_key")]
-        public long Key { get; set; } 
+                public long Key { get; set; } 
 
-        [BsonElement("Code")]
-        public string OrderCode { get; set; } = string.Empty;
+                public string OrderCode { get; set; } = string.Empty;
 
-        [BsonElement("Cart_id")]
-        public string? CartId { get; set; }
+                public string? CartId { get; set; }
 
-        [BsonElement("DiningOptionId")]
-        public int DiningOptionId { get; set; }
+                public int DiningOptionId { get; set; }
 
-        [BsonElement("CustomerGuestGuid")]
-        public string? CustomerGuestGuid { get; set; }
+                public string? CustomerGuestGuid { get; set; }
 
-        [BsonElement("LocationGuid")]
-        public string? LocationGuid { get; set; }
+                public string? LocationGuid { get; set; }
 
-        [BsonElement("DeviceGuid")]
-        public string? DeviceGuid { get; set; }
+                public string? DeviceGuid { get; set; }
 
-        [BsonElement("AssignToLocationGuid")]
-        public string? AssignToLocationGuid { get; set; }
+                public string? AssignToLocationGuid { get; set; }
 
-        [BsonElement("TotalAmount")]
-        public decimal TotalAmount { get; set; }
+                public decimal TotalAmount { get; set; }
 
-        [BsonElement("OrderStatusId")]
-        public int OrderStatusId { get; set; }
+                public int OrderStatusId { get; set; }
 
-        [BsonElement("PaymentStatusId")]
-        public int PaymentStatusId { get; set; }
+                public int PaymentStatusId { get; set; }
 
         public string Status => OrderStatusId.ToString();
         
