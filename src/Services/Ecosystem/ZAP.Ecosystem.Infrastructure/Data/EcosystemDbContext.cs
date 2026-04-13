@@ -4,6 +4,10 @@ namespace ZAP.Ecosystem.Infrastructure.Data;
 
 public class EcosystemDbContext : DbContext
 {
+    public DbSet<ZAP.Identity.Domain.Entities.Customer> Customers { get; set; }
+    public DbSet<ZAP.Identity.Domain.Entities.CustomerMembership> CustomerMemberships { get; set; }
+    public DbSet<ZAP.Identity.Domain.Entities.LoyaltyLevel> LoyaltyLevels { get; set; }
+
     public EcosystemDbContext(DbContextOptions<EcosystemDbContext> options)
         : base(options)
     {

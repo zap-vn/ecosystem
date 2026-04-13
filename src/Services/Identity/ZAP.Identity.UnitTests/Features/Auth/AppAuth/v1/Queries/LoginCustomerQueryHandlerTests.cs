@@ -33,8 +33,13 @@ public class LoginCustomerQueryHandlerTests
     public async Task Handle_ValidCredentials_ReturnsLoginResponse()
     {
         // Arrange
-        var request = new LoginCustomerQuery { Username = "testuser", Password = "password123" };
-        var customer = new Customer { Id = Guid.NewGuid(), Username = "testuser", PasswordHash = "password123", IsActive = true };
+        var request = new LoginCustomerQuery { DialingCode = "+84", PhoneNumber = "388888888", Password = "password123" };
+        var testSecret = "TestSecretKeyForUnitTestingMustBeLongEnough123!";
+        var hashedTestSecret = System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(testSecret));
+        using var hmac = new System.Security.Cryptography.HMACSHA256(hashedTestSecret);
+        var validHash = Convert.ToBase64String(hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes("password123")));
+        
+        var customer = new Customer { Id = Guid.NewGuid(), Username = "testuser", DialingCode = "+84", PhoneNumber = "388888888", PasswordHash = validHash, IsActive = true };
         
         _mockRepository.Setup(r => r.GetPagedAsync(1, 1, It.IsAny<Expression<Func<Customer, bool>>>(), null, "", It.IsAny<CancellationToken>()))
                        .ReturnsAsync(new PagedResult<Customer> { Items = new List<Customer> { customer } });
@@ -56,8 +61,13 @@ public class LoginCustomerQueryHandlerTests
     public async Task Handle_InvalidCredentials_ThrowsUnauthorizedException()
     {
          // Arrange
-        var request = new LoginCustomerQuery { Username = "testuser", Password = "wrongpassword" };
-        var customer = new Customer { Id = Guid.NewGuid(), Username = "testuser", PasswordHash = "password123", IsActive = true };
+        var request = new LoginCustomerQuery { DialingCode = "+84", PhoneNumber = "388888888", Password = "wrongpassword" };
+        var testSecret = "TestSecretKeyForUnitTestingMustBeLongEnough123!";
+        var hashedTestSecret = System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(testSecret));
+        using var hmac = new System.Security.Cryptography.HMACSHA256(hashedTestSecret);
+        var validHash = Convert.ToBase64String(hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes("password123")));
+
+        var customer = new Customer { Id = Guid.NewGuid(), Username = "testuser", DialingCode = "+84", PhoneNumber = "388888888", PasswordHash = validHash, IsActive = true };
         
         _mockRepository.Setup(r => r.GetPagedAsync(1, 1, It.IsAny<Expression<Func<Customer, bool>>>(), null, "", It.IsAny<CancellationToken>()))
                        .ReturnsAsync(new PagedResult<Customer> { Items = new List<Customer> { customer } });

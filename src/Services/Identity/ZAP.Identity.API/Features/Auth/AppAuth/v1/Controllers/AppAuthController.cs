@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ZAP.Ecosystem.Shared.Responses;
 using ZAP.Identity.API.Features.Shared.Controllers;
 using ZAP.Identity.Application.Features.Auth.AppAuth.V1.Queries;
 
@@ -24,12 +25,12 @@ public class AppAuthController : BaseApiController
     {
         try
         {
-            var token = await _mediator.Send(command);
-            return Ok(new { Token = token });
+            var data = await _mediator.Send(command);
+            return Ok(ApiResponse<LoginResponse>.Ok(data, "Login successful"));
         }
-        catch (UnauthorizedAccessException ex)
+        catch (UnauthorizedAccessException)
         {
-            return Unauthorized(new { Error = ex.Message });
+            return Unauthorized(ApiResponse<object>.Failure(401, "Invalid credentials", "UNAUTHORIZED"));
         }
     }
 }
