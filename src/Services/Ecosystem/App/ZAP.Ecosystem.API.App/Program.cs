@@ -62,14 +62,25 @@ builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => 
 
 var app = builder.Build();
 
+app.MapOpenApi();
+app.MapHealthChecks("/health");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
     app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
+app.MapGet("/", (HttpContext ctx) => 
+{
+    ctx.Response.Redirect("index.html");
+    return Task.CompletedTask;
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -116,9 +116,10 @@ builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.INotifi
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.MapOpenApi();
+
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
     app.MapScalarApiReference(); // Add Scalar UI
 }
 else
@@ -131,12 +132,20 @@ app.Use(async (context, next) =>
     context.Response.Headers.Append("X-Xss-Protection", "1; mode=block");
     context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
     context.Response.Headers.Append("X-Frame-Options", "DENY"); 
-    context.Response.Headers.Append("Content-Security-Policy", "default-src 'self';");
+    context.Response.Headers.Append("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;");
     context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
     await next();
 });
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
+app.MapGet("/", (HttpContext ctx) => 
+{
+    ctx.Response.Redirect("index.html");
+    return Task.CompletedTask;
+});
 
 app.UseRateLimiter(); // Apply Rate Limiter
 app.UseCors("StandardSecurityPolicy");
