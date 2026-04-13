@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
     <PackageReference Include="Scalar.AspNetCore" Version="1.2.73" />
@@ -18,5 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ZAP.Ecosystem.Infrastructure\ZAP.Ecosystem.Infrastructure.csproj" />
     <ProjectReference Include="..\..\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+    <ProjectReference Include="..\ZAP.Ecosystem.Application.CRM\ZAP.Ecosystem.Application.CRM.csproj" />
   </ItemGroup>
 </Project>
