@@ -56,7 +56,7 @@ namespace ZAP.Identity.API.Features.Auth.Login.v1.Controllers
         /// <summary>
         /// 4. Login with password
         /// </summary>
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<IActionResult> LoginWithPassword([FromBody] LoginUserCommand command)
         {
             var result = await _mediator.Send(command);

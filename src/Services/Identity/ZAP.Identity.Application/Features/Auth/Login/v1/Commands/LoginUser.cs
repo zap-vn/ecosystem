@@ -16,7 +16,12 @@ namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.LoginUser
     public class LoginUserCommand : IRequest<ApiResponse<LoginDataDto>>
     {
         [JsonPropertyName("account")]
-        public string Account { get; set; } = string.Empty;
+        public string? Account { get; set; }
+
+        [JsonPropertyName("email")]
+        public string? Email { get; set; }
+
+        public string GetEffectiveAccount() => (!string.IsNullOrEmpty(Account) ? Account : Email) ?? string.Empty;
 
         [JsonPropertyName("password")]
         public string? Password { get; set; }
@@ -40,7 +45,7 @@ namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.LoginUser
         public async Task<ApiResponse<LoginDataDto>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var account = (request.Account ?? "").Trim();
+            var account = request.GetEffectiveAccount().Trim();
             
             if (!string.IsNullOrEmpty(request.DialingCode) && !account.Contains("@") && account.All(c => char.IsDigit(c) || c == '+'))
             {
