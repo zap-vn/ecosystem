@@ -46,9 +46,9 @@ builder.Services.AddApiVersioning(options =>
     options.SubstituteApiVersionInUrl = true;
 });
 
-// MediatR scanning for App features (Scans assembly containing Class1)
+// MediatR scanning for App features
 builder.Services.AddMediatR(cfg => {
-    cfg.RegisterServicesFromAssembly(typeof(ZAP.Ecosystem.Application.App.Class1).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(ZAP.Ecosystem.Application.App.Features.Customers.Profile.v1.Queries.GetCustomerProfileQuery).Assembly);
 });
 
 builder.Services.AddDbContext<EcosystemDbContext>(options =>
