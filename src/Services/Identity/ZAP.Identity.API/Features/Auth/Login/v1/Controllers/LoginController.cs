@@ -11,10 +11,11 @@ using Asp.Versioning;
 
 namespace ZAP.Identity.API.Features.Auth.Login.v1.Controllers
 {
+    [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/auth/login")]
     [AllowAnonymous]
-    public class LoginController : BaseApiController
+    public class LoginController : ControllerBase
     {
         private readonly IMediator _mediator;
 
