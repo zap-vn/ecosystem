@@ -7,8 +7,8 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Validators
     {
         public GetLocationListQueryValidator()
         {
-            RuleFor(x => x.Request.PageIndex).GreaterThan(0);
-            RuleFor(x => x.Request.PageSize).GreaterThan(0).LessThanOrEqualTo(100);
+            RuleFor(x => x.Request.page_index).GreaterThan(0);
+            RuleFor(x => x.Request.page_size).GreaterThan(0).LessThanOrEqualTo(100);
         }
     }
 }

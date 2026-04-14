@@ -15,27 +15,20 @@ namespace ZAP.Ecosystem.Infrastructure.Repositories.CRM
         {
         }
 
-        public override async Task<Collection?> GetByIdAsync(object id, System.Threading.CancellationToken cancellationToken = default)
-        {
-            if (id is Guid guid)
-                return await _dbSet.Include(c => c.status).FirstOrDefaultAsync(c => c.id == guid, cancellationToken);
-            return await base.GetByIdAsync(id, cancellationToken);
-        }
-
         public async Task<(IEnumerable<Collection> Items, int TotalCount)> GetPagedAsync(int page, int pageSize, string? search = null)
         {
-            var query = _dbSet
-                .Include(c => c.status)
+            var query = _dbContext.Set<Collection>()
+                .Include(x => x.status)
                 .ThenInclude(s => s.translations)
                 .AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(search))
-                query = query.Where(c => c.name.Contains(search));
+                query = query.Where(x => x.name.Contains(search));
 
             var totalCount = await query.CountAsync();
 
             var items = await query
-                .OrderBy(c => c.name)
+                .OrderBy(x => x.name)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
