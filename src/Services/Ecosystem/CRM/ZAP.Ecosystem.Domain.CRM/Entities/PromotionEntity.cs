@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
+    [System.ComponentModel.DataAnnotations.Schema.Table("promotion", Schema = "marketing")]
     public class PromotionEntity : BaseEntity, ILocalizable<PromotionTranslation>
     {
         public Guid id { get; set; }

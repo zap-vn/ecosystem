@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    public interface ILocationRepository
+    public interface ILocationRepository : ZAP.Ecosystem.Shared.Data.IBaseRepository<Location>
     {
         Task<IEnumerable<Location>> GetPagedAsync(LocationListFilter filter);
         Task<int> GetTotalCountAsync(LocationListFilter filter);

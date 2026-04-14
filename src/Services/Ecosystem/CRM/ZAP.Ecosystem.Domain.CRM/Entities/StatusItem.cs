@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    [Table("status_item", Schema = "platform")]
+    [Table("status_item", Schema = "system")]
     public class StatusItem
     {
         [Key]
@@ -32,7 +32,7 @@ namespace ZAP.Ecosystem.Domain.CRM
         public ICollection<StatusItemTranslation> translations { get; set; } = new List<StatusItemTranslation>();
     }
 
-    [Table("status_item_translation", Schema = "platform")]
+    [Table("status_item_translation", Schema = "system")]
     public class StatusItemTranslation
     {
         [Key]

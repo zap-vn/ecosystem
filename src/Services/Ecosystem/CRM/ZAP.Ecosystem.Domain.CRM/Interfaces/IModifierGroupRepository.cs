@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    public interface IModifierGroupRepository
+    public interface IModifierGroupRepository : ZAP.Ecosystem.Shared.Data.IBaseRepository<ModifierGroup>
     {
         Task<IEnumerable<ModifierGroup>> GetAllAsync(Guid? tenantId = null);
         Task<ModifierGroup?> GetByIdAsync(Guid id);

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
+    [Table("product", Schema = "catalog")]
     public class Product
     {
         public Guid id { get; set; } = Guid.NewGuid();

@@ -4,7 +4,7 @@ using ZAP.Ecosystem.Domain.CRM.Common;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    public interface IPromotionRepository : IRepository<PromotionEntity>
+    public interface IPromotionRepository : ZAP.Ecosystem.Shared.Data.IBaseRepository<PromotionEntity>
     {
         Task<ZAP.Ecosystem.Shared.Data.PagedResult<PromotionEntity>> GetPagedAsync(
             int pageIndex, int pageSize,

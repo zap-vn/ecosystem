@@ -1,6 +1,8 @@
 using ZAP.Ecosystem.Domain.CRM.Common;
 using System.Collections.Generic;
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ZAP.Ecosystem.Domain.CRM
 {
     public class TaxSyncSetting
@@ -10,7 +12,8 @@ namespace ZAP.Ecosystem.Domain.CRM
         public string TimePicker { get; set; } = string.Empty;
     }
 
-        public class CustomerEntity : BaseEntity, ILocalizable<CustomerTranslation>
+    [Table("customer", Schema = "people")]
+    public class CustomerEntity : BaseEntity, ILocalizable<CustomerTranslation>
     {
         public long _key { get; set; }
         public string _rev { get; set; } = string.Empty;
