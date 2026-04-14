@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Asp.Versioning;
+using ZAP.Ecosystem.Shared.Middlewares;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddHealthChecks();
 builder.Services.AddOpenApi();
-builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+    builder.Services.AddControllers();
+
+    // Register real Identity Service
+    builder.Services.AddScoped<ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService, ZAP.Ecosystem.API.CRM.Services.CurrentUserService>();
 
 // Configure JWT Authentication (Matching Identity Service)
 builder.Services.AddAuthentication(options =>
@@ -60,31 +65,34 @@ builder.Services.AddDbContext<EcosystemDbContext>(options =>
 builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), typeof(ZAP.Ecosystem.Shared.Data.BaseRepository<>));
 builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => provider.GetRequiredService<EcosystemDbContext>());
 
-// Override CRM Legacy Injection
-builder.Services.AddScoped<ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService, ZAP.Ecosystem.API.CRM.Mocks.MockUserService>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IProductRepository, ZAP.Ecosystem.API.CRM.Mocks.MockProductRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IUnitRepository, ZAP.Ecosystem.API.CRM.Mocks.MockUnitRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICategoryRepository, ZAP.Ecosystem.API.CRM.Mocks.MockCategoryRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository, ZAP.Ecosystem.API.CRM.Mocks.MockModifierGroupRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IBrandRepository, ZAP.Ecosystem.API.CRM.Mocks.MockBrandRepository>();
-
-builder.Services.AddScoped<ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService, MockCurrentUserService>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ILocationRepository, ZAP.Ecosystem.API.CRM.MockLocationRepository>();
-
-// Auto-register all missing Domain Interfaces to the dynamic Proxy so handlers don't crash with 500 errors
+// Automatically register all EF Core Repositories dynamically
 var domainAssembly = typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository).Assembly;
-var proxyMethod = typeof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy).GetMethod(nameof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy.Create));
-foreach (var type in domainAssembly.GetTypes())
+var infrastructureAssembly = typeof(ZAP.Ecosystem.Infrastructure.Data.EcosystemDbContext).Assembly;
+
+var repositoryInterfaces = domainAssembly.GetTypes()
+    .Where(t => t.IsInterface && t.Name.EndsWith("Repository"))
+    .ToList();
+
+var repositoryImplementations = infrastructureAssembly.GetTypes()
+    .Where(t => t.IsClass && !t.IsAbstract && t.Name.EndsWith("Repository"))
+    .ToList();
+
+foreach (var ri in repositoryInterfaces)
 {
-    if (type.IsInterface && type.Name.EndsWith("Repository") && type != typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository))
+    var impl = repositoryImplementations.FirstOrDefault(t => ri.IsAssignableFrom(t));
+    if (impl != null)
     {
-        builder.Services.AddScoped(type, sp => 
-            proxyMethod!.MakeGenericMethod(type).Invoke(null, null)!
-        );
+        builder.Services.AddScoped(ri, impl);
     }
 }
 
-builder.Services.AddControllers();
+
+
+builder.Services.AddHttpContextAccessor();
+    builder.Services.AddControllers();
+
+    // Register real Identity Service
+    builder.Services.AddScoped<ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService, ZAP.Ecosystem.API.CRM.Services.CurrentUserService>();
 
 builder.Services.AddMediatR(cfg => {
     cfg.RegisterServicesFromAssembly(typeof(ZAP.Ecosystem.Application.CRM.Features.Categories.v1.Queries.GetCategoryListQuery).Assembly);
@@ -113,16 +121,18 @@ app.MapGet("/", (HttpContext ctx) =>
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSharedAcceptLanguage();
 app.MapControllers();
 
 app.Run();
 
-public class MockCurrentUserService : ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService
-{
-    // Mock user for testing without token setup
-    public string? UserGuid => "a6b32eee-a14a-4cec-a070-e23b6ea234fb";
-    public int LocaleId => 2; // Vietnamese etc.
-}
+
+
+
+
+
+
+
 
 
 

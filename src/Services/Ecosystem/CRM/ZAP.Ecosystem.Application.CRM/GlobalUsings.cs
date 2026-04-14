@@ -2,6 +2,7 @@ global using ZAP.Ecosystem.Shared.Data;
 global using ZAP.Ecosystem.Domain.CRM;
 global using ZAP.Ecosystem.Domain.CRM.Common;
 global using ZAP.Ecosystem.Application.CRM.Common.Interfaces;
+global using ZAP.Ecosystem.Shared.Interfaces;
 global using ZAP.Ecosystem.Application.CRM.Common;
 
 global using ZAP.Ecosystem.Application.CRM.Features.Brands.v1.DTOs;
@@ -20,3 +21,4 @@ global using ZAP.Ecosystem.Application.CRM.Features.Products.v1.DTOs;
 
 
 global using ZAP.Ecosystem.Application.CRM.Features.Units.v1.DTOs;
+

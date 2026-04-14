@@ -10,16 +10,16 @@ public class GetLocationByIdQueryHandler : IRequestHandler<GetLocationByIdQuery,
 {
     private readonly ILocationRepository _repository;
 
-    public GetLocationByIdQueryHandler(ILocationRepository repository)
+    private readonly ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService _currentUserService;
+    public GetLocationByIdQueryHandler(ILocationRepository repository, ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService currentUserService)
     {
         _repository = repository;
+        _currentUserService = currentUserService;
     }
 
     public async Task<object> Handle(GetLocationByIdQuery request, CancellationToken cancellationToken)
     {
-        int localeId = 2;
-        if (!string.IsNullOrEmpty(request.AcceptLanguage) && int.TryParse(request.AcceptLanguage, out var parsed))
-            localeId = parsed;
+        int localeId = _currentUserService.LocaleId > 0 ? _currentUserService.LocaleId : 2;
 
         var x = await _repository.GetByIdAsync(request.Id);
         if (x == null) return CrmResponse.NotFound("Location");
@@ -73,3 +73,5 @@ public class GetLocationByIdQueryHandler : IRequestHandler<GetLocationByIdQuery,
         });
     }
 }
+
+

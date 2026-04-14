@@ -11,18 +11,18 @@ public class GetLocationListQueryHandler : IRequestHandler<GetLocationListQuery,
 {
     private readonly ILocationRepository _repository;
 
-    public GetLocationListQueryHandler(ILocationRepository repository)
+    private readonly ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService _currentUserService;
+    public GetLocationListQueryHandler(ILocationRepository repository, ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService currentUserService)
     {
         _repository = repository;
+        _currentUserService = currentUserService;
     }
 
     public async Task<object> Handle(GetLocationListQuery request, CancellationToken cancellationToken)
     {
         var req = request.Request;
 
-        int localeId = req.locale_id;
-        if (!string.IsNullOrEmpty(request.AcceptLanguage) && int.TryParse(request.AcceptLanguage, out var parsedLocale))
-            localeId = parsedLocale;
+        int localeId = req.locale_id > 0 ? req.locale_id : _currentUserService.LocaleId > 0 ? _currentUserService.LocaleId : 2;
 
         var filter = new LocationListFilter
         {
@@ -90,3 +90,5 @@ public class GetLocationListQueryHandler : IRequestHandler<GetLocationListQuery,
         return CrmResponse.Paged(new PagedResult<LocationDto>(dtos, total, req.page_index, req.page_size));
     }
 }
+
+

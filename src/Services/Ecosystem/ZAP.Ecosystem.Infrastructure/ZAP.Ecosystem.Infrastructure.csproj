@@ -9,6 +9,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Modules\" />
+    <Folder Include="Data\Configurations\Catalog\" />
+    <Folder Include="Data\Configurations\Core\" />
+    <Folder Include="Data\Configurations\Customers\" />
+    <Folder Include="Data\Configurations\HR\" />
+    <Folder Include="Data\Configurations\Inventory\" />
+    <Folder Include="Data\Configurations\Locations\" />
+    <Folder Include="Data\Configurations\Payments\" />
+    <Folder Include="Data\Configurations\Promotions\" />
+    <Folder Include="Data\Configurations\Reports\" />
+    <Folder Include="Data\Configurations\Sales\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
@@ -24,5 +34,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
     <ProjectReference Include="..\..\Identity\ZAP.Identity.Domain\ZAP.Identity.Domain.csproj" />
+    <ProjectReference Include="..\CRM\ZAP.Ecosystem.Domain.CRM\ZAP.Ecosystem.Domain.CRM.csproj" />
   </ItemGroup>
 </Project>
