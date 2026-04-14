@@ -40,9 +40,13 @@ public class EcosystemDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         
-        // Ensure schemas align with ZAP database hardening guidelines
-        // e.g. modelBuilder.HasDefaultSchema("catalog");
-        
+        // Define composite keys for CRM join tables
+        modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.CollectionItem>()
+            .HasKey(c => new { c.collection_id, c.product_id });
+
+        modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.ProductCategoryMap>()
+            .HasKey(p => new { p.product_id, p.category_id });
+
         // Scan for all IEntityTypeConfiguration
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(EcosystemDbContext).Assembly);
     }
