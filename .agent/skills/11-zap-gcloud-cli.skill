@@ -1,0 +1,22 @@
+# ZAP Setup Workload Identity Federation (GCloud CLI) Skill
+
+## 1. Mục đích hoạt động
+Skill này thiết lập chuẩn tạo cấu trúc Workload Identity Federation (WIF) và quản trị Cloud Run / hệ sinh thái ZAP trên GCP thông qua công cụ dòng lệnh `gcloud cli` thay vì thao tác trên giao diện. Quá trình này đảm bảo tính minh bạch, tự động hóa như Infrastructure As Code (IaC) cho team.
+
+## 2. Quy tắc thực thi lệnh `gcloud`
+Mỗi khi khởi tạo một project GCP mới hoặc chuyển Repo GitHub, Agent/Admin PHẢI sử dụng tài khoản đã đăng nhập (`gcloud auth login`) và gọi các script thực thi tự động.
+Yêu cầu 2 tham số đầu vào:
+1. `ProjectId`: Mã ID Project trên GCP.
+2. `RepoName`: Tên repo dưới định dạng `owner/repository` (Vd: `your-username/ecosystem`).
+
+## 3. Các bước nghiệp vụ (Operations)
+Skill gcloud cli cấu thành bởi 6 nghiệp vụ lệnh tương tác trực tiếp với Identity and Access Management (IAM):
+- **Enable API**: `gcloud services enable iamcredentials.googleapis.com run.googleapis.com`
+- **Identity Pool**: Tạo kho OIDC nhận diện các lệnh gọi vào GCP.
+- **Provider**: Liên kết pool với server cấp chứng chỉ của GitHub Actions (`token.actions.githubusercontent.com`).
+- **Service Account**: Tạo tài khoản không giữ KEY bí mật cục bộ.
+- **Bind Assertion**: Ràng buộc (restrict) gắt gao rằng **chỉ đúng Repository** của ZAP mới được phép mạo danh Identity Pool này lấy token chạy code.
+- **Grant Roles**: Trao quyền thực thi Deployment lên Cloud Run (`run.admin`, `iam.serviceAccountUser`).
+
+## 4. Tự động hóa Pipeline
+Agent có thể trực tiếp chạy hoặc cung cấp cho người dùng file script PowerShell `setup-gcp-wif.ps1` đính kèm tại dự án để khởi tạo ngay lập tức không cần gõ từng dòng lệnh. Ngay sau khi chạy xong script này, chuỗi Secret cần cho bước trước (bước 10) sẽ được in thẳng ra màn hình Console.

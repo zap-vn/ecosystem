@@ -1,0 +1,38 @@
+# ZAP CI/CD Prerequisites & Provisioning Skill
+
+## 1. Mục đích hoạt động
+Skill này định nghĩa danh sách các cấu hình và thiết lập nền tảng bắt buộc để kích hoạt pipeline tự động CI/CD (`deploy-gcp.yml`) triển khai hệ sinh thái ZAP (C#) từ Github sang Google Cloud Platform (GCP).
+
+## 2. Quy trình xử lý và yêu cầu thông tin
+
+Khi kích hoạt luồng CI/CD, Agent hoặc Developer phải xác nhận 4 thông tin sau đã được thiết lập:
+
+### Yêu cầu 1: Cấu hình Secrets trên GitHub Repository
+Truy cập `Settings > Secrets and variables > Actions` trên Repo để tạo các Repository secrets:
+- `GCP_WORKLOAD_IDENTITY_PROVIDER`: Định danh kết nối Federation. (VD: `projects/123456789/locations/global/workloadIdentityPools/gh-pool/providers/gh-provider`).
+- `GCP_SERVICE_ACCOUNT`: Địa chỉ email IAM Service Account dùng để cấp nhận ủy quyền. (VD: `gh-deploy@zap-pro-123.iam.gserviceaccount.com`).
+*Lưu ý: Không yêu cầu tạo `GITHUB_TOKEN` do được cung cấp tự động bởi pipeline.*
+
+### Yêu cầu 2: Thiết lập bảo mật định danh trên GCP
+Hệ thống môi trường trên Google Cloud phải được cấp quyền trước:
+- **Workload Identity Pool / Provider**: Cấu hình OIDC trust (mapping) từ thẻ `repo:your-org/your-repo` vào hệ thống Google để Github Action nhảy qua mà không dùng file key.
+- Gắn quyền IAM cho Service Account deploy (`GCP_SERVICE_ACCOUNT`):
+  - Quyền quản trị serverless: `Cloud Run Admin` (`roles/run.admin`).
+  - Quyền ủy quyền chạy service: `Service Account User` (`roles/iam.serviceAccountUser`).
+- Cloud Run API phải được đánh dấu status là **Enabled** bên trong dự án GCP.
+
+### Yêu cầu 3: Cấp quyền Write cho GitHub Actions (Workflow permissions)
+Pipeline cần lưu trữ Artifacts/Docker tag qua Registry tự động.
+- Yêu cầu kiểm tra ở Github `Settings > Actions > General > Workflow permissions`.
+- Thiết lập trạng thái: **Read and write permissions**.
+
+### Yêu cầu 4: (Tùy chọn) Biến môi trường Connection String của Database
+Hệ sinh thái ZAP bao gồm database backend (AlloyDB / Postgres / CRM Database).
+- Cần cung cấp biến môi trường trực tiếp tại file `deploy-gcp.yml` dưới thẻ `env_vars:` hoặc thông qua Google Secret Manager.
+- Các hằng số (constants) điển hình cần được inject xuống Cloud Run:
+  - `ASPNETCORE_ENVIRONMENT=Staging` (hoặc Production tùy nhánh merge).
+  - `ConnectionStrings__DefaultConnection`: Chuỗi kết nối DB (IP nội bộ của AlloyDB hoặc Cloud SQL Proxy).
+
+## 3. Nhiệm vụ của Agent
+- KHÔNG thay đổi các service `run` của GCP nếu thiếu 4 thành phần thiết lập này trên hạ tầng thật.
+- Khi người dùng hỏi "Cần thông tin gì để chạy luồng Dev?", Agent sử dụng Skill này như một Checklist để rà soát hoặc in ra hướng dẫn config cho Admin.
