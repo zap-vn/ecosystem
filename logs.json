@@ -1,0 +1,306 @@
+﻿[
+  {
+    "errorGroups": [
+      {
+        "id": "CPrMzavb99G0Gg"
+      }
+    ],
+    "insertId": "69dde3710005ba4a4bf3e88f",
+    "labels": {
+      "instanceId": "008c15ff0854173a73d7524aa5058478a97dcfcc5cd9e885709112e16578f4bfa129cd01dffacdbd9efdad4173c61eb3479cd2f510981407f8352a40b8036350b8c4b7cb1e652b140cdaab565339"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-04-14T06:49:21.627076316Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00007-9zf",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "textPayload": "      System.ArgumentNullException: Value cannot be null. (Parameter 'source')\n         at System.Linq.ThrowHelper.ThrowArgumentNullException(ExceptionArgument argument)\n         at System.Linq.Enumerable.Select[TSource,TResult](IEnumerable`1 source, Func`2 selector)\n         at ZAP.Ecosystem.Application.CRM.Features.ModifierGroup.v1.Queries.GetModifierGroupsQueryHandler.Handle(GetModifierGroupsQuery request, CancellationToken cancellationToken) in /src/src/Services/Ecosystem/CRM/ZAP.Ecosystem.Application.CRM/Features/ModifierGroup/v1/Queries/GetModifierGroupsQueryHandler.cs:line 35\n         at ZAP.Ecosystem.API.CRM.Features.ModifierGroup.v1.Controllers.ModifierGroupsController.List(ModifierGroupListRequestDto request) in /src/src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/Features/ModifierGroup/v1/Controllers/ModifierGroupsController.cs:line 20\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()",
+    "timestamp": "2026-04-14T06:49:21.375370Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.077015999s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "34.96.60.245",
+      "requestMethod": "POST",
+      "requestSize": "3149",
+      "requestUrl": "https://crm-api-768989935757.us-central1.run.app/api/modifiergroups/list",
+      "responseSize": "71",
+      "serverIp": "34.143.75.2",
+      "status": 500,
+      "userAgent": "PostmanRuntime/7.53.0"
+    },
+    "insertId": "69dde3710005c34008132c4c",
+    "labels": {
+      "instanceId": "008c15ff0854173a73d7524aa5058478a97dcfcc5cd9e885709112e16578f4bfa129cd01dffacdbd9efdad4173c61eb3479cd2f510981407f8352a40b8036350b8c4b7cb1e652b140cdaab565339"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-04-14T06:49:21.446180772Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00007-9zf",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "spanId": "1831187a8ad409d2",
+    "timestamp": "2026-04-14T06:49:21.298072Z",
+    "trace": "projects/zapcrmv1/traces/3f2eb1d1e0d25d4e3bc4406cf28c30f2",
+    "traceSampled": true
+  },
+  {
+    "errorGroups": [
+      {
+        "id": "COGt5Y-qsofy7AE"
+      }
+    ],
+    "insertId": "69dde22c000aaa5c436b80fa",
+    "labels": {
+      "instanceId": "008c15ff08ff4de5a2c45e9659f9158e8b71a6b7c2900020d4b1d1c27373cbdb9cb1f264204cfa73981385b604285f4eba8d529e8b6e86ac49c24ac6a4d7d1eb9779fc2bc06fe43197cc2ac7ff17"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-04-14T06:43:56.952562442Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00006-kdp",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "textPayload": "      System.InvalidOperationException: Unable to resolve service for type 'ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository' while attempting to activate 'ZAP.Ecosystem.Application.CRM.Features.ModifierGroup.v1.Queries.GetModifierGroupsQueryHandler'.\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)\n         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)\n         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)\n         at MediatR.Wrappers.RequestHandlerWrapperImpl`2.<>c__DisplayClass1_0.<Handle>g__Handler|0(CancellationToken t)\n         at MediatR.Wrappers.RequestHandlerWrapperImpl`2.Handle(IRequest`1 request, IServiceProvider serviceProvider, CancellationToken cancellationToken)\n         at MediatR.Mediator.Send[TResponse](IRequest`1 request, CancellationToken cancellationToken)\n         at ZAP.Ecosystem.API.CRM.Features.ModifierGroup.v1.Controllers.ModifierGroupsController.List(ModifierGroupListRequestDto request) in /src/src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/Features/ModifierGroup/v1/Controllers/ModifierGroupsController.cs:line 20\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()",
+    "timestamp": "2026-04-14T06:43:56.698972Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.004963656s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "34.96.60.245",
+      "requestMethod": "POST",
+      "requestSize": "3148",
+      "requestUrl": "https://crm-api-768989935757.us-central1.run.app/api/modifiergroups/list",
+      "responseSize": "71",
+      "serverIp": "34.143.76.2",
+      "status": 500,
+      "userAgent": "PostmanRuntime/7.53.0"
+    },
+    "insertId": "69dde22c000aad31175818cf",
+    "labels": {
+      "instanceId": "008c15ff08ff4de5a2c45e9659f9158e8b71a6b7c2900020d4b1d1c27373cbdb9cb1f264204cfa73981385b604285f4eba8d529e8b6e86ac49c24ac6a4d7d1eb9779fc2bc06fe43197cc2ac7ff17"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-04-14T06:43:56.971923904Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00006-kdp",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "spanId": "99657e241ad19aa2",
+    "timestamp": "2026-04-14T06:43:56.692865Z",
+    "trace": "projects/zapcrmv1/traces/a33ed3f4eb31f9c671b4c95cf4fb56d2",
+    "traceSampled": true
+  },
+  {
+    "errorGroups": [
+      {
+        "id": "COGt5Y-qsofy7AE"
+      }
+    ],
+    "insertId": "69dde227000968fea6f1464f",
+    "labels": {
+      "instanceId": "008c15ff08ff4de5a2c45e9659f9158e8b71a6b7c2900020d4b1d1c27373cbdb9cb1f264204cfa73981385b604285f4eba8d529e8b6e86ac49c24ac6a4d7d1eb9779fc2bc06fe43197cc2ac7ff17"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-04-14T06:43:51.955267963Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00006-kdp",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "textPayload": "      System.InvalidOperationException: Unable to resolve service for type 'ZAP.Ecosystem.Domain.CRM.ICustomerRepository' while attempting to activate 'ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries.GetCustomerListQueryHandler'.\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)\n         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)\n         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)\n         at MediatR.Wrappers.RequestHandlerWrapperImpl`2.<>c__DisplayClass1_0.<Handle>g__Handler|0(CancellationToken t)\n         at MediatR.Wrappers.RequestHandlerWrapperImpl`2.Handle(IRequest`1 request, IServiceProvider serviceProvider, CancellationToken cancellationToken)\n         at MediatR.Mediator.Send[TResponse](IRequest`1 request, CancellationToken cancellationToken)\n         at ZAP.Ecosystem.API.CRM.Features.Customers.v1.Controllers.CustomersController.List(CustomerListRequestDto request) in /src/src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/Features/Customers/v1/Controllers/CustomersController.cs:line 20\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()",
+    "timestamp": "2026-04-14T06:43:51.616702Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.033779055s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "34.96.60.245",
+      "requestMethod": "POST",
+      "requestSize": "3198",
+      "requestUrl": "https://crm-api-768989935757.us-central1.run.app/api/customers/list",
+      "responseSize": "71",
+      "serverIp": "34.143.75.2",
+      "status": 500,
+      "userAgent": "PostmanRuntime/7.53.0"
+    },
+    "insertId": "69dde22700096b4dfb92323b",
+    "labels": {
+      "instanceId": "008c15ff08ff4de5a2c45e9659f9158e8b71a6b7c2900020d4b1d1c27373cbdb9cb1f264204cfa73981385b604285f4eba8d529e8b6e86ac49c24ac6a4d7d1eb9779fc2bc06fe43197cc2ac7ff17"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-04-14T06:43:51.645306861Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00006-kdp",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "spanId": "40a9f465c82a368d",
+    "timestamp": "2026-04-14T06:43:51.582145Z",
+    "trace": "projects/zapcrmv1/traces/de7d65e39677aadd71b4c95cf4fb53cd"
+  },
+  {
+    "errorGroups": [
+      {
+        "id": "COGt5Y-qsofy7AE"
+      }
+    ],
+    "insertId": "69dde12e0001ad715d4247f0",
+    "labels": {
+      "instanceId": "008c15ff08ff4de5a2c45e9659f9158e8b71a6b7c2900020d4b1d1c27373cbdb9cb1f264204cfa73981385b604285f4eba8d529e8b6e86ac49c24ac6a4d7d1eb9779fc2bc06fe43197cc2ac7ff17"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-04-14T06:39:42.176566015Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00006-kdp",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "textPayload": "      System.InvalidOperationException: Unable to resolve service for type 'ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository' while attempting to activate 'ZAP.Ecosystem.Application.CRM.Features.ModifierGroup.v1.Queries.GetModifierGroupsQueryHandler'.\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)\n         at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)\n         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)\n         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)\n         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)\n         at MediatR.Wrappers.RequestHandlerWrapperImpl`2.<>c__DisplayClass1_0.<Handle>g__Handler|0(CancellationToken t)\n         at MediatR.Wrappers.RequestHandlerWrapperImpl`2.Handle(IRequest`1 request, IServiceProvider serviceProvider, CancellationToken cancellationToken)\n         at MediatR.Mediator.Send[TResponse](IRequest`1 request, CancellationToken cancellationToken)\n         at ZAP.Ecosystem.API.CRM.Features.ModifierGroup.v1.Controllers.ModifierGroupsController.List(ModifierGroupListRequestDto request) in /src/src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/Features/ModifierGroup/v1/Controllers/ModifierGroupsController.cs:line 20\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()",
+    "timestamp": "2026-04-14T06:39:42.109937Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "2.383467001s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "34.96.60.245",
+      "requestMethod": "POST",
+      "requestSize": "3149",
+      "requestUrl": "https://crm-api-768989935757.us-central1.run.app/api/modifiergroups/list",
+      "responseSize": "71",
+      "serverIp": "34.143.75.2",
+      "status": 500,
+      "userAgent": "PostmanRuntime/7.53.0"
+    },
+    "insertId": "69dde12e0001d739eb8476d3",
+    "labels": {
+      "instanceId": "008c15ff08ff4de5a2c45e9659f9158e8b71a6b7c2900020d4b1d1c27373cbdb9cb1f264204cfa73981385b604285f4eba8d529e8b6e86ac49c24ac6a4d7d1eb9779fc2bc06fe43197cc2ac7ff17"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-04-14T06:39:42.126035768Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00006-kdp",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "spanId": "c69d92c3d8839bd0",
+    "timestamp": "2026-04-14T06:39:39.610322Z",
+    "trace": "projects/zapcrmv1/traces/e56594872f840d1bd3c2b80948c8062e",
+    "traceSampled": true
+  },
+  {
+    "errorGroups": [
+      {
+        "id": "COGt5Y-qsofy7AE"
+      }
+    ],
+    "insertId": "69dddd890008ba8b8cab9079",
+    "labels": {
+      "instanceId": "008c15ff08d0d84609bd9074da6df38b031e47746609ebae50b10055fdd8b84f7a5403d145796e9e02e56cf8672502b7ce64f38aea654270aa1a92d3886842bcc130781c1e36442f78632347e624"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-04-14T06:24:09.912250609Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00006-kdp",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "textPayload": "      System.InvalidOperationException: Unable to resolve service for type 'ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository' while attempting to activate 'ZAP.Ecosystem.Application.CRM.Features.ModifierGroup.v1.Queries.GetModifierGroupsQueryHandler'.\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n         at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)\n         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)\n         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)\n         at MediatR.Wrappers.RequestHandlerWrapperImpl`2.<>c__DisplayClass1_0.<Handle>g__Handler|0(CancellationToken t)\n         at MediatR.Wrappers.RequestHandlerWrapperImpl`2.Handle(IRequest`1 request, IServiceProvider serviceProvider, CancellationToken cancellationToken)\n         at MediatR.Mediator.Send[TResponse](IRequest`1 request, CancellationToken cancellationToken)\n         at ZAP.Ecosystem.API.CRM.Features.ModifierGroup.v1.Controllers.ModifierGroupsController.List(ModifierGroupListRequestDto request) in /src/src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/Features/ModifierGroup/v1/Controllers/ModifierGroupsController.cs:line 20\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\n         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()",
+    "timestamp": "2026-04-14T06:24:09.572043Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.029259630s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "34.96.45.79",
+      "requestMethod": "POST",
+      "requestSize": "3148",
+      "requestUrl": "https://crm-api-768989935757.us-central1.run.app/api/modifiergroups/list",
+      "responseSize": "71",
+      "serverIp": "34.143.74.2",
+      "status": 500,
+      "userAgent": "PostmanRuntime/7.53.0"
+    },
+    "insertId": "69dddd890008bce49c89e44b",
+    "labels": {
+      "instanceId": "008c15ff08d0d84609bd9074da6df38b031e47746609ebae50b10055fdd8b84f7a5403d145796e9e02e56cf8672502b7ce64f38aea654270aa1a92d3886842bcc130781c1e36442f78632347e624"
+    },
+    "logName": "projects/zapcrmv1/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-04-14T06:24:09.577835698Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "crm-api",
+        "location": "us-central1",
+        "project_id": "zapcrmv1",
+        "revision_name": "crm-api-00006-kdp",
+        "service_name": "crm-api"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "ERROR",
+    "spanId": "225a2c281ea264f9",
+    "timestamp": "2026-04-14T06:24:09.536495Z",
+    "trace": "projects/zapcrmv1/traces/3c3ad80c8a628b55cd70e614c0bc217a",
+    "traceSampled": true
+  }
+]
