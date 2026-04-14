@@ -20,8 +20,8 @@ public class DiningOptionsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetById(int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(string id)
     {
         var result = await _mediator.Send(new GetDiningOptionByIdQuery { Id = id });
         return Ok(result);
@@ -34,8 +34,8 @@ public class DiningOptionsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<IActionResult> Update(int id, [FromBody] UpdateDiningOptionCommand command)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(string id, [FromBody] UpdateDiningOptionCommand command)
     {
         command.Id = id;
         var result = await _mediator.Send(command);
