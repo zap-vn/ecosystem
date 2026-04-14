@@ -6,6 +6,8 @@ using ZAP.Ecosystem.Application.CRM.Common;
 using ZAP.Ecosystem.Domain.CRM;
 using ZAP.Ecosystem.Shared.Data;
 
+using System.Linq;
+
 namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.Queries;
 
 public class GetPromotionListQueryHandler : IRequestHandler<GetPromotionListQuery, object>
@@ -41,6 +43,6 @@ public class GetPromotionListQueryHandler : IRequestHandler<GetPromotionListQuer
             updated_at         = x.updated_at ?? DateTime.UtcNow
         }).ToList();
 
-        return CrmResponse.Paged(new PagedResult<DTOs.PromotionDto>(dtos, result.TotalRecord, result.PageIndex, result.PageSize));
+        return CrmResponse.Paged(new PagedResult<DTOs.PromotionDto>(dtos, result.TotalCount, result.PageIndex, result.PageSize));
     }
 }
