@@ -67,13 +67,27 @@ namespace ZAP.Ecosystem.Domain.CRM
         
         // --- Postgres Specific Fields ---
                 public Guid id { get; set; }
+                public int serial_id { get; set; }
+                public string serial_number { get; set; } = string.Empty;
                 public Guid? tenant_id { get; set; }
+                public string customer_code { get; set; } = string.Empty;
                 public string? legacy_id { get; set; }
-                public string? email { get; set; }
+                public string? square_customer_id { get; set; }
+                public string? reference_id { get; set; }
                 public string? phone_number { get; set; }
+                public string? email { get; set; }
                 public string? full_name { get; set; }
-                public string? gender { get; set; }
+                public string? first_name { get; set; }
+                public string? last_name { get; set; }
+                public string? nickname { get; set; }
+                public string? company_name { get; set; }
+                public string? avatar_url { get; set; }
+                public int? gender_id { get; set; }
                 public DateTime? birth_date { get; set; }
+                public string? address_line_1 { get; set; }
+                public string? address_line_2 { get; set; }
+                public string? city_name { get; set; }
+                public string? state_name { get; set; }
                 public int? country_id { get; set; }
                 public int? province_id { get; set; }
                 public int? district_id { get; set; }
@@ -81,11 +95,22 @@ namespace ZAP.Ecosystem.Domain.CRM
                 public string? zipcode { get; set; }
                 public int? preferred_locale_id { get; set; }
                 public Guid? user_id { get; set; }
-                public int? status_id { get; set; }
                 public Guid? tier_id { get; set; }
+                public string? memo { get; set; }
+                public string creation_source { get; set; } = "Email";
+                public string? email_subscription_status { get; set; }
+                public bool is_instant_profile { get; set; } = false;
+                public decimal current_points_balance { get; set; } = 0;
+                public decimal total_spent_amount { get; set; } = 0;
+                public decimal average_spent_amount { get; set; } = 0;
+                public int total_visits_count { get; set; } = 0;
+                public DateTime? first_visit_at { get; set; }
+                public DateTime? last_visit_at { get; set; }
+                public int? status_id { get; set; }
+                public string? display_initial { get; set; }
                 public Guid? group_id { get; set; }
-                public decimal? current_points_balance { get; set; }
-                public decimal? total_spent_amount { get; set; }
+                public DateTime created_at { get; set; } = DateTime.UtcNow;
+                public DateTime? updated_at { get; set; }
 
                 public virtual LoyaltyTier? loyalty_tier { get; set; }
 

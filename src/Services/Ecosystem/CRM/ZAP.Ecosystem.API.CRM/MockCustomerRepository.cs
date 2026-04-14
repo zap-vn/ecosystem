@@ -97,7 +97,7 @@ namespace ZAP.Ecosystem.API.CRM
                         email_subscription_status = reader.IsDBNull(32) ? null : reader.GetString(32),
                         is_instant_profile = !reader.IsDBNull(33) && reader.GetBoolean(33),
                         current_points_balance = reader.IsDBNull(34) ? 0 : reader.GetDecimal(34),
-                        total_spent_amount = reader.IsDBNull(35) ? 0 : reader.GetDecimal(34),
+                        total_spent_amount = reader.IsDBNull(35) ? 0 : reader.GetDecimal(35),
                         status_id = reader.IsDBNull(40) ? null : reader.GetInt32(40),
                         display_initial = reader.IsDBNull(41) ? null : reader.GetString(41),
                         created_at = reader.IsDBNull(42) ? DateTime.UtcNow : reader.GetDateTime(42),
