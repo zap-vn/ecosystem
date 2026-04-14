@@ -20,6 +20,13 @@ public class EcosystemDbContext : DbContext
     public DbSet<ZAP.Ecosystem.Domain.CRM.PromotionEntity> Promotions { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.StatusItem> StatusItems { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.StatusItemTranslation> StatusItemTranslations { get; set; }
+    
+    // CRM Helper Entities for Navigation
+    public DbSet<ZAP.Ecosystem.Domain.CRM.LocationTypeItem> LocationTypes { get; set; }
+    public DbSet<ZAP.Ecosystem.Domain.CRM.LocationTypeTranslation> LocationTypeTranslations { get; set; }
+    public DbSet<ZAP.Ecosystem.Domain.CRM.ProductTypeItem> ProductTypes { get; set; }
+    public DbSet<ZAP.Ecosystem.Domain.CRM.ProductVariant> ProductVariants { get; set; }
+    public DbSet<ZAP.Ecosystem.Domain.CRM.PromotionTranslation> PromotionTranslations { get; set; }
 
     public EcosystemDbContext(DbContextOptions<EcosystemDbContext> options)
         : base(options)
