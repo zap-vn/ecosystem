@@ -15,6 +15,14 @@ builder.Services.AddDbContext<EcosystemDbContext>(options =>
 // Configure Generic Repository from Shared Module
 builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), typeof(ZAP.Ecosystem.Shared.Data.BaseRepository<>));
 
+builder.Services.AddScoped<ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService, MockCurrentUserService>();
+
+builder.Services.AddControllers();
+
+builder.Services.AddMediatR(cfg => {
+    cfg.RegisterServicesFromAssembly(typeof(ZAP.Ecosystem.Application.CRM.Features.Categories.v1.Queries.GetCategoryListQuery).Assembly);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,4 +34,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapControllers();
+
 app.Run();
+
+public class MockCurrentUserService : ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService
+{
+    // Mock user for testing without token setup
+    public string? UserGuid => "a6b32eee-a14a-4cec-a070-e23b6ea234fb";
+    public int LocaleId => 2; // Vietnamese etc.
+}
