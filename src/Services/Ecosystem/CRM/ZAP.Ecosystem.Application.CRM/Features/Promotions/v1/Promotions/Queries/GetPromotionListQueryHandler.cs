@@ -1,11 +1,19 @@
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using ZAP.Ecosystem.Shared.Data;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.Queries;
 
 public class GetPromotionListQueryHandler : IRequestHandler<GetPromotionListQuery, object>
 {
     public Task<object> Handle(GetPromotionListQuery request, CancellationToken cancellationToken)
-        => Task.FromResult(CrmResponse.Paged(Array.Empty<object>(), 0, request.Request.PageIndex, request.Request.PageSize));
+    {
+        return Task.FromResult<object>(new {
+            success = true,
+            code = 200,
+            message = "OK",
+            data = new { total_page = 0, total_record = 0, page_index = 1, page_size = 10, items = System.Array.Empty<object>() }
+        });
+    }
 }
