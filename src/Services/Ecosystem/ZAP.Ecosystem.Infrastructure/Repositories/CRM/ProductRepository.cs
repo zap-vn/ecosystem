@@ -69,10 +69,11 @@ namespace ZAP.Ecosystem.Infrastructure.Repositories.CRM
             int? productTypeId = null, string sortField = "created_at",
             bool sortDescending = true)
         {
-            var query = _dbSet
+            var query = _dbContext.Set<Product>()
                 .Include(p => p.status)
                 .ThenInclude(s => s.translations)
                 .Include(p => p.product_type)
+                .ThenInclude(t => t.translations)
                 .AsNoTracking();
 
             if (tenantId.HasValue) query = query.Where(p => p.tenant_id == tenantId.Value);

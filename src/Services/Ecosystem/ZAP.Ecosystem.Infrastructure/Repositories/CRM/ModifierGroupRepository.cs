@@ -35,7 +35,7 @@ namespace ZAP.Ecosystem.Infrastructure.Repositories.CRM
             int? statusId = null, string? displayType = null,
             string sortField = "name", bool sortDescending = false)
         {
-            var query = _dbSet
+            var query = _dbContext.Set<ModifierGroup>()
                 .Include(g => g.status)
                 .ThenInclude(s => s.translations)
                 .AsNoTracking();

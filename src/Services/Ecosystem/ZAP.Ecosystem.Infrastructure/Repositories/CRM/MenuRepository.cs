@@ -29,7 +29,7 @@ namespace ZAP.Ecosystem.Infrastructure.Repositories.CRM
             int localeId = 2, string sortField = "name",
             bool sortDescending = false)
         {
-            var query = _dbSet
+            var query = _dbContext.Set<MenuHeader>()
                 .Include(m => m.status)
                 .ThenInclude(s => s.translations)
                 .AsNoTracking();

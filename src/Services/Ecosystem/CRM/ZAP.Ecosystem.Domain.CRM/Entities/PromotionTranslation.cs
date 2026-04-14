@@ -2,6 +2,7 @@ using ZAP.Ecosystem.Domain.CRM.Common;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
+    [System.ComponentModel.DataAnnotations.Schema.Table("promotion_translation", Schema = "marketing")]
     public class PromotionTranslation : BaseTranslationEntity
     {
         public string Title { get; set; } = string.Empty;
