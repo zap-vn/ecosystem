@@ -1,9 +1,9 @@
 using MediatR;
 using System;
 
-namespace CRM.Promotion.Application.Features.Promotions.Commands
+namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.Commands
 {
-    public class CreatePromotionCommand : IRequest<Guid>
+    public class CreatePromotionCommand : IRequest<object>
     {
         public Guid? tenant_id { get; set; }
         public string? legacy_id { get; set; }

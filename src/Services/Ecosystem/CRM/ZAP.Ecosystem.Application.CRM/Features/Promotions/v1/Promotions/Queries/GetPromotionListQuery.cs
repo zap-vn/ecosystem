@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace CRM.Promotion.Application.Features.Promotions.Queries;
+namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.Queries;
 
 public class GetPromotionListQuery : IRequest<object>
 {

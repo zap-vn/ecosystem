@@ -2,7 +2,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CRM.Promotion.Application.Features.Promotions.Commands;
+namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.Commands;
 
 public class UpdatePromotionCommandHandler : IRequestHandler<UpdatePromotionCommand, object>
 {

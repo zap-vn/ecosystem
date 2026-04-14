@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using MediatR;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Menu.v1.Commands
 {
-    public class CreateMenuCommand : IRequest<Guid>
+    public class CreateMenuCommand : IRequest<object>
     {
         public Guid? tenant_id { get; set; }
         public string name { get; set; } = string.Empty;
@@ -12,7 +12,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Menu.v1.Commands
         public bool is_active { get; set; } = true;
     }
 
-    public class UpdateMenuCommand : IRequest<bool>
+    public class UpdateMenuCommand : IRequest<object>
     {
         public Guid id { get; set; }
         public string name { get; set; } = string.Empty;
@@ -21,7 +21,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Menu.v1.Commands
         public bool is_active { get; set; }
     }
 
-    public class DeleteMenuCommand : IRequest<bool>
+    public class DeleteMenuCommand : IRequest<object>
     {
         public Guid id { get; set; }
     }

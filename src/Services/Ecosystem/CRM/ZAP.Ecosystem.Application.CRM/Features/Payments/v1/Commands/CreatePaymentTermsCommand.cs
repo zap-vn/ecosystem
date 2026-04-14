@@ -1,8 +1,8 @@
-﻿using MediatR;
+using MediatR;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Commands
 {
-    public class CreatePaymentTermsCommand : IRequest<string>
+    public class CreatePaymentTermsCommand : IRequest<object>
     {
         public string Code { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;

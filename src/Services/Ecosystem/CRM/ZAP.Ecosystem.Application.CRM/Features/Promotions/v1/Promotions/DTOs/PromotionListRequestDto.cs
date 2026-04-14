@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace CRM.Promotion.Application.Features.Promotions.DTOs
+namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.DTOs
 {
     public class PromotionListRequestDto
     {

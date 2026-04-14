@@ -1,10 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using System;
 using System.Text.Json;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Commands
 {
-    public class UpdateLocationCommand : IRequest<bool>
+    public class UpdateLocationCommand : IRequest<object>
     {
         public Guid Id { get; set; }
         public string? legacy_id { get; set; }
