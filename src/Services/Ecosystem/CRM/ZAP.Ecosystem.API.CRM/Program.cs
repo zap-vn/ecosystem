@@ -1,60 +1,38 @@
-using Microsoft.EntityFrameworkCore;
-using Scalar.AspNetCore;
-using ZAP.Ecosystem.Infrastructure.Data;
+using System;
+using System.Threading.Tasks;
+using Npgsql;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddOpenApi();
-
-builder.Services.AddDbContext<EcosystemDbContext>(options =>
+class Program
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Ecosystem"));
-});
-
-// Configure Generic Repository from Shared Module
-builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), typeof(ZAP.Ecosystem.Shared.Data.BaseRepository<>));
-
-builder.Services.AddScoped<ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService, MockCurrentUserService>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ILocationRepository, ZAP.Ecosystem.API.CRM.MockLocationRepository>();
-
-// Auto-register all missing Domain Interfaces to the dynamic Proxy so handlers don't crash with 500 errors
-var domainAssembly = typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository).Assembly;
-var proxyMethod = typeof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy).GetMethod(nameof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy.Create));
-foreach (var type in domainAssembly.GetTypes())
-{
-    if (type.IsInterface && type.Name.EndsWith("Repository") && type != typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository))
+    static async Task Main()
     {
-        builder.Services.AddScoped(type, sp => 
-            proxyMethod!.MakeGenericMethod(type).Invoke(null, null)!
-        );
+        string connStr = "Host=136.118.121.105;Port=5432;Database=postgres;Username=postgres;Password=Pg@Secret2026!;Include Error Detail=true;";
+        await using var conn = new NpgsqlConnection(connStr);
+        await conn.OpenAsync();
+
+        await using var cmd = new NpgsqlCommand("SELECT datname FROM pg_database WHERE datistemplate = false", conn);
+        await using var reader = await cmd.ExecuteReaderAsync();
+
+        Console.WriteLine("DATABASES:");
+        while (await reader.ReadAsync())
+        {
+            string db = reader.GetString(0);
+            if (db == "postgres") continue;
+
+            Console.WriteLine($"DB: {db}");
+            try
+            {
+                var conn2Str = connStr.Replace("Database=postgres", $"Database={db}");
+                await using var conn2 = new NpgsqlConnection(conn2Str);
+                await conn2.OpenAsync();
+                await using var cmd2 = new NpgsqlCommand("SELECT string_agg(table_schema || '.' || table_name, ', ') FROM information_schema.tables WHERE table_schema NOT IN ('pg_catalog', 'information_schema')", conn2);
+                var tables = await cmd2.ExecuteScalarAsync();
+                Console.WriteLine($"   -> TABLES: {tables}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"   -> ERR: {ex.Message}");
+            }
+        }
     }
-}
-
-builder.Services.AddControllers();
-
-builder.Services.AddMediatR(cfg => {
-    cfg.RegisterServicesFromAssembly(typeof(ZAP.Ecosystem.Application.CRM.Features.Categories.v1.Queries.GetCategoryListQuery).Assembly);
-});
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.MapScalarApiReference();
-}
-
-app.UseHttpsRedirection();
-
-app.MapControllers();
-
-app.Run();
-
-public class MockCurrentUserService : ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService
-{
-    // Mock user for testing without token setup
-    public string? UserGuid => "a6b32eee-a14a-4cec-a070-e23b6ea234fb";
-    public int LocaleId => 2; // Vietnamese etc.
 }
