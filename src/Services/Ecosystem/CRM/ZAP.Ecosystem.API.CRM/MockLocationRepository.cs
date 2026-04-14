@@ -31,7 +31,7 @@ namespace ZAP.Ecosystem.API.CRM
                     await conn.OpenAsync();
 
                 using var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT id, name, location_code, address_line_1, status_id, created_at, phone_number, email FROM public.locations LIMIT @PageSize OFFSET @Offset";
+                cmd.CommandText = "SELECT id, name, location_code, address_line_1, status_id, created_at, phone_number, email FROM commerce.location LIMIT @PageSize OFFSET @Offset";
                 
                 var paramLimit = cmd.CreateParameter();
                 paramLimit.ParameterName = "@PageSize";
@@ -75,7 +75,7 @@ namespace ZAP.Ecosystem.API.CRM
                     await conn.OpenAsync();
 
                 using var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT COUNT(*) FROM public.locations";
+                cmd.CommandText = "SELECT COUNT(*) FROM commerce.location";
                 using var reader = await cmd.ExecuteReaderAsync();
                 if (await reader.ReadAsync())
                 {

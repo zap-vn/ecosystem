@@ -45,3 +45,102 @@ paths:
       responses:
         '200':
           description: A successful response
+  /api/categories/list:
+    post:
+      summary: "List Categories"
+      operationId: listCategories
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/categories/list
+      responses:
+        '200':
+          description: A successful response
+
+  /api/customers/list:
+    post:
+      summary: "List Customers"
+      operationId: listCustomers
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/customers/list
+      responses:
+        '200':
+          description: A successful response
+
+  /api/customergroups/list:
+    post:
+      summary: "List CustomerGroups"
+      operationId: listCustomerGroups
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/customergroups/list
+      responses:
+        '200':
+          description: A successful response
+
+  /api/menus/list:
+    post:
+      summary: "List Menus"
+      operationId: listMenus
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/menus/list
+      responses:
+        '200':
+          description: A successful response
+
+  /api/diningoptions/list:
+    post:
+      summary: "List DiningOptions"
+      operationId: listDiningOptions
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/diningoptions/list
+      responses:
+        '200':
+          description: A successful response
+
+  /api/brands/list:
+    post:
+      summary: "List Brands"
+      operationId: listBrands
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/brands/list
+      responses:
+        '200':
+          description: A successful response
+
+  /api/products/list:
+    post:
+      summary: "List Products"
+      operationId: listProducts
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/products/list
+      responses:
+        '200':
+          description: A successful response
+
+  /api/modifiergroups/list:
+    post:
+      summary: "List ModifierGroups"
+      operationId: listModifierGroups
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/modifiergroups/list
+      responses:
+        '200':
+          description: A successful response
+
+  /api/paymenttypes/list:
+    post:
+      summary: "List PaymentTypes"
+      operationId: listPaymentTypes
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/paymenttypes/list
+      responses:
+        '200':
+          description: A successful response
+
+  /api/paymentterms/list:
+    post:
+      summary: "List PaymentTerms"
+      operationId: listPaymentTerms
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/paymentterms/list
+      responses:
+        '200':
+          description: A successful response
