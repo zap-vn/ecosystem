@@ -16,9 +16,9 @@ public class MenusController : ControllerBase
     public MenusController(IMediator mediator) => _mediator = mediator;
 
     [HttpPost("list")]
-    public async Task<IActionResult> List([FromBody] MenuListRequestDto request)
+    public async Task<IActionResult> List([FromBody] MenuListRequestDto? request)
     {
-        var result = await _mediator.Send(new GetMenuListQuery { Request = request });
+        var result = await _mediator.Send(new GetMenuListQuery { Request = request ?? new() });
         return Ok(result);
     }
 
