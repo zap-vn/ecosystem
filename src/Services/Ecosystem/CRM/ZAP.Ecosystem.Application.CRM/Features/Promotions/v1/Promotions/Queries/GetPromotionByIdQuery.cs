@@ -4,4 +4,6 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.Queries;
 
 public class GetPromotionByIdQuery : IRequest<object>
 {
+    public string Id { get; set; }
+    public GetPromotionByIdQuery(string id) => Id = id;
 }

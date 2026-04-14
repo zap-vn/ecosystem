@@ -15,9 +15,9 @@ public class PaymentTermsController : ControllerBase
     public PaymentTermsController(IMediator mediator) => _mediator = mediator;
 
     [HttpPost("list")]
-    public async Task<IActionResult> List([FromBody] PaymentTermsListRequestDto request)
+    public async Task<IActionResult> List([FromBody] GetPaymentTermsListQuery request)
     {
-        var result = await _mediator.Send(new GetPaymentTermsListQuery { Request = request });
+        var result = await _mediator.Send(request);
         return Ok(result);
     }
 

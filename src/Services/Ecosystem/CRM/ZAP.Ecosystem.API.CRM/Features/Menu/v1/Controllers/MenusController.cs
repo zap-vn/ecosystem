@@ -2,9 +2,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using ZAP.Ecosystem.Application.CRM.Features.Menus.v1.Commands;
-using ZAP.Ecosystem.Application.CRM.Features.Menus.v1.DTOs;
-using ZAP.Ecosystem.Application.CRM.Features.Menus.v1.Queries;
+using ZAP.Ecosystem.Application.CRM.Features.Menu.v1.Commands;
+using ZAP.Ecosystem.Application.CRM.Features.Menu.v1.DTOs;
+using ZAP.Ecosystem.Application.CRM.Features.Menu.v1.Queries;
 
 namespace ZAP.Ecosystem.API.CRM.Features.Menu.v1.Controllers;
 
