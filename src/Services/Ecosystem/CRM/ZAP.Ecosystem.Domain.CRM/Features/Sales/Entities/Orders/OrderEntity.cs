@@ -1,14 +1,12 @@
-using MongoDB.Bson.Serialization.Attributes;
+using ZAP.Ecosystem.Domain.CRM.Common;
 using System;
 using System.Collections.Generic;
-using CRM.BuildingBlocks;
 
 namespace CRM.Sales.Domain.Entities.Orders
 {
     public class OrderEntity : BaseEntity
     {
-        [BsonElement("EmpGuid")]
-        public override string? UserGuid { get; set; }
+                public override string? UserGuid { get; set; }
 
         public string OrderCode { get; set; } = string.Empty;
         public decimal TotalAmount { get; set; }

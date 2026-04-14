@@ -16,12 +16,12 @@ paths:
         '200':
           description: A successful response
 
-  /api/v1/collections/collections/list:
+  /api/collections/list:
     post:
       summary: "List Collections"
       operationId: listCollections
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/v1/collections/collections/list
+        address: https://crm-api-768989935757.us-central1.run.app/api/collections/list
       responses:
         '200':
           description: A successful response

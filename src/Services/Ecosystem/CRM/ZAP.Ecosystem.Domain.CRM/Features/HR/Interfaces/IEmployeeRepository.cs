@@ -1,12 +1,12 @@
+using ZAP.Ecosystem.Domain.CRM.Common;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CRM.BuildingBlocks.Interfaces;
 using CRM.HR.Domain.Entities;
 
 namespace CRM.HR.Domain.Interfaces
 {
-    public interface IEmployeeRepository : IMongoRepository<Employee>
+    public interface IEmployeeRepository : IRepository<Employee>
     {
         Task<Employee?> GetByCodeAsync(string code);
         

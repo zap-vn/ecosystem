@@ -1,16 +1,11 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+using ZAP.Ecosystem.Domain.CRM.Common;
 
 namespace CRM.Order.Domain.Entities
 {
-    [BsonIgnoreExtraElements]
-    public class LocationEntity
+        public class LocationEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.String)]
-        public string Id { get; set; } = string.Empty;
+                        public string Id { get; set; } = string.Empty;
 
-        [BsonElement("Name")]
-        public string Name { get; set; } = string.Empty;
+                public string Name { get; set; } = string.Empty;
     }
 }

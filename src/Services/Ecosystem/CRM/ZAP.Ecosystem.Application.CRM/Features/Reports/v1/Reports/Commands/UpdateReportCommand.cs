@@ -1,13 +1,11 @@
 using MediatR;
-using System;
 
-namespace CRM.Report.Application.Features.Reports.Commands
+namespace ZAP.Ecosystem.Application.CRM.Features.Reports.v1.Commands;
+
+public class UpdateReportCommand : IRequest<object>
 {
-    public class UpdateReportCommand : IRequest<bool>
-    {
-        public string Id { get; set; } = string.Empty; // Injected from route
-        public string Name { get; set; } = string.Empty;
-        public string Type { get; set; } = string.Empty;
-        public string ConfigurationJson { get; set; } = string.Empty;
-    }
+    public string Id { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string Type { get; set; } = string.Empty;
+    public string ConfigurationJson { get; set; } = string.Empty;
 }

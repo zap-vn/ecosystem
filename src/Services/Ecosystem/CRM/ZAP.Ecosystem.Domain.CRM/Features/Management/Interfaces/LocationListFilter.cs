@@ -1,3 +1,4 @@
+using ZAP.Ecosystem.Domain.CRM.Common;
 using System;
 
 namespace CRM.Management.Domain.Interfaces

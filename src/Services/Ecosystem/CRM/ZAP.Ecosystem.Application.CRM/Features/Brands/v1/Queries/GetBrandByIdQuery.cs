@@ -1,16 +1,9 @@
-﻿using MediatR;
-using CRM.Brand.Application.Features.Products.DTOs;
+using MediatR;
+using System;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.Queries;
+
+public class GetBrandByIdQuery : IRequest<object>
 {
-    public class GetProductByIdQuery : IRequest<ProductDto>
-    {
-        public string Id { get; set; }
-
-        public GetProductByIdQuery(string id)
-        {
-            Id = id;
-        }
-    }
+    public Guid Id { get; set; }
 }
-

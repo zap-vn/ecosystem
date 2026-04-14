@@ -1,16 +1,9 @@
-﻿using MediatR;
-using System.Collections.Generic;
-using CRM.Collection.Application.Features.Collections.DTOs;
-using CRM.BuildingBlocks.Models;
+using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Collections.v1.DTOs;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Collections.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Collections.v1.Queries;
+
+public class GetCollectionListQuery : IRequest<object>
 {
-    public class GetCollectionListQuery : IRequest<PagedResult<CollectionDto>>
-    {
-        public int PageIndex { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
-        public string? Search { get; set; }
-    }
+    public CollectionListRequestDto Request { get; set; } = new();
 }
-
-

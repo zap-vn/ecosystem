@@ -1,9 +1,9 @@
-using CRM.BuildingBlocks.Interfaces;
+using ZAP.Ecosystem.Domain.CRM.Common;
 using CRM.Organization.Domain.Entities;
 
 namespace CRM.Organization.Domain.Interfaces
 {
-    public interface IOrganizationRepository : IMongoRepository<OrganizationUnit>
+    public interface IOrganizationRepository : IRepository<OrganizationUnit>
     {
     }
 }
