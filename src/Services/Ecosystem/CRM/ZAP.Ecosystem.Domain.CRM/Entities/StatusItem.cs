@@ -48,6 +48,7 @@ namespace ZAP.Ecosystem.Domain.CRM
         [Column("name")]
         public string? name { get; set; }
 
+        [ForeignKey("status_item_id")]
         public StatusItem? status_item { get; set; }
     }
 }

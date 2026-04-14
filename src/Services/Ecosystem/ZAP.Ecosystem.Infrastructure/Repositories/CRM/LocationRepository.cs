@@ -49,11 +49,11 @@ namespace ZAP.Ecosystem.Infrastructure.Repositories.CRM
 
         private IQueryable<Location> BuildQuery(LocationListFilter filter)
         {
-            var query = _dbSet
-                // .Include(l => l.status)
-                // .ThenInclude(s => s.translations)
-                // .Include(l => l.location_type)
-                // .ThenInclude(t => t.translations)
+            var query = _dbContext.Set<Location>()
+                .Include(l => l.status)
+                .ThenInclude(s => s.translations)
+                .Include(l => l.location_type)
+                .ThenInclude(t => t.translations)
                 .AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(filter.Search))
@@ -82,7 +82,7 @@ namespace ZAP.Ecosystem.Infrastructure.Repositories.CRM
         public override async Task<Location?> GetByIdAsync(object id, System.Threading.CancellationToken cancellationToken = default)
         {
             if (id is Guid guid)
-                return await _dbSet/*.Include(l => l.status)*/.FirstOrDefaultAsync(l => l.id == guid, cancellationToken);
+                return await _dbContext.Set<Location>().Include(l => l.status).FirstOrDefaultAsync(l => l.id == guid, cancellationToken);
             return await base.GetByIdAsync(id, cancellationToken);
         }
 
