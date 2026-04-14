@@ -1,12 +1,10 @@
-﻿using MediatR;
-using CRM.Payment.Application.Features.PaymentTerms.DTOs;
-using CRM.BuildingBlocks.Models;
+using MediatR;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries;
+
+public class GetPaymentTermsListQuery : IRequest<object>
 {
-    public class GetPaymentTermsListQuery : IRequest<PagedResult<PaymentTermsDto>>
-    {
-        public FilterDTOs Filter { get; set; } = new();
-    }
+    public int PageIndex { get; set; } = 1;
+    public int PageSize { get; set; } = 20;
+    public string? Search { get; set; }
 }
-

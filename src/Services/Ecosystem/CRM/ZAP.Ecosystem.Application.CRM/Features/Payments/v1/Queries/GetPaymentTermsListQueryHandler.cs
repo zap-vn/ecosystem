@@ -1,39 +1,16 @@
-﻿using MediatR;
-using CRM.Payment.Application.Features.PaymentTerms.DTOs;
-using CRM.BuildingBlocks.Models;
+using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Payments.v1.DTOs;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
-using CRM.Payment.Domain.Interfaces;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries;
+
+public class GetPaymentTermsListQueryHandler : IRequestHandler<GetPaymentTermsListQuery, object>
 {
-    public class GetPaymentTermsListQueryHandler : IRequestHandler<GetPaymentTermsListQuery, PagedResult<PaymentTermsDto>>
+    public Task<object> Handle(GetPaymentTermsListQuery request, CancellationToken cancellationToken)
     {
-        private readonly IPaymentTermsRepository _repository;
-
-        public GetPaymentTermsListQueryHandler(IPaymentTermsRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<PagedResult<PaymentTermsDto>> Handle(GetPaymentTermsListQuery request, CancellationToken cancellationToken)
-        {
-            var list = await _repository.GetAllAsync();
-            var dtos = list.Select(x => new PaymentTermsDto 
-            { 
-#pragma warning disable CS8602
-                Id = x.Id.ToString(),
-                Code = x.Code,
-                Name = x.Name,
-                Description = x.Description,
-                Days = x.Days,
-                IsActive = x.IsActive
-#pragma warning restore CS8602
-            }).ToList();
-
-            return new PagedResult<PaymentTermsDto>(dtos, dtos.Count, request.Filter.PageIndex, request.Filter.PageSize);
-        }
+        var dtos = new List<PaymentTermsDto>();
+        return Task.FromResult(CrmResponse.Paged(new ZAP.Ecosystem.Shared.Data.PagedResult<PaymentTermsDto>(dtos, 0, request.PageIndex, request.PageSize)));
     }
 }
-

@@ -1,48 +1,11 @@
-﻿using CRM.Category.Application.Features.Categories.DTOs;
-using CRM.Category.Domain.Interfaces;
 using MediatR;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Categories.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Categories.v1.Queries;
+
+public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, object>
 {
-    public record GetCategoriesQuery : IRequest<IEnumerable<CategoryDto>>;
-
-    public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, IEnumerable<CategoryDto>>
-    {
-        private readonly ICategoryRepository _categoryRepository;
-
-        public GetCategoriesQueryHandler(ICategoryRepository categoryRepository)
-        {
-            _categoryRepository = categoryRepository;
-        }
-
-        public async Task<IEnumerable<CategoryDto>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
-        {
-            var categories = await _categoryRepository.GetAllAsync();
-            
-            var allDtos = categories.Select(x => new CategoryDto
-            {
-                id = x.id,
-                parent_id = x.parent_id,
-                name = x.name,
-                is_active = x.is_active,
-                icon_url = x.icon_url,
-                materialized_path = x.materialized_path,
-                seo_title = x.seo_title
-            }).ToList();
-
-            // Build hierarchy
-            var lookup = allDtos.ToLookup(x => x.parent_id);
-            foreach (var dto in allDtos)
-            {
-                dto.children = lookup[dto.id].ToList();
-            }
-
-            return allDtos.Where(x => x.parent_id == null).ToList();
-        }
-    }
+    public Task<object> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
+        => Task.FromResult(CrmResponse.Ok(null));
 }
-

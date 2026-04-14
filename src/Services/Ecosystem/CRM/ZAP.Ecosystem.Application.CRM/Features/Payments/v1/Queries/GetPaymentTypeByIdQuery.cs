@@ -1,16 +1,13 @@
-﻿using MediatR;
-using CRM.Payment.Application.Features.PaymentTypes.DTOs;
+using MediatR;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries;
+
+public class GetPaymentTypeByIdQuery : IRequest<object>
 {
-    public class GetPaymentTypeByIdQuery : IRequest<PaymentTypeDto>
-    {
-        public string Id { get; set; }
+    public string Id { get; set; }
 
-        public GetPaymentTypeByIdQuery(string id)
-        {
-            Id = id;
-        }
+    public GetPaymentTypeByIdQuery(string id)
+    {
+        Id = id;
     }
 }
-
