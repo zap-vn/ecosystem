@@ -59,9 +59,9 @@ namespace ZAP.Ecosystem.API.CRM
                     });
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Fallback to empty context if table fails
+                list.Add(new Location { id = Guid.NewGuid(), name = "DEBUG SQL ERROR: " + ex.Message });
             }
             return list;
         }
@@ -82,8 +82,10 @@ namespace ZAP.Ecosystem.API.CRM
                     return reader.GetInt32(0);
                 }
             }
-            catch (Exception) { }
-            return 0;
+            catch (Exception ex) { 
+                Console.WriteLine(ex.Message);
+                return 9999;
+            }
         }
     }
 }
