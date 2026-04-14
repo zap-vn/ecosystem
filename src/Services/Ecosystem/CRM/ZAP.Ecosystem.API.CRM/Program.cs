@@ -16,19 +16,27 @@ builder.Services.AddDbContext<EcosystemDbContext>(options =>
 builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), typeof(ZAP.Ecosystem.Shared.Data.BaseRepository<>));
 
 builder.Services.AddScoped<ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService, MockCurrentUserService>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ILocationRepository, ZAP.Ecosystem.API.CRM.MockLocationRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICustomerRepository, ZAP.Ecosystem.API.CRM.MockCustomerRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ILocationRepository,     ZAP.Ecosystem.API.CRM.MockLocationRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICustomerRepository,      ZAP.Ecosystem.API.CRM.MockCustomerRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository, ZAP.Ecosystem.API.CRM.MockModifierGroupRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICollectionRepository,    ZAP.Ecosystem.API.CRM.MockCollectionRepository>();
 
-// Auto-register all missing Domain Interfaces to the dynamic Proxy so handlers don't crash with 500 errors
+// Auto-register all remaining repository interfaces via DispatchProxy (returns empty data)
 var domainAssembly = typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository).Assembly;
 var proxyMethod = typeof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy).GetMethod(nameof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy.Create));
+var manuallyRegistered = new HashSet<Type>
+{
+    typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository),
+    typeof(ZAP.Ecosystem.Domain.CRM.ICustomerRepository),
+    typeof(ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository),
+    typeof(ZAP.Ecosystem.Domain.CRM.ICollectionRepository),
+};
 foreach (var type in domainAssembly.GetTypes())
 {
-    if (type.IsInterface && type.Name.EndsWith("Repository") && type != typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository) && type != typeof(ZAP.Ecosystem.Domain.CRM.ICustomerRepository))
+    if (type.IsInterface && type.Name.EndsWith("Repository") && !manuallyRegistered.Contains(type))
     {
-        builder.Services.AddScoped(type, sp => 
-            proxyMethod!.MakeGenericMethod(type).Invoke(null, null)!
-        );
+        builder.Services.AddScoped(type, _ =>
+            proxyMethod!.MakeGenericMethod(type).Invoke(null, null)!);
     }
 }
 

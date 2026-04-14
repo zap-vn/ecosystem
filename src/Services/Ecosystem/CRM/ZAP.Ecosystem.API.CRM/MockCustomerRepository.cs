@@ -46,44 +46,50 @@ namespace ZAP.Ecosystem.API.CRM
                     total = Convert.ToInt32(countResult);
                 }
 
-                // Fetch page
                 using var cmd = conn.CreateCommand();
                 cmd.CommandText = $@"
-                    SELECT id, tenant_id, legacy_id, email, phone_number,
-                           full_name, gender, birth_date, country_id, province_id,
-                           district_id, ward_id, zipcode, preferred_locale_id, user_id,
-                           status_id, tier_id, group_id, current_points_balance, total_spent_amount,
-                           created_at, updated_at
+                    SELECT * 
                     FROM people.customer
                     ORDER BY {EscapeSort(sortField)} {(sortDescending ? "DESC" : "ASC")}
                     LIMIT {pageSize} OFFSET {offset}";
 
                 using var reader = await cmd.ExecuteReaderAsync();
+                
+                bool HasColumn(System.Data.IDataRecord r, string columnName)
+                {
+                    for (int i = 0; i < r.FieldCount; i++)
+                    {
+                        if (r.GetName(i).Equals(columnName, StringComparison.InvariantCultureIgnoreCase))
+                            return true;
+                    }
+                    return false;
+                }
+
                 while (await reader.ReadAsync())
                 {
-                    list.Add(new CustomerEntity
-                    {
-                        id                      = reader.IsDBNull(0)  ? Guid.Empty        : reader.GetGuid(0),
-                        tenant_id               = reader.IsDBNull(1)  ? null              : reader.GetGuid(1),
-                        legacy_id               = reader.IsDBNull(2)  ? null              : reader.GetString(2),
-                        email                   = reader.IsDBNull(3)  ? null              : reader.GetString(3),
-                        phone_number            = reader.IsDBNull(4)  ? null              : reader.GetString(4),
-                        full_name               = reader.IsDBNull(5)  ? null              : reader.GetString(5),
-                        gender                  = reader.IsDBNull(6)  ? null              : reader.GetString(6),
-                        birth_date              = reader.IsDBNull(7)  ? null              : reader.GetDateTime(7),
-                        country_id              = reader.IsDBNull(8)  ? null              : reader.GetInt32(8),
-                        province_id             = reader.IsDBNull(9)  ? null              : reader.GetInt32(9),
-                        district_id             = reader.IsDBNull(10) ? null              : reader.GetInt32(10),
-                        ward_id                 = reader.IsDBNull(11) ? null              : reader.GetInt32(11),
-                        zipcode                 = reader.IsDBNull(12) ? null              : reader.GetString(12),
-                        preferred_locale_id     = reader.IsDBNull(13) ? null              : reader.GetInt32(13),
-                        user_id                 = reader.IsDBNull(14) ? null              : reader.GetGuid(14),
-                        status_id               = reader.IsDBNull(15) ? null              : reader.GetInt32(15),
-                        tier_id                 = reader.IsDBNull(16) ? null              : reader.GetGuid(16),
-                        group_id                = reader.IsDBNull(17) ? null              : reader.GetGuid(17),
-                        current_points_balance  = reader.IsDBNull(18) ? null              : reader.GetDecimal(18),
-                        total_spent_amount      = reader.IsDBNull(19) ? null              : reader.GetDecimal(19),
-                    });
+                    var entity = new CustomerEntity();
+                    if (HasColumn(reader, "id") && !reader.IsDBNull(reader.GetOrdinal("id"))) entity.id = reader.GetGuid(reader.GetOrdinal("id"));
+                    if (HasColumn(reader, "tenant_id") && !reader.IsDBNull(reader.GetOrdinal("tenant_id"))) entity.tenant_id = reader.GetGuid(reader.GetOrdinal("tenant_id"));
+                    if (HasColumn(reader, "legacy_id") && !reader.IsDBNull(reader.GetOrdinal("legacy_id"))) entity.legacy_id = reader.GetString(reader.GetOrdinal("legacy_id"));
+                    if (HasColumn(reader, "email") && !reader.IsDBNull(reader.GetOrdinal("email"))) entity.email = reader.GetString(reader.GetOrdinal("email"));
+                    if (HasColumn(reader, "phone_number") && !reader.IsDBNull(reader.GetOrdinal("phone_number"))) entity.phone_number = reader.GetString(reader.GetOrdinal("phone_number"));
+                    if (HasColumn(reader, "full_name") && !reader.IsDBNull(reader.GetOrdinal("full_name"))) entity.full_name = reader.GetString(reader.GetOrdinal("full_name"));
+                    if (HasColumn(reader, "gender") && !reader.IsDBNull(reader.GetOrdinal("gender"))) entity.gender = reader.GetString(reader.GetOrdinal("gender"));
+                    if (HasColumn(reader, "birth_date") && !reader.IsDBNull(reader.GetOrdinal("birth_date"))) entity.birth_date = reader.GetDateTime(reader.GetOrdinal("birth_date"));
+                    if (HasColumn(reader, "country_id") && !reader.IsDBNull(reader.GetOrdinal("country_id"))) entity.country_id = reader.GetInt32(reader.GetOrdinal("country_id"));
+                    if (HasColumn(reader, "province_id") && !reader.IsDBNull(reader.GetOrdinal("province_id"))) entity.province_id = reader.GetInt32(reader.GetOrdinal("province_id"));
+                    if (HasColumn(reader, "district_id") && !reader.IsDBNull(reader.GetOrdinal("district_id"))) entity.district_id = reader.GetInt32(reader.GetOrdinal("district_id"));
+                    if (HasColumn(reader, "ward_id") && !reader.IsDBNull(reader.GetOrdinal("ward_id"))) entity.ward_id = reader.GetInt32(reader.GetOrdinal("ward_id"));
+                    if (HasColumn(reader, "zipcode") && !reader.IsDBNull(reader.GetOrdinal("zipcode"))) entity.zipcode = reader.GetString(reader.GetOrdinal("zipcode"));
+                    if (HasColumn(reader, "preferred_locale_id") && !reader.IsDBNull(reader.GetOrdinal("preferred_locale_id"))) entity.preferred_locale_id = reader.GetInt32(reader.GetOrdinal("preferred_locale_id"));
+                    if (HasColumn(reader, "user_id") && !reader.IsDBNull(reader.GetOrdinal("user_id"))) entity.user_id = reader.GetGuid(reader.GetOrdinal("user_id"));
+                    if (HasColumn(reader, "status_id") && !reader.IsDBNull(reader.GetOrdinal("status_id"))) entity.status_id = reader.GetInt32(reader.GetOrdinal("status_id"));
+                    if (HasColumn(reader, "tier_id") && !reader.IsDBNull(reader.GetOrdinal("tier_id"))) entity.tier_id = reader.GetGuid(reader.GetOrdinal("tier_id"));
+                    if (HasColumn(reader, "group_id") && !reader.IsDBNull(reader.GetOrdinal("group_id"))) entity.group_id = reader.GetGuid(reader.GetOrdinal("group_id"));
+                    if (HasColumn(reader, "current_points_balance") && !reader.IsDBNull(reader.GetOrdinal("current_points_balance"))) entity.current_points_balance = reader.GetDecimal(reader.GetOrdinal("current_points_balance"));
+                    if (HasColumn(reader, "total_spent_amount") && !reader.IsDBNull(reader.GetOrdinal("total_spent_amount"))) entity.total_spent_amount = reader.GetDecimal(reader.GetOrdinal("total_spent_amount"));
+
+                    list.Add(entity);
                 }
             }
             catch (Exception ex)
