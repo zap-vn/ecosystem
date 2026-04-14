@@ -27,15 +27,15 @@ namespace ZAP.Ecosystem.API.CRM
 
                 using var cmd = conn.CreateCommand();
                 cmd.CommandText = $@"
-                    SELECT id, serial_id, serial_number, location_code, tenant_id,
-                           node_id, legacy_id, business_name, name, slug,
-                           description, location_type_id, address_line_1, address_line_2, city,
-                           state, country_id, province_id, district_id, ward_id,
-                           zipcode, phone_number, email, website, twitter,
-                           instagram, facebook, logo_url, cover_image_url, brand_color,
-                           timezone, latitude, longitude,
-                           transfer_account, transfer_tag, parent_location_id,
-                           status_id, is_active, created_at, updated_at,
+                    SELECT l.id, l.serial_id, l.serial_number, l.location_code, l.tenant_id,
+                           l.node_id, l.legacy_id, l.business_name, l.name, l.slug,
+                           l.description, l.location_type_id, l.address_line_1, l.address_line_2, l.city,
+                           l.state, l.country_id, l.province_id, l.district_id, l.ward_id,
+                           l.zipcode, l.phone_number, l.email, l.website, l.twitter,
+                           l.instagram, l.facebook, l.logo_url, l.cover_image_url, l.brand_color,
+                           l.timezone, l.latitude, l.longitude,
+                           l.transfer_account, l.transfer_tag, l.parent_location_id,
+                           l.status_id, l.is_active, l.created_at, l.updated_at,
                            si.code AS status_code, sit.name AS status_name
                     FROM commerce.location l
                     LEFT JOIN system.status_item si ON si.id = l.status_id
@@ -166,21 +166,21 @@ namespace ZAP.Ecosystem.API.CRM
 
                 using var cmd = conn.CreateCommand();
                 cmd.CommandText = $@"
-                    SELECT id, serial_id, serial_number, location_code, tenant_id,
-                           node_id, legacy_id, business_name, name, slug,
-                           description, location_type_id, address_line_1, address_line_2, city,
-                           state, country_id, province_id, district_id, ward_id,
-                           zipcode, phone_number, email, website, twitter,
-                           instagram, facebook, logo_url, cover_image_url, brand_color,
-                           timezone, latitude, longitude,
-                           transfer_account, transfer_tag, parent_location_id,
-                           status_id, is_active, created_at, updated_at,
+                    SELECT l.id, l.serial_id, l.serial_number, l.location_code, l.tenant_id,
+                           l.node_id, l.legacy_id, l.business_name, l.name, l.slug,
+                           l.description, l.location_type_id, l.address_line_1, l.address_line_2, l.city,
+                           l.state, l.country_id, l.province_id, l.district_id, l.ward_id,
+                           l.zipcode, l.phone_number, l.email, l.website, l.twitter,
+                           l.instagram, l.facebook, l.logo_url, l.cover_image_url, l.brand_color,
+                           l.timezone, l.latitude, l.longitude,
+                           l.transfer_account, l.transfer_tag, l.parent_location_id,
+                           l.status_id, l.is_active, l.created_at, l.updated_at,
                            si.code AS status_code, sit.name AS status_name
                     FROM commerce.location l
                     LEFT JOIN system.status_item si ON si.id = l.status_id
                     LEFT JOIN system.status_item_translation sit ON sit.status_item_id = si.id AND sit.locale_id = 2
                     {where}
-                    ORDER BY {orderBy} {dir}
+                    ORDER BY l.{orderBy} {dir}
                     LIMIT {pageSize} OFFSET {offset}";
 
                 using var reader = await cmd.ExecuteReaderAsync();
