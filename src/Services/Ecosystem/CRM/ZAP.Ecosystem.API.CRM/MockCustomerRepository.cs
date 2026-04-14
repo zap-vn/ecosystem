@@ -60,41 +60,52 @@ namespace ZAP.Ecosystem.API.CRM
 
                 using var reader = await cmd.ExecuteReaderAsync();
                 
-                bool HasColumn(System.Data.IDataRecord r, string columnName)
-                {
-                    for (int i = 0; i < r.FieldCount; i++)
-                    {
-                        if (r.GetName(i).Equals(columnName, StringComparison.InvariantCultureIgnoreCase))
-                            return true;
-                    }
-                    return false;
-                }
-
                 while (await reader.ReadAsync())
                 {
-                    var entity = new CustomerEntity();
-                    if (HasColumn(reader, "id") && !reader.IsDBNull(reader.GetOrdinal("id"))) entity.id = reader.GetGuid(reader.GetOrdinal("id"));
-                    if (HasColumn(reader, "tenant_id") && !reader.IsDBNull(reader.GetOrdinal("tenant_id"))) entity.tenant_id = reader.GetGuid(reader.GetOrdinal("tenant_id"));
-                    if (HasColumn(reader, "legacy_id") && !reader.IsDBNull(reader.GetOrdinal("legacy_id"))) entity.legacy_id = reader.GetString(reader.GetOrdinal("legacy_id"));
-                    if (HasColumn(reader, "email") && !reader.IsDBNull(reader.GetOrdinal("email"))) entity.email = reader.GetString(reader.GetOrdinal("email"));
-                    if (HasColumn(reader, "phone_number") && !reader.IsDBNull(reader.GetOrdinal("phone_number"))) entity.phone_number = reader.GetString(reader.GetOrdinal("phone_number"));
-                    if (HasColumn(reader, "full_name") && !reader.IsDBNull(reader.GetOrdinal("full_name"))) entity.full_name = reader.GetString(reader.GetOrdinal("full_name"));
-                    if (HasColumn(reader, "gender") && !reader.IsDBNull(reader.GetOrdinal("gender"))) entity.gender = reader.GetString(reader.GetOrdinal("gender"));
-                    if (HasColumn(reader, "birth_date") && !reader.IsDBNull(reader.GetOrdinal("birth_date"))) entity.birth_date = reader.GetDateTime(reader.GetOrdinal("birth_date"));
-                    if (HasColumn(reader, "country_id") && !reader.IsDBNull(reader.GetOrdinal("country_id"))) entity.country_id = reader.GetInt32(reader.GetOrdinal("country_id"));
-                    if (HasColumn(reader, "province_id") && !reader.IsDBNull(reader.GetOrdinal("province_id"))) entity.province_id = reader.GetInt32(reader.GetOrdinal("province_id"));
-                    if (HasColumn(reader, "district_id") && !reader.IsDBNull(reader.GetOrdinal("district_id"))) entity.district_id = reader.GetInt32(reader.GetOrdinal("district_id"));
-                    if (HasColumn(reader, "ward_id") && !reader.IsDBNull(reader.GetOrdinal("ward_id"))) entity.ward_id = reader.GetInt32(reader.GetOrdinal("ward_id"));
-                    if (HasColumn(reader, "zipcode") && !reader.IsDBNull(reader.GetOrdinal("zipcode"))) entity.zipcode = reader.GetString(reader.GetOrdinal("zipcode"));
-                    if (HasColumn(reader, "preferred_locale_id") && !reader.IsDBNull(reader.GetOrdinal("preferred_locale_id"))) entity.preferred_locale_id = reader.GetInt32(reader.GetOrdinal("preferred_locale_id"));
-                    if (HasColumn(reader, "user_id") && !reader.IsDBNull(reader.GetOrdinal("user_id"))) entity.user_id = reader.GetGuid(reader.GetOrdinal("user_id"));
-                    if (HasColumn(reader, "status_id") && !reader.IsDBNull(reader.GetOrdinal("status_id"))) entity.status_id = reader.GetInt32(reader.GetOrdinal("status_id"));
-                    if (HasColumn(reader, "status_code") && !reader.IsDBNull(reader.GetOrdinal("status_code"))) entity.status_code = reader.GetString(reader.GetOrdinal("status_code"));
-                    if (HasColumn(reader, "status_name") && !reader.IsDBNull(reader.GetOrdinal("status_name"))) entity.status_name = reader.GetString(reader.GetOrdinal("status_name"));
-                    if (HasColumn(reader, "tier_id") && !reader.IsDBNull(reader.GetOrdinal("tier_id"))) entity.tier_id = reader.GetGuid(reader.GetOrdinal("tier_id"));
-                    if (HasColumn(reader, "group_id") && !reader.IsDBNull(reader.GetOrdinal("group_id"))) entity.group_id = reader.GetGuid(reader.GetOrdinal("group_id"));
-                    if (HasColumn(reader, "current_points_balance") && !reader.IsDBNull(reader.GetOrdinal("current_points_balance"))) entity.current_points_balance = reader.GetDecimal(reader.GetOrdinal("current_points_balance"));
-                    if (HasColumn(reader, "total_spent_amount") && !reader.IsDBNull(reader.GetOrdinal("total_spent_amount"))) entity.total_spent_amount = reader.GetDecimal(reader.GetOrdinal("total_spent_amount"));
+                    var entity = new CustomerEntity
+                    {
+                        id = reader.IsDBNull(0) ? Guid.Empty : reader.GetGuid(0),
+                        serial_id = reader.IsDBNull(1) ? 0 : reader.GetInt32(1),
+                        serial_number = reader.IsDBNull(2) ? "" : reader.GetString(2),
+                        tenant_id = reader.IsDBNull(3) ? null : reader.GetGuid(3),
+                        customer_code = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                        legacy_id = reader.IsDBNull(5) ? null : reader.GetString(5),
+                        phone_number = reader.IsDBNull(8) ? null : reader.GetString(8),
+                        email = reader.IsDBNull(9) ? null : reader.GetString(9),
+                        full_name = reader.IsDBNull(10) ? null : reader.GetString(10),
+                        first_name = reader.IsDBNull(11) ? null : reader.GetString(11),
+                        last_name = reader.IsDBNull(12) ? null : reader.GetString(12),
+                        nickname = reader.IsDBNull(13) ? null : reader.GetString(13),
+                        company_name = reader.IsDBNull(14) ? null : reader.GetString(14),
+                        avatar_url = reader.IsDBNull(15) ? null : reader.GetString(15),
+                        gender_id = reader.IsDBNull(16) ? null : reader.GetInt32(16),
+                        birth_date = reader.IsDBNull(17) ? null : reader.GetDateTime(17),
+                        address_line_1 = reader.IsDBNull(18) ? null : reader.GetString(18),
+                        address_line_2 = reader.IsDBNull(19) ? null : reader.GetString(19),
+                        city_name = reader.IsDBNull(20) ? null : reader.GetString(20),
+                        state_name = reader.IsDBNull(21) ? null : reader.GetString(21),
+                        country_id = reader.IsDBNull(22) ? null : reader.GetInt32(22),
+                        province_id = reader.IsDBNull(23) ? null : reader.GetInt32(23),
+                        district_id = reader.IsDBNull(24) ? null : reader.GetInt32(24),
+                        ward_id = reader.IsDBNull(25) ? null : reader.GetInt32(25),
+                        zipcode = reader.IsDBNull(26) ? null : reader.GetString(26),
+                        preferred_locale_id = reader.IsDBNull(27) ? null : reader.GetInt32(27),
+                        user_id = reader.IsDBNull(28) ? null : reader.GetGuid(28),
+                        tier_id = reader.IsDBNull(29) ? null : reader.GetGuid(29),
+                        memo = reader.IsDBNull(30) ? null : reader.GetString(30),
+                        creation_source = reader.IsDBNull(31) ? "Email" : reader.GetString(31),
+                        email_subscription_status = reader.IsDBNull(32) ? null : reader.GetString(32),
+                        is_instant_profile = !reader.IsDBNull(33) && reader.GetBoolean(33),
+                        current_points_balance = reader.IsDBNull(34) ? 0 : reader.GetDecimal(34),
+                        total_spent_amount = reader.IsDBNull(35) ? 0 : reader.GetDecimal(34),
+                        status_id = reader.IsDBNull(40) ? null : reader.GetInt32(40),
+                        display_initial = reader.IsDBNull(41) ? null : reader.GetString(41),
+                        created_at = reader.IsDBNull(42) ? DateTime.UtcNow : reader.GetDateTime(42),
+                        updated_at = reader.IsDBNull(43) ? null : reader.GetDateTime(43),
+                        group_id = reader.IsDBNull(44) ? null : reader.GetGuid(44),
+                        status_code = reader.IsDBNull(45) ? null : reader.GetString(45),
+                        status_name = reader.IsDBNull(46) ? null : reader.GetString(46)
+                    };
 
                     list.Add(entity);
                 }
