@@ -1,61 +1,53 @@
-﻿using CRM.BuildingBlocks.Interfaces;
-using CRM.BuildingBlocks.Models;
-using CRM.Unit.Application.Features.Units.DTOs;
-using CRM.Unit.Domain.Interfaces;
 using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Units.v1.DTOs;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Units.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Units.v1.Queries;
+
+public class GetUnitsQueryHandler : IRequestHandler<GetUnitsQuery, object>
 {
-    public class GetUnitsQueryHandler : IRequestHandler<GetUnitsQuery, PagedResult<UnitDto>>
+    private readonly IUnitRepository _repository;
+    private readonly ICurrentUserService _currentUserService;
+
+    public GetUnitsQueryHandler(IUnitRepository repository, ICurrentUserService currentUserService)
     {
-        private readonly IUnitRepository _repository;
-        private readonly ICurrentUserService _currentUserService;
+        _repository = repository;
+        _currentUserService = currentUserService;
+    }
 
-        public GetUnitsQueryHandler(IUnitRepository repository, ICurrentUserService currentUserService)
+    public async Task<object> Handle(GetUnitsQuery request, CancellationToken cancellationToken)
+    {
+        Guid? tenantId = Guid.TryParse(_currentUserService.UserGuid, out var g) ? g : null;
+        var localeId = _currentUserService.LocaleId;
+
+        var (items, total) = await _repository.GetPagedAsync(
+            request.Request.PageIndex,
+            request.Request.PageSize,
+            tenantId,
+            request.Request.Search,
+            request.Request.Filters?.StatusId,
+            request.Request.Filters?.Precision,
+            request.Request.Sort?.Field ?? "name",
+            request.Request.Sort?.Descending ?? false);
+
+        var dtos = items.Select(x => new UnitDto
         {
-            _repository = repository;
-            _currentUserService = currentUserService;
-        }
+            id = x.id,
+            tenant_id = x.tenant_id,
+            code = x.code,
+            name = x.translations?.FirstOrDefault(t => t.locale_id == localeId)?.name ?? x.name,
+            abbreviation = x.abbreviation,
+            precision = x.precision,
+            status_id = x.status_id,
+            status_code = x.status?.code,
+            status_name = x.status?.translations?.FirstOrDefault(t => t.locale_id == localeId)?.name
+                       ?? x.status?.translations?.FirstOrDefault(t => t.locale_id == 1)?.name,
+            is_active = x.status_id != 0
+        }).ToList();
 
-        public async Task<PagedResult<UnitDto>> Handle(GetUnitsQuery request, CancellationToken cancellationToken)
-        {
-            var tenantIdString = _currentUserService.UserGuid;
-            Guid? tenantId = null;
-            if (Guid.TryParse(tenantIdString, out var guid)) tenantId = guid;
-
-            var (items, total) = await _repository.GetPagedAsync(
-                request.Request.PageIndex,
-                request.Request.PageSize,
-                tenantId,
-                request.Request.Search,
-                request.Request.Filters?.StatusId,
-                request.Request.Filters?.Precision,
-                request.Request.Sort?.Field ?? "name",
-                request.Request.Sort?.Descending ?? false);
-
-            var localeId = _currentUserService.LocaleId;
-            var dtos = items.Select(x => new UnitDto
-            {
-                id = x.id,
-                tenant_id = x.tenant_id,
-                code = x.code,
-                name = x.translations?.FirstOrDefault(t => t.locale_id == localeId)?.name ?? x.name,
-                abbreviation = x.abbreviation,
-                precision = x.precision,
-                status_id = x.status_id,
-                status_code = x.status?.code,
-                status_name = x.status?.translations?.FirstOrDefault(t => t.locale_id == localeId)?.name ?? 
-                              x.status?.translations?.FirstOrDefault(t => t.locale_id == 1)?.name,
-                is_active = x.status_id != 0
-            });
-
-            return new PagedResult<UnitDto>(dtos.ToList(), total, request.Request.PageIndex, request.Request.PageSize);
-        }
+        return CrmResponse.Paged(new PagedResult<UnitDto>(dtos, total, request.Request.PageIndex, request.Request.PageSize));
     }
 }
-

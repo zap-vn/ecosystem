@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.DTOs
 {
-    public class ProductListRequestDto
+    public class BrandListRequestDto
     {
         [JsonPropertyName("page_index")]
         public int Page { get; set; } = 1;
@@ -15,13 +15,13 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.DTOs
         public string Search { get; set; } = string.Empty;
 
         [JsonPropertyName("filters")]
-        public ProductListFilterDto Filters { get; set; } = new();
+        public BrandListFilterDto Filters { get; set; } = new();
 
         [JsonPropertyName("sort")]
-        public ProductListSortDto Sort { get; set; } = new();
+        public BrandListSortDto Sort { get; set; } = new();
     }
 
-    public class ProductListFilterDto
+    public class BrandListFilterDto
     {
         [JsonPropertyName("cate_id")]
         public string? CategoryId { get; set; }
@@ -42,7 +42,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.DTOs
     /// <summary>
     /// Sort config. field: "name" | "price" | "stock" | "created_at" (default)
     /// </summary>
-    public class ProductListSortDto
+    public class BrandListSortDto
     {
         [JsonPropertyName("field")]
         public string Field { get; set; } = "created_at";

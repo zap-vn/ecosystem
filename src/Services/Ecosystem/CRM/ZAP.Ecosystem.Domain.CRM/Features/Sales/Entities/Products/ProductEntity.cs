@@ -1,14 +1,11 @@
-using MongoDB.Bson.Serialization.Attributes;
-using CRM.BuildingBlocks;
-using CRM.BuildingBlocks.Interfaces;
+using ZAP.Ecosystem.Domain.CRM.Common;
 using System.Collections.Generic;
 
 namespace CRM.Sales.Domain.Entities.Products
 {
     public class ProductEntity : BaseEntity, ILocalizable<ProductTranslation>
     {
-        [BsonElement("EmpGuid")]
-        public override string? UserGuid { get; set; }
+                public override string? UserGuid { get; set; }
 
         public string Code { get; set; } = string.Empty;
         

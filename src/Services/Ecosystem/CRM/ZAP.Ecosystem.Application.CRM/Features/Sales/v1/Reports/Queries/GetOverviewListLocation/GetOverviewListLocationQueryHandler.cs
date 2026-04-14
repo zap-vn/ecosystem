@@ -1,22 +1,11 @@
 using MediatR;
-using CRM.Sales.Application.Common.Interfaces;
-using CRM.Sales.Application.Features.Reports.DTOs;
-using CRM.Sales.Domain.Interfaces;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace CRM.Sales.Application.Features.Reports.Queries.GetOverviewListLocation
+namespace CRM.Sales.Application.Features.Reports.Queries.GetOverviewListLocation;
+
+public class GetOverviewListLocationQueryHandler : IRequestHandler<GetOverviewListLocationQuery, object>
 {
-    public class GetOverviewListLocationQueryHandler : IRequestHandler<GetOverviewListLocationQuery, SalesSummaryDto>
-    {
-        private readonly IReportRepository _repository;
-
-        public GetOverviewListLocationQueryHandler(IReportRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<SalesSummaryDto> Handle(GetOverviewListLocationQuery request, CancellationToken cancellationToken)
-        {
-            return await _repository.GetOverviewListLocationAsync(request.Request, request.UserGuid);
-        }
-    }
+    public Task<object> Handle(GetOverviewListLocationQuery request, CancellationToken cancellationToken)
+        => Task.FromResult(CrmResponse.Ok(null));
 }

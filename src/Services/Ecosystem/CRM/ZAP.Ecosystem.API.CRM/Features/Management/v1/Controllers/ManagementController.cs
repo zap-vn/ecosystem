@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ZAP.Ecosystem.Shared.Data;
-using ZAP.Ecosystem.Application.CRM.Features.Prices.v1.Queries;
-using ZAP.Ecosystem.Application.CRM.Features.Prices.v1.DTOs;
+using ZAP.Ecosystem.Application.CRM.Features.Management.v1.Queries;
+using ZAP.Ecosystem.Application.CRM.Features.Management.v1.DTOs;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -23,9 +23,7 @@ namespace ZAP.Ecosystem.API.CRM.Features.Management.v1.Controllers
         public async Task<IActionResult> GetPrices([FromQuery] GetPriceListQuery query)
         {
             var result = await _mediator.Send(query);
-            return Ok(ApiResponse<IReadOnlyList<PriceListDto>>.SuccessResult(
-                result.Items, 
-                new PaginationMetadata(result.CurrentPage, result.PageSize, result.TotalCount)));
+            return Ok(result);
         }
     }
 }

@@ -1,33 +1,13 @@
-﻿#nullable enable
+#nullable enable
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.DTOs
 {
-    public class CategoryDto
+    // Legacy class — use Categories.v1.DTOs.CategoryDto instead
+    internal class LegacyCategoryDto
     {
         public Guid id { get; set; }
-        public int? serial_id { get; set; }
-        public Guid? parent_id { get; set; }
-        public string? legacy_id { get; set; }
-        public string? materialized_path { get; set; }
         public string name { get; set; } = string.Empty;
-        public string? slug { get; set; }
-        public string? icon_url { get; set; }
-        public string? banner_url { get; set; }
-        public int sort_order { get; set; }
-        public string? meta_title { get; set; }
-        public string? meta_description { get; set; }
-        public int? status_id { get; set; }
-        public string? status_code { get; set; }
-        public string? status_name { get; set; }
-        public bool is_active { get; set; }
-        public string? seo_title { get; set; }
-        public string? seo_description { get; set; }
-        public string[]? channels { get; set; }
-        public int item_count { get; set; }
-        public List<CategoryDto> children { get; set; } = new();
     }
 }
-

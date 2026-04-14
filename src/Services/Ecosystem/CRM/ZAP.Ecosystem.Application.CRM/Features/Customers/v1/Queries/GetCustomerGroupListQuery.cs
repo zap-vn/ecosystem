@@ -1,12 +1,7 @@
-﻿using MediatR;
-using CRM.Customer.Application.Features.CustomerGroups.DTOs;
-using CRM.BuildingBlocks.Models;
+using MediatR;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries;
+
+public class GetCustomerGroupListQuery : IRequest<object>
 {
-    public class GetCustomerGroupListQuery : IRequest<PagedResult<CustomerGroupDto>>
-    {
-        public FilterDTOs Filter { get; set; } = new();
-    }
 }
-

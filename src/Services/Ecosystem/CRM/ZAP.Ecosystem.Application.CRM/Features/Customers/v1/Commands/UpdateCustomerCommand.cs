@@ -1,8 +1,8 @@
-﻿using MediatR;
+using MediatR;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Commands
 {
-    public class UpdateCustomerCommand : IRequest<bool>
+    public class UpdateCustomerCommand : IRequest<object>
     {
         public string Id { get; set; } = string.Empty;
         public string BusinessName { get; set; } = string.Empty;

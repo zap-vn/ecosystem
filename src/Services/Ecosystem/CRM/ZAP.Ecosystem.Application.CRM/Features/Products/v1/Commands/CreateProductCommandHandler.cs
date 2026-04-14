@@ -3,47 +3,43 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ZAP.Ecosystem.Domain.CRM;
+namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Commands;
 
-
-
-namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Commands
+public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, object>
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, string>
+    private readonly IProductRepository _repository;
+
+    public CreateProductCommandHandler(IProductRepository repository)
     {
-        private readonly IProductRepository _repository;
+        _repository = repository;
+    }
 
-        public CreateProductCommandHandler(IProductRepository repository)
+    public async Task<object> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    {
+        var entity = new Product
         {
-            _repository = repository;
-        }
-
-        public async Task<string> Handle(CreateProductCommand request, CancellationToken cancellationToken)
-        {
-            var entity = new global::CRM.Product.Domain.Entities.Product
-            {
+            id = Guid.NewGuid(),
+            tenant_id = request.TenantId,
+            brand_id = request.BrandId,
+            name = request.Name ?? string.Empty,
+            short_description = request.ShortDescription,
+            long_description_html = request.LongDescriptionHtml,
+            status_id = request.StatusId,
+            product_type_id = request.ProductTypeId,
+            is_featured = request.IsFeatured,
+            variants = request.Variants.Select(v => new ProductVariant            {
                 id = Guid.NewGuid(),
-                tenant_id = request.TenantId,
-                brand_id = request.BrandId,
-                name = request.Name ?? string.Empty,
-                short_description = request.ShortDescription,
-                long_description_html = request.LongDescriptionHtml,
-                status_id = request.StatusId,
-                product_type_id = request.ProductTypeId,
-                is_featured = request.IsFeatured,
-                variants = request.Variants.Select(v => new ProductVariant
-                {
-                    id = Guid.NewGuid(),
-                    variant_name = v.VariantName ?? string.Empty,
-                    sku_code = v.SkuCode ?? string.Empty,
-                    barcode = v.Barcode,
-                    sale_price = v.Price,
-                    base_price = v.OriginalPrice
-                }).ToList()
-            };
+                variant_name = v.VariantName ?? string.Empty,
+                sku_code = v.SkuCode ?? string.Empty,
+                barcode = v.Barcode,
+                sale_price = v.Price,
+                base_price = v.OriginalPrice
+            }).ToList()
+        };
 
-            await _repository.CreateAsync(entity);
-            return entity.id.ToString();
-        }
+        await _repository.CreateAsync(entity);
+        return CrmResponse.Created(new { id = entity.id });
     }
 }
 

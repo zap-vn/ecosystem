@@ -1,7 +1,5 @@
+using ZAP.Ecosystem.Domain.CRM.Common;
 using System.Collections.Generic;
-using MongoDB.Bson.Serialization.Attributes;
-using CRM.BuildingBlocks;
-using CRM.BuildingBlocks.Interfaces;
 
 namespace CRM.Customer.Domain.Entities
 {
@@ -12,8 +10,7 @@ namespace CRM.Customer.Domain.Entities
         public string TimePicker { get; set; } = string.Empty;
     }
 
-    [BsonIgnoreExtraElements]
-    public class CustomerEntity : BaseEntity, ILocalizable<CustomerTranslation>
+        public class CustomerEntity : BaseEntity, ILocalizable<CustomerTranslation>
     {
         public long _key { get; set; }
         public string _rev { get; set; } = string.Empty;
@@ -26,12 +23,9 @@ namespace CRM.Customer.Domain.Entities
         public string CurrencySymbol { get; set; } = string.Empty;
         public string CustomerCode { get; set; } = string.Empty;
         
-        [BsonSerializer(typeof(CRM.BuildingBlocks.FlexibleLongSerializer))]
-        [BsonElement("LanguageId")]
         public long LanguageId { get; set; }
         
-        [BsonElement("Language")]
-        public string Language { get; set; } = string.Empty;
+                public string Language { get; set; } = string.Empty;
         
         public int CustomerStatusId { get; set; }
         public string Email { get; set; } = string.Empty;
@@ -50,8 +44,7 @@ namespace CRM.Customer.Domain.Entities
         public int Visible { get; set; }
         public string Websites { get; set; } = string.Empty;
         
-        [BsonElement("MerchantUrl")]
-        public string MerchantUrl { get; set; } = string.Empty;
+                public string MerchantUrl { get; set; } = string.Empty;
         public int Currency_key { get; set; }
         public string Plural { get; set; } = string.Empty;
         public string Singular { get; set; } = string.Empty;
@@ -73,52 +66,30 @@ namespace CRM.Customer.Domain.Entities
         public bool IsVerifyApple { get; set; } = false;
         
         // --- Postgres Specific Fields ---
-        [BsonIgnore]
-        public Guid id { get; set; }
-        [BsonIgnore]
-        public Guid? tenant_id { get; set; }
-        [BsonIgnore]
-        public string? legacy_id { get; set; }
-        [BsonIgnore]
-        public string? email { get; set; }
-        [BsonIgnore]
-        public string? phone_number { get; set; }
-        [BsonIgnore]
-        public string? full_name { get; set; }
-        [BsonIgnore]
-        public string? gender { get; set; }
-        [BsonIgnore]
-        public DateTime? birth_date { get; set; }
-        [BsonIgnore]
-        public int? country_id { get; set; }
-        [BsonIgnore]
-        public int? province_id { get; set; }
-        [BsonIgnore]
-        public int? district_id { get; set; }
-        [BsonIgnore]
-        public int? ward_id { get; set; }
-        [BsonIgnore]
-        public string? zipcode { get; set; }
-        [BsonIgnore]
-        public int? preferred_locale_id { get; set; }
-        [BsonIgnore]
-        public Guid? user_id { get; set; }
-        [BsonIgnore]
-        public int? status_id { get; set; }
-        [BsonIgnore]
-        public Guid? tier_id { get; set; }
-        [BsonIgnore]
-        public Guid? group_id { get; set; }
-        [BsonIgnore]
-        public decimal? current_points_balance { get; set; }
-        [BsonIgnore]
-        public decimal? total_spent_amount { get; set; }
+                public Guid id { get; set; }
+                public Guid? tenant_id { get; set; }
+                public string? legacy_id { get; set; }
+                public string? email { get; set; }
+                public string? phone_number { get; set; }
+                public string? full_name { get; set; }
+                public string? gender { get; set; }
+                public DateTime? birth_date { get; set; }
+                public int? country_id { get; set; }
+                public int? province_id { get; set; }
+                public int? district_id { get; set; }
+                public int? ward_id { get; set; }
+                public string? zipcode { get; set; }
+                public int? preferred_locale_id { get; set; }
+                public Guid? user_id { get; set; }
+                public int? status_id { get; set; }
+                public Guid? tier_id { get; set; }
+                public Guid? group_id { get; set; }
+                public decimal? current_points_balance { get; set; }
+                public decimal? total_spent_amount { get; set; }
 
-        [BsonIgnore]
-        public virtual LoyaltyTier? loyalty_tier { get; set; }
+                public virtual LoyaltyTier? loyalty_tier { get; set; }
 
-        [BsonIgnore]
-        public virtual StatusItem? status { get; set; }
+                public virtual StatusItem? status { get; set; }
         // -------------------------------
 
         // Legacy fields for compilation if needed

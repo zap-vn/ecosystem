@@ -1,15 +1,12 @@
-using MongoDB.Bson.Serialization.Attributes;
+using ZAP.Ecosystem.Domain.CRM.Common;
 using System;
 using System.Collections.Generic;
-using CRM.BuildingBlocks;
-using CRM.BuildingBlocks.Interfaces;
 
 namespace CRM.HR.Domain.Entities
 {
     public class Employee : BaseEntity, ILocalizable<EmployeeTranslation>
     {
-        [BsonElement("EmpGuid")]
-        public override string? UserGuid { get; set; }
+                public override string? UserGuid { get; set; }
 
         public string EmployeeCode { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty; // Fallback

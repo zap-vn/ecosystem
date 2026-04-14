@@ -1,3 +1,4 @@
+using ZAP.Ecosystem.Domain.CRM.Common;
 using CRM.Customer.Domain.Entities;
 using System;
 using System.Collections.Generic;

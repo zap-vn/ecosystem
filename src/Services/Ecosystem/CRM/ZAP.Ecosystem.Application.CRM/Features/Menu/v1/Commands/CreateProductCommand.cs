@@ -1,10 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using System;
 using System.Collections.Generic;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Menu.v1.Commands
 {
-    public class CreateProductCommand : IRequest<string>
+    public class CreateProductCommand : IRequest<object>
     {
         public Guid TenantId { get; set; }
         public Guid? BrandId { get; set; }

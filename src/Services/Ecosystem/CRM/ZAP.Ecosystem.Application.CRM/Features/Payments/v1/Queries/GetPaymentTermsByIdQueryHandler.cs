@@ -1,37 +1,11 @@
-﻿using MediatR;
-using CRM.Payment.Application.Features.PaymentTerms.DTOs;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Payment.Domain.Interfaces;
-using System;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries;
+
+public class GetPaymentTermsByIdQueryHandler : IRequestHandler<GetPaymentTermsByIdQuery, object>
 {
-    public class GetPaymentTermsByIdQueryHandler : IRequestHandler<GetPaymentTermsByIdQuery, PaymentTermsDto>
-    {
-        private readonly IPaymentTermsRepository _repository;
-
-        public GetPaymentTermsByIdQueryHandler(IPaymentTermsRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<PaymentTermsDto> Handle(GetPaymentTermsByIdQuery request, CancellationToken cancellationToken)
-        {
-            if (string.IsNullOrEmpty(request.Id)) return null;
-            var entity = await _repository.GetByIdAsync(request.Id);
-            if (entity == null) return null;
-
-            return new PaymentTermsDto 
-            { 
-                Id = entity.Id,
-                Code = entity.Code,
-                Name = entity.Name,
-                Description = entity.Description,
-                Days = entity.Days,
-                IsActive = entity.IsActive
-            };
-        }
-    }
+    public Task<object> Handle(GetPaymentTermsByIdQuery request, CancellationToken cancellationToken)
+        => Task.FromResult(CrmResponse.NotFound("PaymentTerms"));
 }
-

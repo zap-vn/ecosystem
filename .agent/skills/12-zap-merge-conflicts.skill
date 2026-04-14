@@ -1,0 +1,30 @@
+# ZAP Code Merge Conflict Management Skill
+
+## 1. Mục đích hoạt động
+Skill này định chuẩn quy trình tiếp cận, phân tích và giải quyết (Resolve) hiện tượng đụng độ mã nguồn (Merge Conflicts) của hệ sinh thái ZAP, đảm bảo không có bất kỳ logic nghiệp vụ, cấu hình Dependency Injection hoặc phiên bản Database nào bị hỏng hóc hoặc bị mất mát (code override) trong quá trình merge các nhánh (như `feature` vào `dev`).
+
+## 2. Tiêu chuẩn giải phẫu Conflict đối với C# / .NET 8 (ZAP Ecosytem)
+
+### 2.1 Đối với file Migration của EF Core (`ModelSnapshot.cs` / `.Designer.cs`)
+- **TUYỆT ĐỐI KHÔNG xài tool ghép code tay để gộp 2 file Snapshot**: Khi xảy ra conflict ở thư mục Migrations (Data/EF), file Snapshot bị đụng ID rất nặng.
+- **Cách xử lý chuẩn**: 
+  1. Loại bỏ luôn (discard/delete) bản Migration gây conflict của bạn.
+  2. Bỏ qua conflict của `ModelSnapshot.cs` bằng cách "Accept Incoming" (chấp nhận code mới từ dev).
+  3. Xoá migration cũ bằng `dotnet ef migrations remove` (nếu cần), sau đó chạy lại lệnh sinh mới tinh `dotnet ef migrations add <Tên_Mới>` bằng code C# bạn vừa merge.
+
+### 2.2 Đối với cấu hình `Program.cs` / Dependency Injection (DI)
+- Việc đăng ký DI (Scoped, Transient), hoặc Middleware thường bị conflict nếu 2 dev cùng nộp code.
+- **Cách xử lý chuẩn**: Giữ lại **CẢ HAI** (Keep Both) thay vì ghi đè, sau đó sắp xếp lại cho trật tự logic (không để trùng service đăng ký).
+
+### 2.3 Đối với CQRS Handlers & Business Logic (Lớp Application/Domain)
+- Phân tích cẩn thận theo nguyên lý Clean Architecture: Code validation (Guard) và code Handler (Logic).
+- Cố gắng nhúng và hòa trộn cả 2 flow hoặc tích hợp thay đổi.
+- **Bắt buộc**: Luôn gọi `dotnet build ZAP.Ecosystem.slnx` sau khi merge xong để chắc chắn trình biên dịch C# không báo lỗi ngoặc `{}` nhầm do conflict rác.
+
+## 3. Quy trình thực thi dành cho AI Agent
+Khi người dùng yêu cầu "Xử lý merge conflict" hoặc hệ thống kẹt ở `git status` có "Unmerged paths", Agent **BẮT BUỘC** thực hiện quy trình sau:
+1. Chạy `git status` để lấy danh sách các file đang đụng độ.
+2. Dùng công cụ đọc nội dung (vd: `view_file` hoặc tương đương) để tìm các dấu hiệu `<<<<<<< HEAD`, `=======`, và `>>>>>>>`.
+3. Nhắn lại cho người dùng về mức độ nghiêm trọng và cung cấp bản đối sánh.
+4. Đề xuất bản code MỚI, HOÀN CHỈNH (không còn marker conflict) cho file đó thay vì chỉ cung cấp gợi ý mơ hồ.
+5. Kiểm nghiệm (Verify) bằng `run_command` gọi `dotnet build` trước khi báo cáo hoàn thành.

@@ -68,6 +68,28 @@ builder.Services.AddScoped<CRM.Product.Domain.Interfaces.ICategoryRepository, ZA
 builder.Services.AddScoped<CRM.Product.Domain.Interfaces.IModifierGroupRepository, ZAP.Ecosystem.API.CRM.Mocks.MockModifierGroupRepository>();
 builder.Services.AddScoped<CRM.Product.Domain.Interfaces.IBrandRepository, ZAP.Ecosystem.API.CRM.Mocks.MockBrandRepository>();
 
+builder.Services.AddScoped<ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService, MockCurrentUserService>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ILocationRepository, ZAP.Ecosystem.API.CRM.MockLocationRepository>();
+
+// Auto-register all missing Domain Interfaces to the dynamic Proxy so handlers don't crash with 500 errors
+var domainAssembly = typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository).Assembly;
+var proxyMethod = typeof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy).GetMethod(nameof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy.Create));
+foreach (var type in domainAssembly.GetTypes())
+{
+    if (type.IsInterface && type.Name.EndsWith("Repository") && type != typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository))
+    {
+        builder.Services.AddScoped(type, sp => 
+            proxyMethod!.MakeGenericMethod(type).Invoke(null, null)!
+        );
+    }
+}
+
+builder.Services.AddControllers();
+
+builder.Services.AddMediatR(cfg => {
+    cfg.RegisterServicesFromAssembly(typeof(ZAP.Ecosystem.Application.CRM.Features.Categories.v1.Queries.GetCategoryListQuery).Assembly);
+});
+
 var app = builder.Build();
 
 app.MapOpenApi();
@@ -91,7 +113,15 @@ app.MapGet("/", (HttpContext ctx) =>
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
+
+public class MockCurrentUserService : ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService
+{
+    // Mock user for testing without token setup
+    public string? UserGuid => "a6b32eee-a14a-4cec-a070-e23b6ea234fb";
+    public int LocaleId => 2; // Vietnamese etc.
+}
+
+

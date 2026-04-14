@@ -1,0 +1,27 @@
+# ZAP CI/CD & Deployment Workflows Skill (GCP + GitHub)
+
+## 1. Overview
+This skill defines the autonomous CI/CD deployment pipeline for the ZAP Ecosystem utilizing GitHub Actions and Google Cloud Platform (GCP). The purpose is to maintain a continuous, automated delivery cycle from code push to remote infrastructure updates.
+
+## 2. CI/CD Architecture
+- **Source of Truth**: GitHub (`dev`, `develop`, `main` tracking branches).
+- **Artifact Registry**: GitHub Packages (GHCR - GitHub Container Registry).
+- **Target Platform**: Google Cloud Platform (Cloud Run, Cloud SQL, AlloyDB).
+
+## 3. Deployment Flow (GitHub Actions)
+1. **Trigger Phase**: The process is triggered automatically on pushes or PR merges to active development branches.
+2. **Build Phase (Deploy to GitHub)**: 
+   - Authenticats with GitHub Container Registry (GHCR) using `$GITHUB_TOKEN`.
+   - Uses `Dockerfile` (Identity Service) and `Dockerfile.CRM` (CRM Service).
+   - Builds Docker images with commit-hash or branch tags.
+   - Pushes built artifacts to `ghcr.io`.
+3. **CD Run Phase (Deploy to GCP)**:
+   - Uses OIDC Workload Identity Federation to securely authenticate against Google Cloud Platform (no hardcoded keys).
+   - Pulls the specific container image generated in Step 2.
+   - Updates Google Cloud Run services (`zap-identity-service`, `zap-crm-service`) using `google-github-actions/deploy-cloudrun@v2`.
+   - Redirects traffic securely to the updated image.
+
+## 4. Agent Operational Rules
+- ALWAYS ensure that Dockerfiles are updated if sweeping architectural changes occur (e.g. adding new project references).
+- NEVER hardcode GCP secrets (Service Account Keys) in `.yml` files; instruct the user to configure variables/secrets or utilize GCP Workload Identity Federation.
+- Review database migrations manually before applying them on GCP unless a dedicated init-container or Flyway step handles it in CI.

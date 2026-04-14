@@ -1,17 +1,14 @@
-﻿using MediatR;
-using CRM.Location.Application.Features.Products.DTOs;
+using MediatR;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries;
+
+// Renamed from GetProductByIdQuery to avoid conflict with Products.v1.Queries.GetProductByIdQuery
+public class GetLocProductByIdQuery : IRequest<object>
 {
-    public class GetProductByIdQuery : IRequest<ProductDto>
-    {
-        public string Id { get; set; }
+    public string Id { get; set; }
 
-        public GetProductByIdQuery(string id)
-        {
-            Id = id;
-        }
+    public GetLocProductByIdQuery(string id)
+    {
+        Id = id;
     }
 }
-
-

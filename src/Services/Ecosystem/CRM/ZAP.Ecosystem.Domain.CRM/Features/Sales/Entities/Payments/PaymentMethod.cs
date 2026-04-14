@@ -1,6 +1,5 @@
+using ZAP.Ecosystem.Domain.CRM.Common;
 using System.Collections.Generic;
-using CRM.BuildingBlocks;
-using CRM.BuildingBlocks.Interfaces;
 
 namespace CRM.Sales.Domain.Entities.Payments
 {

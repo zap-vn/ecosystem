@@ -1,16 +1,9 @@
-﻿using MediatR;
-using CRM.Customer.Application.Features.Customers.DTOs;
+using MediatR;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries;
+
+public class GetCustomerByIdQuery : IRequest<object>
 {
-    public class GetCustomerByIdQuery : IRequest<CustomerDto>
-    {
-        public string Id { get; set; }
-
-        public GetCustomerByIdQuery(string id)
-        {
-            Id = id;
-        }
-    }
+    public string Id { get; set; }
+    public GetCustomerByIdQuery(string id) => Id = id;
 }
-

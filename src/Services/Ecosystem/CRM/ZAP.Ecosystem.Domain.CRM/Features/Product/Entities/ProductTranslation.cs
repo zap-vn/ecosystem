@@ -1,4 +1,4 @@
-
+using ZAP.Ecosystem.Domain.CRM.Common;
 namespace CRM.Product.Domain.Entities
 {
     public class ProductTranslation : BaseTranslationEntity
@@ -7,3 +7,5 @@ namespace CRM.Product.Domain.Entities
         public string Description { get; set; } = string.Empty;
     }
 }
+
+

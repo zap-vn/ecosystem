@@ -1,11 +1,10 @@
 using MediatR;
-using CRM.Report.Application.Features.Reports.DTOs;
-using CRM.BuildingBlocks.Models;
 
-namespace CRM.Report.Application.Features.Reports.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Reports.v1.Queries;
+
+public class GetReportListQuery : IRequest<object>
 {
-    public class GetReportListQuery : IRequest<PagedResult<ReportDto>>
-    {
-        public FilterDTOs Filter { get; set; } = new();
-    }
+    public int PageIndex { get; set; } = 1;
+    public int PageSize { get; set; } = 20;
+    public string? Search { get; set; }
 }

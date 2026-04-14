@@ -1,9 +1,9 @@
-using CRM.BuildingBlocks.Interfaces;
+using ZAP.Ecosystem.Domain.CRM.Common;
 using CRM.Payment.Domain.Entities;
 
 namespace CRM.Payment.Domain.Interfaces
 {
-    public interface IPaymentTypeRepository : IMongoRepository<PaymentType>
+    public interface IPaymentTypeRepository : IRepository<PaymentType>
     {
     }
 }

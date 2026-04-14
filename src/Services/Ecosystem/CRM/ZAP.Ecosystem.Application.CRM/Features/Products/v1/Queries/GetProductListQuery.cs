@@ -1,12 +1,9 @@
 using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Products.v1.DTOs;
+namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries;
 
-
-
-namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries
+public class GetProductListQuery : IRequest<object>
 {
-    public class GetProductListQuery : IRequest<PagedResult<ProductDto>>
-    {
-        public ProductListRequestDto Request { get; set; } = new();
-    }
+    public ZAP.Ecosystem.Application.CRM.Features.Products.v1.DTOs.ProductListRequestDto Request { get; set; } = new();
 }
 

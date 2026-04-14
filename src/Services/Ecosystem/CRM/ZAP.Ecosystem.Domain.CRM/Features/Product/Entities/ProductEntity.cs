@@ -1,48 +1,33 @@
-using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Generic;
+using ZAP.Ecosystem.Domain.CRM.Common;using System.Collections.Generic;
 
 namespace CRM.Product.Domain.Entities
 {
-    [BsonIgnoreExtraElements]
-    public class ProductEntity : BaseEntity, ILocalizable<ProductTranslation>
+        public class ProductEntity : BaseEntity, ILocalizable<ProductTranslation>
     {
-        [BsonElement("UserGuid")]
-        public string? UserGuid { get; set; }
+                public override string? UserGuid { get; set; }
+                public string? EmpGuid { get; set; }
 
-        [BsonElement("EmpGuid")]
-        public string? EmpGuid { get; set; }
+                public string Code { get; set; } = string.Empty;
 
-        [BsonElement("SKU")]
-        public string Code { get; set; } = string.Empty;
+                public string Barcode { get; set; } = string.Empty;
 
-        [BsonElement("Barcode")]
-        public string Barcode { get; set; } = string.Empty;
+                public string Name { get; set; } = string.Empty; 
 
-        [BsonElement("Name")]
-        public string Name { get; set; } = string.Empty; 
+                public string Description { get; set; } = string.Empty;
 
-        [BsonElement("Description")]
-        public string Description { get; set; } = string.Empty;
+                        public decimal Price { get; set; }
 
-        [BsonElement("Price")]
-        [BsonRepresentation(MongoDB.Bson.BsonType.Decimal128)]
-        public decimal Price { get; set; }
+                public string Category { get; set; } = string.Empty;
 
-        [BsonElement("CategoryGuid")]
-        public string Category { get; set; } = string.Empty;
+                public string ImageUrl { get; set; } = string.Empty;
 
-        [BsonElement("Image")]
-        public string ImageUrl { get; set; } = string.Empty;
+                public int Stock { get; set; }
 
-        [BsonElement("Quantity")]
-        public int Stock { get; set; }
+                public int Visible { get; set; } = 1;
 
-        [BsonElement("Visible")]
-        public int Visible { get; set; } = 1;
-
-        [BsonIgnore]
-        public bool IsActive => Visible == 1;
+                public bool IsActive => Visible == 1;
         
         public ICollection<ProductTranslation> Translations { get; set; } = new List<ProductTranslation>();
     }
 }
+

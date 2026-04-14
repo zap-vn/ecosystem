@@ -1,35 +1,11 @@
-﻿using MediatR;
-using CRM.Customer.Application.Features.CustomerGroups.DTOs;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Customer.Domain.Interfaces;
-using System;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries;
+
+public class GetCustomerGroupByIdQueryHandler : IRequestHandler<GetCustomerGroupByIdQuery, object>
 {
-    public class GetCustomerGroupByIdQueryHandler : IRequestHandler<GetCustomerGroupByIdQuery, CustomerGroupDto>
-    {
-        private readonly ICustomerGroupRepository _repository;
-
-        public GetCustomerGroupByIdQueryHandler(ICustomerGroupRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<CustomerGroupDto> Handle(GetCustomerGroupByIdQuery request, CancellationToken cancellationToken)
-        {
-            if (string.IsNullOrEmpty(request.Id)) return null;
-            var entity = await _repository.GetByIdAsync(request.Id);
-            if (entity == null) return null;
-
-            return new CustomerGroupDto
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                Description = entity.Description,
-                DiscountPercentage = entity.DiscountPercentage
-            };
-        }
-    }
+    public Task<object> Handle(GetCustomerGroupByIdQuery request, CancellationToken cancellationToken)
+        => Task.FromResult(CrmResponse.Ok(null));
 }
-

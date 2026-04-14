@@ -1,15 +1,12 @@
+using ZAP.Ecosystem.Domain.CRM.Common;
 using System;
 using System.Collections.Generic;
-using CRM.BuildingBlocks;
-using CRM.BuildingBlocks.Interfaces;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace CRM.Promotion.Domain.Entities
 {
     public class PromotionEntity : BaseEntity, ILocalizable<PromotionTranslation>
     {
-        [BsonIgnore]
-        public Guid id { get; set; }
+                public Guid id { get; set; }
         public Guid? tenant_id { get; set; }
         public string? legacy_id { get; set; }
 

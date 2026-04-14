@@ -10,29 +10,30 @@ WORKDIR /src
 
 # Copy solution and project files
 COPY ["ZAP.Ecosystem.slnx", "."]
-COPY ["src/Services/Identity/ZAP.Identity.API/ZAP.Identity.API.csproj", "src/Services/Identity/ZAP.Identity.API/"]
-COPY ["src/Services/Identity/ZAP.Identity.Application/ZAP.Identity.Application.csproj", "src/Services/Identity/ZAP.Identity.Application/"]
-COPY ["src/Services/Identity/ZAP.Identity.Infrastructure/ZAP.Identity.Infrastructure.csproj", "src/Services/Identity/ZAP.Identity.Infrastructure/"]
-COPY ["src/Services/Identity/ZAP.Identity.Domain/ZAP.Identity.Domain.csproj", "src/Services/Identity/ZAP.Identity.Domain/"]
+COPY ["src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/ZAP.Ecosystem.API.CRM.csproj", "src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/"]
+COPY ["src/Services/Ecosystem/CRM/ZAP.Ecosystem.Application.CRM/ZAP.Ecosystem.Application.CRM.csproj", "src/Services/Ecosystem/CRM/ZAP.Ecosystem.Application.CRM/"]
+COPY ["src/Services/Ecosystem/ZAP.Ecosystem.Infrastructure/ZAP.Ecosystem.Infrastructure.csproj", "src/Services/Ecosystem/ZAP.Ecosystem.Infrastructure/"]
+COPY ["src/Services/Ecosystem/ZAP.Ecosystem.Domain/ZAP.Ecosystem.Domain.csproj", "src/Services/Ecosystem/ZAP.Ecosystem.Domain/"]
 COPY ["src/Services/Ecosystem/ZAP.Ecosystem.Shared/ZAP.Ecosystem.Shared.csproj", "src/Services/Ecosystem/ZAP.Ecosystem.Shared/"]
+COPY ["src/Services/Ecosystem/CRM/ZAP.Ecosystem.Domain.CRM/ZAP.Ecosystem.Domain.CRM.csproj", "src/Services/Ecosystem/CRM/ZAP.Ecosystem.Domain.CRM/"]
 
 # Restore dependencies
-RUN dotnet restore "src/Services/Identity/ZAP.Identity.API/ZAP.Identity.API.csproj"
+RUN dotnet restore "src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/ZAP.Ecosystem.API.CRM.csproj"
 
 # Copy the rest of the source code
 COPY . .
 
-WORKDIR "/src/src/Services/Identity/ZAP.Identity.API"
+WORKDIR "/src/src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM"
 
 # Build the project
-RUN dotnet build "ZAP.Identity.API.csproj" -c Release -o /app/build
+RUN dotnet build "ZAP.Ecosystem.API.CRM.csproj" -c Release -o /app/build
 
 # Publish
 FROM build AS publish
-RUN dotnet publish "ZAP.Identity.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "ZAP.Ecosystem.API.CRM.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Final image
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ZAP.Identity.API.dll"]
+ENTRYPOINT ["dotnet", "ZAP.Ecosystem.API.CRM.dll"]

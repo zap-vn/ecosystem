@@ -1,12 +1,9 @@
-
-
 using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Units.v1.DTOs;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries;
+
+public class GetUnitsQuery : IRequest<object>
 {
-    public class GetUnitsQuery : IRequest<PagedResult<UnitDto>>
-    {
-        public UnitListRequestDto Request { get; set; } = new();
-    }
+    public UnitListRequestDto Request { get; set; } = new();
 }
-

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using MediatR;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Units.v1.Commands
 {
-    public class UpdateUnitCommand : IRequest<bool>
+    public class UpdateUnitCommand : IRequest<object>
     {
         public int Id { get; set; }
         public string? Code { get; set; }
@@ -12,7 +12,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Units.v1.Commands
         public bool? IsActive { get; set; }
     }
 
-    public class DeleteUnitCommand : IRequest<bool>
+    public class DeleteUnitCommand : IRequest<object>
     {
         public int Id { get; set; }
     }

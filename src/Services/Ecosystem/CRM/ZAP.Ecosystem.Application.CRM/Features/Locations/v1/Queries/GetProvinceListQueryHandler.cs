@@ -1,41 +1,29 @@
-﻿using MediatR;
-using System.Collections.Generic;
+using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Locations.v1.DTOs;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Location.Application.Features.Locations.DTOs;
-using CRM.Location.Domain.Interfaces;
-using CRM.BuildingBlocks.Interfaces;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries;
+
+public class GetProvinceListQueryHandler : IRequestHandler<GetProvinceListQuery, object>
 {
-    public class GetProvinceListQueryHandler : IRequestHandler<GetProvinceListQuery, List<ProvinceDto>>
+    private readonly ILocationRepository _repository;
+
+    public GetProvinceListQueryHandler(ILocationRepository repository)
     {
-        private readonly ILocationRepository _repository;
-        private readonly ICurrentUserService _currentUserService;
+        _repository = repository;
+    }
 
-        public GetProvinceListQueryHandler(ILocationRepository repository, ICurrentUserService currentUserService)
+    public async Task<object> Handle(GetProvinceListQuery request, CancellationToken cancellationToken)
+    {
+        var items = await _repository.GetProvincesAsync(request.LocaleId);
+        var dtos = items.Select(p => new ProvinceDto
         {
-            _repository = repository;
-            _currentUserService = currentUserService;
-        }
+            province_code = p.code,
+            city_name = p.translations?.FirstOrDefault(t => t.locale_id == request.LocaleId)?.name ?? string.Empty
+        }).ToList();
 
-        public async Task<List<ProvinceDto>> Handle(GetProvinceListQuery request, CancellationToken cancellationToken)
-        {
-            var localeId = _currentUserService.LocaleId;
-            var items = await _repository.GetProvincesAsync(localeId);
-
-            return items.Select(p =>
-            {
-                var translation = p.translations?.FirstOrDefault(t => t.locale_id == localeId);
-                return new ProvinceDto
-                {
-                    province_code = p.code,
-                    city_name = translation?.name ?? string.Empty
-                };
-            }).ToList();
-        }
+        return CrmResponse.Ok(dtos);
     }
 }
-
-

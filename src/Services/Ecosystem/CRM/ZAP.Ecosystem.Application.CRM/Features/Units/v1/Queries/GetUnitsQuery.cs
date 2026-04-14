@@ -1,12 +1,9 @@
-﻿using CRM.Unit.Application.Features.Units.DTOs;
-using CRM.BuildingBlocks.Models;
 using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Units.v1.DTOs;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Units.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Units.v1.Queries;
+
+public class GetUnitsQuery : IRequest<object>
 {
-    public class GetUnitsQuery : IRequest<PagedResult<UnitDto>>
-    {
-        public UnitListRequestDto Request { get; set; } = new();
-    }
+    public UnitListRequestDto Request { get; set; } = new();
 }
-

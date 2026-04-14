@@ -1,4 +1,4 @@
-using CRM.BuildingBlocks;
+using ZAP.Ecosystem.Domain.CRM.Common;
 
 namespace CRM.Customer.Domain.Entities
 {

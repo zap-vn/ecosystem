@@ -1,9 +1,9 @@
-﻿using MediatR;
+using MediatR;
 using System;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Categories.v1.Commands
 {
-    public class CreateCategoryCommand : IRequest<Guid>
+    public class CreateCategoryCommand : IRequest<object>
     {
         public Guid? tenant_id { get; set; }
         public Guid? parent_id { get; set; }

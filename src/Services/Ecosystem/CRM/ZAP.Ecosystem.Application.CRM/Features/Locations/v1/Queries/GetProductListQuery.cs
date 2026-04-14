@@ -1,13 +1,10 @@
-﻿using MediatR;
-using CRM.Location.Application.Features.Products.DTOs;
-using CRM.BuildingBlocks.Models;
+using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Locations.v1.DTOs;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries;
+
+// Renamed from GetProductListQuery to avoid conflict with Products.v1.Queries.GetProductListQuery
+public class GetLocProductListQuery : IRequest<object>
 {
-    public class GetProductListQuery : IRequest<PagedResult<ProductDto>>
-    {
-        public ProductListRequestDto Request { get; set; } = new();
-    }
+    public LocProductListRequestDto Request { get; set; } = new();
 }
-
-

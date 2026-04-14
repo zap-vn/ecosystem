@@ -1,49 +1,16 @@
-﻿using MediatR;
+using MediatR;
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Brand.Domain.Entities;
-using CRM.Brand.Domain.Interfaces;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.Commands
+namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.Commands;
+
+public class CreateBrandCommandHandler : IRequestHandler<CreateBrandCommand, object>
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, string>
+    public async Task<object> Handle(CreateBrandCommand request, CancellationToken cancellationToken)
     {
-        private readonly IProductRepository _repository;
-
-        public CreateProductCommandHandler(IProductRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<string> Handle(CreateProductCommand request, CancellationToken cancellationToken)
-        {
-            var entity = new CRM.Brand.Domain.Entities.Product
-            {
-                id = Guid.NewGuid(),
-                tenant_id = request.TenantId,
-                brand_id = request.BrandId,
-                name = request.Name ?? string.Empty,
-                short_description = request.ShortDescription,
-                long_description_html = request.LongDescriptionHtml,
-                status_id = request.StatusId,
-                product_type_id = request.ProductTypeId,
-                is_featured = request.IsFeatured,
-                variants = request.Variants.Select(v => new ProductVariant
-                {
-                    id = Guid.NewGuid(),
-                    variant_name = v.VariantName ?? string.Empty,
-                    sku_code = v.SkuCode ?? string.Empty,
-                    barcode = v.Barcode,
-                    sale_price = v.Price,
-                    base_price = v.OriginalPrice
-                }).ToList()
-            };
-
-            await _repository.CreateAsync(entity);
-            return entity.id.ToString();
-        }
+        await Task.CompletedTask;
+        var id = Guid.NewGuid();
+        return CrmResponse.Created(new { id });
     }
 }
-

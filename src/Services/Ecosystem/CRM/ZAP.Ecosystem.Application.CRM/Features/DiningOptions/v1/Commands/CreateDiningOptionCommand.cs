@@ -1,8 +1,8 @@
-﻿using MediatR;
+using MediatR;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.DiningOptions.v1.Commands
 {
-    public class CreateDiningOptionCommand : IRequest<int>
+    public class CreateDiningOptionCommand : IRequest<object>
     {
         public string Code { get; set; } = string.Empty;
         public bool IsActive { get; set; } = true;

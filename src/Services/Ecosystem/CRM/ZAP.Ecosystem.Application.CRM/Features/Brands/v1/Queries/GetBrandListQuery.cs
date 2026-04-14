@@ -1,11 +1,9 @@
 using MediatR;
 using ZAP.Ecosystem.Application.CRM.Features.Brands.v1.DTOs;
-using ZAP.Ecosystem.Shared.Data;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.Queries;
+
+public class GetBrandListQuery : IRequest<object>
 {
-    public class GetBrandListQuery : IRequest<PagedResult<BrandDto>>
-    {
-        public BrandListRequestDto Request { get; set; } = new();
-    }
+    public ZAP.Ecosystem.Application.CRM.Features.Brands.v1.DTOs.BrandListRequestDto Request { get; set; } = new();
 }

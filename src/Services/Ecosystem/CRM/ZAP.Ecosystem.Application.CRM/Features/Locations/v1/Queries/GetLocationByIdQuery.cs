@@ -1,15 +1,10 @@
-﻿using MediatR;
-using CRM.Location.Application.Features.Locations.DTOs;
+using MediatR;
 using System;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries;
+
+public class GetLocationByIdQuery : IRequest<object>
 {
-    public class GetLocationByIdQuery : IRequest<LocationDto?>
-    {
-        public Guid Id { get; set; }
-        public int LocaleId { get; set; } = 2; // Default to 2 (VI)
-    }
-
+    public Guid Id { get; set; }
+    public string? AcceptLanguage { get; set; }
 }
-
-

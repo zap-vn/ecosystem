@@ -1,69 +1,62 @@
-﻿using CRM.BuildingBlocks.Interfaces;
-using CRM.BuildingBlocks.Models;
-using CRM.Category.Application.Features.Categories.DTOs;
-using CRM.Category.Domain.Interfaces;
 using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Categories.v1.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Categories.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Categories.v1.Queries;
+
+public class GetCategoryListQueryHandler : IRequestHandler<GetCategoryListQuery, object>
 {
-    public class GetCategoryListQueryHandler : IRequestHandler<GetCategoryListQuery, PagedResult<CategoryDto>>
+    private readonly ICategoryRepository _repository;
+    private readonly ICurrentUserService _currentUserService;
+
+    public GetCategoryListQueryHandler(ICategoryRepository repository, ICurrentUserService currentUserService)
     {
-        private readonly ICategoryRepository _repository;
-        private readonly ICurrentUserService _currentUserService;
+        _repository = repository;
+        _currentUserService = currentUserService;
+    }
 
-        public GetCategoryListQueryHandler(ICategoryRepository repository, ICurrentUserService currentUserService)
+    public async Task<object> Handle(GetCategoryListQuery request, CancellationToken cancellationToken)
+    {
+        var tenantIdString = _currentUserService.UserGuid;
+        Guid? tenantId = null;
+        if (Guid.TryParse(tenantIdString, out var guid)) tenantId = guid;
+
+        var (items, total) = await _repository.GetPagedAsync(
+            request.Request.PageIndex,
+            request.Request.PageSize,
+            tenantId,
+            request.Request.Search,
+            request.Request.Filters?.StatusId,
+            null,
+            request.Request.Sort?.Field ?? "name",
+            request.Request.Sort?.Descending ?? false);
+
+        var dtos = items.Select(x => new CategoryDto
         {
-            _repository = repository;
-            _currentUserService = currentUserService;
-        }
+            id = x.id,
+            serial_id = x.serial_id,
+            parent_id = x.parent_id,
+            materialized_path = x.materialized_path,
+            name = x.name,
+            slug = x.slug,
+            icon_url = x.icon_url,
+            banner_url = x.banner_url,
+            sort_order = x.sort_order ?? 0,
+            meta_title = x.meta_title,
+            meta_description = x.meta_description,
+            status_id = x.status_id,
+            status_code = x.status?.code,
+            status_name = x.status?.translations?.FirstOrDefault(t => t.locale_id == _currentUserService.LocaleId)?.name ??
+                          x.status?.translations?.FirstOrDefault(t => t.locale_id == 2)?.name,
+            is_active = x.is_active,
+            seo_title = x.seo_title,
+            seo_description = x.seo_description
+        }).ToList();
 
-        public async Task<PagedResult<CategoryDto>> Handle(GetCategoryListQuery request, CancellationToken cancellationToken)
-        {
-            var tenantIdString = _currentUserService.UserGuid;
-            Guid? tenantId = null;
-            if (Guid.TryParse(tenantIdString, out var guid)) tenantId = guid;
-
-            var (items, total) = await _repository.GetPagedAsync(
-                request.Request.PageIndex,
-                request.Request.PageSize,
-                tenantId,
-                request.Request.Search,
-                request.Request.Filters?.StatusId,
-                null, // parentId
-                request.Request.Sort?.Field ?? "name",
-                request.Request.Sort?.Descending ?? false);
-
-            var dtos = items.Select(x => new CategoryDto
-            {
-                id = x.id,
-                serial_id = x.serial_id,
-                parent_id = x.parent_id,
-                legacy_id = x.legacy_id,
-                materialized_path = x.materialized_path,
-                name = x.name,
-                slug = x.slug,
-                icon_url = x.icon_url,
-                banner_url = x.banner_url,
-                sort_order = x.sort_order ?? 0,
-                meta_title = x.meta_title,
-                meta_description = x.meta_description,
-                status_id        = x.status_id,
-                status_code      = x.status?.code,
-                status_name      = x.status?.translations?.FirstOrDefault(t => t.locale_id == _currentUserService.LocaleId)?.name ?? 
-                                   x.status?.translations?.FirstOrDefault(t => t.locale_id == 2)?.name,
-                is_active = x.is_active,
-                seo_title = x.seo_title,
-                seo_description = x.seo_description
-            }).ToList();
-
-            return new PagedResult<CategoryDto>(dtos, total, request.Request.PageIndex, request.Request.PageSize);
-
-        }
+        return CrmResponse.Paged(new PagedResult<CategoryDto>(dtos, total, request.Request.PageIndex, request.Request.PageSize));
     }
 }
-

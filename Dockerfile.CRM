@@ -15,6 +15,7 @@ COPY ["src/Services/Ecosystem/CRM/ZAP.Ecosystem.Application.CRM/ZAP.Ecosystem.Ap
 COPY ["src/Services/Ecosystem/ZAP.Ecosystem.Infrastructure/ZAP.Ecosystem.Infrastructure.csproj", "src/Services/Ecosystem/ZAP.Ecosystem.Infrastructure/"]
 COPY ["src/Services/Ecosystem/ZAP.Ecosystem.Domain/ZAP.Ecosystem.Domain.csproj", "src/Services/Ecosystem/ZAP.Ecosystem.Domain/"]
 COPY ["src/Services/Ecosystem/ZAP.Ecosystem.Shared/ZAP.Ecosystem.Shared.csproj", "src/Services/Ecosystem/ZAP.Ecosystem.Shared/"]
+COPY ["src/Services/Ecosystem/CRM/ZAP.Ecosystem.Domain.CRM/ZAP.Ecosystem.Domain.CRM.csproj", "src/Services/Ecosystem/CRM/ZAP.Ecosystem.Domain.CRM/"]
 
 # Restore dependencies
 RUN dotnet restore "src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/ZAP.Ecosystem.API.CRM.csproj"
