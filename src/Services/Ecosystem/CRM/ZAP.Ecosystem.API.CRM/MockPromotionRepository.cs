@@ -58,7 +58,7 @@ namespace ZAP.Ecosystem.API.CRM
                     SELECT p.id, p.tenant_id, p.legacy_id, p.name, p.short_name, p.description,
                            p.status_id, p.discount_value, p.is_automatic,
                            si.code AS status_code, sit.name AS status_name,
-                           p.serial_id
+                           p.serial_id, p.created_at, p.updated_at
                     FROM marketing.promotion p
                     LEFT JOIN system.status_item si ON si.id = p.status_id
                     LEFT JOIN system.status_item_translation sit ON sit.status_item_id = si.id AND sit.locale_id = 2
@@ -82,7 +82,9 @@ namespace ZAP.Ecosystem.API.CRM
                         is_automatic   = !reader.IsDBNull(8) && reader.GetBoolean(8),
                         status_code    = reader.IsDBNull(9) ? null         : reader.GetString(9),
                         status_name    = reader.IsDBNull(10) ? null        : reader.GetString(10),
-                        serial_id      = reader.IsDBNull(11) ? 0           : reader.GetInt32(11)
+                        serial_id      = reader.IsDBNull(11) ? 0           : reader.GetInt32(11),
+                        created_at     = reader.IsDBNull(12) ? DateTime.UtcNow : reader.GetDateTime(12),
+                        updated_at     = reader.IsDBNull(13) ? null        : reader.GetDateTime(13)
                     });
                 }
             }

@@ -44,6 +44,8 @@ namespace ZAP.Ecosystem.Domain.CRM
         public int status_id { get; set; } = 7001;
         public string? status_code { get; set; }
         public string? status_name { get; set; }
+        public DateTime created_at { get; set; } = DateTime.UtcNow;
+        public DateTime? updated_at { get; set; }
 
         public ICollection<PromotionTranslation> Translations { get; set; } = new List<PromotionTranslation>();
     }
