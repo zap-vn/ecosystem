@@ -86,6 +86,7 @@ namespace ZAP.Ecosystem.API.CRM
                 Console.WriteLine(ex.Message);
                 return 9999;
             }
+            return 0;
         }
     }
 }
