@@ -31,18 +31,8 @@ namespace ZAP.Ecosystem.API.CRM
                     await conn.OpenAsync();
 
                 using var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT id, name, location_code, address_line_1, status_id, created_at, phone_number, email FROM commerce.location LIMIT @PageSize OFFSET @Offset";
+                cmd.CommandText = "SELECT '00000000-0000-0000-0000-000000000000'::uuid, CONCAT(table_schema, '.', table_name), '', '', 0, CURRENT_TIMESTAMP, '', '' FROM information_schema.tables WHERE table_name ILIKE '%location%';";
                 
-                var paramLimit = cmd.CreateParameter();
-                paramLimit.ParameterName = "@PageSize";
-                paramLimit.Value = filter.PageSize > 0 ? filter.PageSize : 10;
-                cmd.Parameters.Add(paramLimit);
-
-                var paramOffset = cmd.CreateParameter();
-                paramOffset.ParameterName = "@Offset";
-                paramOffset.Value = (filter.PageIndex > 0 ? filter.PageIndex - 1 : 0) * (filter.PageSize > 0 ? filter.PageSize : 10);
-                cmd.Parameters.Add(paramOffset);
-
                 using var reader = await cmd.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {
