@@ -4,5 +4,5 @@ namespace ZAP.Ecosystem.Application.CRM.Features.DiningOptions.v1.Queries;
 
 public class GetDiningOptionByIdQuery : IRequest<object>
 {
-    public int Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 }
