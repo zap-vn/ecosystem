@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ICurrentUserService = ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService;
 namespace ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries;
 
 public class GetProductListQueryHandler : IRequestHandler<GetProductListQuery, object>

@@ -62,11 +62,11 @@ builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => 
 
 // Override CRM Legacy Injection
 builder.Services.AddScoped<ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService, ZAP.Ecosystem.API.CRM.Mocks.MockUserService>();
-builder.Services.AddScoped<CRM.Product.Domain.Interfaces.IProductRepository, ZAP.Ecosystem.API.CRM.Mocks.MockProductRepository>();
-builder.Services.AddScoped<CRM.Product.Domain.Interfaces.IUnitRepository, ZAP.Ecosystem.API.CRM.Mocks.MockUnitRepository>();
-builder.Services.AddScoped<CRM.Product.Domain.Interfaces.ICategoryRepository, ZAP.Ecosystem.API.CRM.Mocks.MockCategoryRepository>();
-builder.Services.AddScoped<CRM.Product.Domain.Interfaces.IModifierGroupRepository, ZAP.Ecosystem.API.CRM.Mocks.MockModifierGroupRepository>();
-builder.Services.AddScoped<CRM.Product.Domain.Interfaces.IBrandRepository, ZAP.Ecosystem.API.CRM.Mocks.MockBrandRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IProductRepository, ZAP.Ecosystem.API.CRM.Mocks.MockProductRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IUnitRepository, ZAP.Ecosystem.API.CRM.Mocks.MockUnitRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICategoryRepository, ZAP.Ecosystem.API.CRM.Mocks.MockCategoryRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository, ZAP.Ecosystem.API.CRM.Mocks.MockModifierGroupRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IBrandRepository, ZAP.Ecosystem.API.CRM.Mocks.MockBrandRepository>();
 
 builder.Services.AddScoped<ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService, MockCurrentUserService>();
 builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ILocationRepository, ZAP.Ecosystem.API.CRM.MockLocationRepository>();
@@ -123,5 +123,6 @@ public class MockCurrentUserService : ZAP.Ecosystem.Application.CRM.Common.Inter
     public string? UserGuid => "a6b32eee-a14a-4cec-a070-e23b6ea234fb";
     public int LocaleId => 2; // Vietnamese etc.
 }
+
 
 

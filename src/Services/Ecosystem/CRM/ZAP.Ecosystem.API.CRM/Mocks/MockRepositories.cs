@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CRM.Product.Domain.Entities;
-using CRM.Product.Domain.Interfaces;
+using ZAP.Ecosystem.Domain.CRM;
+using ZAP.Ecosystem.Domain.CRM;
 using ZAP.Ecosystem.Shared.Interfaces;
 
 namespace ZAP.Ecosystem.API.CRM.Mocks
@@ -18,17 +18,17 @@ namespace ZAP.Ecosystem.API.CRM.Mocks
 
     public class MockProductRepository : IProductRepository
     {
-        public Task<IEnumerable<global::CRM.Product.Domain.Entities.Product>> GetAllAsync() => Task.FromResult(Enumerable.Empty<global::CRM.Product.Domain.Entities.Product>());
-        public Task<global::CRM.Product.Domain.Entities.Product?> GetByIdAsync(string id) => Task.FromResult<global::CRM.Product.Domain.Entities.Product?>(new global::CRM.Product.Domain.Entities.Product { id = Guid.NewGuid() });
-        public Task CreateAsync(global::CRM.Product.Domain.Entities.Product product) => Task.CompletedTask;
-        public Task UpdateAsync(global::CRM.Product.Domain.Entities.Product product) => Task.CompletedTask;
+        public Task<IEnumerable<global::ZAP.Ecosystem.Domain.CRM.Product>> GetAllAsync() => Task.FromResult(Enumerable.Empty<global::ZAP.Ecosystem.Domain.CRM.Product>());
+        public Task<global::ZAP.Ecosystem.Domain.CRM.Product?> GetByIdAsync(string id) => Task.FromResult<global::ZAP.Ecosystem.Domain.CRM.Product?>(new global::ZAP.Ecosystem.Domain.CRM.Product { id = Guid.NewGuid() });
+        public Task CreateAsync(global::ZAP.Ecosystem.Domain.CRM.Product product) => Task.CompletedTask;
+        public Task UpdateAsync(global::ZAP.Ecosystem.Domain.CRM.Product product) => Task.CompletedTask;
         public Task DeleteAsync(string id) => Task.CompletedTask;
         
         public Task<(IEnumerable<ProductVariant> Items, int TotalCount)> GetPagedAsync(int page, int pageSize, Guid? tenantId = null, string? searchTerm = null, int? statusId = null, Guid? categoryId = null, Guid? locationId = null, int localeId = 2, int? productTypeId = null, string sortField = "created_at", bool sortDescending = true) 
             => Task.FromResult<(IEnumerable<ProductVariant>, int)>((new List<ProductVariant>(), 0));
 
-        public Task<(IEnumerable<global::CRM.Product.Domain.Entities.Product> Items, int TotalCount)> GetPagedProductsAsync(int page, int pageSize, Guid? tenantId = null, string? searchTerm = null, int? statusId = null, Guid? categoryId = null, Guid? locationId = null, int localeId = 2, int? productTypeId = null, string sortField = "created_at", bool sortDescending = true)
-            => Task.FromResult<(IEnumerable<global::CRM.Product.Domain.Entities.Product>, int)>((new List<global::CRM.Product.Domain.Entities.Product>(), 0));
+        public Task<(IEnumerable<global::ZAP.Ecosystem.Domain.CRM.Product> Items, int TotalCount)> GetPagedProductsAsync(int page, int pageSize, Guid? tenantId = null, string? searchTerm = null, int? statusId = null, Guid? categoryId = null, Guid? locationId = null, int localeId = 2, int? productTypeId = null, string sortField = "created_at", bool sortDescending = true)
+            => Task.FromResult<(IEnumerable<global::ZAP.Ecosystem.Domain.CRM.Product>, int)>((new List<global::ZAP.Ecosystem.Domain.CRM.Product>(), 0));
     }
 
     public class MockUnitRepository : IUnitRepository
@@ -44,12 +44,12 @@ namespace ZAP.Ecosystem.API.CRM.Mocks
 
     public class MockCategoryRepository : ICategoryRepository
     {
-        public Task<IEnumerable<Category>> GetAllAsync() => Task.FromResult(Enumerable.Empty<Category>());
+        public Task<IEnumerable<Category>> GetAllAsync(Guid? tenantId = null) => Task.FromResult(Enumerable.Empty<Category>());
         public Task<Category?> GetByIdAsync(Guid id) => Task.FromResult<Category?>(new Category { id = id });
         public Task CreateAsync(Category category) => Task.CompletedTask;
         public Task UpdateAsync(Category category) => Task.CompletedTask;
         public Task DeleteAsync(Guid id) => Task.CompletedTask;
-        public Task<(IEnumerable<Category> Items, int Total)> GetPagedAsync(int page, int pageSize, Guid? tenantId = null, string? search = null, int? statusId = null, string sortField = "name", bool sortDescending = false)
+        public Task<(IEnumerable<Category> Items, int Total)> GetPagedAsync(int page, int pageSize, Guid? tenantId = null, string? search = null, int? statusId = null, Guid? parentId = null, string sortField = "name", bool sortDescending = false)
             => Task.FromResult<(IEnumerable<Category>, int)>((new List<Category>(), 0));
     }
 
@@ -75,3 +75,4 @@ namespace ZAP.Ecosystem.API.CRM.Mocks
             => Task.FromResult<(IEnumerable<Brand>, int)>((new List<Brand>(), 0));
     }
 }
+

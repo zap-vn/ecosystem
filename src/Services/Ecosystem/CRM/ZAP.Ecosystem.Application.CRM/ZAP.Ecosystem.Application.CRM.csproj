@@ -5,146 +5,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Using Include="ZAP.Ecosystem.Shared.Data" />
-    <Using Include="ZAP.Ecosystem.Shared.Interfaces" />
-    <Using Include="ZAP.Ecosystem.Application.CRM.Features.Products.v1.DTOs" />
-    <Using Include="CRM.Product.Domain.Interfaces" />
-    <Using Include="CRM.Product.Domain.Entities" />
+    <Folder Include="Features\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
-    <!-- Exclude handlers still using obsolete CRM.BuildingBlocks / old MongoDB namespaces -->
-    <Compile Remove="Features\Brands\v1\Commands\CreateBrandCommandHandler.cs" />
-    <Compile Remove="Features\Brands\v1\Commands\UpdateBrandCommandHandler.cs" />
-    <Compile Remove="Features\Brands\v1\Queries\GetBrandByIdQueryHandler.cs" />
-    <Compile Remove="Features\Brands\v1\Queries\GetBrandListQuery.cs" />
-    <Compile Remove="Features\Brands\v1\Queries\GetBrandListQueryHandler.cs" />
-    <Compile Remove="Features\Categories\v1\Commands\CreateCategoryCommandHandler.cs" />
-    <Compile Remove="Features\Categories\v1\Commands\UpdateCategoryCommandHandler.cs" />
-    <Compile Remove="Features\Categories\v1\Queries\GetCategoriesQueryHandler.cs" />
-    <Compile Remove="Features\Categories\v1\Queries\GetCategoryByIdQuery.cs" />
-    <Compile Remove="Features\Categories\v1\Queries\GetCategoryListQuery.cs" />
-    <Compile Remove="Features\Categories\v1\Queries\GetCategoryListQueryHandler.cs" />
-    <Compile Remove="Features\Collections\v1\Queries\GetCollectionListQuery.cs" />
-    <Compile Remove="Features\Collections\v1\Queries\GetCollectionListQueryHandler.cs" />
-    <Compile Remove="Features\Collections\v1\Queries\GetProductListQuery.cs" />
-    <Compile Remove="Features\Collections\v1\Queries\GetProductListQueryHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Commands\CreateCustomerCommand.cs" />
-    <Compile Remove="Features\Customers\v1\Commands\CreateCustomerCommandHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Commands\CreateCustomerGroupCommandHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Commands\UpdateCustomerCommandHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Commands\UpdateCustomerGroupCommandHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetCustomerByIdQueryHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetCustomerGroupByIdQueryHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetCustomerGroupListQuery.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetCustomerGroupListQueryHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetCustomerListQuery.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetCustomerListQueryHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetCustomerManagementListQuery.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetMembershipListQuery.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Commands\CreateDiningOptionCommandHandler.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Commands\CreateProductCommandHandler.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Commands\UpdateDiningOptionCommand.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Commands\UpdateProductCommandHandler.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Queries\GetDiningOptionByIdQuery.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Queries\GetDiningOptionListQuery.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Queries\GetProductByIdQuery.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Queries\GetProductByIdQueryHandler.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Queries\GetProductListQuery.cs" />
-    <Compile Remove="Features\DiningOptions\v1\Queries\GetProductListQueryHandler.cs" />
-    <Compile Remove="Features\Locations\v1\Commands\CreateLocationCommandHandler.cs" />
-    <Compile Remove="Features\Locations\v1\Commands\CreateProductCommandHandler.cs" />
-    <Compile Remove="Features\Locations\v1\Commands\UpdateLocationCommandHandler.cs" />
-    <Compile Remove="Features\Locations\v1\Commands\UpdateProductCommandHandler.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetLocationByIdQueryHandler.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetLocationListQuery.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetLocationListQueryHandler.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetProductByIdQueryHandler.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetProductListQuery.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetProductListQueryHandler.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetProvinceListQueryHandler.cs" />
-    <Compile Remove="Features\Management\v1\Commands\CreateProductCommandHandler.cs" />
-    <Compile Remove="Features\Management\v1\Commands\UpdateProductCommandHandler.cs" />
-    <Compile Remove="Features\Management\v1\Queries\GetPriceListQuery.cs" />
-    <Compile Remove="Features\Management\v1\Queries\GetProductByIdQuery.cs" />
-    <Compile Remove="Features\Management\v1\Queries\GetProductByIdQueryHandler.cs" />
-    <Compile Remove="Features\Management\v1\Queries\GetProductListQuery.cs" />
-    <Compile Remove="Features\Management\v1\Queries\GetProductListQueryHandler.cs" />
-    <Compile Remove="Features\Menu\v1\Commands\CreateProductCommandHandler.cs" />
-    <Compile Remove="Features\Menu\v1\Commands\MenuCommandHandlers.cs" />
-    <Compile Remove="Features\Menu\v1\Commands\UpdateProductCommandHandler.cs" />
-    <Compile Remove="Features\Menu\v1\Queries\GetMenuListQuery.cs" />
-    <Compile Remove="Features\Menu\v1\Queries\GetProductByIdQueryHandler.cs" />
-    <Compile Remove="Features\Menu\v1\Queries\GetProductListQuery.cs" />
-    <Compile Remove="Features\Menu\v1\Queries\GetProductListQueryHandler.cs" />
-    <Compile Remove="Features\ModifierGroup\v1\Commands\CreateModifierGroupCommandHandler.cs" />
-    <Compile Remove="Features\ModifierGroup\v1\Commands\DeleteModifierGroupCommandHandler.cs" />
-    <Compile Remove="Features\ModifierGroup\v1\Commands\UpdateModifierGroupCommandHandler.cs" />
-    <Compile Remove="Features\ModifierGroup\v1\Queries\GetModifierGroupByIdQuery.cs" />
-    <Compile Remove="Features\ModifierGroup\v1\Queries\GetModifierGroupsQuery.cs" />
-    <Compile Remove="Features\ModifierGroup\v1\Queries\GetModifierGroupsQueryHandler.cs" />
-    <Compile Remove="Features\Orders\v1\Queries\GetTransactionManagementListQuery.cs" />
-    <Compile Remove="Features\Payments\v1\Commands\CreatePaymentTermsCommandHandler.cs" />
-    <Compile Remove="Features\Payments\v1\Commands\CreatePaymentTypeCommandHandler.cs" />
-    <Compile Remove="Features\Payments\v1\Commands\UpdatePaymentTermsCommandHandler.cs" />
-    <Compile Remove="Features\Payments\v1\Commands\UpdatePaymentTypeCommandHandler.cs" />
-    <Compile Remove="Features\Payments\v1\Queries\GetPaymentListQuery.cs" />
-    <Compile Remove="Features\Payments\v1\Queries\GetPaymentTermsByIdQueryHandler.cs" />
-    <Compile Remove="Features\Payments\v1\Queries\GetPaymentTermsListQuery.cs" />
-    <Compile Remove="Features\Payments\v1\Queries\GetPaymentTermsListQueryHandler.cs" />
-    <Compile Remove="Features\Payments\v1\Queries\GetPaymentTypeByIdQueryHandler.cs" />
-    <Compile Remove="Features\Payments\v1\Queries\GetPaymentTypeListQuery.cs" />
-    <Compile Remove="Features\Payments\v1\Queries\GetPaymentTypeListQueryHandler.cs" />
-    <Compile Remove="Features\Promotions\v1\Promotions\Commands\CreatePromotionCommandHandler.cs" />
-    <Compile Remove="Features\Promotions\v1\Promotions\Commands\UpdatePromotionCommandHandler.cs" />
-    <Compile Remove="Features\Promotions\v1\Promotions\Queries\GetPromotionListQuery.cs" />
-    <Compile Remove="Features\Reports\v1\Reports\Commands\CreateReportCommandHandler.cs" />
-    <Compile Remove="Features\Reports\v1\Reports\Commands\UpdateReportCommandHandler.cs" />
-    <Compile Remove="Features\Reports\v1\Reports\Queries\GetReportByIdQueryHandler.cs" />
-    <Compile Remove="Features\Reports\v1\Reports\Queries\GetReportListQuery.cs" />
-    <Compile Remove="Features\Reports\v1\Reports\Queries\GetReportListQueryHandler.cs" />
-    <Compile Remove="Features\Units\v1\Commands\CreateUnitCommandHandler.cs" />
-    <Compile Remove="Features\Units\v1\Commands\UpdateAndDeleteUnitHandlers.cs" />
-    <Compile Remove="Features\Units\v1\Queries\GetUnitsQuery.cs" />
-    <Compile Remove="Features\Units\v1\Queries\GetUnitsQueryHandler.cs" />
-    <!-- Additional files found to use obsolete CRM.* namespaces -->
-    <Compile Remove="Features\Brands\v1\Queries\GetBrandByIdQuery.cs" />
-    <Compile Remove="Features\Collections\v1\Commands\CreateProductCommandHandler.cs" />
-    <Compile Remove="Features\Collections\v1\Commands\UpdateProductCommandHandler.cs" />
-    <Compile Remove="Features\Collections\v1\Queries\GetProductByIdQuery.cs" />
-    <Compile Remove="Features\Collections\v1\Queries\GetProductByIdQueryHandler.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetCustomerByIdQuery.cs" />
-    <Compile Remove="Features\Customers\v1\Queries\GetCustomerGroupByIdQuery.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetLocationByIdQuery.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetProductByIdQuery.cs" />
-    <Compile Remove="Features\Locations\v1\Queries\GetProvinceListQuery.cs" />
-    <Compile Remove="Features\Menu\v1\Queries\GetProductByIdQuery.cs" />
-    <Compile Remove="Features\Payments\v1\Queries\GetPaymentTermsByIdQuery.cs" />
-    <Compile Remove="Features\Payments\v1\Queries\GetPaymentTypeByIdQuery.cs" />
-    <!-- Products queries that reference IBrandRepository/ICurrentUserService not yet in Domain -->
-    <Compile Remove="Features\Products\v1\Queries\GetBrandByIdQuery.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetBrandsQuery.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetBrandsQueryHandler.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetCategoriesQueryHandler.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetCategoryByIdQuery.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetCategoryListQuery.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetCategoryListQueryHandler.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetModifierGroupByIdQuery.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetModifierGroupsQuery.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetModifierGroupsQueryHandler.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetPriceListQuery.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetUnitsQuery.cs" />
-    <Compile Remove="Features\Products\v1\Queries\GetUnitsQueryHandler.cs" />
-    <Compile Remove="Features\Sales\v1\Reports\Queries\GetOverviewListLocation\GetOverviewListLocationQueryHandler.cs" />
-    <Compile Remove="Features\Products\v1\Commands\CreateModifierGroupCommandHandler.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="14.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
     <ProjectReference Include="..\ZAP.Ecosystem.Domain.CRM\ZAP.Ecosystem.Domain.CRM.csproj" />
+    <ProjectReference Include="..\..\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
   </ItemGroup>
 </Project>
