@@ -1,15 +1,10 @@
-﻿using MediatR;
-using CRM.Location.Application.Features.Locations.DTOs;
-using CRM.BuildingBlocks.Models;
-using System.Collections.Generic;
-using System;
+using MediatR;
+using ZAP.Ecosystem.Application.CRM.Features.Locations.v1.DTOs;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Queries;
+
+public class GetLocationListQuery : IRequest<object>
 {
-    public class GetLocationListQuery : IRequest<PagedResult<LocationDto>>
-    {
-        public LocationListRequestDto Request { get; set; } = new LocationListRequestDto();
-    }
+    public LocationListRequestDto Request { get; set; } = new();
+    public string? AcceptLanguage { get; set; }
 }
-
-

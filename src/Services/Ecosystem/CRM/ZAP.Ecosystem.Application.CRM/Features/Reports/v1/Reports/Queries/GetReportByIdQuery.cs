@@ -1,15 +1,13 @@
 using MediatR;
-using CRM.Report.Application.Features.Reports.DTOs;
 
-namespace CRM.Report.Application.Features.Reports.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Reports.v1.Queries;
+
+public class GetReportByIdQuery : IRequest<object>
 {
-    public class GetReportByIdQuery : IRequest<ReportDto>
-    {
-        public string Id { get; set; }
+    public string Id { get; set; }
 
-        public GetReportByIdQuery(string id)
-        {
-            Id = id;
-        }
+    public GetReportByIdQuery(string id)
+    {
+        Id = id;
     }
 }

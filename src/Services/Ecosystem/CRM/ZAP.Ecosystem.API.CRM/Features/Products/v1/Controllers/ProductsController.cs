@@ -1,98 +1,45 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 using ZAP.Ecosystem.Application.CRM.Features.Products.v1.Commands;
-using ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries;
 using ZAP.Ecosystem.Application.CRM.Features.Products.v1.DTOs;
-using ZAP.Ecosystem.Shared.Data;
-using ZAP.Ecosystem.Shared.Data;
+using ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries;
 
-namespace ZAP.Ecosystem.API.CRM.Features.Products.v1.Controllers
+namespace ZAP.Ecosystem.API.CRM.Features.Products.v1.Controllers;
+
+[ApiController]
+[Route("api/v1/products")]
+public class ProductsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/products")]
-    public class ProductsController : ControllerBase
+    private readonly IMediator _mediator;
+    public ProductsController(IMediator mediator) => _mediator = mediator;
+
+    [HttpPost("list")]
+    public async Task<IActionResult> List([FromBody] ProductListRequestDto request)
     {
-        private readonly IMediator _mediator;
+        var result = await _mediator.Send(new GetProductListQuery { Request = request });
+        return Ok(result);
+    }
 
-        public ProductsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(string id)
+    {
+        var result = await _mediator.Send(new GetProductByIdQuery(id));
+        return Ok(result);
+    }
 
-        [HttpGet("health")]
-        public IActionResult Health()
-        {
-            return Ok(new { Status = "CRM Product API is running", Time = System.DateTime.UtcNow });
-        }
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateProductCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
 
-        [HttpPost("list")]
-        [Consumes("application/json")]
-        public async Task<IActionResult> List([FromBody] ProductListRequestDto requestBody)
-        {
-            Console.WriteLine(">>> LOG: ProductsController.List reached <<<");
-            Console.WriteLine($">>> LOG: Page={requestBody.Page}, PageSize={requestBody.PageSize} <<<");
-
-            var result = await _mediator.Send(new GetProductListQuery { Request = requestBody });
-            
-            return Ok(new 
-            {
-                success = true,
-                code = 200,
-                message = "OK",
-                data = new 
-                {
-                    total_page = result.PageSize > 0 ? (int)Math.Ceiling((double)result.TotalCount / result.PageSize) : 1,
-                    total_record = result.TotalCount,
-                    page_index = result.CurrentPage,
-                    page_size = result.PageSize,
-                    items = result.Items.Select(x => new
-                    {
-                        id = x.id,
-                        serial_id = x.serial_id,
-                        media_url = x.media_url,
-                        variant_name = x.variant_name,
-                        sku_code = x.sku_code,
-                        category_id = x.category_id,
-                        sale_price = x.sale_price ?? 0,
-                        location_id = x.location_id,
-                        qty_on_hand = x.qty_on_hand ?? 0,
-                        barcode = x.barcode,
-                        product_type_id = x.product_type_id,
-                        product_type_text = x.product_type_text,
-                        status_id = x.status_id,
-                        status_code = x.status_code
-                    }).ToList()
-                }
-            });
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(string id)
-        {
-            var result = await _mediator.Send(new GetProductByIdQuery(id));
-            if (result == null) return NotFound();
-            return Ok(result);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateProductCommand command)
-        {
-            var result = await _mediator.Send(command);
-            return Ok(result);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, [FromBody] UpdateProductCommand command)
-        {
-            command.Id = id; 
-            var result = await _mediator.Send(command);
-            if (!result) return NotFound();
-            return Ok(result);
-        }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(string id, [FromBody] UpdateProductCommand command)
+    {
+        command.Id = id;
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
 }
-
-

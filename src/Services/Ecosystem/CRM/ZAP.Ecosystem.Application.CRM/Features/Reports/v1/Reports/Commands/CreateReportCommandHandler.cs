@@ -1,32 +1,14 @@
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Report.Domain.Entities;
-using CRM.Report.Domain.Interfaces;
 
-namespace CRM.Report.Application.Features.Reports.Commands
+namespace ZAP.Ecosystem.Application.CRM.Features.Reports.v1.Commands;
+
+public class CreateReportCommandHandler : IRequestHandler<CreateReportCommand, object>
 {
-    public class CreateReportCommandHandler : IRequestHandler<CreateReportCommand, string>
+    public Task<object> Handle(CreateReportCommand request, CancellationToken cancellationToken)
     {
-        private readonly IReportRepository _repository;
-
-        public CreateReportCommandHandler(IReportRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<string> Handle(CreateReportCommand request, CancellationToken cancellationToken)
-        {
-            var entity = new ReportTemplate
-            {
-                Code = request.Code,
-                Name = request.Name,
-                Type = request.Type,
-                ConfigurationJson = request.ConfigurationJson
-            };
-
-            await _repository.CreateAsync(entity);
-            return entity.Id.ToString();
-        }
+        return Task.FromResult(CrmResponse.Created(new { id = Guid.NewGuid() }));
     }
 }

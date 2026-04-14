@@ -1,63 +1,44 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using ZAP.Ecosystem.Application.CRM.Features.CustomerGroups.v1.Commands;
-using ZAP.Ecosystem.Application.CRM.Features.CustomerGroups.v1.Queries;
-using ZAP.Ecosystem.Application.CRM.Features.CustomerGroups.v1.DTOs;
-using ZAP.Ecosystem.Shared.Data;
-using ZAP.Ecosystem.Shared.Data;
+using ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Commands;
+using ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries;
 
-namespace ZAP.Ecosystem.API.CRM.Features.Customers.v1.Controllers
+namespace ZAP.Ecosystem.API.CRM.Features.Customers.v1.Controllers;
+
+[ApiController]
+[Route("api/customergroups")]
+public class CustomerGroupsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CustomerGroupsController : ControllerBase
+    private readonly IMediator _mediator;
+    public CustomerGroupsController(IMediator mediator) => _mediator = mediator;
+
+    [HttpPost("list")]
+    public async Task<IActionResult> List([FromBody] GetCustomerGroupListQuery query)
     {
-        private readonly IMediator _mediator;
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
 
-        public CustomerGroupsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(string id)
+    {
+        var result = await _mediator.Send(new GetCustomerGroupByIdQuery(id));
+        return Ok(result);
+    }
 
-        [HttpGet("health")]
-        public IActionResult Health()
-        {
-            return Ok(new { Status = "CRM Customer (Groups) API is running", Time = System.DateTime.UtcNow });
-        }
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateCustomerGroupCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
 
-        [HttpPost("list")]
-        public async Task<IActionResult> List()
-        {
-            var filter = await Request.GetRawBodyAsync<FilterDTOs>();
-            var result = await _mediator.Send(new GetCustomerGroupListQuery { Filter = filter });
-            return Ok(result);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(string id)
-        {
-            var result = await _mediator.Send(new GetCustomerGroupByIdQuery(id));
-            if (result == null) return NotFound();
-            return Ok(result);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateCustomerGroupCommand command)
-        {
-            var result = await _mediator.Send(command);
-            return Ok(result);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, [FromBody] UpdateCustomerGroupCommand command)
-        {
-            command.Id = id; 
-            var result = await _mediator.Send(command);
-            if (!result) return NotFound();
-            return Ok(result);
-        }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(string id, [FromBody] UpdateCustomerGroupCommand command)
+    {
+        command.Id = id;
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
 }
-
-
