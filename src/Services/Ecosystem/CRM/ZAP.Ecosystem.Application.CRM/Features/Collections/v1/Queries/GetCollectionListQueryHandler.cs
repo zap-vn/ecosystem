@@ -22,13 +22,11 @@ public class GetCollectionListQueryHandler : IRequestHandler<GetCollectionListQu
 
         var dtos = items.Select(c => new CollectionDto
         {
-            id = c.id,
-            name = c.name,
-            slug = c.slug,
-            description_html = c.description_html,
-            banner_url = c.banner_url,
-            status_id = c.status_id,
-            sort_order = c.sort_order
+            id            = c.id,
+            name          = c.name,
+            image_url     = c.banner_url,
+            product_count = c.items.Count,
+            status_id     = c.status_id,
         }).ToList();
 
         return CrmResponse.Paged(new PagedResult<CollectionDto>(dtos, total, req.page_index, req.page_size));

@@ -41,7 +41,7 @@ namespace ZAP.Ecosystem.API.CRM
                 // Count
                 using (var countCmd = conn.CreateCommand())
                 {
-                    countCmd.CommandText = "SELECT COUNT(*) FROM identity.customer";
+                    countCmd.CommandText = "SELECT COUNT(*) FROM people.customer";
                     var countResult = await countCmd.ExecuteScalarAsync();
                     total = Convert.ToInt32(countResult);
                 }
@@ -54,7 +54,7 @@ namespace ZAP.Ecosystem.API.CRM
                            district_id, ward_id, zipcode, preferred_locale_id, user_id,
                            status_id, tier_id, group_id, current_points_balance, total_spent_amount,
                            created_at, updated_at
-                    FROM identity.customer
+                    FROM people.customer
                     ORDER BY {EscapeSort(sortField)} {(sortDescending ? "DESC" : "ASC")}
                     LIMIT {pageSize} OFFSET {offset}";
 
