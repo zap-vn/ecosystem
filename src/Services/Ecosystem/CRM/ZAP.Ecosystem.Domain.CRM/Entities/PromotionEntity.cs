@@ -6,7 +6,8 @@ namespace ZAP.Ecosystem.Domain.CRM
 {
     public class PromotionEntity : BaseEntity, ILocalizable<PromotionTranslation>
     {
-                public Guid id { get; set; }
+        public Guid id { get; set; }
+        public int serial_id { get; set; }
         public Guid? tenant_id { get; set; }
         public string? legacy_id { get; set; }
 

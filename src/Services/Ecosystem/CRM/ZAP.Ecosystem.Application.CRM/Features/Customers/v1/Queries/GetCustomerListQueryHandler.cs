@@ -40,6 +40,7 @@ public class GetCustomerListQueryHandler : IRequestHandler<GetCustomerListQuery,
         var dtos = pagedResult.Items.Select(c => new CustomerListDto
         {
             id = c.id,
+            serial_id = c.serial_id,
             full_name = c.full_name ?? string.Empty,
             phone_number = c.phone_number,
             email = c.email,

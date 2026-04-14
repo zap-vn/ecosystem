@@ -7,6 +7,7 @@ namespace ZAP.Ecosystem.Domain.CRM
     public class MenuHeader
     {
         public Guid id { get; set; }
+        public int? serial_id { get; set; }
         public Guid? tenant_id { get; set; }
         public string name { get; set; } = string.Empty;
         public string menu_type { get; set; } = "DIGITAL";

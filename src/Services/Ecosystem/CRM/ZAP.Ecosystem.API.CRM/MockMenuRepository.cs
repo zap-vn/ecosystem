@@ -52,7 +52,7 @@ namespace ZAP.Ecosystem.API.CRM
                 using var cmd = conn.CreateCommand();
                 cmd.CommandText = $@"
                     SELECT m.id, m.tenant_id, m.name, m.menu_type, m.app_id, m.status_id, m.timezone_id, m.is_active,
-                           si.code AS status_code, sit.name AS status_name
+                           si.code AS status_code, sit.name AS status_name, m.serial_id
                     FROM catalog.menu m
                     LEFT JOIN system.status_item si ON si.id = m.status_id
                     LEFT JOIN system.status_item_translation sit ON sit.status_item_id = si.id AND sit.locale_id = {localeId}
@@ -75,6 +75,7 @@ namespace ZAP.Ecosystem.API.CRM
                         is_active   = reader.IsDBNull(7) ? false : reader.GetBoolean(7),
                         status_code = reader.IsDBNull(8) ? null : reader.GetString(8),
                         status_name = reader.IsDBNull(9) ? null : reader.GetString(9),
+                        serial_id   = reader.IsDBNull(10) ? (int?)null : reader.GetInt32(10),
                     });
                 }
             }

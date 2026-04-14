@@ -54,7 +54,8 @@ namespace ZAP.Ecosystem.API.CRM
                     SELECT c.id, c.name, c.slug, c.description, c.image_url,
                            c.status_id, c.sort_order, c.created_at, c.updated_at,
                            COUNT(ci.product_id)::int AS product_count,
-                           si.code AS status_code, sit.name AS status_name
+                           si.code AS status_code, sit.name AS status_name,
+                           c.serial_id
                     FROM catalog.collection c
                     LEFT JOIN catalog.collection_item ci ON ci.collection_id = c.id
                     LEFT JOIN system.status_item si ON si.id = c.status_id
@@ -62,7 +63,7 @@ namespace ZAP.Ecosystem.API.CRM
                     {whereClause}
                     GROUP BY c.id, c.name, c.slug, c.description, c.image_url,
                              c.status_id, c.sort_order, c.created_at, c.updated_at,
-                             si.code, sit.name
+                             si.code, sit.name, c.serial_id
                     ORDER BY c.name
                     LIMIT {pageSize} OFFSET {offset}";
 
@@ -82,6 +83,7 @@ namespace ZAP.Ecosystem.API.CRM
                         updated_at       = reader.IsDBNull(8)  ? null            : reader.GetDateTime(8),
                         status_code      = reader.IsDBNull(10) ? null            : reader.GetString(10),
                         status_name      = reader.IsDBNull(11) ? null            : reader.GetString(11),
+                        serial_id        = reader.IsDBNull(12) ? (int?)null      : reader.GetInt32(12),
                     };
                     // Store product_count via items count proxy
                     int productCount = reader.IsDBNull(9) ? 0 : reader.GetInt32(9);

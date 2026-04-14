@@ -5,6 +5,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.DTOs
     public class PromotionDto
     {
         public Guid id { get; set; }
+        public int serial_id { get; set; }
         public Guid tenant_id { get; set; }
         public string? legacy_id { get; set; }
 
@@ -38,6 +39,8 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.DTOs
         public bool is_all_payment_methods { get; set; }
 
         public int status_id { get; set; }
+        public string? status_code { get; set; }
+        public string? status_name { get; set; }
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
     }

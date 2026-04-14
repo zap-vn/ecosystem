@@ -12,6 +12,9 @@ namespace ZAP.Ecosystem.Domain.CRM
         [Key]
         [Column("id")]
         public Guid id { get; set; }
+        
+        [Column("serial_id")]
+        public int? serial_id { get; set; }
 
         [Column("tenant_id")]
         public Guid? tenant_id { get; set; }

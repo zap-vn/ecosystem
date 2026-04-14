@@ -23,6 +23,24 @@ public class GetPromotionListQueryHandler : IRequestHandler<GetPromotionListQuer
             sortField: query.Request.Sort?.Field ?? "name",
             sortDescending: query.Request.Sort?.Descending ?? false);
 
-        return CrmResponse.Paged(result, "OK");
+        var dtos = result.Items.Select(x => new DTOs.PromotionDto
+        {
+            id                 = x.id,
+            serial_id          = x.serial_id,
+            tenant_id          = x.tenant_id ?? Guid.Empty,
+            legacy_id          = x.legacy_id,
+            name               = x.name,
+            short_name         = x.short_name,
+            description        = x.description,
+            is_automatic       = x.is_automatic,
+            discount_value     = x.discount_value,
+            status_id          = x.status_id,
+            status_code        = x.status_code,
+            status_name        = x.status_name,
+            created_at         = x.created_at,
+            updated_at         = x.updated_at ?? DateTime.UtcNow
+        }).ToList();
+
+        return CrmResponse.Paged(new PagedResult<DTOs.PromotionDto>(dtos, result.TotalRecord, result.PageIndex, result.PageSize));
     }
 }
