@@ -1,16 +1,9 @@
-﻿using MediatR;
-using CRM.Customer.Application.Features.CustomerGroups.DTOs;
+using MediatR;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries;
+
+public class GetCustomerGroupByIdQuery : IRequest<object>
 {
-    public class GetCustomerGroupByIdQuery : IRequest<CustomerGroupDto>
-    {
-        public string Id { get; set; }
-
-        public GetCustomerGroupByIdQuery(string id)
-        {
-            Id = id;
-        }
-    }
+    public string Id { get; set; }
+    public GetCustomerGroupByIdQuery(string id) => Id = id;
 }
-

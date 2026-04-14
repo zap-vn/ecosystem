@@ -1,34 +1,11 @@
-﻿using MediatR;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Payment.Domain.Entities;
-using CRM.Payment.Domain.Interfaces;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Commands
+namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Commands;
+
+public class CreatePaymentTermsCommandHandler : IRequestHandler<CreatePaymentTermsCommand, object>
 {
-    public class CreatePaymentTermsCommandHandler : IRequestHandler<CreatePaymentTermsCommand, string>
-    {
-        private readonly IPaymentTermsRepository _repository;
-
-        public CreatePaymentTermsCommandHandler(IPaymentTermsRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<string> Handle(CreatePaymentTermsCommand request, CancellationToken cancellationToken)
-        {
-            var entity = new Domain.Entities.PaymentTerms
-            {
-                Code = request.Code,
-                Name = request.Name,
-                Description = request.Description,
-                Days = request.Days,
-                IsActive = request.IsActive
-            };
-
-            await _repository.CreateAsync(entity);
-            return entity.Id.ToString();
-        }
-    }
+    public Task<object> Handle(CreatePaymentTermsCommand request, CancellationToken cancellationToken)
+        => Task.FromResult(CrmResponse.Ok(null));
 }
-

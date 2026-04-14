@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Management.v1.DTOs
 {
-    public class ProductVariantDto
+    // Renamed from ProductVariantDto to avoid conflict with Products.v1.DTOs
+    public class MgmtProductVariantDto
     {
         public Guid id { get; set; }
         public int? serial_id { get; set; }
@@ -20,8 +21,8 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Management.v1.DTOs
         public decimal? qty_on_hand { get; set; }
     }
 
-
-    public class ProductDto
+    // Renamed from ProductDto to avoid conflict with Products.v1.DTOs
+    public class MgmtProductDto
     {
         public Guid id { get; set; }
         public int? serial_id { get; set; }
@@ -35,9 +36,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Management.v1.DTOs
         public string? long_description_html { get; set; }
         public int? status_id { get; set; }
         public bool is_featured { get; set; }
-        public List<ProductVariantDto> variants { get; set; } = new List<ProductVariantDto>();
-
-        // Extra fields for List
+        public List<MgmtProductVariantDto> variants { get; set; } = new List<MgmtProductVariantDto>();
         public string? media_url { get; set; }
         public string? variant_name { get; set; }
         public Guid? category_id { get; set; }
@@ -54,7 +53,4 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Management.v1.DTOs
         public DateTime created_at { get; set; }
         public DateTime? updated_at { get; set; }
     }
-
 }
-
-

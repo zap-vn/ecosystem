@@ -1,37 +1,11 @@
-﻿using MediatR;
-using CRM.Payment.Application.Features.PaymentTypes.DTOs;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using CRM.Payment.Domain.Interfaces;
-using System;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Payments.v1.Queries;
+
+public class GetPaymentTypeByIdQueryHandler : IRequestHandler<GetPaymentTypeByIdQuery, object>
 {
-    public class GetPaymentTypeByIdQueryHandler : IRequestHandler<GetPaymentTypeByIdQuery, PaymentTypeDto>
-    {
-        private readonly IPaymentTypeRepository _repository;
-
-        public GetPaymentTypeByIdQueryHandler(IPaymentTypeRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<PaymentTypeDto> Handle(GetPaymentTypeByIdQuery request, CancellationToken cancellationToken)
-        {
-            if (string.IsNullOrEmpty(request.Id)) return null;
-            var entity = await _repository.GetByIdAsync(request.Id);
-            if (entity == null) return null;
-
-            return new PaymentTypeDto
-            {
-                Id = entity.Id,
-                Code = entity.Code,
-                Name = entity.Name,
-                Description = entity.Description,
-                IsActive = entity.IsActive
-#pragma warning restore CS8602
-            };
-        }
-    }
+    public Task<object> Handle(GetPaymentTypeByIdQuery request, CancellationToken cancellationToken)
+        => Task.FromResult(CrmResponse.NotFound("PaymentType"));
 }
-

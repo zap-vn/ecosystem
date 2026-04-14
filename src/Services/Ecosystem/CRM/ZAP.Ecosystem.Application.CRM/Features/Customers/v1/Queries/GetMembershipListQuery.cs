@@ -1,18 +1,7 @@
-﻿using MediatR;
-using CRM.BuildingBlocks.Models;
-using CRM.Customer.Application.Features.Memberships.DTOs;
-using System;
+using MediatR;
 
-namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Queries;
+
+public class GetMembershipListQuery : IRequest<object>
 {
-    public class GetMembershipListQuery : IRequest<PagedResult<MembershipListDto>>
-    {
-        public Guid? TenantId { get; set; }
-        public Guid? PlanId { get; set; }
-        public int? StatusId { get; set; }
-        public bool? IsExpired { get; set; }
-        public int Page { get; set; } = 1;
-        public int PageSize { get; set; } = 20;
-    }
 }
-

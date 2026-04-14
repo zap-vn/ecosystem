@@ -1,5 +1,7 @@
 using MediatR;
 using ZAP.Ecosystem.Application.CRM.Features.Products.v1.DTOs;
+using ProductDto = ZAP.Ecosystem.Application.CRM.Features.Products.v1.DTOs.ProductDto;
+using ProductVariantDto = ZAP.Ecosystem.Application.CRM.Features.Products.v1.DTOs.ProductVariantDto;
 using System;
 using System.Linq;
 using System.Threading;

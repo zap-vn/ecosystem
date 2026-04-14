@@ -1,9 +1,9 @@
 using MediatR;
 using System;
 
-namespace CRM.Promotion.Application.Features.Promotions.Commands
+namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.Commands
 {
-    public class UpdatePromotionCommand : IRequest<bool>
+    public class UpdatePromotionCommand : IRequest<object>
     {
         public string Id { get; set; } = string.Empty; // Injected from route
 

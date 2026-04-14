@@ -1,9 +1,9 @@
-﻿using MediatR;
+using MediatR;
 using System;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.Commands
 {
-    public class CreateLocationCommand : IRequest<Guid>
+    public class CreateLocationCommand : IRequest<object>
     {
         public Guid? tenant_id { get; set; }
         public Guid? node_id { get; set; }

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using MediatR;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.ModifierGroup.v1.Commands
 {
-    public class CreateModifierGroupCommand : IRequest<Guid>
+    public class CreateModifierGroupCommand : IRequest<object>
     {
         public Guid TenantId { get; set; }
         public string? LegacyId { get; set; }

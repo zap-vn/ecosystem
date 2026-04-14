@@ -1,10 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using System;
 using System.Collections.Generic;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.DiningOptions.v1.Commands
 {
-    public class UpdateProductCommand : IRequest<bool>
+    public class UpdateProductCommand : IRequest<object>
     {
         public string Id { get; set; } = string.Empty;
         public string? Name { get; set; }

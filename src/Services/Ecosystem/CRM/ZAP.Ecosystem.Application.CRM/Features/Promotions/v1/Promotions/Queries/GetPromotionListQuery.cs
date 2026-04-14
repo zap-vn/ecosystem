@@ -1,11 +1,8 @@
 using MediatR;
-using CRM.Promotion.Application.Features.Promotions.DTOs;
-using CRM.BuildingBlocks.Models;
 
-namespace CRM.Promotion.Application.Features.Promotions.Queries
+namespace ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.Queries;
+
+public class GetPromotionListQuery : IRequest<object>
 {
-    public class GetPromotionListQuery : IRequest<PagedResult<PromotionListDto>>
-    {
-        public PromotionListRequestDto Request { get; set; } = new();
-    }
+    public ZAP.Ecosystem.Application.CRM.Features.Promotions.v1.DTOs.PromotionListRequestDto Request { get; set; } = new();
 }

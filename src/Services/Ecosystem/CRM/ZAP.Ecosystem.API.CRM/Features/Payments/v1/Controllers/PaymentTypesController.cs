@@ -15,9 +15,9 @@ public class PaymentTypesController : ControllerBase
     public PaymentTypesController(IMediator mediator) => _mediator = mediator;
 
     [HttpPost("list")]
-    public async Task<IActionResult> List([FromBody] PaymentTypeListRequestDto request)
+    public async Task<IActionResult> List([FromBody] GetPaymentTypeListQuery request)
     {
-        var result = await _mediator.Send(new GetPaymentTypeListQuery { Request = request });
+        var result = await _mediator.Send(request);
         return Ok(result);
     }
 

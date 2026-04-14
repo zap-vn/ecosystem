@@ -13,4 +13,8 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="14.1.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZAP.Ecosystem.Domain.CRM\ZAP.Ecosystem.Domain.CRM.csproj" />
+    <ProjectReference Include="..\..\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+  </ItemGroup>
 </Project>

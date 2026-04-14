@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.DTOs
 {
-    public class ProductListRequestDto
+    // Renamed from ProductListRequestDto to avoid conflict with Products.v1.DTOs
+    public class LocProductListRequestDto
     {
         [JsonPropertyName("page_index")]
         public int Page { get; set; } = 1;
@@ -15,13 +16,13 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.DTOs
         public string Search { get; set; } = string.Empty;
 
         [JsonPropertyName("filters")]
-        public ProductListFilterDto Filters { get; set; } = new();
+        public LocProductListFilterDto Filters { get; set; } = new();
 
         [JsonPropertyName("sort")]
-        public ProductListSortDto Sort { get; set; } = new();
+        public LocProductListSortDto Sort { get; set; } = new();
     }
 
-    public class ProductListFilterDto
+    public class LocProductListFilterDto
     {
         [JsonPropertyName("cate_id")]
         public string? CategoryId { get; set; }
@@ -39,10 +40,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.DTOs
         public int? ProductTypeId { get; set; }
     }
 
-    /// <summary>
-    /// Sort config. field: "name" | "price" | "stock" | "created_at" (default)
-    /// </summary>
-    public class ProductListSortDto
+    public class LocProductListSortDto
     {
         [JsonPropertyName("field")]
         public string Field { get; set; } = "created_at";
@@ -51,5 +49,3 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.DTOs
         public bool Descending { get; set; } = true;
     }
 }
-
-

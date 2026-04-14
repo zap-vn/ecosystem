@@ -5,5 +5,5 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Brands.v1.Queries;
 
 public class GetBrandListQuery : IRequest<object>
 {
-    public BrandListRequestDto Request { get; set; } = new();
+    public ZAP.Ecosystem.Application.CRM.Features.Brands.v1.DTOs.BrandListRequestDto Request { get; set; } = new();
 }

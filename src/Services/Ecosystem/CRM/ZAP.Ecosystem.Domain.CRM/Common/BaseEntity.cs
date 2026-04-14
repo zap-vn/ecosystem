@@ -18,7 +18,7 @@ public abstract class BaseTranslationEntity
 
 public interface ILocalizable<T>
 {
-    List<T> Translations { get; set; }
+    ICollection<T> Translations { get; set; }
 }
 
 public interface IRepository<T> where T : class
