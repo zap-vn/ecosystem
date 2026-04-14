@@ -31,7 +31,7 @@ namespace ZAP.Ecosystem.API.CRM
                     await conn.OpenAsync();
 
                 using var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT '00000000-0000-0000-0000-000000000000'::uuid, CONCAT(table_schema, '.', table_name), '', '', 0, CURRENT_TIMESTAMP, '', '' FROM information_schema.tables WHERE table_name ILIKE '%location%';";
+                cmd.CommandText = "SELECT '00000000-0000-0000-0000-000000000000'::uuid, CONCAT(table_schema, '.', table_name), '', '', 0, CURRENT_TIMESTAMP, '', '' FROM information_schema.tables WHERE table_schema NOT IN ('pg_catalog', 'information_schema') LIMIT 50;";
                 
                 using var reader = await cmd.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
