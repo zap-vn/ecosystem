@@ -48,7 +48,9 @@ namespace ZAP.Ecosystem.API.CRM
 
                 using var cmd = conn.CreateCommand();
                 cmd.CommandText = $@"
-                    SELECT * 
+                    SELECT id, serial_id, serial_number, tenant_id, customer_code, legacy_id, square_customer_id, reference_id, phone_number, email, full_name, first_name, last_name,
+                           nickname, company_name, avatar_url, gender_id, birth_date, address_line_1, address_line_2, city_name, state_name, country_id, province_id, district_id,
+                           ward_id, zipcode, preferred_locale_id, user_id, tier_id, memo, creation_source, email_subscription_status, is_instant_profile, current_points_balance, total_spent_amount, average_spent_amount, total_visits_count, first_visit_at, last_visit_at, status_id, display_initial, created_at, updated_at, group_id
                     FROM people.customer
                     ORDER BY {EscapeSort(sortField)} {(sortDescending ? "DESC" : "ASC")}
                     LIMIT {pageSize} OFFSET {offset}";
