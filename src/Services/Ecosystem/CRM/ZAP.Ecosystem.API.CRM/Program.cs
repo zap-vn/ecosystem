@@ -18,6 +18,19 @@ builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), 
 builder.Services.AddScoped<ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService, MockCurrentUserService>();
 builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ILocationRepository, ZAP.Ecosystem.API.CRM.MockLocationRepository>();
 
+// Auto-register all missing Domain Interfaces to the dynamic Proxy so handlers don't crash with 500 errors
+var domainAssembly = typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository).Assembly;
+var proxyMethod = typeof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy).GetMethod(nameof(ZAP.Ecosystem.API.CRM.MockRepositoryProxy.Create));
+foreach (var type in domainAssembly.GetTypes())
+{
+    if (type.IsInterface && type.Name.EndsWith("Repository") && type != typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository))
+    {
+        builder.Services.AddScoped(type, sp => 
+            proxyMethod!.MakeGenericMethod(type).Invoke(null, null)!
+        );
+    }
+}
+
 builder.Services.AddControllers();
 
 builder.Services.AddMediatR(cfg => {
