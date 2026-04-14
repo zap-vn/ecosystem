@@ -137,6 +137,12 @@ namespace ZAP.Ecosystem.Domain.CRM
 
         [ForeignKey("status_id")]
         public StatusItem? status { get; set; }
+
+        [NotMapped]
+        public string? status_code { get; set; }
+
+        [NotMapped]
+        public string? status_name { get; set; }
     }
 }
 

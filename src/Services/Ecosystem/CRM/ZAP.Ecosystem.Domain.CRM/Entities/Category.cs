@@ -77,6 +77,12 @@ namespace ZAP.Ecosystem.Domain.CRM
         [NotMapped]
         public string? seo_description { get; set; }
 
+        [NotMapped]
+        public string? status_code { get; set; }
+
+        [NotMapped]
+        public string? status_name { get; set; }
+
         // Navigation properties (Renamed to avoid EF conventions)
         [ForeignKey("parent_id")]
         public Category? parent_category { get; set; }

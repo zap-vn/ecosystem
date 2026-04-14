@@ -48,10 +48,13 @@ namespace ZAP.Ecosystem.API.CRM
 
                 using var cmd = conn.CreateCommand();
                 cmd.CommandText = $@"
-                    SELECT id, serial_id, serial_number, tenant_id, customer_code, legacy_id, square_customer_id, reference_id, phone_number, email, full_name, first_name, last_name,
-                           nickname, company_name, avatar_url, gender_id, birth_date, address_line_1, address_line_2, city_name, state_name, country_id, province_id, district_id,
-                           ward_id, zipcode, preferred_locale_id, user_id, tier_id, memo, creation_source, email_subscription_status, is_instant_profile, current_points_balance, total_spent_amount, average_spent_amount, total_visits_count, first_visit_at, last_visit_at, status_id, display_initial, created_at, updated_at, group_id
-                    FROM people.customer
+                    SELECT c.id, c.serial_id, c.serial_number, c.tenant_id, c.customer_code, c.legacy_id, c.square_customer_id, c.reference_id, c.phone_number, c.email, c.full_name, c.first_name, c.last_name,
+                           c.nickname, c.company_name, c.avatar_url, c.gender_id, c.birth_date, c.address_line_1, c.address_line_2, c.city_name, c.state_name, c.country_id, c.province_id, c.district_id,
+                           c.ward_id, c.zipcode, c.preferred_locale_id, c.user_id, c.tier_id, c.memo, c.creation_source, c.email_subscription_status, c.is_instant_profile, c.current_points_balance, c.total_spent_amount, c.average_spent_amount, c.total_visits_count, c.first_visit_at, c.last_visit_at, c.status_id, c.display_initial, c.created_at, c.updated_at, c.group_id,
+                           si.code AS status_code, sit.name AS status_name
+                    FROM people.customer c
+                    LEFT JOIN system.status_item si ON si.id = c.status_id
+                    LEFT JOIN system.status_item_translation sit ON sit.status_item_id = si.id AND sit.locale_id = 2
                     ORDER BY {EscapeSort(sortField)} {(sortDescending ? "DESC" : "ASC")}
                     LIMIT {pageSize} OFFSET {offset}";
 
@@ -86,6 +89,8 @@ namespace ZAP.Ecosystem.API.CRM
                     if (HasColumn(reader, "preferred_locale_id") && !reader.IsDBNull(reader.GetOrdinal("preferred_locale_id"))) entity.preferred_locale_id = reader.GetInt32(reader.GetOrdinal("preferred_locale_id"));
                     if (HasColumn(reader, "user_id") && !reader.IsDBNull(reader.GetOrdinal("user_id"))) entity.user_id = reader.GetGuid(reader.GetOrdinal("user_id"));
                     if (HasColumn(reader, "status_id") && !reader.IsDBNull(reader.GetOrdinal("status_id"))) entity.status_id = reader.GetInt32(reader.GetOrdinal("status_id"));
+                    if (HasColumn(reader, "status_code") && !reader.IsDBNull(reader.GetOrdinal("status_code"))) entity.status_code = reader.GetString(reader.GetOrdinal("status_code"));
+                    if (HasColumn(reader, "status_name") && !reader.IsDBNull(reader.GetOrdinal("status_name"))) entity.status_name = reader.GetString(reader.GetOrdinal("status_name"));
                     if (HasColumn(reader, "tier_id") && !reader.IsDBNull(reader.GetOrdinal("tier_id"))) entity.tier_id = reader.GetGuid(reader.GetOrdinal("tier_id"));
                     if (HasColumn(reader, "group_id") && !reader.IsDBNull(reader.GetOrdinal("group_id"))) entity.group_id = reader.GetGuid(reader.GetOrdinal("group_id"));
                     if (HasColumn(reader, "current_points_balance") && !reader.IsDBNull(reader.GetOrdinal("current_points_balance"))) entity.current_points_balance = reader.GetDecimal(reader.GetOrdinal("current_points_balance"));

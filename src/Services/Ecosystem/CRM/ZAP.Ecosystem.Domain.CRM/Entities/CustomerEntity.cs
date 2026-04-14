@@ -90,6 +90,8 @@ namespace ZAP.Ecosystem.Domain.CRM
                 public virtual LoyaltyTier? loyalty_tier { get; set; }
 
                 public virtual StatusItem? status { get; set; }
+                public string? status_code { get; set; }
+                public string? status_name { get; set; }
         // -------------------------------
 
         // Legacy fields for compilation if needed

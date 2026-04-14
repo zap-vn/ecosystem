@@ -41,6 +41,8 @@ namespace ZAP.Ecosystem.Domain.CRM
         public bool is_all_payment_methods { get; set; } = true;
 
         public int status_id { get; set; } = 7001;
+        public string? status_code { get; set; }
+        public string? status_name { get; set; }
 
         public ICollection<PromotionTranslation> Translations { get; set; } = new List<PromotionTranslation>();
     }

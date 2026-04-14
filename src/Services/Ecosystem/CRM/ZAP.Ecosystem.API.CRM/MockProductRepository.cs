@@ -82,9 +82,12 @@ namespace ZAP.Ecosystem.API.CRM
                            p.product_type_id, p.name, p.short_description,
                            p.status_id, p.is_featured, p.created_at, p.updated_at,
                            v.id, v.sku_code, v.barcode, v.variant_name,
-                           v.base_price, v.sale_price, v.is_default
+                           v.base_price, v.sale_price, v.is_default,
+                           s.code as status_code, st.name as status_name
                     FROM catalog.product p
                     LEFT JOIN catalog.product_variant v ON v.product_id = p.id AND v.is_default = true
+                    LEFT JOIN system.status_item s ON s.id = p.status_id
+                    LEFT JOIN system.status_item_translation st ON st.status_item_id = s.id AND st.locale_id = {localeId}
                     {where}
                     ORDER BY {sort} {(sortDescending ? "DESC" : "ASC")}
                     LIMIT {pageSize} OFFSET {offset}";
@@ -105,6 +108,15 @@ namespace ZAP.Ecosystem.API.CRM
                         is_featured     = !reader.IsDBNull(8) && reader.GetBoolean(8),
                         created_at      = reader.IsDBNull(9)  ? DateTime.UtcNow : reader.GetDateTime(9),
                         updated_at      = reader.IsDBNull(10) ? null          : reader.GetDateTime(10),
+                        status = reader.IsDBNull(7) ? null : new StatusItem 
+                        { 
+                            id = reader.GetInt32(7),
+                            code = reader.IsDBNull(17) ? null : reader.GetString(17),
+                            translations = reader.IsDBNull(18) ? new List<StatusItemTranslation>() : new List<StatusItemTranslation> 
+                            { 
+                                new StatusItemTranslation { name = reader.GetString(18), locale_id = localeId } 
+                            }
+                        }
                     };
 
                     if (!reader.IsDBNull(11))

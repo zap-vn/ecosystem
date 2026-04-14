@@ -1,37 +1,44 @@
-using ZAP.Ecosystem.Domain.CRM.Common;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    [Table("modifier_group", Schema = "catalog")]
-    public class ModifierGroup
+    [Table("modifier_item", Schema = "catalog")]
+    public class ModifierItem
     {
         [Key]
         public Guid id { get; set; } = Guid.NewGuid();
-        public Guid tenant_id { get; set; }
-        
+
         [Column("serial_id")]
         public int? serial_id { get; set; }
 
         [Column("serial_number")]
         public string? serial_number { get; set; }
-        
-        public string? legacy_id { get; set; }
-        public string name { get; set; } = string.Empty;
-        public string? description { get; set; }
+
+        [Column("group_id")]
+        public Guid? group_id { get; set; }
+
+        [Column("product_variant_id")]
+        public Guid? product_variant_id { get; set; }
+
+        [Column("image_url")]
         public string? image_url { get; set; }
-        public int min_selection { get; set; } = 0;
-        public int max_selection { get; set; } = 1;
-        public bool is_required { get; set; } = false;
+
+        [Column("price_override")]
+        public decimal? price_override { get; set; }
+
+        [Column("sort_order")]
         public int sort_order { get; set; } = 0;
-        
+
         [Column("status_id")]
         public int? status_id { get; set; }
-        
-        [ForeignKey("status_id")]
-        public StatusItem? status { get; set; }
+
+        [Column("created_at")]
+        public DateTime created_at { get; set; }
+
+        [Column("updated_at")]
+        public DateTime? updated_at { get; set; }
 
         [NotMapped]
         public string? status_code { get; set; }
@@ -40,5 +47,3 @@ namespace ZAP.Ecosystem.Domain.CRM
         public string? status_name { get; set; }
     }
 }
-
-

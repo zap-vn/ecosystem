@@ -41,6 +41,12 @@ namespace ZAP.Ecosystem.Domain.CRM
         public DateTime? updated_at { get; set; }
 
         public ICollection<CollectionItem> items { get; set; } = new List<CollectionItem>();
+
+        [NotMapped]
+        public string? status_code { get; set; }
+
+        [NotMapped]
+        public string? status_name { get; set; }
     }
 }
 

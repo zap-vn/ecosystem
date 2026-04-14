@@ -52,11 +52,14 @@ namespace ZAP.Ecosystem.API.CRM
                 // Fetch page
                 using var cmd = conn.CreateCommand();
                 cmd.CommandText = $@"
-                    SELECT id, tenant_id, serial_id, serial_number, legacy_id,
-                           name, description, image_url, min_selection, max_selection,
-                           is_required, sort_order, status_id
-                    FROM catalog.modifier_group
-                    ORDER BY {EscapeSort(sortField)} {(sortDescending ? "DESC" : "ASC")}
+                    SELECT mg.id, mg.tenant_id, mg.serial_id, mg.serial_number, mg.legacy_id,
+                           mg.name, mg.description, mg.image_url, mg.min_selection, mg.max_selection,
+                           mg.is_required, mg.sort_order, mg.status_id,
+                           si.code AS status_code, sit.name AS status_name
+                    FROM catalog.modifier_group mg
+                    LEFT JOIN system.status_item si ON si.id = mg.status_id
+                    LEFT JOIN system.status_item_translation sit ON sit.status_item_id = si.id AND sit.locale_id = 2
+                    ORDER BY mg.{EscapeSort(sortField)} {(sortDescending ? "DESC" : "ASC")}
                     LIMIT {pageSize} OFFSET {offset}";
 
                 using var reader = await cmd.ExecuteReaderAsync();
@@ -77,6 +80,8 @@ namespace ZAP.Ecosystem.API.CRM
                         is_required   = !reader.IsDBNull(10) && reader.GetBoolean(10),
                         sort_order    = reader.IsDBNull(11) ? 0             : reader.GetInt32(11),
                         status_id     = reader.IsDBNull(12) ? null          : reader.GetInt32(12),
+                        status_code   = reader.IsDBNull(13) ? null          : reader.GetString(13),
+                        status_name   = reader.IsDBNull(14) ? null          : reader.GetString(14),
                     });
                 }
             }

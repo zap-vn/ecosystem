@@ -320,16 +320,16 @@
                 </div>
             </div>
 
-            <!-- CRM API (Future) -->
-            <div class="service-card glass" style="opacity: 0.6;">
+            <!-- CRM API -->
+            <div class="service-card glass">
                 <span class="service-tag">ERP / CRM</span>
                 <h3>
                     CRM API
-                    <span class="status-dot" style="background: #64748b;"></span>
+                    <span id="status-crm" class="status-dot status-online"></span>
                 </h3>
-                <p>Hệ thống quản lý quan hệ khách hàng, Quản lý chi nhánh và Báo cáo (Đang phát triển).</p>
+                <p>Hệ thống quản lý quan hệ khách hàng, Quản lý chi nhánh và Báo cáo (Active).</p>
                 <div class="btn-group">
-                    <span class="btn btn-secondary">In Development</span>
+                    <a href="/docs/crm/v1" class="btn btn-primary" target="_blank">Endpoints List (Scalar)</a>
                 </div>
             </div>
         </main>
@@ -364,8 +364,9 @@
 
         // Check health every 15 seconds
         setInterval(() => {
-            checkStatus('https://localhost:7181', 'status-identity');
-            checkStatus('https://localhost:7049', 'status-app');
+            checkStatus('http://localhost:5181', 'status-identity');
+            checkStatus('http://localhost:5182', 'status-app');
+            checkStatus('http://localhost:5146', 'status-crm');
         }, 15000);
     </script>
 </body>

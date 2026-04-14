@@ -503,3 +503,9 @@ paths:
       x-google-backend:
         address: https://crm-api-768989935757.us-central1.run.app/api/paymentterms/{id}
       responses: { '200': { description: OK } }
+  /api/modifieritems/list:
+    post:
+      operationId: list_modifieritems
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/modifieritems/list
+      responses: { '200': { description: OK } }

@@ -28,6 +28,12 @@ namespace ZAP.Ecosystem.Domain.CRM
         // Navigation
         public StatusItem? status { get; set; }
         public ProductTypeItem? product_type { get; set; }
+
+        [NotMapped]
+        public string? status_code { get; set; }
+
+        [NotMapped]
+        public string? status_name { get; set; }
         public ICollection<ProductVariant> variants { get; set; } = new List<ProductVariant>();
         public ICollection<ProductCategoryMap> category_mappings { get; set; } = new List<ProductCategoryMap>();
     }

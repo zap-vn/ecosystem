@@ -22,6 +22,8 @@ builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository, ZA
 builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICollectionRepository,    ZAP.Ecosystem.API.CRM.MockCollectionRepository>();
 builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICategoryRepository,      ZAP.Ecosystem.API.CRM.MockCategoryRepository>();
 builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IProductRepository,       ZAP.Ecosystem.API.CRM.MockProductRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IModifierItemRepository,   ZAP.Ecosystem.API.CRM.MockModifierItemRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IPromotionRepository,     ZAP.Ecosystem.API.CRM.MockPromotionRepository>();
 
 // Auto-register all remaining repository interfaces via DispatchProxy (returns empty data)
 var domainAssembly = typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository).Assembly;
@@ -34,6 +36,8 @@ var manuallyRegistered = new HashSet<Type>
     typeof(ZAP.Ecosystem.Domain.CRM.ICollectionRepository),
     typeof(ZAP.Ecosystem.Domain.CRM.ICategoryRepository),
     typeof(ZAP.Ecosystem.Domain.CRM.IProductRepository),
+    typeof(ZAP.Ecosystem.Domain.CRM.IModifierItemRepository),
+    typeof(ZAP.Ecosystem.Domain.CRM.IPromotionRepository),
 };
 foreach (var type in domainAssembly.GetTypes())
 {

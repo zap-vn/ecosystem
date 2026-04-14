@@ -53,12 +53,16 @@ namespace ZAP.Ecosystem.API.CRM
                 cmd.CommandText = $@"
                     SELECT c.id, c.name, c.slug, c.description, c.image_url,
                            c.status_id, c.sort_order, c.created_at, c.updated_at,
-                           COUNT(ci.product_id)::int AS product_count
+                           COUNT(ci.product_id)::int AS product_count,
+                           si.code AS status_code, sit.name AS status_name
                     FROM catalog.collection c
                     LEFT JOIN catalog.collection_item ci ON ci.collection_id = c.id
+                    LEFT JOIN system.status_item si ON si.id = c.status_id
+                    LEFT JOIN system.status_item_translation sit ON sit.status_item_id = si.id AND sit.locale_id = 2
                     {whereClause}
                     GROUP BY c.id, c.name, c.slug, c.description, c.image_url,
-                             c.status_id, c.sort_order, c.created_at, c.updated_at
+                             c.status_id, c.sort_order, c.created_at, c.updated_at,
+                             si.code, sit.name
                     ORDER BY c.name
                     LIMIT {pageSize} OFFSET {offset}";
 
@@ -67,15 +71,17 @@ namespace ZAP.Ecosystem.API.CRM
                 {
                     var col = new Collection
                     {
-                        id              = reader.IsDBNull(0) ? Guid.Empty    : reader.GetGuid(0),
-                        name            = reader.IsDBNull(1) ? string.Empty  : reader.GetString(1),
-                        slug            = reader.IsDBNull(2) ? string.Empty  : reader.GetString(2),
-                        description_html= reader.IsDBNull(3) ? null          : reader.GetString(3),
-                        banner_url      = reader.IsDBNull(4) ? null          : reader.GetString(4),
-                        status_id       = reader.IsDBNull(5) ? 0             : reader.GetInt32(5),
-                        sort_order      = reader.IsDBNull(6) ? 0             : reader.GetInt32(6),
-                        created_at      = reader.IsDBNull(7) ? DateTime.UtcNow : reader.GetDateTime(7),
-                        updated_at      = reader.IsDBNull(8) ? null          : reader.GetDateTime(8),
+                        id               = reader.IsDBNull(0)  ? Guid.Empty      : reader.GetGuid(0),
+                        name             = reader.IsDBNull(1)  ? string.Empty    : reader.GetString(1),
+                        slug             = reader.IsDBNull(2)  ? string.Empty    : reader.GetString(2),
+                        description_html = reader.IsDBNull(3)  ? null            : reader.GetString(3),
+                        banner_url       = reader.IsDBNull(4)  ? null            : reader.GetString(4),
+                        status_id        = reader.IsDBNull(5)  ? 0               : reader.GetInt32(5),
+                        sort_order       = reader.IsDBNull(6)  ? 0               : reader.GetInt32(6),
+                        created_at       = reader.IsDBNull(7)  ? DateTime.UtcNow : reader.GetDateTime(7),
+                        updated_at       = reader.IsDBNull(8)  ? null            : reader.GetDateTime(8),
+                        status_code      = reader.IsDBNull(10) ? null            : reader.GetString(10),
+                        status_name      = reader.IsDBNull(11) ? null            : reader.GetString(11),
                     };
                     // Store product_count via items count proxy
                     int productCount = reader.IsDBNull(9) ? 0 : reader.GetInt32(9);

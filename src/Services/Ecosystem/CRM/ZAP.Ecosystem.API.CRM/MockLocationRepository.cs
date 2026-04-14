@@ -35,9 +35,12 @@ namespace ZAP.Ecosystem.API.CRM
                            instagram, facebook, logo_url, cover_image_url, brand_color,
                            timezone, latitude, longitude,
                            transfer_account, transfer_tag, parent_location_id,
-                           status_id, is_active, created_at, updated_at
-                    FROM commerce.location
-                    WHERE id = '{id}'
+                           status_id, is_active, created_at, updated_at,
+                           si.code AS status_code, sit.name AS status_name
+                    FROM commerce.location l
+                    LEFT JOIN system.status_item si ON si.id = l.status_id
+                    LEFT JOIN system.status_item_translation sit ON sit.status_item_id = si.id AND sit.locale_id = 2
+                    WHERE l.id = '{id}'
                     LIMIT 1";
 
                 using var reader = await cmd.ExecuteReaderAsync();
@@ -85,6 +88,8 @@ namespace ZAP.Ecosystem.API.CRM
                         is_active          = !reader.IsDBNull(37) && reader.GetBoolean(37),
                         created_at         = reader.IsDBNull(38) ? DateTime.UtcNow : reader.GetDateTime(38),
                         updated_at         = reader.IsDBNull(39) ? DateTime.UtcNow : reader.GetDateTime(39),
+                        status_code        = reader.IsDBNull(40) ? null            : reader.GetString(40),
+                        status_name        = reader.IsDBNull(41) ? null            : reader.GetString(41),
                     };
                 }
             }
@@ -169,8 +174,11 @@ namespace ZAP.Ecosystem.API.CRM
                            instagram, facebook, logo_url, cover_image_url, brand_color,
                            timezone, latitude, longitude,
                            transfer_account, transfer_tag, parent_location_id,
-                           status_id, is_active, created_at, updated_at
-                    FROM commerce.location
+                           status_id, is_active, created_at, updated_at,
+                           si.code AS status_code, sit.name AS status_name
+                    FROM commerce.location l
+                    LEFT JOIN system.status_item si ON si.id = l.status_id
+                    LEFT JOIN system.status_item_translation sit ON sit.status_item_id = si.id AND sit.locale_id = 2
                     {where}
                     ORDER BY {orderBy} {dir}
                     LIMIT {pageSize} OFFSET {offset}";
@@ -220,6 +228,8 @@ namespace ZAP.Ecosystem.API.CRM
                         is_active          = !reader.IsDBNull(37) && reader.GetBoolean(37),
                         created_at         = reader.IsDBNull(38) ? DateTime.UtcNow : reader.GetDateTime(38),
                         updated_at         = reader.IsDBNull(39) ? DateTime.UtcNow : reader.GetDateTime(39),
+                        status_code        = reader.IsDBNull(40) ? null            : reader.GetString(40),
+                        status_name        = reader.IsDBNull(41) ? null            : reader.GetString(41),
                     });
                 }
             }
