@@ -9,6 +9,7 @@ using Scalar.AspNetCore;
 using System.Text;
 using System.Threading.RateLimiting;
 using ZAP.Identity.Infrastructure.Data;
+using ZAP.Identity.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
@@ -107,8 +108,8 @@ builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), 
 // For Identity, map DbContext to IdentityDbContext for the generic repository
 builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => provider.GetRequiredService<IdentityDbContext>());
 
-// Đăng ký giả lập cho các Interfaces (Do chưa nối vào cơ sở dữ liệu thật)
-builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.IUserRepository, MockUserRepository>();
+// Đăng ký real implementations từ Infrastructure
+builder.Services.AddScoped<ZAP.Identity.Application.Common.Interfaces.IUserRepository, UserRepository>();
 builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.ITokenGenerator, RealTokenGenerator>();
 builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.IOtpRepository, MockOtpRepository>();
 builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.INotificationService, MockNotificationService>();
@@ -156,22 +157,17 @@ app.MapControllers();
 
 app.Run();
 
-// ===================== MOCKS =====================
-public class MockUser
+
+// ===================== IMPLEMENTATIONS =====================
+public class MockOtpRepository : ZAP.Identity.Application.Common.Interfaces.IOtpRepository
 {
-    public string email { get; set; } = string.Empty;
-    public string password_hash { get; set; } = string.Empty;
-    public int status_id { get; set; }
-    public System.Guid? tenant_id { get; set; }
-    public System.Guid id { get; set; }
-    public string full_name { get; set; } = string.Empty;
-    public string avatar_id { get; set; } = string.Empty;
+    public async Task CreateAsync(dynamic customerOtp) => await Task.CompletedTask;
 }
 
-public class MockUserRepository : ZAP.Identity.Application.Common.Interfaces.IUserRepository
+public class MockNotificationService : ZAP.Identity.Application.Common.Interfaces.INotificationService
 {
-    public async Task<dynamic> GetByEmailAsync(string email) => await Task.FromResult<dynamic>(new MockUser { email = email, password_hash = "password123", status_id = 9001, tenant_id = System.Guid.Parse("a6b32eee-a14a-4cec-a070-e23b6ea234fb"), id = System.Guid.Parse("a6b32eee-a14a-4cec-a070-e23b6ea234fb"), full_name = "Nguyen Van A", avatar_id = "https://api.pendogo.vn/logo.png" });
-    public async Task<dynamic> GetByPhoneAsync(string phone) => await Task.FromResult<dynamic>(new MockUser { email = "vana@pendo-test-01.vn", password_hash = "password123", status_id = 9001, tenant_id = System.Guid.Parse("a6b32eee-a14a-4cec-a070-e23b6ea234fb"), id = System.Guid.Parse("a6b32eee-a14a-4cec-a070-e23b6ea234fb"), full_name = "Nguyen Van A", avatar_id = "https://api.pendogo.vn/logo.png" });
+    public async Task SendOtpEmailAsync(string email, string otpCode, string name) => await Task.CompletedTask;
+    public async Task SendSmsOtpAsync(string phone, string otpCode) => await Task.CompletedTask;
 }
 
 public class RealTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITokenGenerator
