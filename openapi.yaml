@@ -11,7 +11,7 @@ paths:
       summary: "Login Customer/Employee"
       operationId: loginAuth
       x-google-backend:
-        address: https://identity-api-768989935757.us-central1.run.app/api/v1/auth/login
+        address: https://identity-api-768989935757.us-central1.run.app
       responses:
         '200':
           description: A successful response
@@ -20,498 +20,498 @@ paths:
     post:
       operationId: list_promotions
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/promotions/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/promotions:
     get:
       operationId: get_promotions
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/promotions
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_promotions
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/promotions
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/promotions/{id}:
     get:
       operationId: get_id_promotions
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/promotions/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_promotions
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/promotions/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_promotions
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/promotions/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/collections/list:
     post:
       operationId: list_collections
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/collections/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/collections:
     get:
       operationId: get_collections
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/collections
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_collections
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/collections
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/collections/{id}:
     get:
       operationId: get_id_collections
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/collections/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_collections
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/collections/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_collections
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/collections/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/locations/list:
     post:
       operationId: list_locations
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/locations/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/locations/provinces:
     get:
       operationId: get_locations_provinces
       parameters: [{ name: locale_id, in: query, required: false, type: integer }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/locations/provinces
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/locations:
     get:
       operationId: get_locations
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/locations
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_locations
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/locations
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/locations/{id}:
     get:
       operationId: get_id_locations
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/locations/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_locations
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/locations/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_locations
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/locations/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/categories/list:
     post:
       operationId: list_categories
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/categories/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/categories:
     get:
       operationId: get_categories
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/categories
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_categories
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/categories
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/categories/{id}:
     get:
       operationId: get_id_categories
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/categories/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_categories
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/categories/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_categories
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/categories/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/customers/list:
     post:
       operationId: list_customers
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customers/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/customers:
     get:
       operationId: get_customers
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customers
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_customers
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customers
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/customers/{id}:
     get:
       operationId: get_id_customers
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customers/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_customers
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customers/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_customers
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customers/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/customergroups/list:
     post:
       operationId: list_customergroups
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customergroups/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/customergroups:
     get:
       operationId: get_customergroups
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customergroups
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_customergroups
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customergroups
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/customergroups/{id}:
     get:
       operationId: get_id_customergroups
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customergroups/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_customergroups
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customergroups/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_customergroups
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/customergroups/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/menus/list:
     post:
       operationId: list_menus
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/menus/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/menus:
     get:
       operationId: get_menus
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/menus
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_menus
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/menus
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/menus/{id}:
     get:
       operationId: get_id_menus
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/menus/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_menus
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/menus/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_menus
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/menus/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/diningoptions/list:
     post:
       operationId: list_diningoptions
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/diningoptions/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/diningoptions:
     get:
       operationId: get_diningoptions
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/diningoptions
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_diningoptions
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/diningoptions
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/diningoptions/{id}:
     get:
       operationId: get_id_diningoptions
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/diningoptions/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_diningoptions
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/diningoptions/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_diningoptions
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/diningoptions/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/brands/list:
     post:
       operationId: list_brands
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/brands/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/brands:
     get:
       operationId: get_brands
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/brands
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_brands
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/brands
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/brands/{id}:
     get:
       operationId: get_id_brands
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/brands/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_brands
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/brands/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_brands
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/brands/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/products/list:
     post:
       operationId: list_products
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/products/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/products:
     get:
       operationId: get_products
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/products
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_products
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/products
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/products/{id}:
     get:
       operationId: get_id_products
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/products/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_products
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/products/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_products
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/products/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/modifiergroups/list:
     post:
       operationId: list_modifiergroups
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/modifiergroups/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/modifiergroups:
     get:
       operationId: get_modifiergroups
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/modifiergroups
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_modifiergroups
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/modifiergroups
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/modifiergroups/{id}:
     get:
       operationId: get_id_modifiergroups
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/modifiergroups/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_modifiergroups
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/modifiergroups/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_modifiergroups
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/modifiergroups/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/paymenttypes/list:
     post:
       operationId: list_paymenttypes
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymenttypes/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/paymenttypes:
     get:
       operationId: get_paymenttypes
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymenttypes
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_paymenttypes
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymenttypes
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/paymenttypes/{id}:
     get:
       operationId: get_id_paymenttypes
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymenttypes/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_paymenttypes
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymenttypes/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_paymenttypes
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymenttypes/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
 
   /api/paymentterms/list:
     post:
       operationId: list_paymentterms
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymentterms/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/paymentterms:
     get:
       operationId: get_paymentterms
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymentterms
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     post:
       operationId: post_paymentterms
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymentterms
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/paymentterms/{id}:
     get:
       operationId: get_id_paymentterms
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymentterms/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     put:
       operationId: put_id_paymentterms
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymentterms/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
     delete:
       operationId: del_id_paymentterms
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/paymentterms/{id}
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/modifieritems/list:
     post:
       operationId: list_modifieritems
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/modifieritems/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
   /api/geocountries/list:
     post:
       operationId: list_geocountries
       x-google-backend:
-        address: https://crm-api-768989935757.us-central1.run.app/api/geocountries/list
+        address: https://crm-api-768989935757.us-central1.run.app
       responses: { '200': { description: OK } }
