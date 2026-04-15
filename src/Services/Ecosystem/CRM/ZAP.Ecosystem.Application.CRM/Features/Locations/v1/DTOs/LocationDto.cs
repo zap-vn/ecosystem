@@ -45,7 +45,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Locations.v1.DTOs
         public string? timezone { get; set; }
         public decimal? latitude { get; set; }
         public decimal? longitude { get; set; }
-        public System.Text.Json.JsonElement? operating_hours { get; set; }
+        public string? operating_hours { get; set; }
         public string? transfer_account { get; set; }
         public string? transfer_tag { get; set; }
         public Guid? parent_location_id { get; set; }

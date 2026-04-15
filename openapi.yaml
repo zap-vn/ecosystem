@@ -509,3 +509,9 @@ paths:
       x-google-backend:
         address: https://crm-api-768989935757.us-central1.run.app/api/modifieritems/list
       responses: { '200': { description: OK } }
+  /api/geocountries/list:
+    post:
+      operationId: list_geocountries
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/geocountries/list
+      responses: { '200': { description: OK } }

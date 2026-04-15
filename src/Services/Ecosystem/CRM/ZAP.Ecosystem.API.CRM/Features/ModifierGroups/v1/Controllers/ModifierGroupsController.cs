@@ -1,0 +1,22 @@
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using ZAP.Ecosystem.Application.CRM.Features.ModifierGroup.v1.DTOs;
+using ZAP.Ecosystem.Application.CRM.Features.ModifierGroup.v1.Queries;
+
+namespace ZAP.Ecosystem.API.CRM.Features.ModifierGroups.v1.Controllers;
+
+[ApiController]
+[Route("api/modifiergroups")]
+public class ModifierGroupsController : ControllerBase
+{
+    private readonly IMediator _mediator;
+    public ModifierGroupsController(IMediator mediator) => _mediator = mediator;
+
+    [HttpPost("list")]
+    public async Task<IActionResult> List([FromBody] ModifierGroupListRequestDto? request)
+    {
+        var result = await _mediator.Send(new GetModifierGroupsQuery { Request = request ?? new() });
+        return Ok(result);
+    }
+}
