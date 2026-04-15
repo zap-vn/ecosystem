@@ -19,7 +19,8 @@ public class User
     public string? serial_number { get; set; }
 
     [Column("legacy_id")]
-    public long? legacy_id { get; set; }
+    [MaxLength(255)]
+    public string? legacy_id { get; set; }
 
     [Column("username")]
     [MaxLength(100)]
