@@ -98,6 +98,25 @@ public class EcosystemDbContext : DbContext
         modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.ProductLocationPricing>()
             .HasKey(p => new { p.product_variant_id, p.location_id });
 
+        // OrderDetailEntity has complex properties that are not entities
+        modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.OrderDetailEntity>(entity =>
+        {
+            entity.Ignore(e => e.OrderSummary);
+            entity.Ignore(e => e.Shipping);
+            entity.Ignore(e => e.PaymentList);
+            entity.HasKey(e => e.Id);
+        });
+
+        // OrderEntity has complex properties that are not entities
+        modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.OrderEntity>(entity =>
+        {
+            entity.Ignore(e => e.Items);
+        });
+
+        // Explicitly ignore supporting classes that are not intended to be entities
+        modelBuilder.Ignore<ZAP.Ecosystem.Domain.CRM.OrderSummaryInfo>();
+        modelBuilder.Ignore<ZAP.Ecosystem.Domain.CRM.OrderItemSnapshot>();
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(EcosystemDbContext).Assembly);
     }
 }
