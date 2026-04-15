@@ -24,5 +24,8 @@
     <ProjectReference Include="..\..\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
     <ProjectReference Include="..\ZAP.Ecosystem.Application.App\ZAP.Ecosystem.Application.App.csproj" />
     <ProjectReference Include="..\..\..\Identity\ZAP.Identity.Domain\ZAP.Identity.Domain.csproj" />
+    <ProjectReference Include="..\..\CRM\ZAP.Ecosystem.API.CRM\ZAP.Ecosystem.API.CRM.csproj" />
+    <ProjectReference Include="..\..\CRM\ZAP.Ecosystem.Application.CRM\ZAP.Ecosystem.Application.CRM.csproj" />
+    <ProjectReference Include="..\..\CRM\ZAP.Ecosystem.Domain.CRM\ZAP.Ecosystem.Domain.CRM.csproj" />
   </ItemGroup>
 </Project>

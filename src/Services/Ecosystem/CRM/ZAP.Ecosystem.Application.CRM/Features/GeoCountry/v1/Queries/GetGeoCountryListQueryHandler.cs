@@ -38,7 +38,8 @@ namespace ZAP.Ecosystem.Application.CRM.Features.GeoCountry.v1.Queries
                 serial_number = x.serial_number,
                 iso_alpha2    = x.iso_alpha2,
                 iso_alpha3    = x.iso_alpha3,
-                numeric_code  = x.numeric_code,
+                // numeric_code can be stored as string or int in different domain assemblies; parse safely
+                numeric_code  = int.TryParse(x.numeric_code?.ToString(), out var __nc) ? __nc : (int?)null,
                 is_active     = x.is_active,
                 latitude      = x.latitude,
                 longitude     = x.longitude,
