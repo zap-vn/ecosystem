@@ -18,7 +18,7 @@ public class EcosystemDbContext : DbContext
     public DbSet<ZAP.Ecosystem.Domain.CRM.ProductTypeItem> ProductTypeItems { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.ProductVariant> ProductVariants { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.UomItem> UomItems { get; set; }
-    public DbSet<ZAP.Ecosystem.Domain.CRM.TaxSyncSetting> TaxSyncSettings { get; set; }
+    // TaxSyncSetting is a value object, not a DB entity - do not add DbSet
     public DbSet<ZAP.Ecosystem.Domain.CRM.StatusItem> StatusItems { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.TranslatePaymentType> TranslatePaymentTypes { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.CustomerGroup> CustomerGroups { get; set; }
@@ -84,6 +84,10 @@ public class EcosystemDbContext : DbContext
 
         modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.ProductCategoryMap>()
             .HasKey(p => new { p.product_id, p.category_id });
+
+        // TaxSyncSetting is a value object embedded in CustomerEntity, not a DB entity
+        modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.CustomerEntity>()
+            .Ignore(c => c.TaxSyncSetting);
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(EcosystemDbContext).Assembly);
     }
