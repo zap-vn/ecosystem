@@ -9,7 +9,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.GeoCountry.v1.DTOs
         public string? serial_number { get; set; }
         public string? iso_alpha2 { get; set; }
         public string? iso_alpha3 { get; set; }
-        public string? numeric_code { get; set; }
+        public int? numeric_code { get; set; }
         public bool is_active { get; set; }
         public decimal? latitude { get; set; }
         public decimal? longitude { get; set; }

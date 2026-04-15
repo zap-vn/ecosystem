@@ -24,7 +24,7 @@ namespace ZAP.Ecosystem.Domain.CRM
         public string? iso_alpha3 { get; set; }
 
         [Column("numeric_code")]
-        public string? numeric_code { get; set; }
+        public int? numeric_code { get; set; }
 
         [Column("is_active")]
         public bool is_active { get; set; }
