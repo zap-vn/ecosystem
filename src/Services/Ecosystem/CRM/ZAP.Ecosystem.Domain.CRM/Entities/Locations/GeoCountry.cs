@@ -49,5 +49,7 @@ namespace ZAP.Ecosystem.Domain.CRM
 
         [Column("updated_at")]
         public DateTime? updated_at { get; set; }
+
+        public virtual System.Collections.Generic.ICollection<GeoCountryTranslation> Translations { get; set; } = new System.Collections.Generic.List<GeoCountryTranslation>();
     }
 }

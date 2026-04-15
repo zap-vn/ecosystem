@@ -5,6 +5,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.GeoCountry.v1.DTOs
     public class GeoCountryDto
     {
         public int id { get; set; }
+        public string? name { get; set; }
         public int? serial_id { get; set; }
         public string? serial_number { get; set; }
         public string? iso_alpha2 { get; set; }

@@ -34,6 +34,7 @@ public class EcosystemDbContext : DbContext
     public DbSet<ZAP.Ecosystem.Domain.CRM.GeoProvince> GeoProvinces { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.GeoProvinceTranslation> GeoProvinceTranslations { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.GeoCountry> GeoCountries { get; set; }
+    public DbSet<ZAP.Ecosystem.Domain.CRM.GeoCountryTranslation> GeoCountryTranslations { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.Location> Locations { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.LocationEntity> LocationEntities { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.LocationTypeItem> LocationTypeItems { get; set; }

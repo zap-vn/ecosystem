@@ -33,6 +33,7 @@ namespace ZAP.Ecosystem.Application.CRM.Features.GeoCountry.v1.Queries
             var dtos = items.Select(x => new GeoCountryDto
             {
                 id            = x.id,
+                name          = x.Translations?.FirstOrDefault()?.name,
                 serial_id     = x.serial_id,
                 serial_number = x.serial_number,
                 iso_alpha2    = x.iso_alpha2,
