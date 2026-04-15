@@ -100,7 +100,7 @@ builder.Services.AddMediatR(cfg => {
 
 builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Identity") ?? "Host=136.118.121.105;Port=5432;Username=postgres;Password=Pg@Secret2026!;Database=zap_ecosystem_v110");
+    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Identity") ?? "Host=136.118.121.105;Port=5432;Username=postgres;Password=Pg@Secret2026!;Database=zap_ecosystem_v200");
 });
 
 // Configure Generic Repository
@@ -115,6 +115,12 @@ builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.IOtpRep
 builder.Services.AddSingleton<ZAP.Identity.Application.Common.Interfaces.INotificationService, MockNotificationService>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ZAP.Identity.Infrastructure.Data.IdentityDbContext>();
+    db.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 app.MapOpenApi();
@@ -211,13 +217,3 @@ public class RealTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITo
     }
 }
 
-public class MockOtpRepository : ZAP.Identity.Application.Common.Interfaces.IOtpRepository
-{
-    public async Task CreateAsync(dynamic customerOtp) => await Task.CompletedTask;
-}
-
-public class MockNotificationService : ZAP.Identity.Application.Common.Interfaces.INotificationService
-{
-    public async Task SendOtpEmailAsync(string email, string otpCode, string name) => await Task.CompletedTask;
-    public async Task SendSmsOtpAsync(string phone, string otpCode) => await Task.CompletedTask;
-}
