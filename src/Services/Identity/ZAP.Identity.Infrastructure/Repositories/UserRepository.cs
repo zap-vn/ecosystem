@@ -24,9 +24,10 @@ public class UserRepository : IUserRepository
 
     public async Task<dynamic> GetByPhoneAsync(string phone)
     {
+        // phone_number is [NotMapped] — EF cannot translate it to SQL, query by username instead
         return await _context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(u => u.phone_number == phone)
+            .FirstOrDefaultAsync(u => u.username == phone)
             ?? (dynamic)null!;
     }
 }

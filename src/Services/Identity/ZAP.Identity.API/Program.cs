@@ -206,10 +206,10 @@ public class RealTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITo
             new System.Security.Claims.Claim("RolePermission_id", "657ab15d54f17333f3d89c65"),
             new System.Security.Claims.Claim("Language", "vi"),
             new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub, user.id.ToString()),
-            new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.UniqueName, user.email),
-            new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email, user.email),
+            new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.UniqueName, user.email ?? string.Empty),
+            new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email, user.email ?? string.Empty),
             new System.Security.Claims.Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, System.Guid.NewGuid().ToString()),
-            new System.Security.Claims.Claim("fullname", user.full_name),
+            new System.Security.Claims.Claim("fullname", user.full_name ?? string.Empty),
             new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "MerchantAdmin")
         };
 
