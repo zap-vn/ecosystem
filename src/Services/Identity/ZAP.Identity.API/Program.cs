@@ -118,8 +118,15 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<ZAP.Identity.Infrastructure.Data.IdentityDbContext>();
-    db.Database.EnsureCreated();
+    try
+    {
+        var db = scope.ServiceProvider.GetRequiredService<ZAP.Identity.Infrastructure.Data.IdentityDbContext>();
+        db.Database.EnsureCreated();
+    }
+    catch (System.Exception ex)
+    {
+        System.Console.WriteLine($"DB Create Error: {ex.Message}");
+    }
 }
 
 // Configure the HTTP request pipeline.
