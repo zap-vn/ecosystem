@@ -108,8 +108,8 @@ namespace ZAP.Ecosystem.Domain.CRM
         [Column("longitude")]
         public decimal? longitude { get; set; }
 
-        [Column("operating_hours")]
-        public System.Text.Json.JsonElement? operating_hours { get; set; }
+        [Column("operating_hours", TypeName = "jsonb")]
+        public string? operating_hours { get; set; }
 
         [Column("transfer_account")]
         public string? transfer_account { get; set; }
