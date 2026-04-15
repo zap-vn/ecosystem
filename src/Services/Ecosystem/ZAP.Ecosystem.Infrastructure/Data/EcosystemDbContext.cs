@@ -86,8 +86,17 @@ public class EcosystemDbContext : DbContext
             .HasKey(p => new { p.product_id, p.category_id });
 
         // TaxSyncSetting is a value object embedded in CustomerEntity, not a DB entity
-        modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.CustomerEntity>()
-            .Ignore(c => c.TaxSyncSetting);
+        modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.CustomerEntity>(entity =>
+        {
+            entity.Ignore(c => c.TaxSyncSetting);
+            // CustomerEntity has its own lowercase 'id' (Guid) mapped to DB; ignore the uppercase 'Id' inherited from BaseEntity
+            entity.Ignore(c => c.Id);
+            entity.HasKey(c => c.id);
+        });
+
+        // ProductLocationPricing has composite PK: product_variant_id + location_id
+        modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.ProductLocationPricing>()
+            .HasKey(p => new { p.product_variant_id, p.location_id });
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(EcosystemDbContext).Assembly);
     }
