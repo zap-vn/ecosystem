@@ -1,4 +1,4 @@
 [build]
 [[build.env]]
 name = "GOOGLE_BUILDABLE"
-value = "src/Services/Ecosystem/CRM/ZAP.Identity.API/ZAP.Identity.API.csproj"
+value = "src/Services/Identity/ZAP.Ecosystem.API.CRM/ZAP.Ecosystem.API.CRM.csproj"
