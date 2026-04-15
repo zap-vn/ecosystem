@@ -320,17 +320,27 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
             <!-- CRM API (Future) -->
+=======
+            <!-- CRM API -->
+>>>>>>> deploy_crm_dev
             <div class="service-card glass">
                 <span class="service-tag">ERP / CRM</span>
                 <h3>
                     CRM API
                     <span id="status-crm" class="status-dot status-online"></span>
                 </h3>
+<<<<<<< HEAD
                 <p>Hệ thống quản lý điểm bán hàng POS, Quản lý chi nhánh phân phối và Báo cáo tự động.</p>
                 <div class="btn-group">
                     <a href="/docs/crm/v1" class="btn btn-primary" target="_blank">Scalar Gateway</a>
                     <a href="/crm-portal/" class="btn btn-secondary" target="_blank">Portal CRM</a>
+=======
+                <p>Hệ thống quản lý quan hệ khách hàng, Quản lý chi nhánh và Báo cáo (Active).</p>
+                <div class="btn-group">
+                    <a href="/docs/crm/v1" class="btn btn-primary" target="_blank">Endpoints List (Scalar)</a>
+>>>>>>> deploy_crm_dev
                 </div>
             </div>
         </main>
@@ -365,9 +375,15 @@
 
         // Check health every 15 seconds
         setInterval(() => {
+<<<<<<< HEAD
             checkStatus('https://localhost:7181', 'status-identity');
             checkStatus('https://localhost:7049', 'status-app');
             checkStatus('https://localhost:7189', 'status-crm');
+=======
+            checkStatus('http://localhost:5181', 'status-identity');
+            checkStatus('http://localhost:5182', 'status-app');
+            checkStatus('http://localhost:5146', 'status-crm');
+>>>>>>> deploy_crm_dev
         }, 15000);
     </script>
 </body>

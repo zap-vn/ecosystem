@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="14.1.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZAP.Ecosystem.Domain.CRM\ZAP.Ecosystem.Domain.CRM.csproj" />

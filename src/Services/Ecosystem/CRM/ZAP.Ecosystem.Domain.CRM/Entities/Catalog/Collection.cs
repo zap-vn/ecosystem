@@ -12,6 +12,9 @@ namespace ZAP.Ecosystem.Domain.CRM
         [Key]
         [Column("id")]
         public Guid id { get; set; }
+        
+        [Column("serial_id")]
+        public int? serial_id { get; set; }
 
         [Column("tenant_id")]
         public Guid? tenant_id { get; set; }
@@ -41,6 +44,15 @@ namespace ZAP.Ecosystem.Domain.CRM
         public DateTime? updated_at { get; set; }
 
         public ICollection<CollectionItem> items { get; set; } = new List<CollectionItem>();
+        
+        [ForeignKey("status_id")]
+        public StatusItem? status { get; set; }
+
+        [NotMapped]
+        public string? status_code { get; set; }
+
+        [NotMapped]
+        public string? status_name { get; set; }
     }
 }
 

@@ -1,11 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using ZAP.Ecosystem.Infrastructure.Data;
+<<<<<<< HEAD
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Asp.Versioning;
 using ZAP.Ecosystem.Shared.Middlewares;
 using Scalar.AspNetCore;
+=======
+using ZAP.Ecosystem.Application.CRM.Behaviors;
+using FluentValidation;
+>>>>>>> deploy_crm_dev
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +70,7 @@ builder.Services.AddDbContext<EcosystemDbContext>(options =>
 builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), typeof(ZAP.Ecosystem.Shared.Data.BaseRepository<>));
 builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => provider.GetRequiredService<EcosystemDbContext>());
 
+<<<<<<< HEAD
 // Automatically register all EF Core Repositories dynamically
 var domainAssembly = typeof(ZAP.Ecosystem.Domain.CRM.ILocationRepository).Assembly;
 var infrastructureAssembly = typeof(ZAP.Ecosystem.Infrastructure.Data.EcosystemDbContext).Assembly;
@@ -85,6 +91,21 @@ foreach (var ri in repositoryInterfaces)
         builder.Services.AddScoped(ri, impl);
     }
 }
+=======
+builder.Services.AddValidatorsFromAssembly(typeof(ZAP.Ecosystem.Application.CRM.Features.Customers.v1.Validators.GetCustomerListQueryValidator).Assembly);
+builder.Services.AddTransient(typeof(MediatR.IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+builder.Services.AddScoped<ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService, MockCurrentUserService>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ILocationRepository,     ZAP.Ecosystem.Infrastructure.Repositories.CRM.LocationRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICustomerRepository,      ZAP.Ecosystem.Infrastructure.Repositories.CRM.CustomerRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository, ZAP.Ecosystem.Infrastructure.Repositories.CRM.ModifierGroupRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICollectionRepository,    ZAP.Ecosystem.Infrastructure.Repositories.CRM.CollectionRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICategoryRepository,      ZAP.Ecosystem.Infrastructure.Repositories.CRM.CategoryRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IProductRepository,       ZAP.Ecosystem.Infrastructure.Repositories.CRM.ProductRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IModifierItemRepository,   ZAP.Ecosystem.Infrastructure.Repositories.CRM.ModifierItemRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IPromotionRepository,     ZAP.Ecosystem.Infrastructure.Repositories.CRM.PromotionRepository>();
+builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IMenuRepository,          ZAP.Ecosystem.Infrastructure.Repositories.CRM.MenuRepository>();
+>>>>>>> deploy_crm_dev
 
 
 

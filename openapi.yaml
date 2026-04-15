@@ -96,6 +96,13 @@ paths:
       x-google-backend:
         address: https://crm-api-768989935757.us-central1.run.app/api/locations/list
       responses: { '200': { description: OK } }
+  /api/locations/provinces:
+    get:
+      operationId: get_locations_provinces
+      parameters: [{ name: locale_id, in: query, required: false, type: integer }]
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/locations/provinces
+      responses: { '200': { description: OK } }
   /api/locations:
     get:
       operationId: get_locations
@@ -495,4 +502,10 @@ paths:
       parameters: [{ name: id, in: path, required: true, type: string }]
       x-google-backend:
         address: https://crm-api-768989935757.us-central1.run.app/api/paymentterms/{id}
+      responses: { '200': { description: OK } }
+  /api/modifieritems/list:
+    post:
+      operationId: list_modifieritems
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/modifieritems/list
       responses: { '200': { description: OK } }

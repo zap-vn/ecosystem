@@ -7,6 +7,7 @@ namespace ZAP.Ecosystem.Domain.CRM
     public class MenuHeader
     {
         public Guid id { get; set; }
+        public int? serial_id { get; set; }
         public Guid? tenant_id { get; set; }
         public string name { get; set; } = string.Empty;
         public string menu_type { get; set; } = "DIGITAL";
@@ -19,7 +20,9 @@ namespace ZAP.Ecosystem.Domain.CRM
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public DateTime updated_at { get; set; } = DateTime.UtcNow;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public string? StatusLabel { get; set; }
+        public string? status_code { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string? status_name { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey("status_id")]
         public virtual StatusItem? status { get; set; }

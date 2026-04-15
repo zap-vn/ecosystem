@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    public interface ICollectionRepository
+    public interface ICollectionRepository : ZAP.Ecosystem.Shared.Data.IBaseRepository<Collection>
     {
         Task<Collection?> GetByIdAsync(Guid id);
         Task<(IEnumerable<Collection> Items, int TotalCount)> GetPagedAsync(int page, int pageSize, string? search = null);

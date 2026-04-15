@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    public interface ICategoryRepository
+    public interface ICategoryRepository : ZAP.Ecosystem.Shared.Data.IBaseRepository<Category>
     {
         Task<IEnumerable<Category>> GetAllAsync(Guid? tenantId = null);
         Task<Category?> GetByIdAsync(Guid id);

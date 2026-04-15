@@ -21,6 +21,7 @@ namespace ZAP.Ecosystem.Domain.CRM
         [Column("name")]
         public string name { get; set; } = string.Empty;
 
+        [ForeignKey("lookup_id")]
         public virtual LocationTypeItem? location_type { get; set; }
     }
 }

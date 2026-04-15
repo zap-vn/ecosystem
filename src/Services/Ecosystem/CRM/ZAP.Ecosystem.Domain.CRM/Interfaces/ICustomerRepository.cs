@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    public interface ICustomerRepository
+    public interface ICustomerRepository : ZAP.Ecosystem.Shared.Data.IBaseRepository<CustomerEntity>
     {
         Task<ZAP.Ecosystem.Shared.Data.PagedResult<CustomerEntity>> GetPagedAsync(
             int pageIndex,

@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Customers.v1.DTOs
 {
     public class CustomerListDto
     {
         public Guid id { get; set; }
+        public int serial_id { get; set; }
         public string? legacy_id { get; set; }
         public string full_name { get; set; } = string.Empty;
         public string? phone_number { get; set; }

@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 
 namespace ZAP.Ecosystem.Application.CRM.Features.Menu.v1.DTOs
 {
     public class MenuListResultDto
     {
         public Guid id { get; set; }
+        public int? serial_id { get; set; }
         public string name { get; set; } = string.Empty;
         public string menu_type { get; set; } = string.Empty;
         public string channel => menu_type; // Match SQL alias
