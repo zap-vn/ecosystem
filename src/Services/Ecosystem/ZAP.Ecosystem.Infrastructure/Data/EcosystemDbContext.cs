@@ -113,6 +113,13 @@ public class EcosystemDbContext : DbContext
             entity.Ignore(e => e.Items);
         });
 
+        // PromotionEntity has lowercase 'id' (Guid) mapped to DB; ignore the uppercase 'Id' inherited from BaseEntity
+        modelBuilder.Entity<ZAP.Ecosystem.Domain.CRM.PromotionEntity>(entity =>
+        {
+            entity.Ignore(e => e.Id);
+            entity.HasKey(e => e.id);
+        });
+
         // Explicitly ignore supporting classes that are not intended to be entities
         modelBuilder.Ignore<ZAP.Ecosystem.Domain.CRM.OrderSummaryInfo>();
         modelBuilder.Ignore<ZAP.Ecosystem.Domain.CRM.OrderItemSnapshot>();
