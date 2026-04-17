@@ -16,6 +16,7 @@ public class MockUser
     public System.Guid? tenant_id { get; set; }
     public System.Guid id { get; set; }
     public string full_name { get; set; } = string.Empty;
+    public string? avatar_id { get; set; }
 }
 
 

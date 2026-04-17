@@ -64,10 +64,23 @@ namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.LoginUser
                 return ApiResponse<LoginDataDto>.ErrorResult("AUTH_002|Tài khoản hoặc mật khẩu không chính xác.");
             }
 
-            var hashedInput = HashLegacyPassword(request.Password ?? "");
-            bool isPasswordValid = user.password_hash == hashedInput || 
-                                 user.password_hash == request.Password ||
-                                 (request.Password == "password123" && (user.password_hash.StartsWith("NX7+ndWp8gdh") || user.password_hash == "FnB_data"));
+            var password = request.Password ?? "";
+            var storedHash = (string)user.password_hash;
+            bool isPasswordValid = false;
+
+            if (storedHash.StartsWith("$2b$") || storedHash.StartsWith("$2a$") || storedHash.StartsWith("$2y$"))
+            {
+                // bcrypt hash
+                isPasswordValid = BCrypt.Net.BCrypt.Verify(password, storedHash);
+            }
+            else
+            {
+                // legacy MD5+SHA256 hash
+                var hashedInput = HashLegacyPassword(password);
+                isPasswordValid = storedHash == hashedInput ||
+                                  storedHash == password ||
+                                  (password == "password123" && (storedHash.StartsWith("NX7+ndWp8gdh") || storedHash == "FnB_data"));
+            }
 
             if (!isPasswordValid)
             {

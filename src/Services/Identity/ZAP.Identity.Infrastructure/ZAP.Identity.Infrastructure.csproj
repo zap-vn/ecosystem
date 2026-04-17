@@ -23,5 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZAP.Identity.Domain\ZAP.Identity.Domain.csproj" />
+    <ProjectReference Include="..\ZAP.Identity.Application\ZAP.Identity.Application.csproj" />
   </ItemGroup>
 </Project>

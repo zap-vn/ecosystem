@@ -509,3 +509,151 @@ paths:
       x-google-backend:
         address: https://crm-api-768989935757.us-central1.run.app/api/modifieritems/list
       responses: { '200': { description: OK } }
+  /api/geocountries/list:
+    post:
+      operationId: list_geocountries
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/geocountries/list
+      responses: { '200': { description: OK } }
+
+  /api/uom/list:
+    post:
+      operationId: list_uom
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/uom/list
+      responses: { '200': { description: OK } }
+  /api/uom:
+    post:
+      operationId: post_uom
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/uom
+      responses: { '200': { description: OK } }
+  /api/uom/{id}:
+    put:
+      operationId: put_id_uom
+      parameters: [{ name: id, in: path, required: true, type: string }]
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/uom/{id}
+      responses: { '200': { description: OK } }
+    delete:
+      operationId: del_id_uom
+      parameters: [{ name: id, in: path, required: true, type: string }]
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/uom/{id}
+      responses: { '200': { description: OK } }
+
+  /api/orders/list:
+    post:
+      operationId: list_orders
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/orders/list
+      responses: { '200': { description: OK } }
+  /api/orders/health:
+    get:
+      operationId: health_orders
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/orders/health
+      responses: { '200': { description: OK } }
+
+  /api/reports/list:
+    post:
+      operationId: list_reports
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/reports/list
+      responses: { '200': { description: OK } }
+  /api/reports:
+    post:
+      operationId: post_reports
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/reports
+      responses: { '200': { description: OK } }
+  /api/reports/{id}:
+    get:
+      operationId: get_id_reports
+      parameters: [{ name: id, in: path, required: true, type: string }]
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/reports/{id}
+      responses: { '200': { description: OK } }
+    put:
+      operationId: put_id_reports
+      parameters: [{ name: id, in: path, required: true, type: string }]
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/reports/{id}
+      responses: { '200': { description: OK } }
+  /api/reports/health:
+    get:
+      operationId: health_reports
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/reports/health
+      responses: { '200': { description: OK } }
+
+  /api/organizations/health:
+    get:
+      operationId: health_organizations
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/organizations/health
+      responses: { '200': { description: OK } }
+
+  /api/v1/management/prices:
+    get:
+      operationId: get_management_prices
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/v1/management/prices
+      responses: { '200': { description: OK } }
+  /api/v1/management/transactions:
+    get:
+      operationId: get_management_transactions
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/v1/management/transactions
+      responses: { '200': { description: OK } }
+
+  /api/v1/promotions/management:
+    get:
+      operationId: get_promotions_management
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/v1/promotions/management
+      responses: { '200': { description: OK } }
+
+  /api/v1/customers/management:
+    get:
+      operationId: get_customers_management
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/v1/customers/management
+      responses: { '200': { description: OK } }
+  /api/v1/customers/management/memberships:
+    get:
+      operationId: get_customers_management_memberships
+      x-google-backend:
+        address: https://crm-api-768989935757.us-central1.run.app/api/v1/customers/management/memberships
+      responses: { '200': { description: OK } }
+
+  /api/v1/auth/login/check-account:
+    post:
+      operationId: auth_check_account
+      x-google-backend:
+        address: https://identity-api-768989935757.us-central1.run.app/api/v1/auth/login/check-account
+      responses: { '200': { description: OK } }
+  /api/v1/auth/login/send-otp:
+    post:
+      operationId: auth_send_otp
+      x-google-backend:
+        address: https://identity-api-768989935757.us-central1.run.app/api/v1/auth/login/send-otp
+      responses: { '200': { description: OK } }
+  /api/v1/auth/login/verify-otp:
+    post:
+      operationId: auth_verify_otp
+      x-google-backend:
+        address: https://identity-api-768989935757.us-central1.run.app/api/v1/auth/login/verify-otp
+      responses: { '200': { description: OK } }
+  /api/v1/auth/customer/login:
+    post:
+      operationId: auth_customer_login
+      x-google-backend:
+        address: https://identity-api-768989935757.us-central1.run.app/api/v1/auth/customer/login
+      responses: { '200': { description: OK } }
+  /api/v1/auth/login/health:
+    get:
+      operationId: auth_login_health
+      x-google-backend:
+        address: https://identity-api-768989935757.us-central1.run.app/api/v1/auth/login/health
+      responses: { '200': { description: OK } }
