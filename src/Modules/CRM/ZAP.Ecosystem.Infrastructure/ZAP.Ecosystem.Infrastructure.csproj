@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\" />
+    <Folder Include="Data\Configurations\Catalog\" />
+    <Folder Include="Data\Configurations\Core\" />
+    <Folder Include="Data\Configurations\Customers\" />
+    <Folder Include="Data\Configurations\HR\" />
+    <Folder Include="Data\Configurations\Inventory\" />
+    <Folder Include="Data\Configurations\Locations\" />
+    <Folder Include="Data\Configurations\Payments\" />
+    <Folder Include="Data\Configurations\Promotions\" />
+    <Folder Include="Data\Configurations\Reports\" />
+    <Folder Include="Data\Configurations\Sales\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+    <ProjectReference Include="..\..\Identity\ZAP.Identity.Domain\ZAP.Identity.Domain.csproj" />
+    <ProjectReference Include="..\ZAP.Ecosystem.Domain.CRM\ZAP.Ecosystem.Domain.CRM.csproj" />
+    <ProjectReference Include="..\..\Catalog\ZAP.CRM.Catalog.Domain\ZAP.CRM.Catalog.Domain.csproj" />
+  </ItemGroup>
+</Project>

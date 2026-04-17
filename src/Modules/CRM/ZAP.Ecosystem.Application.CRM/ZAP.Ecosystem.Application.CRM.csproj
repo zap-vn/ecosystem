@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.1.0" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZAP.Ecosystem.Infrastructure\ZAP.Ecosystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\ZAP.Ecosystem.Domain.CRM\ZAP.Ecosystem.Domain.CRM.csproj" />
+    <ProjectReference Include="..\..\..\Shared\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+    <ProjectReference Include="..\..\Catalog\ZAP.CRM.Catalog.Application\ZAP.CRM.Catalog.Application.csproj" />
+  </ItemGroup>
+</Project>

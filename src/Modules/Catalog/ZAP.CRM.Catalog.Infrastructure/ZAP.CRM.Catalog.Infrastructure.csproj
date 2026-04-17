@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\ZAP.CRM.Catalog.Domain\ZAP.CRM.Catalog.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+    <ProjectReference Include="..\..\CRM\ZAP.Ecosystem.Infrastructure\ZAP.Ecosystem.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.6" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>

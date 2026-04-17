@@ -320,27 +320,69 @@
                 </div>
             </div>
 
-<<<<<<< HEAD
-            <!-- CRM API (Future) -->
-=======
             <!-- CRM API -->
->>>>>>> deploy_crm_dev
             <div class="service-card glass">
                 <span class="service-tag">ERP / CRM</span>
                 <h3>
                     CRM API
                     <span id="status-crm" class="status-dot status-online"></span>
                 </h3>
-<<<<<<< HEAD
-                <p>Hệ thống quản lý điểm bán hàng POS, Quản lý chi nhánh phân phối và Báo cáo tự động.</p>
+                <p>Hệ thống lõi Master Data, Quản lý chi nhánh phân phối và Cài đặt hệ thống.</p>
                 <div class="btn-group">
                     <a href="/docs/crm/v1" class="btn btn-primary" target="_blank">Scalar Gateway</a>
                     <a href="/crm-portal/" class="btn btn-secondary" target="_blank">Portal CRM</a>
-=======
-                <p>Hệ thống quản lý quan hệ khách hàng, Quản lý chi nhánh và Báo cáo (Active).</p>
+                </div>
+            </div>
+
+            <!-- Sales API -->
+            <div class="service-card glass">
+                <span class="service-tag">Sales Execution</span>
+                <h3>
+                    Sales API
+                    <span id="status-sales" class="status-dot status-online"></span>
+                </h3>
+                <p>Module xử lý Giao dịch, Đơn hàng POS, Omnichannel và Dining Options.</p>
                 <div class="btn-group">
-                    <a href="/docs/crm/v1" class="btn btn-primary" target="_blank">Endpoints List (Scalar)</a>
->>>>>>> deploy_crm_dev
+                    <a href="/docs/crm/v1" class="btn btn-primary" target="_blank">Scalar Gateway</a>
+                </div>
+            </div>
+
+            <!-- Finance API -->
+            <div class="service-card glass">
+                <span class="service-tag">Financial Ledger</span>
+                <h3>
+                    Finance API
+                    <span id="status-finance" class="status-dot status-online"></span>
+                </h3>
+                <p>Module quản lý Doanh thu, Thanh toán, Báo cáo tài chính và Cấu hình Payment.</p>
+                <div class="btn-group">
+                    <a href="/docs/crm/v1" class="btn btn-primary" target="_blank">Scalar Gateway</a>
+                </div>
+            </div>
+
+            <!-- HRM API -->
+            <div class="service-card glass">
+                <span class="service-tag">Human Resources</span>
+                <h3>
+                    HRM API
+                    <span id="status-hrm" class="status-dot status-online"></span>
+                </h3>
+                <p>Quản lý dữ liệu Nhân viên, Cấu hình ca làm việc, Lịch sử Clock-in và Payroll.</p>
+                <div class="btn-group">
+                    <a href="/docs/crm/v1" class="btn btn-primary" target="_blank">Scalar Gateway</a>
+                </div>
+            </div>
+
+            <!-- Inventory API -->
+            <div class="service-card glass">
+                <span class="service-tag">Supply Chain</span>
+                <h3>
+                    Inventory API
+                    <span id="status-inventory" class="status-dot status-online"></span>
+                </h3>
+                <p>Quản lý Định mức nguyên liệu BOM, Nhập/Xuất kho và Quản lý Supplier.</p>
+                <div class="btn-group">
+                    <a href="/docs/crm/v1" class="btn btn-primary" target="_blank">Scalar Gateway</a>
                 </div>
             </div>
         </main>
@@ -350,7 +392,7 @@
                 <h4>Postman Documentation</h4>
                 <p>Tài liệu API luôn được đồng bộ tự động lên Postman Cloud mỗi khi có thay đổi.</p>
             </div>
-            <a href="https://pendogo-mobile.postman.co/workspace/ecosystem~432e9c04-a50a-48f6-8e45-7ab4d5cb1524/collection/15026203-ec11fa1d-b3ed-4503-b019-e37997f1e4dd?sideView=agentMode" class="postman-btn" target="_blank">
+            <a href="https://pendogo-mobile.postman.co/workspace/ecosystem~432e9c04-a50a-48f6-8e45-7ab4d5cb1524/collection/15026203-0a7f9d08-edc2-4296-820a-2f774180de5a?sideView=agentMode" class="postman-btn" target="_blank">
                 <img src="https://run.pstmn.io/button.svg" alt="Postman" style="height: 24px;">
                 View Documentation
             </a>
@@ -365,7 +407,6 @@
         async function checkStatus(url, elementId) {
             const el = document.getElementById(elementId);
             try {
-                // Using a simple fetch - note: CORS might need to be enabled on target services
                 const response = await fetch(url, { mode: 'no-cors' });
                 el.className = 'status-dot status-online';
             } catch (e) {
@@ -375,15 +416,13 @@
 
         // Check health every 15 seconds
         setInterval(() => {
-<<<<<<< HEAD
-            checkStatus('https://localhost:7181', 'status-identity');
-            checkStatus('https://localhost:7049', 'status-app');
-            checkStatus('https://localhost:7189', 'status-crm');
-=======
             checkStatus('http://localhost:5181', 'status-identity');
             checkStatus('http://localhost:5182', 'status-app');
             checkStatus('http://localhost:5146', 'status-crm');
->>>>>>> deploy_crm_dev
+            checkStatus('http://localhost:5146', 'status-sales');
+            checkStatus('http://localhost:5146', 'status-finance');
+            checkStatus('http://localhost:5146', 'status-hrm');
+            checkStatus('http://localhost:5146', 'status-inventory');
         }, 15000);
     </script>
 </body>

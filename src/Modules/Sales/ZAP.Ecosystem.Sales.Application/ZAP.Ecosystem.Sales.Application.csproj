@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZAP.Ecosystem.Sales.Domain\ZAP.Ecosystem.Sales.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+    <ProjectReference Include="..\..\Catalog\ZAP.CRM.Catalog.Domain\ZAP.CRM.Catalog.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.1.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

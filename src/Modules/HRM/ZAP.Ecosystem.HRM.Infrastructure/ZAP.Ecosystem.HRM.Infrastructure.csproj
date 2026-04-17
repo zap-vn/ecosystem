@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZAP.Ecosystem.HRM.Application\ZAP.Ecosystem.HRM.Application.csproj" />
+    <ProjectReference Include="..\..\..\Shared\ZAP.Ecosystem.Shared\ZAP.Ecosystem.Shared.csproj" />
+  <ProjectReference Include="..\..\CRM\ZAP.Ecosystem.Infrastructure\ZAP.Ecosystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\ZAP.Ecosystem.HRM.Domain\ZAP.Ecosystem.HRM.Domain.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

@@ -1,4 +1,4 @@
-﻿namespace ZAP.Ecosystem.App.UnitTests;
+namespace ZAP.Ecosystem.App.UnitTests;
 
 public class UnitTest1
 {
@@ -8,3 +8,5 @@ public class UnitTest1
 
     }
 }
+
+
