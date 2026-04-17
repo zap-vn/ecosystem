@@ -29,68 +29,14 @@ namespace ZAP.Ecosystem.CRM.Domain.Entities.Customers;
     [Table("customer", Schema = "people")]
     public class CustomerEntity : BaseEntity, ILocalizable<CustomerTranslation>
     {
-        // --- Legacy fields (not in DB) ---
-        [NotMapped] public long _key { get; set; }
-        [NotMapped] public string _rev { get; set; } = string.Empty;
-        [NotMapped] public string BusinessName { get; set; } = string.Empty;
-        [NotMapped] public string BussinessTypeId { get; set; } = string.Empty;
-        [NotMapped] public int Country { get; set; }
-        [NotMapped] public string CreateDate { get; set; } = string.Empty;
-        [NotMapped] public string CurrencyId { get; set; } = string.Empty;
-        [NotMapped] public string CurrencyNativeName { get; set; } = string.Empty;
-        [NotMapped] public string CurrencySymbol { get; set; } = string.Empty;
-        [NotMapped] public string CustomerCode { get; set; } = string.Empty;
-        [NotMapped] public long LanguageId { get; set; }
-        [NotMapped] public string Language { get; set; } = string.Empty;
-        [NotMapped] public int CustomerStatusId { get; set; }
-        [NotMapped] public string Email { get; set; } = string.Empty;
-        [NotMapped] public string EmpGuid { get; set; } = string.Empty;
-        [NotMapped] public string FirstName { get; set; } = string.Empty;
-        [NotMapped] public string InterestGrade { get; set; } = string.Empty;
-        [NotMapped] public string LastName { get; set; } = string.Empty;
-        [NotMapped] public string PassCode { get; set; } = string.Empty;
-        [NotMapped] public string Password { get; set; } = string.Empty;
-        [NotMapped] public string Phone { get; set; } = string.Empty;
-        [NotMapped] public string Point { get; set; } = string.Empty;
-        [NotMapped] public string ReferenceId { get; set; } = string.Empty;
-        [NotMapped] public string StartedDate { get; set; } = string.Empty;
-        [NotMapped] public string TimeZoneDisplayName { get; set; } = string.Empty;
-        [NotMapped] public string TimeZoneId { get; set; } = string.Empty;
-        [NotMapped] public int Visible { get; set; }
-        [NotMapped] public string Websites { get; set; } = string.Empty;
-        [NotMapped] public string MerchantUrl { get; set; } = string.Empty;
-        [NotMapped] public int Currency_key { get; set; }
-        [NotMapped] public string Plural { get; set; } = string.Empty;
-        [NotMapped] public string Singular { get; set; } = string.Empty;
-        [NotMapped] public int NotificationId { get; set; }
-        [NotMapped] public string PublicKey { get; set; } = string.Empty;
-        [NotMapped] public string AdminUpdate { get; set; } = string.Empty;
-        [NotMapped] public string BatchCode { get; set; } = string.Empty;
-        [NotMapped] public string LinkVAT { get; set; } = string.Empty;
-        [NotMapped] public int TimeReport { get; set; }
-        [NotMapped] public int TimeInvoice { get; set; }
-        [NotMapped] public TaxSyncSetting TaxSyncSetting { get; set; } = new TaxSyncSetting();
-        [NotMapped] public string MerchantName { get; set; } = string.Empty;
-        [NotMapped] public string RegistrationSource { get; set; } = "Email";
-        [NotMapped] public bool IsVerify { get; set; } = false;
-        [NotMapped] public bool IsVerifyPhone { get; set; } = false;
-        [NotMapped] public bool IsVerifyEmail { get; set; } = false;
-        [NotMapped] public bool IsVerifyGoogle { get; set; } = false;
-        [NotMapped] public bool IsVerifyApple { get; set; } = false;
 
-        // --- Suppress BaseEntity PascalCase properties (not in DB) ---
-        [NotMapped] public override string? UserGuid { get; set; }
-        [NotMapped] public new DateTime CreatedAt { get; set; }
-        [NotMapped] public new DateTime? UpdatedAt { get; set; }
-        [NotMapped] public new bool IsDeleted { get; set; }
-        [NotMapped] public new Guid Id { get; set; }
 
         // --- Postgres Specific Fields ---
         public Guid id { get; set; }
         public int serial_id { get; set; }
-        public string serial_number { get; set; } = string.Empty;
+        public string? serial_number { get; set; }
         public Guid? tenant_id { get; set; }
-        public string customer_code { get; set; } = string.Empty;
+        public string? customer_code { get; set; }
         public string? legacy_id { get; set; }
         public string? square_customer_id { get; set; }
         public string? reference_id { get; set; }
@@ -117,7 +63,7 @@ namespace ZAP.Ecosystem.CRM.Domain.Entities.Customers;
         public Guid? user_id { get; set; }
         public Guid? tier_id { get; set; }
         public string? memo { get; set; }
-        public string creation_source { get; set; } = "Email";
+        public string? creation_source { get; set; }
         public string? email_subscription_status { get; set; }
         public bool is_instant_profile { get; set; } = false;
         public decimal current_points_balance { get; set; } = 0;
@@ -138,11 +84,7 @@ namespace ZAP.Ecosystem.CRM.Domain.Entities.Customers;
         [NotMapped] public string? status_name { get; set; }
         // --------------------------------
 
-        // Legacy aliases (not in DB)
-        [NotMapped] public string Name { get; set; } = string.Empty;
-        [NotMapped] public string PhoneNumber { get; set; } = string.Empty;
-        [NotMapped] public string Address { get; set; } = string.Empty;
-        [NotMapped] public bool IsActive { get; set; } = true;
+
 
         public ICollection<CustomerTranslation> Translations { get; set; } = new List<CustomerTranslation>();
     }

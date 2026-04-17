@@ -27,7 +27,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
-        builder.ToTable("crm_category", "catalog");
+        builder.ToTable("category", "catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

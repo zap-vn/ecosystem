@@ -13,6 +13,7 @@ using ZAP.Ecosystem.Sales.Infrastructure.Data;
 using ZAP.Ecosystem.HRM.Infrastructure.Data;
 using ZAP.Ecosystem.Finance.Infrastructure.Data;
 using ZAP.Ecosystem.Inventory.Infrastructure.Data;
+using Npgsql;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -74,20 +75,24 @@ builder.Services.AddApiVersioning(options =>
 });
 
 // --- 4. Database & Repositories ---
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("ZAP_Ecosystem"));
+dataSourceBuilder.EnableDynamicJson();
+var dataSource = dataSourceBuilder.Build();
+
 builder.Services.AddDbContext<EcosystemDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Ecosystem"));
+    options.UseNpgsql(dataSource);
 });
 
 // Register Module-Specific DbContexts (sharing same connection)
 builder.Services.AddDbContext<SalesDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Ecosystem")));
+    options.UseNpgsql(dataSource));
 
 builder.Services.AddDbContext<HRMDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Ecosystem")));
+    options.UseNpgsql(dataSource));
 
 builder.Services.AddDbContext<FinanceDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Ecosystem")));
+    options.UseNpgsql(dataSource));
 
 
 

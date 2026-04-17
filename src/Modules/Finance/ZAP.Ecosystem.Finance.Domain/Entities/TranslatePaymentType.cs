@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ZAP.CRM.Catalog.Domain.Entities.Brands;
 using ZAP.CRM.Catalog.Domain.Entities.Products;
 using ZAP.CRM.Catalog.Domain.Entities.Locations;
@@ -8,7 +8,7 @@ using ZAP.Ecosystem.Shared.Entities;
 
 namespace ZAP.Ecosystem.Finance.Domain.Entities;
     [Table("translate_payment_type", Schema = "platform")]
-    [PrimaryKey(nameof(Id), nameof(LanguageCode))]
+
     public class TranslatePaymentType : BaseTranslationEntity
     {
         public string Name { get; set; } = string.Empty;

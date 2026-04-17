@@ -1,9 +1,11 @@
 {
-  "tenant_id": "f47ac10b-fa24-4372-a567-6e8c00000000",
-  "brand_id": "80c11227-5465-4567-bf78-00a77585eaa6",
-  "category_id": "f943c301-372c-4324-8b3a-2d84b9f60f09",
-  "product_id": "e6d1f120-667d-420e-a9bd-bbab5e40432a",
-  "user_id": "f47ac10b-fa24-4372-a567-222271ae0000",
-  "customer_id": "cce5a133-c827-46ba-a106-9b5cccaeb528",
-  "phone_number": "0903079341"
+  "tenant_id": "330e8400-e29b-41d4-a716-446655440111",
+  "brand_id": "6ea8c1af-cea6-4f66-8e1d-24532d8aad7f",
+  "product_id": "db835e7c-9cdd-451f-a59d-ea895caecbf7",
+  "category_id": "9ac42c05-3276-4848-b01d-01d619638c5c",
+  "user_id": "f47ac10b-fa24-4372-a567-222271ae0001",
+  "username": "binh.hoang.coo",
+  "email": "binh.hoang.coo@zap.vn",
+  "customer_id": "330e8400-e29b-41d4-a716-189c00000000",
+  "phone_number": "0903539916"
 }

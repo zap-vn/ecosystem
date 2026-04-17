@@ -27,8 +27,19 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {
-        builder.ToTable("crm_product", "catalog");
-        // builder.HasKey(x => x.id); // Disabled due to ID naming variance
+        builder.ToTable("product", "catalog");
+        builder.HasKey(x => x.id);
+
+        builder.HasMany(p => p.variants)
+               .WithOne(v => v.product)
+               .HasForeignKey(v => v.product_id);
+
+        builder.HasMany(p => p.translations)
+               .WithOne(t => t.product)
+               .HasForeignKey(t => t.product_id);
+        builder.HasMany(p => p.category_mappings)
+               .WithOne(c => c.product)
+               .HasForeignKey(c => c.product_id);
     }
 }
 

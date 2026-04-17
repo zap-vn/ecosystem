@@ -25,8 +25,11 @@ public class EcosystemDbContext : DbContext
 
         modelBuilder.Entity<CustomerEntity>(entity =>
         {
-            entity.Ignore(c => c.TaxSyncSetting);
             entity.Ignore(c => c.Id);
+            entity.Ignore(c => c.CreatedAt);
+            entity.Ignore(c => c.UpdatedAt);
+            entity.Ignore(c => c.IsDeleted);
+            entity.Ignore(c => c.UserGuid);
             entity.HasKey(c => c.id);
         });
 

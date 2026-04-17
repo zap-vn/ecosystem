@@ -21,6 +21,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZAP.CRM.Catalog.Domain.Entities.Products;
+    [NotMapped]
     [Table("product_media", Schema = "catalog")]
     public class ProductMedia
     {

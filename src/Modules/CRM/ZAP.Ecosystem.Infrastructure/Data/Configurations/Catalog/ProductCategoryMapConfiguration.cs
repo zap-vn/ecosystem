@@ -27,7 +27,7 @@ public class ProductCategoryMapConfiguration : IEntityTypeConfiguration<ProductC
 {
     public void Configure(EntityTypeBuilder<ProductCategoryMap> builder)
     {
-        builder.ToTable("crm_productcategorymap", "catalog");
+        builder.ToTable("productcategorymap", "catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

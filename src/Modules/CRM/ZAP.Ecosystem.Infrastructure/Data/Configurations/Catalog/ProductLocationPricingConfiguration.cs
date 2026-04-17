@@ -27,7 +27,7 @@ public class ProductLocationPricingConfiguration : IEntityTypeConfiguration<Prod
 {
     public void Configure(EntityTypeBuilder<ProductLocationPricing> builder)
     {
-        builder.ToTable("crm_productlocationpricing", "catalog");
+        builder.ToTable("product_location_pricing", "catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

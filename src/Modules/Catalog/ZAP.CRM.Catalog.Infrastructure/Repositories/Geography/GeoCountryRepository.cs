@@ -75,7 +75,7 @@ namespace ZAP.CRM.Catalog.Infrastructure.Repositories.Geography;
             };
 
             var items = await query
-                .Skip((page - 1) * pageSize)
+                .Skip((Math.Max(1, page) - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 

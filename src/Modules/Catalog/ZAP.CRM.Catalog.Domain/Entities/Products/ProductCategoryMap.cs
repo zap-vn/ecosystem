@@ -37,7 +37,9 @@ namespace ZAP.CRM.Catalog.Domain.Entities.Products;
         public bool is_primary { get; set; } = false;
 
         // Navigation
+        [ForeignKey("product_id")]
         public Product? product { get; set; }
+        [ForeignKey("category_id")]
         public Category? category { get; set; }
     }
 

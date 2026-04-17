@@ -27,7 +27,7 @@ public class ModifierGroupConfiguration : IEntityTypeConfiguration<ModifierGroup
 {
     public void Configure(EntityTypeBuilder<ModifierGroup> builder)
     {
-        builder.ToTable("crm_modifiergroup", "catalog");
+        builder.ToTable("modifier_group", "catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

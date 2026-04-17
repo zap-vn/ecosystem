@@ -124,9 +124,17 @@ endpoints.forEach(e => {
     if (!folders[mod]) folders[mod] = {};
     if (!folders[mod][res]) folders[mod][res] = [];
     
-    const bodySample = e.dtoClass ? getSampleForClass(e.dtoClass) : {};
+    let bodySample = e.dtoClass ? getSampleForClass(e.dtoClass) : {};
     
-    // Inject Real Data if available
+    // Hardcoded logic for known important ones (Base values)
+    if (e.name === 'LoginWithPassword' || e.name === 'VerifyOtpAndLogin' || e.name === 'SendOtp') {
+        bodySample.account = 'binh.hoang.coo@pho24.com.vn'; // The system expects Email or Phone
+        bodySample.password = '123456';
+        bodySample.otp_code = '123456';
+        if (bodySample.phone_number) delete bodySample.phone_number;
+    }
+
+    // Inject Real Data (Final override)
     if (fs.existsSync('REAL_DATA_SAMPLE.json')) {
         const real = JSON.parse(fs.readFileSync('REAL_DATA_SAMPLE.json', 'utf8'));
         Object.keys(bodySample).forEach(key => {
@@ -137,18 +145,16 @@ endpoints.forEach(e => {
             if (key.includes('user_id')) bodySample[key] = real.user_id;
             if (key.includes('customer_id')) bodySample[key] = real.customer_id;
             if (key.includes('phone_number')) bodySample[key] = real.phone_number;
+            if (key.includes('page_size')) bodySample[key] = 10;
+            if (key.includes('page_index') || key.includes('page_number') || key === 'page') bodySample[key] = 1;
+            if (key === 'search' || key === 'field') bodySample[key] = '';
+            if (key === 'filters' || key === 'sort') bodySample[key] = {};
+            
+            // Map username or email to account for Admin Login
+            if (key === 'account' && real.username) bodySample[key] = real.username;
+            else if (key === 'account' && real.email) bodySample[key] = real.email;
+            else if (key === 'account' && real.phone_number) bodySample[key] = real.phone_number;
         });
-    }
-
-    // Hardcoded logic for known important ones to be safe
-    if (e.name === 'LoginWithPassword' || e.name === 'VerifyOtpAndLogin') {
-        bodySample.phone_number = '0901234567';
-        bodySample.password = 'string';
-        bodySample.otp_code = '123456';
-    } else if (e.name === 'CheckAccount') {
-        bodySample.account_identifier = 'test@zap.vn';
-    } else if (e.name === 'SendOtp') {
-        bodySample.phone_number = '0901234567';
     }
 
     folders[mod][res].push({ ...e, bodySample });
@@ -160,24 +166,47 @@ function buildPostmanItems() {
         name: mod,
         item: Object.entries(resources).sort().map(([res, actions]) => ({
             name: res,
-            item: actions.map(a => ({
-                name: a.name,
-                request: {
-                    method: a.method,
-                    header: [
-                        { key: 'Content-Type', value: 'application/json', type: 'text' }
-                    ],
-                    url: {
-                        raw: `{{gateway}}/${a.fullRoute}`,
-                        host: ['{{gateway}}'],
-                        path: a.fullRoute.split('/')
-                    },
-                    body: a.method === 'POST' || a.method === 'PUT' ? {
-                        mode: 'raw',
-                        raw: JSON.stringify(a.bodySample || {}, null, 2)
-                    } : undefined
+            item: actions.map(a => {
+                const item = {
+                    name: a.name,
+                    request: {
+                        method: a.method,
+                        header: [
+                            { key: 'Content-Type', value: 'application/json', type: 'text' },
+                            { key: 'Accept-Language', value: 'vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7', type: 'text', description: '2 for VI, 1 for EN' }
+                        ],
+                        url: {
+                            raw: `{{gateway}}/${a.fullRoute}`,
+                            host: ['{{gateway}}'],
+                            path: a.fullRoute.split('/')
+                        },
+                        body: a.method === 'POST' || a.method === 'PUT' ? {
+                            mode: 'raw',
+                            raw: JSON.stringify(a.bodySample || {}, null, 2)
+                        } : undefined
+                    }
+                };
+
+                // Add Automation Script for Login
+                if (a.name.toLowerCase().includes('login') || a.name === 'VerifyOtpAndLogin') {
+                    item.event = [{
+                        listen: "test",
+                        script: {
+                            exec: [
+                                "if (pm.response.code === 200) {",
+                                "    var jsonData = pm.response.json();",
+                                "    if (jsonData.data && jsonData.data.token) {",
+                                "        pm.collectionVariables.set('token', jsonData.data.token);",
+                                "        console.log('✅ Token Captured Successfully');",
+                                "    }",
+                                "}"
+                            ],
+                            type: "text/javascript"
+                        }
+                    }];
                 }
-            }))
+                return item;
+            })
         }))
     }));
 }
@@ -185,12 +214,19 @@ function buildPostmanItems() {
 const collection = {
     info: {
         name: 'ZAP Ecosystem - Master Suite v2',
-        description: 'Updated with Automatic DTO Body Generation.',
+        description: 'Updated with Automatic Token Capture and Bearer Auth.',
         schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json'
     },
     variable: [
-        { key: 'gateway', value: 'http://localhost:5120', type: 'string' }
+        { key: 'gateway', value: 'http://localhost:5120', type: 'string' },
+        { key: 'token', value: '', type: 'string' }
     ],
+    auth: {
+        type: 'bearer',
+        bearer: [
+            { key: 'token', value: '{{token}}', type: 'string' }
+        ]
+    },
     item: buildPostmanItems()
 };
 

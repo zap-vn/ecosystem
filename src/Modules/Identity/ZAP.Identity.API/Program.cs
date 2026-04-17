@@ -24,9 +24,14 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers(options =>
 {
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-    // Tạm thời comment AuthorizeFilter ra để test các endpoint login (vì Authorize cản hết)
-    // Hoặc [AllowAnonymous] trên LoginController, nhưng để an toàn tôi sẽ comment lại.
     // options.Filters.Add(new AuthorizeFilter(policy)); 
+})
+.AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver
+    {
+        NamingStrategy = new Newtonsoft.Json.Serialization.SnakeCaseNamingStrategy()
+    };
 });
 
 // Configure CORS

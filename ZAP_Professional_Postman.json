@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "ZAP Ecosystem - Master Suite v2",
-    "description": "Updated with Automatic DTO Body Generation.",
+    "description": "Updated with Automatic Token Capture and Bearer Auth.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -9,8 +9,23 @@
       "key": "gateway",
       "value": "http://localhost:5120",
       "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
     }
   ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
   "item": [
     {
       "name": "AUTH",
@@ -27,6 +42,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -44,9 +65,26 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"access_token\": \"string\",\n  \"refresh_token\": \"string\",\n  \"dialing_code\": \"string\",\n  \"phone_number\": \"0903079341\",\n  \"password\": \"string\"\n}"
+                  "raw": "{\n  \"access_token\": \"string\",\n  \"refresh_token\": \"string\",\n  \"dialing_code\": \"string\",\n  \"phone_number\": \"0903539916\",\n  \"password\": \"string\"\n}"
                 }
-              }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code === 200) {",
+                      "    var jsonData = pm.response.json();",
+                      "    if (jsonData.data && jsonData.data.token) {",
+                      "        pm.collectionVariables.set('token', jsonData.data.token);",
+                      "        console.log('✅ Token Captured Successfully');",
+                      "    }",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
             }
           ]
         },
@@ -62,6 +100,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -79,7 +123,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"account_identifier\": \"test@zap.vn\"\n}"
+                  "raw": "{}"
                 }
               }
             },
@@ -92,6 +136,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -109,7 +159,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"phone_number\": \"0901234567\"\n}"
+                  "raw": "{\n  \"account\": \"binh.hoang.coo\",\n  \"password\": \"123456\",\n  \"otp_code\": \"123456\"\n}"
                 }
               }
             },
@@ -122,6 +172,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -139,9 +195,26 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"phone_number\": \"0901234567\",\n  \"password\": \"string\",\n  \"otp_code\": \"123456\"\n}"
+                  "raw": "{\n  \"account\": \"binh.hoang.coo\",\n  \"password\": \"123456\",\n  \"otp_code\": \"123456\"\n}"
                 }
-              }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code === 200) {",
+                      "    var jsonData = pm.response.json();",
+                      "    if (jsonData.data && jsonData.data.token) {",
+                      "        pm.collectionVariables.set('token', jsonData.data.token);",
+                      "        console.log('✅ Token Captured Successfully');",
+                      "    }",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
             },
             {
               "name": "LoginWithPassword",
@@ -152,6 +225,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -168,9 +247,26 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"phone_number\": \"0901234567\",\n  \"password\": \"string\",\n  \"otp_code\": \"123456\"\n}"
+                  "raw": "{\n  \"account\": \"binh.hoang.coo\",\n  \"password\": \"123456\",\n  \"otp_code\": \"123456\"\n}"
                 }
-              }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code === 200) {",
+                      "    var jsonData = pm.response.json();",
+                      "    if (jsonData.data && jsonData.data.token) {",
+                      "        pm.collectionVariables.set('token', jsonData.data.token);",
+                      "        console.log('✅ Token Captured Successfully');",
+                      "    }",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
             }
           ]
         }
@@ -191,6 +287,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -208,7 +310,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"filters\": null,\n  \"sort\": null,\n  \"is_active\": true,\n  \"search\": \"string\",\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                  "raw": "{\n  \"page_index\": 1,\n  \"page_size\": 10,\n  \"filters\": {},\n  \"sort\": {},\n  \"is_active\": true,\n  \"search\": \"\",\n  \"field\": \"\",\n  \"descending\": true\n}"
                 }
               }
             }
@@ -226,6 +328,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -243,7 +351,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"search\": \"string\",\n  \"filters\": null,\n  \"sort\": null,\n  \"locale_id\": 0,\n  \"status_id\": 0,\n  \"is_active\": true,\n  \"menu_type\": \"string\",\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                  "raw": "{\n  \"page_index\": 1,\n  \"page_size\": 10,\n  \"search\": \"\",\n  \"filters\": {},\n  \"sort\": {},\n  \"locale_id\": 0,\n  \"status_id\": 0,\n  \"is_active\": true,\n  \"menu_type\": \"string\",\n  \"field\": \"\",\n  \"descending\": true\n}"
                 }
               }
             },
@@ -256,6 +364,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -285,6 +399,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -315,6 +435,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -346,6 +472,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -363,7 +495,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"filters\": null,\n  \"sort\": null,\n  \"group_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"status_id\": 0,\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                  "raw": "{\n  \"page_index\": 1,\n  \"page_size\": 10,\n  \"filters\": {},\n  \"sort\": {},\n  \"group_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"status_id\": 0,\n  \"field\": \"\",\n  \"descending\": true\n}"
                 }
               }
             }
@@ -381,6 +513,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -398,7 +536,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"filters\": null,\n  \"sort\": null,\n  \"group_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"status_id\": 0,\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                  "raw": "{\n  \"page_index\": 1,\n  \"page_size\": 10,\n  \"filters\": {},\n  \"sort\": {},\n  \"group_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"status_id\": 0,\n  \"field\": \"\",\n  \"descending\": true\n}"
                 }
               }
             }
@@ -416,6 +554,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -433,7 +577,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"search\": \"string\",\n  \"filters\": null,\n  \"sort\": null,\n  \"category_id\": \"f943c301-372c-4324-8b3a-2d84b9f60f09\",\n  \"status_id\": 0,\n  \"location_id\": \"string\",\n  \"locale_id\": 0,\n  \"product_type_id\": 0,\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                  "raw": "{\n  \"page_index\": 1,\n  \"page_size\": 10,\n  \"search\": \"\",\n  \"filters\": {},\n  \"sort\": {},\n  \"category_id\": \"9ac42c05-3276-4848-b01d-01d619638c5c\",\n  \"status_id\": 0,\n  \"location_id\": \"string\",\n  \"locale_id\": 0,\n  \"product_type_id\": 0,\n  \"field\": \"\",\n  \"descending\": true\n}"
                 }
               }
             },
@@ -446,6 +590,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -472,6 +622,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -488,7 +644,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"tenant_id\": \"f47ac10b-fa24-4372-a567-6e8c00000000\",\n  \"brand_id\": \"80c11227-5465-4567-bf78-00a77585eaa6\",\n  \"name\": \"string\",\n  \"short_description\": \"string\",\n  \"long_description_html\": \"string\",\n  \"status_id\": 0,\n  \"product_type_id\": 0,\n  \"is_featured\": true,\n  \"variants\": null,\n  \"variant_name\": \"string\",\n  \"sku_code\": \"string\",\n  \"barcode\": \"string\",\n  \"price\": null,\n  \"original_price\": null,\n  \"stock_quantity\": 0,\n  \"uom\": \"string\",\n  \"is_active\": true\n}"
+                  "raw": "{\n  \"tenant_id\": \"330e8400-e29b-41d4-a716-446655440111\",\n  \"brand_id\": \"6ea8c1af-cea6-4f66-8e1d-24532d8aad7f\",\n  \"name\": \"string\",\n  \"short_description\": \"string\",\n  \"long_description_html\": \"string\",\n  \"status_id\": 0,\n  \"product_type_id\": 0,\n  \"is_featured\": true,\n  \"variants\": null,\n  \"variant_name\": \"string\",\n  \"sku_code\": \"string\",\n  \"barcode\": \"string\",\n  \"price\": null,\n  \"original_price\": null,\n  \"stock_quantity\": 0,\n  \"uom\": \"string\",\n  \"is_active\": true\n}"
                 }
               }
             },
@@ -501,6 +657,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -541,6 +703,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -566,6 +734,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -597,6 +771,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -627,6 +807,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -663,6 +849,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -688,6 +880,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -722,6 +920,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -747,6 +951,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -786,6 +996,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -811,6 +1027,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -845,6 +1067,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -875,6 +1103,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -906,6 +1140,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -931,6 +1171,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -965,6 +1211,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -990,6 +1242,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1029,6 +1287,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1054,6 +1318,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1088,6 +1358,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1113,6 +1389,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1147,6 +1429,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1172,6 +1460,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1211,6 +1505,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1236,6 +1536,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1270,6 +1576,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1300,6 +1612,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1331,6 +1649,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1356,6 +1680,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1390,6 +1720,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {
@@ -1415,6 +1751,12 @@
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "vi-VN, vi;q=0.9, en-US;q=0.8, en;q=0.7",
+                    "type": "text",
+                    "description": "2 for VI, 1 for EN"
                   }
                 ],
                 "url": {

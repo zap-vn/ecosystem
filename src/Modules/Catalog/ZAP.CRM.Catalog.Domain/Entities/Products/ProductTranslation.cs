@@ -1,38 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ZAP.CRM.Catalog.Domain.Interfaces.Brands;
-using ZAP.CRM.Catalog.Domain.Interfaces.Products;
-using ZAP.CRM.Catalog.Domain.Interfaces.Menus;
-using ZAP.CRM.Catalog.Domain.Interfaces.Categories;
-using ZAP.CRM.Catalog.Domain.Interfaces.Locations;
-using ZAP.CRM.Catalog.Domain.Interfaces.Modifiers;
-using ZAP.CRM.Catalog.Domain.Interfaces.Geography;
-using ZAP.CRM.Catalog.Domain.Interfaces.Commons;
-using ZAP.CRM.Catalog.Domain.Entities.Brands;
-using ZAP.CRM.Catalog.Domain.Entities.Products;
-using ZAP.CRM.Catalog.Domain.Entities.Menus;
-using ZAP.CRM.Catalog.Domain.Entities.Categories;
-using ZAP.CRM.Catalog.Domain.Entities.Locations;
-using ZAP.CRM.Catalog.Domain.Entities.Modifiers;
-using ZAP.CRM.Catalog.Domain.Entities.Geography;
-using ZAP.CRM.Catalog.Domain.Entities.Commons;
-using ZAP.CRM.Catalog.Domain.Interfaces;
 using ZAP.Ecosystem.Shared.Entities;
 
 namespace ZAP.CRM.Catalog.Domain.Entities.Products;
     [Table("product_translation", Schema = "catalog")]
-    [PrimaryKey(nameof(Id), nameof(LanguageCode))]
     public class ProductTranslation : BaseTranslationEntity
     {
-        public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
+        [Column("product_id")]
+        public Guid product_id { get; set; }
+
+        [Column("locale_id")]
+        public int locale_id { get; set; }
+
+        [Column("name")]
+        public string? Name { get; set; }
+
+        [Column("short_description")]
+        public string? ShortDescription { get; set; }
+
+        [Column("long_description_html")]
+        public string? LongDescriptionHtml { get; set; }
+
+        // Navigation
+        [ForeignKey("product_id")]
+        public Product? product { get; set; }
     }
-
-
-
-
-
-
-
-

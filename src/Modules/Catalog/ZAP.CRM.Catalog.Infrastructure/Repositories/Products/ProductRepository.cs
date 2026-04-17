@@ -48,9 +48,9 @@ namespace ZAP.CRM.Catalog.Infrastructure.Repositories.Products;
         {
             var query = _context.Set<Product>()
                 .Include(p => p.status).ThenInclude(s => s.translations)
-                .Include(p => p.product_type).ThenInclude(pt => pt.translations)
-                .Include(p => p.category_mappings).ThenInclude(cm => cm.category)
-                .Include(p => p.variants).ThenInclude(v => v.media)
+                .Include(p => p.category).ThenInclude(c => c.translations)
+                .Include(p => p.translations)
+                .Include(p => p.variants)
                 .Include(p => p.variants).ThenInclude(v => v.location_pricing)
                 .AsQueryable();
 

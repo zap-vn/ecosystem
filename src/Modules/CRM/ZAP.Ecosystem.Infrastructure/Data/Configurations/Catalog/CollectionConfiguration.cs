@@ -27,7 +27,7 @@ public class CollectionConfiguration : IEntityTypeConfiguration<Collection>
 {
     public void Configure(EntityTypeBuilder<Collection> builder)
     {
-        builder.ToTable("crm_collection", "catalog");
+        builder.ToTable("collection", "catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }
