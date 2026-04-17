@@ -1,0 +1,1443 @@
+{
+  "info": {
+    "name": "ZAP Ecosystem - Master Suite v2",
+    "description": "Updated with Automatic DTO Body Generation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "gateway",
+      "value": "http://localhost:5120",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "AUTH",
+      "item": [
+        {
+          "name": "Customer",
+          "item": [
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/auth/customer/login",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "customer",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_token\": \"string\",\n  \"refresh_token\": \"string\",\n  \"dialing_code\": \"string\",\n  \"phone_number\": \"string\",\n  \"password\": \"string\"\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "item": [
+            {
+              "name": "CheckAccount",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/auth/login/check_account",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login",
+                    "check_account"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_identifier\": \"test@zap.vn\"\n}"
+                }
+              }
+            },
+            {
+              "name": "SendOtp",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/auth/login/send_otp",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login",
+                    "send_otp"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone_number\": \"0901234567\"\n}"
+                }
+              }
+            },
+            {
+              "name": "VerifyOtpAndLogin",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/auth/login/verify_otp",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login",
+                    "verify_otp"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone_number\": \"0901234567\",\n  \"password\": \"string\",\n  \"otp_code\": \"123456\"\n}"
+                }
+              }
+            },
+            {
+              "name": "LoginWithPassword",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/auth/login",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone_number\": \"0901234567\",\n  \"password\": \"string\",\n  \"otp_code\": \"123456\"\n}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CATALOG",
+      "item": [
+        {
+          "name": "Geo_countries",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/geo_countries/list",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "geo_countries",
+                    "list"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"filters\": null,\n  \"sort\": null,\n  \"is_active\": true,\n  \"search\": \"string\",\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Menus",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/menus/list",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "menus",
+                    "list"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"search\": \"string\",\n  \"filters\": null,\n  \"sort\": null,\n  \"locale_id\": 0,\n  \"status_id\": 0,\n  \"is_active\": true,\n  \"menu_type\": \"string\",\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/menus",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "menus"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/menus/{id:guid}",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "menus",
+                    "{id:guid}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/menus/{id:guid}",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "menus",
+                    "{id:guid}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Modifier_groups",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/modifier_groups/list",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "modifier_groups",
+                    "list"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"filters\": null,\n  \"sort\": null,\n  \"group_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"status_id\": 0,\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Modifier_items",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/modifier_items/list",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "modifier_items",
+                    "list"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"filters\": null,\n  \"sort\": null,\n  \"group_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"status_id\": 0,\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Products",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/products/list",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "products",
+                    "list"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"search\": \"string\",\n  \"filters\": null,\n  \"sort\": null,\n  \"category_id\": \"string\",\n  \"status_id\": 0,\n  \"location_id\": \"string\",\n  \"locale_id\": 0,\n  \"product_type_id\": 0,\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "GetById",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/products/{id}",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "products",
+                    "{id}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/products",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "products"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"brand_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"name\": \"string\",\n  \"short_description\": \"string\",\n  \"long_description_html\": \"string\",\n  \"status_id\": 0,\n  \"product_type_id\": 0,\n  \"is_featured\": true,\n  \"variants\": null,\n  \"variant_name\": \"string\",\n  \"sku_code\": \"string\",\n  \"barcode\": \"string\",\n  \"price\": null,\n  \"original_price\": null,\n  \"stock_quantity\": 0,\n  \"uom\": \"string\",\n  \"is_active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/catalog/products/{id}",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "catalog",
+                    "products",
+                    "{id}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"00000000-0000-0000-0000-000000000000\",\n  \"name\": \"string\",\n  \"short_description\": \"string\",\n  \"long_description_html\": \"string\",\n  \"status_id\": 0,\n  \"is_featured\": true,\n  \"product_type_id\": 0,\n  \"variants\": null,\n  \"variant_name\": \"string\",\n  \"sku_code\": \"string\",\n  \"barcode\": \"string\",\n  \"price\": null,\n  \"original_price\": null,\n  \"stock_quantity\": 0,\n  \"uom\": \"string\",\n  \"is_active\": true\n}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CRM",
+      "item": [
+        {
+          "name": "Customers",
+          "item": [
+            {
+              "name": "GetList",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/crm/customers",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "crm",
+                    "customers"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GetById",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/crm/customers/{id}",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "crm",
+                    "customers",
+                    "{id}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Promotions",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/crm/promotions/list",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "crm",
+                    "promotions",
+                    "list"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            },
+            {
+              "name": "GetById",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/crm/promotions/{id}",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "crm",
+                    "promotions",
+                    "{id}"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FINANCE",
+      "item": [
+        {
+          "name": "Payments",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/finance/payments",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "finance",
+                    "payments"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/finance/payments",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "finance",
+                    "payments"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reports",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/finance/reports",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "finance",
+                    "reports"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/finance/reports",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "finance",
+                    "reports"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HRM",
+      "item": [
+        {
+          "name": "Attendances",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/hrm/attendances",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "hrm",
+                    "attendances"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/hrm/attendances",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "hrm",
+                    "attendances"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Employees",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/hrm/employees/list",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "hrm",
+                    "employees",
+                    "list"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            },
+            {
+              "name": "GetById",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/hrm/employees/{id}",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "hrm",
+                    "employees",
+                    "{id}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Leaves",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/hrm/leaves",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "hrm",
+                    "leaves"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/hrm/leaves",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "hrm",
+                    "leaves"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Shifts",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/hrm/shifts",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "hrm",
+                    "shifts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/hrm/shifts",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "hrm",
+                    "shifts"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "INVENTORY",
+      "item": [
+        {
+          "name": "Purchase_orders",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/inventory/purchase_orders",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventory",
+                    "purchase_orders"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/inventory/purchase_orders",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventory",
+                    "purchase_orders"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Stock_takes",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/inventory/stock_takes",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventory",
+                    "stock_takes"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/inventory/stock_takes",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventory",
+                    "stock_takes"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vendors",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/inventory/vendors",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventory",
+                    "vendors"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/inventory/vendors",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventory",
+                    "vendors"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SALES",
+      "item": [
+        {
+          "name": "Dining_options",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/sales/dining_options",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "sales",
+                    "dining_options"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/sales/dining_options",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "sales",
+                    "dining_options"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Orders",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/sales/orders/list",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "sales",
+                    "orders",
+                    "list"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            },
+            {
+              "name": "GetById",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/sales/orders/{id}",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "sales",
+                    "orders",
+                    "{id}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Products",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/sales/products",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "sales",
+                    "products"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/sales/products",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "sales",
+                    "products"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reports",
+          "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/sales/reports",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "sales",
+                    "reports"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{gateway}}/api/v1/sales/reports",
+                  "host": [
+                    "{{gateway}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "sales",
+                    "reports"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

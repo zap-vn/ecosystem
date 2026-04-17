@@ -1,0 +1,18 @@
+﻿# ZAP API Synchronization & Postman Testing Skill
+
+## 1. Multi-Cluster API Aggregation
+- **Context**: The ZAP Architecture consists of multiple independent API clusters (CRM/Ecosystem, Identity, App).
+- **Postman Sync Requirement**: To sync the complete system API catalog to Postman Cloud (or local Postman), we must aggregate the OpenAPI (openapi.json) specifications from ALL running services.
+
+## 2. API Sync Workflow
+1. **Start Clusters**: Simultaneously start all module APIs (typically ZAP.Ecosystem.API on port 5146, ZAP.Identity.API on port 5181, ZAP.Ecosystem.API.App on port 5182).
+2. **Fetch Specs**: Request http://localhost:<PORT>/openapi/v1.json from all active clusters.
+3. **Merge Specs**:
+   - Merge all the endpoints inside the .paths object into a master OpenAPI object.
+   - Merge all the data structures inside .components.schemas to resolve references.
+4. **Export to Root**: Save the perfectly merged JSON out to the root directory openapi.json.
+
+## 3. Postman Cloud Automatic Sync
+- ZAP utilizes the official [Postman GitHub Integration].
+- Once the merged openapi.json is generated, it serves as the single-source-of-truth.
+- A simple git commit and git push of the root openapi.json will trigger Postman Cloud to Auto-Sync the new Module Controllers and any schema modifications directly to the Team Workspace.

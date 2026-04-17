@@ -1,31 +1,60 @@
 <Solution>
-  <Folder Name="/src/" />
+  <Folder Name="/src/API/">
+    <Project Path="src/API/ZAP.Ecosystem.API/ZAP.Ecosystem.API.csproj" />
+    <Project Path="src/API/App/ZAP.Ecosystem.API.App/ZAP.Ecosystem.API.App.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/ZAP.Ecosystem.Shared/ZAP.Ecosystem.Shared.csproj" />
+    <Project Path="src/Shared/ZAP.Ecosystem.Domain/ZAP.Ecosystem.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Catalog/">
+    <Project Path="src/Modules/Catalog/ZAP.CRM.Catalog.Domain/ZAP.CRM.Catalog.Domain.csproj" />
+    <Project Path="src/Modules/Catalog/ZAP.CRM.Catalog.Application/ZAP.CRM.Catalog.Application.csproj" />
+    <Project Path="src/Modules/Catalog/ZAP.CRM.Catalog.Infrastructure/ZAP.CRM.Catalog.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/CRM/">
+    <Project Path="src/Modules/CRM/ZAP.Ecosystem.Domain.CRM/ZAP.Ecosystem.Domain.CRM.csproj" />
+    <Project Path="src/Modules/CRM/ZAP.Ecosystem.Application.CRM/ZAP.Ecosystem.Application.CRM.csproj" />
+    <Project Path="src/Modules/CRM/ZAP.Ecosystem.Infrastructure/ZAP.Ecosystem.Infrastructure.csproj" />
+    <Project Path="src/Modules/CRM/ZAP.Ecosystem.CRM.API/ZAP.Ecosystem.CRM.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Sales/">
+    <Project Path="src/Modules/Sales/ZAP.Ecosystem.Sales.Domain/ZAP.Ecosystem.Sales.Domain.csproj" />
+    <Project Path="src/Modules/Sales/ZAP.Ecosystem.Sales.Application/ZAP.Ecosystem.Sales.Application.csproj" />
+    <Project Path="src/Modules/Sales/ZAP.Ecosystem.Sales.Infrastructure/ZAP.Ecosystem.Sales.Infrastructure.csproj" />
+    <Project Path="src/Modules/Sales/ZAP.Ecosystem.Sales.API/ZAP.Ecosystem.Sales.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Finance/">
+    <Project Path="src/Modules/Finance/ZAP.Ecosystem.Finance.Domain/ZAP.Ecosystem.Finance.Domain.csproj" />
+    <Project Path="src/Modules/Finance/ZAP.Ecosystem.Finance.Application/ZAP.Ecosystem.Finance.Application.csproj" />
+    <Project Path="src/Modules/Finance/ZAP.Ecosystem.Finance.Infrastructure/ZAP.Ecosystem.Finance.Infrastructure.csproj" />
+    <Project Path="src/Modules/Finance/ZAP.Ecosystem.Finance.API/ZAP.Ecosystem.Finance.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/HRM/">
+    <Project Path="src/Modules/HRM/ZAP.Ecosystem.HRM.Domain/ZAP.Ecosystem.HRM.Domain.csproj" />
+    <Project Path="src/Modules/HRM/ZAP.Ecosystem.HRM.Application/ZAP.Ecosystem.HRM.Application.csproj" />
+    <Project Path="src/Modules/HRM/ZAP.Ecosystem.HRM.Infrastructure/ZAP.Ecosystem.HRM.Infrastructure.csproj" />
+    <Project Path="src/Modules/HRM/ZAP.Ecosystem.HRM.API/ZAP.Ecosystem.HRM.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Inventory/">
+    <Project Path="src/Modules/Inventory/ZAP.Ecosystem.Inventory.Domain/ZAP.Ecosystem.Inventory.Domain.csproj" />
+    <Project Path="src/Modules/Inventory/ZAP.Ecosystem.Inventory.Application/ZAP.Ecosystem.Inventory.Application.csproj" />
+    <Project Path="src/Modules/Inventory/ZAP.Ecosystem.Inventory.Infrastructure/ZAP.Ecosystem.Inventory.Infrastructure.csproj" />
+    <Project Path="src/Modules/Inventory/ZAP.Ecosystem.Inventory.API/ZAP.Ecosystem.Inventory.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Identity/">
+    <Project Path="src/Modules/Identity/ZAP.Ecosystem.API.Identity/ZAP.Ecosystem.API.Identity.csproj" />
+    <Project Path="src/Modules/Identity/ZAP.Ecosystem.Application.Identity/ZAP.Ecosystem.Application.Identity.csproj" />
+    <Project Path="src/Modules/Identity/ZAP.Identity.API/ZAP.Identity.API.csproj" />
+    <Project Path="src/Modules/Identity/ZAP.Identity.Application/ZAP.Identity.Application.csproj" />
+    <Project Path="src/Modules/Identity/ZAP.Identity.Domain/ZAP.Identity.Domain.csproj" />
+    <Project Path="src/Modules/Identity/ZAP.Identity.Infrastructure/ZAP.Identity.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/App/">
+    <Project Path="src/Modules/App/ZAP.Ecosystem.Application.App/ZAP.Ecosystem.Application.App.csproj" />
+  </Folder>
   <Folder Name="/src/Gateway/">
     <Project Path="src/Gateway/ZAP.Gateway/ZAP.Gateway.csproj" />
   </Folder>
-  <Folder Name="/src/Services/" />
-  <Folder Name="/src/Services/Ecosystem/">
-    <Project Path="src/Services/Ecosystem/ZAP.Ecosystem.Domain/ZAP.Ecosystem.Domain.csproj" />
-    <Project Path="src/Services/Ecosystem/ZAP.Ecosystem.Infrastructure/ZAP.Ecosystem.Infrastructure.csproj" />
-    <Project Path="src/Services/Ecosystem/ZAP.Ecosystem.Shared/ZAP.Ecosystem.Shared.csproj" />
-  </Folder>
-  <Folder Name="/src/Services/Ecosystem/App/">
-    <Project Path="src/Services/Ecosystem/App/ZAP.Ecosystem.API.App/ZAP.Ecosystem.API.App.csproj" />
-    <Project Path="src/Services/Ecosystem/App/ZAP.Ecosystem.Application.App/ZAP.Ecosystem.Application.App.csproj" />
-    <Project Path="src/Services/Ecosystem/App/ZAP.Ecosystem.App.UnitTests/ZAP.Ecosystem.App.UnitTests.csproj" />
-  </Folder>
-  <Folder Name="/src/Services/Ecosystem/CRM/">
-    <Project Path="src/Services/Ecosystem/CRM/ZAP.Ecosystem.API.CRM/ZAP.Ecosystem.API.CRM.csproj" />
-    <Project Path="src/Services/Ecosystem/CRM/ZAP.Ecosystem.Application.CRM/ZAP.Ecosystem.Application.CRM.csproj" />
-    <Project Path="src/Services/Ecosystem/CRM/ZAP.Ecosystem.CRM.UnitTests/ZAP.Ecosystem.CRM.UnitTests.csproj" />
-  </Folder>
-  <Folder Name="/src/Services/Identity/">
-    <Project Path="src/Services/Identity/ZAP.Ecosystem.API.Identity/ZAP.Ecosystem.API.Identity.csproj" />
-    <Project Path="src/Services/Identity/ZAP.Ecosystem.Application.Identity/ZAP.Ecosystem.Application.Identity.csproj" />
-    <Project Path="src/Services/Identity/ZAP.Identity.API/ZAP.Identity.API.csproj" />
-    <Project Path="src/Services/Identity/ZAP.Identity.Application/ZAP.Identity.Application.csproj" />
-    <Project Path="src/Services/Identity/ZAP.Identity.Domain/ZAP.Identity.Domain.csproj" />
-    <Project Path="src/Services/Identity/ZAP.Identity.Infrastructure/ZAP.Identity.Infrastructure.csproj" />
-    <Project Path="src/Services/Identity/ZAP.Identity.UnitTests/ZAP.Identity.UnitTests.csproj" />
-  </Folder>
+  <Folder Name="/src/Workers/" />
 </Solution>

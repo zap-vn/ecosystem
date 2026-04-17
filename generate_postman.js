@@ -1,195 +1,207 @@
 const fs = require('fs');
+const path = require('path');
+const https = require('https');
 
-const gateway = 'http://localhost:5120';
+const rootDir = 'src';
+const API_KEY = 'PMAK-69e22f257e44dc0001c11bbd-8add08c0a15d437deba43d3267b8be7a09';
+const COLLECTION_UID = '15026203-0a7f9d08-edc2-4296-820a-2f774180de5a';
 
-const collection = {
-  info: {
-    name: 'ZAP Ecosystem V1 - Standardized Final',
-    description: 'ZAP ERP Ecosystem - Full API Test Suite\n\nStandards:\n- Version: v1\n- Case: snake_case (URLs, Body, Response)\n- Gateway: http://localhost:5120',
-    schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
-    _postman_id: 'zap-ecosystem-final-v1'
-  },
-  variable: [
-    { key: 'gateway', value: gateway, type: 'string' }
-  ],
-  item: [
-    {
-      name: '01. Identity & Auth',
-      item: [
-        {
-          name: 'App Auth - Login Customer',
-          request: {
-            method: 'POST',
-            header: [{ key: 'Content-Type', value: 'application/json' }],
-            url: { raw: '{{gateway}}/api/v1/auth/customer/login', host: ['{{gateway}}'], path: ['api', 'v1', 'auth', 'customer', 'login'] },
-            body: {
-              mode: 'raw',
-              raw: JSON.stringify({
-                phone_number: '0901234567',
-                password: 'password123'
-              }, null, 2)
-            }
-          }
-        },
-        {
-          name: 'Login - Check Account',
-          request: {
-            method: 'POST',
-            header: [{ key: 'Content-Type', value: 'application/json' }],
-            url: { raw: '{{gateway}}/api/v1/auth/login/check_account', host: ['{{gateway}}'], path: ['api', 'v1', 'auth', 'login', 'check_account'] },
-            body: {
-              mode: 'raw',
-              raw: JSON.stringify({
-                account_identifier: 'test@zap.vn'
-              }, null, 2)
-            }
-          }
-        },
-        {
-          name: 'Login - Send OTP',
-          request: {
-            method: 'POST',
-            header: [{ key: 'Content-Type', value: 'application/json' }],
-            url: { raw: '{{gateway}}/api/v1/auth/login/send_otp', host: ['{{gateway}}'], path: ['api', 'v1', 'auth', 'login', 'send_otp'] },
-            body: {
-              mode: 'raw',
-              raw: JSON.stringify({
-                phone_number: '0901234567'
-              }, null, 2)
-            }
-          }
-        }
-      ]
-    },
-    {
-      name: '02. Catalog',
-      item: [
-        {
-          name: 'Geo Countries - List',
-          request: {
-            method: 'POST',
-            header: [{ key: 'Content-Type', value: 'application/json' }],
-            url: { raw: '{{gateway}}/api/v1/catalog/geo_countries/list', host: ['{{gateway}}'], path: ['api', 'v1', 'catalog', 'geo_countries', 'list'] },
-            body: {
-              mode: 'raw',
-              raw: JSON.stringify({ page_index: 1, page_size: 10, search: '', is_active: true }, null, 2)
-            }
-          }
-        },
-        {
-          name: 'Menus - List',
-          request: {
-            method: 'POST',
-            header: [{ key: 'Content-Type', value: 'application/json' }],
-            url: { raw: '{{gateway}}/api/v1/catalog/menus/list', host: ['{{gateway}}'], path: ['api', 'v1', 'catalog', 'menus', 'list'] },
-            body: {
-              mode: 'raw',
-              raw: JSON.stringify({ page_index: 1, page_size: 10, search: '' }, null, 2)
-            }
-          }
-        },
-        {
-          name: 'Products - List',
-          request: {
-            method: 'POST',
-            header: [{ key: 'Content-Type', value: 'application/json' }],
-            url: { raw: '{{gateway}}/api/v1/catalog/products/list', host: ['{{gateway}}'], path: ['api', 'v1', 'catalog', 'products', 'list'] },
-            body: {
-              mode: 'raw',
-              raw: JSON.stringify({
-                page_index: 1,
-                page_size: 10,
-                search: '',
-                filters: { category_id: null, status_id: 1, location_id: null },
-                sort: { field: "name", descending: false }
-              }, null, 2)
-            }
-          }
-        }
-      ]
-    },
-    {
-      name: '03. CRM',
-      item: [
-        {
-          name: 'Customers - List',
-          request: {
-            method: 'GET',
-            url: { 
-                raw: '{{gateway}}/api/v1/crm/customers?page_index=1&page_size=10', 
-                host: ['{{gateway}}'], 
-                path: ['api', 'v1', 'crm', 'customers'],
-                query: [{ key: 'page_index', value: '1' }, { key: 'page_size', value: '10' }]
-            }
-          }
-        },
-        {
-            name: 'Promotions - List',
-            request: {
-                method: 'POST',
-                header: [{ key: 'Content-Type', value: 'application/json' }],
-                url: { raw: '{{gateway}}/api/v1/crm/promotions/list', host: ['{{gateway}}'], path: ['api', 'v1', 'crm', 'promotions', 'list'] },
-                body: {
-                    mode: 'raw',
-                    raw: JSON.stringify({ page_index: 1, page_size: 10, search: "" }, null, 2)
-                }
-            }
-        }
-      ]
-    },
-    {
-      name: '04. Sales',
-      item: [
-        {
-          name: 'Orders - List',
-          request: {
-            method: 'POST',
-            header: [{ key: 'Content-Type', value: 'application/json' }],
-            url: { raw: '{{gateway}}/api/v1/sales/orders/list', host: ['{{gateway}}'], path: ['api', 'v1', 'sales', 'orders', 'list'] },
-            body: {
-              mode: 'raw',
-              raw: JSON.stringify({
-                page_index: 1,
-                page_size: 10,
-                search: '',
-                status_id: null
-              }, null, 2)
-            }
-          }
-        },
-        {
-          name: 'Dining Options - List',
-          request: {
-            method: 'GET',
-            url: { raw: '{{gateway}}/api/v1/sales/dining_options', host: ['{{gateway}}'], path: ['api', 'v1', 'sales', 'dining_options'] }
-          }
-        }
-      ]
-    },
-    {
-        name: '99. System Health (Ping)',
-        item: [
-            { name: 'CRM Ping', request: { method: 'GET', url: '{{gateway}}/api/v1/crm/ping' } },
-            { name: 'Sales Ping', request: { method: 'GET', url: '{{gateway}}/api/v1/sales/ping' } },
-            { name: 'HRM Ping', request: { method: 'GET', url: '{{gateway}}/api/v1/hrm/ping' } },
-            { name: 'Inventory Ping', request: { method: 'GET', url: '{{gateway}}/api/v1/inventory/ping' } },
-            { name: 'Finance Ping', request: { method: 'GET', url: '{{gateway}}/api/v1/finance/ping' } }
-        ]
-    }
-  ]
+const endpoints = [];
+
+function toSnakeCase(str) {
+    return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`).replace(/^_/, '');
+}
+
+// Map of common names to sample values
+const sampleValues = {
+    'string': 'string',
+    'int': 0,
+    'long': 0,
+    'double': 0.0,
+    'decimal': 0.0,
+    'bool': true,
+    'boolean': true,
+    'guid': '00000000-0000-0000-0000-000000000000',
+    'datetime': new Date().toISOString()
 };
 
-const jsonResult = JSON.stringify(collection, null, 2);
+function getSampleForClass(className) {
+    // Try to find the file for this class
+    const searchFiles = [];
+    const walk = (d) => {
+        fs.readdirSync(d).forEach(f => {
+            const p = path.join(d, f);
+            if (fs.statSync(p).isDirectory()) walk(p);
+            else if (f === `${className}.cs`) searchFiles.push(p);
+        });
+    };
+    walk('src');
 
-// Standardizing ALL potential Postman files in the workspace root
-const filesToUpdate = [
-  'ZAP_Ecosystem_V2_Postman.json',
-  'ZAP_Stabilized_Postman.json',
-  'ZAP_Ecosystem_Postman_Collection.json',
-  'ZAP_Ecosystem_API.json'
-];
+    if (searchFiles.length === 0) return {};
 
-filesToUpdate.forEach(file => {
-  fs.writeFileSync(file, jsonResult);
-  console.log(`Updated: ${file}`);
+    const content = fs.readFileSync(searchFiles[0], 'utf8');
+    const sample = {};
+    const lines = content.split('\n');
+    
+    lines.forEach(line => {
+        const propMatch = line.match(/public\s+([\w<>?]+)\s+(\w+)\s*{\s*get;\s*set;\s*}/);
+        if (propMatch) {
+            const type = propMatch[1].toLowerCase();
+            const name = toSnakeCase(propMatch[2]);
+            
+            if (type.includes('string')) sample[name] = 'string';
+            else if (type.includes('int') || type.includes('long')) sample[name] = 0;
+            else if (type.includes('bool')) sample[name] = true;
+            else if (type.includes('guid')) sample[name] = '00000000-0000-0000-0000-000000000000';
+            else if (type.includes('datetime')) sample[name] = new Date().toISOString();
+            else sample[name] = null;
+        }
+    });
+    return sample;
+}
+
+function scanDir(dir) {
+    const files = fs.readdirSync(dir);
+    for (const file of files) {
+        const fullPath = path.join(dir, file);
+        if (fs.statSync(fullPath).isDirectory()) {
+            scanDir(fullPath);
+        } else if (file.endsWith('Controller.cs')) {
+            parseController(fullPath);
+        }
+    }
+}
+
+function parseController(filePath) {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const routeMatch = content.match(/\[Route\("(.*?)"\)\]/);
+    const baseRoute = routeMatch ? routeMatch[1] : '';
+    
+    const routeParts = baseRoute.split('/');
+    const moduleName = routeParts[2] || 'System';
+    const resourceName = routeParts[3] || path.basename(filePath).replace('Controller.cs', '');
+
+    const lines = content.split('\n');
+    let currentAction = null;
+
+    lines.forEach(line => {
+        const httpMatch = line.match(/\[Http(Get|Post|Put|Delete)(?:\("(.*?)"\))?\]/);
+        if (httpMatch) {
+            currentAction = {
+                method: httpMatch[1].toUpperCase(),
+                subRoute: httpMatch[2] || '',
+                baseRoute: baseRoute,
+                module: moduleName,
+                resource: resourceName,
+                fullRoute: (baseRoute + '/' + (httpMatch[2] || '')).replace(/\/+/g, '/').replace(/\/$/, '')
+            };
+        } else if (currentAction && line.includes('public async Task<IActionResult>')) {
+            const nameMatch = line.match(/public async Task<IActionResult>\s+(\w+)\s*\((.*?)\)/);
+            if (nameMatch) {
+                currentAction.name = nameMatch[1];
+                const paramContent = nameMatch[2];
+                // Try to extract the DTO class name
+                const dtoMatch = paramContent.match(/\[FromBody\]\s*([\w]+)\s*/);
+                if (dtoMatch) {
+                    currentAction.dtoClass = dtoMatch[1];
+                }
+                endpoints.push(currentAction);
+                currentAction = null;
+            }
+        }
+    });
+}
+
+scanDir(rootDir);
+
+// Build Hierarchical Folder Structure
+const folders = {};
+
+endpoints.forEach(e => {
+    const mod = e.module.toUpperCase();
+    const res = e.resource.charAt(0).toUpperCase() + e.resource.slice(1);
+    
+    if (!folders[mod]) folders[mod] = {};
+    if (!folders[mod][res]) folders[mod][res] = [];
+    
+    const bodySample = e.dtoClass ? getSampleForClass(e.dtoClass) : {};
+    
+    // Hardcoded logic for known important ones to be safe
+    if (e.name === 'LoginWithPassword' || e.name === 'VerifyOtpAndLogin') {
+        bodySample.phone_number = '0901234567';
+        bodySample.password = 'string';
+        bodySample.otp_code = '123456';
+    } else if (e.name === 'CheckAccount') {
+        bodySample.account_identifier = 'test@zap.vn';
+    } else if (e.name === 'SendOtp') {
+        bodySample.phone_number = '0901234567';
+    }
+
+    folders[mod][res].push({ ...e, bodySample });
 });
+
+// Convert to Postman JSON
+function buildPostmanItems() {
+    return Object.entries(folders).sort().map(([mod, resources]) => ({
+        name: mod,
+        item: Object.entries(resources).sort().map(([res, actions]) => ({
+            name: res,
+            item: actions.map(a => ({
+                name: a.name,
+                request: {
+                    method: a.method,
+                    header: [
+                        { key: 'Content-Type', value: 'application/json', type: 'text' }
+                    ],
+                    url: {
+                        raw: `{{gateway}}/${a.fullRoute}`,
+                        host: ['{{gateway}}'],
+                        path: a.fullRoute.split('/')
+                    },
+                    body: a.method === 'POST' || a.method === 'PUT' ? {
+                        mode: 'raw',
+                        raw: JSON.stringify(a.bodySample || {}, null, 2)
+                    } : undefined
+                }
+            }))
+        }))
+    }));
+}
+
+const collection = {
+    info: {
+        name: 'ZAP Ecosystem - Master Suite v2',
+        description: 'Updated with Automatic DTO Body Generation.',
+        schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json'
+    },
+    variable: [
+        { key: 'gateway', value: 'http://localhost:5120', type: 'string' }
+    ],
+    item: buildPostmanItems()
+};
+
+fs.writeFileSync('ZAP_Professional_Postman.json', JSON.stringify(collection, null, 2));
+
+// Cloud Sync
+console.log(`Syncing to Postman Cloud (UID: ${COLLECTION_UID})...`);
+const options = {
+    hostname: 'api.getpostman.com',
+    path: `/collections/${COLLECTION_UID}`,
+    method: 'PUT',
+    headers: {
+        'X-Api-Key': API_KEY,
+        'Content-Type': 'application/json'
+    }
+};
+
+const req = https.request(options, (res) => {
+    let b = '';
+    res.on('data', d => b += d);
+    res.on('end', () => {
+        const result = JSON.parse(b);
+        if (result.collection) console.log('✅ MASTER COLLECTION UPDATED WITH BODIES!');
+        else console.error('❌ FAILED:', result);
+    });
+});
+req.write(JSON.stringify({ collection }));
+req.end();
