@@ -126,6 +126,20 @@ endpoints.forEach(e => {
     
     const bodySample = e.dtoClass ? getSampleForClass(e.dtoClass) : {};
     
+    // Inject Real Data if available
+    if (fs.existsSync('REAL_DATA_SAMPLE.json')) {
+        const real = JSON.parse(fs.readFileSync('REAL_DATA_SAMPLE.json', 'utf8'));
+        Object.keys(bodySample).forEach(key => {
+            if (key.includes('tenant_id')) bodySample[key] = real.tenant_id;
+            if (key.includes('brand_id')) bodySample[key] = real.brand_id;
+            if (key.includes('category_id')) bodySample[key] = real.category_id;
+            if (key.includes('product_id')) bodySample[key] = real.product_id;
+            if (key.includes('user_id')) bodySample[key] = real.user_id;
+            if (key.includes('customer_id')) bodySample[key] = real.customer_id;
+            if (key.includes('phone_number')) bodySample[key] = real.phone_number;
+        });
+    }
+
     // Hardcoded logic for known important ones to be safe
     if (e.name === 'LoginWithPassword' || e.name === 'VerifyOtpAndLogin') {
         bodySample.phone_number = '0901234567';

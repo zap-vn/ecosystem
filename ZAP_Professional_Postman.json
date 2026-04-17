@@ -44,7 +44,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"access_token\": \"string\",\n  \"refresh_token\": \"string\",\n  \"dialing_code\": \"string\",\n  \"phone_number\": \"string\",\n  \"password\": \"string\"\n}"
+                  "raw": "{\n  \"access_token\": \"string\",\n  \"refresh_token\": \"string\",\n  \"dialing_code\": \"string\",\n  \"phone_number\": \"0903079341\",\n  \"password\": \"string\"\n}"
                 }
               }
             }
@@ -433,7 +433,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"search\": \"string\",\n  \"filters\": null,\n  \"sort\": null,\n  \"category_id\": \"string\",\n  \"status_id\": 0,\n  \"location_id\": \"string\",\n  \"locale_id\": 0,\n  \"product_type_id\": 0,\n  \"field\": \"string\",\n  \"descending\": true\n}"
+                  "raw": "{\n  \"page_index\": 0,\n  \"page_size\": 0,\n  \"search\": \"string\",\n  \"filters\": null,\n  \"sort\": null,\n  \"category_id\": \"f943c301-372c-4324-8b3a-2d84b9f60f09\",\n  \"status_id\": 0,\n  \"location_id\": \"string\",\n  \"locale_id\": 0,\n  \"product_type_id\": 0,\n  \"field\": \"string\",\n  \"descending\": true\n}"
                 }
               }
             },
@@ -488,7 +488,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"tenant_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"brand_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"name\": \"string\",\n  \"short_description\": \"string\",\n  \"long_description_html\": \"string\",\n  \"status_id\": 0,\n  \"product_type_id\": 0,\n  \"is_featured\": true,\n  \"variants\": null,\n  \"variant_name\": \"string\",\n  \"sku_code\": \"string\",\n  \"barcode\": \"string\",\n  \"price\": null,\n  \"original_price\": null,\n  \"stock_quantity\": 0,\n  \"uom\": \"string\",\n  \"is_active\": true\n}"
+                  "raw": "{\n  \"tenant_id\": \"f47ac10b-fa24-4372-a567-6e8c00000000\",\n  \"brand_id\": \"80c11227-5465-4567-bf78-00a77585eaa6\",\n  \"name\": \"string\",\n  \"short_description\": \"string\",\n  \"long_description_html\": \"string\",\n  \"status_id\": 0,\n  \"product_type_id\": 0,\n  \"is_featured\": true,\n  \"variants\": null,\n  \"variant_name\": \"string\",\n  \"sku_code\": \"string\",\n  \"barcode\": \"string\",\n  \"price\": null,\n  \"original_price\": null,\n  \"stock_quantity\": 0,\n  \"uom\": \"string\",\n  \"is_active\": true\n}"
                 }
               }
             },
