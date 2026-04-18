@@ -7,6 +7,7 @@ on:
     paths:
       - 'ZAP_Ecosystem_Units.postman_collection.json'
       - 'ZAP_GCP_Environment.postman_environment.json'
+      - 'sync_postman.js'
   workflow_dispatch:
 
 jobs:
@@ -17,25 +18,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Create or Update ZAP Environment
-        run: |
-          # Use API to push Environment
-          curl -s -X POST "https://api.getpostman.com/environments" \
-            -H "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d @ZAP_GCP_Environment.postman_environment.json > response.json
-          cat response.json
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Create or Update ZAP Collection
-        run: |
-          # Use API to push Collection
-          # Note: If collection already exists, use PUT. For simplicity we assume a push script handles it 
-          # by wrapping the JSON in {"collection": { ... }} required by Postman API.
-          
-          echo "{\"collection\": $(cat ZAP_Ecosystem_Units.postman_collection.json)}" > payload.json
-          
-          curl -s -X POST "https://api.getpostman.com/collections" \
-            -H "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d @payload.json > response_col.json
-          cat response_col.json
+      - name: Run Postman Sync Script
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: node sync_postman.js
