@@ -41,7 +41,7 @@ jobs:
 
       # --- Build & Push Identity Service ---
       - name: Build Identity Docker image
-        run: docker build -t ${{ env.AR_HOSTNAME }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/zap-identity-service:${{ github.sha }} -f Dockerfile .
+        run: docker build -t ${{ env.AR_HOSTNAME }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/zap-identity-service:${{ github.sha }} -f Dockerfile.Identity .
       
       - name: Push Identity Docker image
         run: docker push ${{ env.AR_HOSTNAME }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/zap-identity-service:${{ github.sha }}
