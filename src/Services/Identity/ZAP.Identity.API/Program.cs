@@ -73,7 +73,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
         ValidAudience = builder.Configuration["JwtSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"] ?? "a_very_secret_default_key_at_least_32_chars_long"))
+        IssuerSigningKey = new SymmetricSecurityKey(System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"] ?? "a_very_secret_default_key_at_least_32_chars_long")))
     };
 });
 
@@ -181,7 +181,7 @@ public class RealTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITo
     public async Task<string> GenerateTokenAsync(dynamic user)
     {
         var secretKey = _config["JwtSettings:SecretKey"] ?? "a_very_secret_default_key_at_least_32_chars_long";
-        var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretKey));
+        var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(secretKey)));
         var credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(securityKey, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256);
 
         var claims = new System.Collections.Generic.List<System.Security.Claims.Claim>
