@@ -199,9 +199,12 @@ public class RealTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITo
             new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "MerchantAdmin")
         };
 
+        var issuer = _config["JwtSettings:Issuer"] ?? "ZAP.Identity.Service";
+        var audience = _config["JwtSettings:Audience"] ?? "ZAP.Ecosystem.Clients";
+
         var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
-            issuer: "CRM.Authentication.Api",
-            audience: "CRM.GateWay.Api",
+            issuer: issuer,
+            audience: audience,
             claims: claims,
             expires: System.DateTime.UtcNow.AddMinutes(120),
             signingCredentials: credentials);
