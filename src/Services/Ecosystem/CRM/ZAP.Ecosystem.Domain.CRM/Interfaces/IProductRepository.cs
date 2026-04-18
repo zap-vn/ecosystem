@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    public interface IProductRepository : ZAP.Ecosystem.Shared.Data.IBaseRepository<Product>
+    public interface IProductRepository
     {
         Task<IEnumerable<Product>> GetAllAsync();
         Task<Product?> GetByIdAsync(string id);

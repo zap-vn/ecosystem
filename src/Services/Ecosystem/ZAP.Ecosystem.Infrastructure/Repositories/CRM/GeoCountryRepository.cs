@@ -22,7 +22,7 @@ namespace ZAP.Ecosystem.Infrastructure.Repositories.CRM
             string sortField = "id",
             bool sortDescending = false)
         {
-            var query = _dbSet.AsNoTracking().Include(c => c.Translations);
+            IQueryable<GeoCountry> query = _dbSet.AsNoTracking().Include(c => c.Translations);
 
             if (isActive.HasValue)
                 query = query.Where(c => c.is_active == isActive.Value);

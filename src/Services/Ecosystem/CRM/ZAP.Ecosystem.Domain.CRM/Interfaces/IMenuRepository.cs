@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    public interface IMenuRepository : ZAP.Ecosystem.Shared.Data.IBaseRepository<MenuHeader>
+    public interface IMenuRepository
     {
         Task<MenuHeader?> GetByIdAsync(Guid id);
         Task<(IEnumerable<MenuHeader> Items, int Total)> GetPagedAsync(
