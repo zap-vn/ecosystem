@@ -7,21 +7,20 @@ using ZAP.Ecosystem.Domain.CRM;
 
 namespace ZAP.Ecosystem.Infrastructure.Data.Repositories.CRM
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : ZAP.Ecosystem.Shared.Data.BaseRepository<Product>, IProductRepository
     {
-        private readonly EcosystemDbContext _context;
-        public ProductRepository(EcosystemDbContext context) => _context = context;
+        public ProductRepository(EcosystemDbContext context) : base(context) { }
 
-        public async Task<IEnumerable<Product>> GetAllAsync() => await _context.Products.ToListAsync();
-        public async Task<Product?> GetByIdAsync(string id) => await _context.Products.FirstOrDefaultAsync(p => p.id == Guid.Parse(id));
-        public async Task CreateAsync(Product product) { _context.Products.Add(product); await _context.SaveChangesAsync(); }
-        public async Task UpdateAsync(Product product) { _context.Products.Update(product); await _context.SaveChangesAsync(); }
-        public async Task DeleteAsync(string id) { var p = await _context.Products.FindAsync(Guid.Parse(id)); if (p != null) { _context.Products.Remove(p); await _context.SaveChangesAsync(); } }
+        public async Task<IEnumerable<Product>> GetAllAsync() => await _dbSet.ToListAsync();
+        public async Task<Product?> GetByIdAsync(string id) => await _dbSet.FirstOrDefaultAsync(p => p.id == Guid.Parse(id));
+        public async Task CreateAsync(Product product) { _dbSet.Add(product); await _dbContext.SaveChangesAsync(); }
+        public async Task UpdateAsync(Product product) { _dbSet.Update(product); await _dbContext.SaveChangesAsync(); }
+        public async Task DeleteAsync(string id) { var p = await _dbSet.FindAsync(Guid.Parse(id)); if (p != null) { _dbSet.Remove(p); await _dbContext.SaveChangesAsync(); } }
 
         public async Task<(IEnumerable<ProductVariant> Items, int TotalCount)> GetPagedAsync(
             int page, int pageSize, Guid? tenantId = null, string? searchTerm = null, int? statusId = null, Guid? categoryId = null, Guid? locationId = null, int localeId = 2, int? productTypeId = null, string sortField = "created_at", bool sortDescending = true)
         {
-            var q = _context.ProductVariants.AsQueryable();
+            var q = _dbContext.Set<ProductVariant>().AsQueryable();
             if (!string.IsNullOrEmpty(searchTerm)) q = q.Where(x => x.variant_name != null && x.variant_name.Contains(searchTerm));
             int total = await q.CountAsync();
             var items = await q.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
@@ -31,7 +30,7 @@ namespace ZAP.Ecosystem.Infrastructure.Data.Repositories.CRM
         public async Task<(IEnumerable<Product> Items, int TotalCount)> GetPagedProductsAsync(
             int page, int pageSize, Guid? tenantId = null, string? searchTerm = null, int? statusId = null, Guid? categoryId = null, Guid? locationId = null, int localeId = 2, int? productTypeId = null, string sortField = "created_at", bool sortDescending = true)
         {
-            var query = _context.Products
+            var query = _dbSet
                 .Include(p => p.status).ThenInclude(s => s.translations)
                 .Include(p => p.product_type).ThenInclude(pt => pt.translations)
                 .Include(p => p.category_mappings).ThenInclude(cm => cm.category)

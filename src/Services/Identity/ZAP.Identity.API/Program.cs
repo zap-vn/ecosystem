@@ -210,13 +210,3 @@ public class RealTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITo
     }
 }
 
-public class MockOtpRepository : ZAP.Identity.Application.Common.Interfaces.IOtpRepository
-{
-    public async Task CreateAsync(dynamic customerOtp) => await Task.CompletedTask;
-}
-
-public class MockNotificationService : ZAP.Identity.Application.Common.Interfaces.INotificationService
-{
-    public async Task SendOtpEmailAsync(string email, string otpCode, string name) => await Task.CompletedTask;
-    public async Task SendSmsOtpAsync(string phone, string otpCode) => await Task.CompletedTask;
-}

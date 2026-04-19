@@ -18,11 +18,7 @@ public class EcosystemDbContext : DbContext
     public DbSet<ZAP.Ecosystem.Domain.CRM.ProductTypeItem> ProductTypeItems { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.ProductVariant> ProductVariants { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.UomItem> UomItems { get; set; }
-<<<<<<< HEAD
-    public DbSet<ZAP.Ecosystem.Domain.CRM.TaxSyncSetting> TaxSyncSettings { get; set; }
-=======
     // TaxSyncSetting is a value object, not a DB entity - do not add DbSet
->>>>>>> deploy_crm_dev
     public DbSet<ZAP.Ecosystem.Domain.CRM.StatusItem> StatusItems { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.TranslatePaymentType> TranslatePaymentTypes { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.CustomerGroup> CustomerGroups { get; set; }
@@ -37,11 +33,8 @@ public class EcosystemDbContext : DbContext
     public DbSet<ZAP.Ecosystem.Domain.CRM.InventoryItem> InventoryItems { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.GeoProvince> GeoProvinces { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.GeoProvinceTranslation> GeoProvinceTranslations { get; set; }
-<<<<<<< HEAD
-=======
     public DbSet<ZAP.Ecosystem.Domain.CRM.GeoCountry> GeoCountries { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.GeoCountryTranslation> GeoCountryTranslations { get; set; }
->>>>>>> deploy_crm_dev
     public DbSet<ZAP.Ecosystem.Domain.CRM.Location> Locations { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.LocationEntity> LocationEntities { get; set; }
     public DbSet<ZAP.Ecosystem.Domain.CRM.LocationTypeItem> LocationTypeItems { get; set; }

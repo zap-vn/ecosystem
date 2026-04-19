@@ -6,10 +6,9 @@ using ZAP.Ecosystem.Infrastructure.Data;
 
 namespace ZAP.Ecosystem.Infrastructure.Data.Repositories.CRM
 {
-    public class CollectionRepository : ICollectionRepository
+    public class CollectionRepository : ZAP.Ecosystem.Shared.Data.BaseRepository<Collection>, ICollectionRepository
     {
-        private readonly EcosystemDbContext _context;
-        public CollectionRepository(EcosystemDbContext context) => _context = context;
+        public CollectionRepository(EcosystemDbContext context) : base(context) { }
 
         public Task<Collection> GetByIdAsync(Guid id) => throw new NotImplementedException();
         public Task<(IEnumerable<Collection> Items, int TotalCount)> GetPagedAsync(int page, int pageSize, string search = null) => throw new NotImplementedException();

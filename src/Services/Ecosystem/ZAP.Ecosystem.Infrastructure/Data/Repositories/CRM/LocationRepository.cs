@@ -7,22 +7,21 @@ using ZAP.Ecosystem.Domain.CRM;
 
 namespace ZAP.Ecosystem.Infrastructure.Data.Repositories.CRM
 {
-    public class LocationRepository : ILocationRepository
+    public class LocationRepository : ZAP.Ecosystem.Shared.Data.BaseRepository<Location>, ILocationRepository
     {
-        private readonly EcosystemDbContext _context;
-        public LocationRepository(EcosystemDbContext context) => _context = context;
+        public LocationRepository(EcosystemDbContext context) : base(context) { }
 
-        public async Task<Location?> GetByIdAsync(Guid id) => await _context.Locations.FirstOrDefaultAsync(l => l.id == id);
-        public async Task CreateAsync(Location location) { _context.Locations.Add(location); await _context.SaveChangesAsync(); }
-        public async Task CreateStoreAsync(Store store) { _context.Stores.Add(store); await _context.SaveChangesAsync(); }
-        public async Task UpdateAsync(Location location) { _context.Locations.Update(location); await _context.SaveChangesAsync(); }
-        public async Task DeleteAsync(Guid id) { var l = await _context.Locations.FindAsync(id); if (l != null) { _context.Locations.Remove(l); await _context.SaveChangesAsync(); } }
+        public async Task<Location?> GetByIdAsync(Guid id) => await _dbSet.FirstOrDefaultAsync(l => l.id == id);
+        public async Task CreateAsync(Location location) { _dbSet.Add(location); await _dbContext.SaveChangesAsync(); }
+        public async Task CreateStoreAsync(Store store) { _dbContext.Set<Store>().Add(store); await _dbContext.SaveChangesAsync(); }
+        public async Task UpdateAsync(Location location) { _dbSet.Update(location); await _dbContext.SaveChangesAsync(); }
+        public async Task DeleteAsync(Guid id) { var l = await _dbSet.FindAsync(id); if (l != null) { _dbSet.Remove(l); await _dbContext.SaveChangesAsync(); } }
 
-        public async Task<IEnumerable<GeoProvince>> GetProvincesAsync(int localeId) => await _context.GeoProvinces.Include(x => x.translations).ToListAsync();
+        public async Task<IEnumerable<GeoProvince>> GetProvincesAsync(int localeId) => await _dbContext.Set<GeoProvince>().Include(x => x.translations).ToListAsync();
 
         public async Task<IEnumerable<Location>> GetPagedAsync(ZAP.Ecosystem.Domain.CRM.LocationListFilter filter)
         {
-            var query = _context.Locations.AsQueryable();
+            var query = _dbSet.AsQueryable();
             if (filter.TenantId.HasValue) query = query.Where(x => x.tenant_id == filter.TenantId.Value);
             if (!string.IsNullOrEmpty(filter.Search)) query = query.Where(x => x.name.Contains(filter.Search));
             if (filter.StatusId.HasValue) query = query.Where(x => x.status_id == filter.StatusId.Value);
@@ -31,7 +30,7 @@ namespace ZAP.Ecosystem.Infrastructure.Data.Repositories.CRM
 
         public async Task<int> GetTotalCountAsync(ZAP.Ecosystem.Domain.CRM.LocationListFilter filter)
         {
-            var query = _context.Locations.AsQueryable();
+            var query = _dbSet.AsQueryable();
             if (filter.TenantId.HasValue) query = query.Where(x => x.tenant_id == filter.TenantId.Value);
             if (!string.IsNullOrEmpty(filter.Search)) query = query.Where(x => x.name.Contains(filter.Search));
             if (filter.StatusId.HasValue) query = query.Where(x => x.status_id == filter.StatusId.Value);

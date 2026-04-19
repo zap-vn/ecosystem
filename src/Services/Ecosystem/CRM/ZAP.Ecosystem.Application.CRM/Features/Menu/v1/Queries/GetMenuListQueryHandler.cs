@@ -1,4 +1,5 @@
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace ZAP.Ecosystem.Application.CRM.Features.Menu.v1.Queries;
 public class GetMenuListQueryHandler : IRequestHandler<GetMenuListQuery, object>
 {
     private readonly ZAP.Ecosystem.Domain.CRM.IMenuRepository _repository;
-    private readonly ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService _currentUserService;
+    private readonly ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService _currentUserService;
 
-    public GetMenuListQueryHandler(ZAP.Ecosystem.Domain.CRM.IMenuRepository repository, ZAP.Ecosystem.Application.CRM.Common.Interfaces.ICurrentUserService currentUserService)
+    public GetMenuListQueryHandler(ZAP.Ecosystem.Domain.CRM.IMenuRepository repository, ZAP.Ecosystem.Shared.Interfaces.ICurrentUserService currentUserService)
     {
         _repository = repository;
         _currentUserService = currentUserService;
