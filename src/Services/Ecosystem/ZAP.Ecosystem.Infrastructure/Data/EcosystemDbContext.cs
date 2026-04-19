@@ -58,6 +58,10 @@ public class EcosystemDbContext : DbContext
     public DbSet<ZAP.Identity.Domain.Entities.Customer> Customers { get; set; }
     public DbSet<ZAP.Identity.Domain.Entities.CustomerMembership> CustomerMemberships { get; set; }
     public DbSet<ZAP.Identity.Domain.Entities.LoyaltyLevel> LoyaltyLevels { get; set; }
+    
+    // Dictionaries
+    public DbSet<ZAP.Ecosystem.Shared.Entities.EntityDictionary> EntityDictionaries { get; set; }
+    public DbSet<ZAP.Ecosystem.Shared.Entities.EntityFieldDictionary> EntityFieldDictionaries { get; set; }
 
     // CRM Entities
     public DbSet<ZAP.Ecosystem.Domain.CRM.CustomerEntity> CrmCustomers { get; set; }
