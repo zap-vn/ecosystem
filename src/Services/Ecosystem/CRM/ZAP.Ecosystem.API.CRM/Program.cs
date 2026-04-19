@@ -74,7 +74,7 @@ builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), 
 builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => provider.GetRequiredService<EcosystemDbContext>());
 
 // Auto-register repositories from Infrastructure
-var infrastructureAssembly = typeof(ZAP.Ecosystem.Infrastructure.Data.Repositories.CRM.ProductRepository).Assembly;
+var infrastructureAssembly = typeof(ZAP.Ecosystem.Infrastructure.Repositories.CRM.ProductRepository).Assembly;
 var repositoryTypes = infrastructureAssembly.GetTypes()
     .Where(t => t.IsClass && !t.IsAbstract && t.Name.EndsWith("Repository") && !t.IsGenericType);
 
@@ -112,5 +112,11 @@ app.UseAuthorization();
 app.UseSharedAcceptLanguage();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<EcosystemDbContext>();
+    dbContext.Database.EnsureCreated();
+}
 
 app.Run();
