@@ -72,17 +72,19 @@ builder.Services.AddDbContext<EcosystemDbContext>(options =>
 builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), typeof(ZAP.Ecosystem.Shared.Data.BaseRepository<>));
 builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => provider.GetRequiredService<EcosystemDbContext>());
 
-// Repository registrations
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ILocationRepository,      ZAP.Ecosystem.Infrastructure.Repositories.CRM.LocationRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICustomerRepository,       ZAP.Ecosystem.Infrastructure.Repositories.CRM.CustomerRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IModifierGroupRepository,  ZAP.Ecosystem.Infrastructure.Repositories.CRM.ModifierGroupRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICollectionRepository,     ZAP.Ecosystem.Infrastructure.Repositories.CRM.CollectionRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.ICategoryRepository,       ZAP.Ecosystem.Infrastructure.Repositories.CRM.CategoryRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IProductRepository,        ZAP.Ecosystem.Infrastructure.Repositories.CRM.ProductRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IModifierItemRepository,   ZAP.Ecosystem.Infrastructure.Repositories.CRM.ModifierItemRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IPromotionRepository,      ZAP.Ecosystem.Infrastructure.Repositories.CRM.PromotionRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IMenuRepository,           ZAP.Ecosystem.Infrastructure.Repositories.CRM.MenuRepository>();
-builder.Services.AddScoped<ZAP.Ecosystem.Domain.CRM.IGeoCountryRepository,     ZAP.Ecosystem.Infrastructure.Repositories.CRM.GeoCountryRepository>();
+// Auto-register repositories from Infrastructure
+var infrastructureAssembly = typeof(ZAP.Ecosystem.Infrastructure.Data.Repositories.CRM.ProductRepository).Assembly;
+var repositoryTypes = infrastructureAssembly.GetTypes()
+    .Where(t => t.IsClass && !t.IsAbstract && t.Name.EndsWith("Repository") && !t.IsGenericType);
+
+foreach (var repoType in repositoryTypes)
+{
+    var interfaceType = repoType.GetInterfaces().FirstOrDefault(i => i.Name == "I" + repoType.Name);
+    if (interfaceType != null)
+    {
+        builder.Services.AddScoped(interfaceType, repoType);
+    }
+}
 
 var app = builder.Build();
 
