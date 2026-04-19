@@ -126,8 +126,30 @@ public class EcosystemDbContext : DbContext
         });
 
         // Explicitly ignore supporting classes that are not intended to be entities
+        modelBuilder.Ignore<ZAP.Ecosystem.Domain.CRM.TaxSyncSetting>();
         modelBuilder.Ignore<ZAP.Ecosystem.Domain.CRM.OrderSummaryInfo>();
         modelBuilder.Ignore<ZAP.Ecosystem.Domain.CRM.OrderItemSnapshot>();
+
+        // Dictionary mappings
+        modelBuilder.Entity<ZAP.Ecosystem.Shared.Entities.EntityDictionary>(entity =>
+        {
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedAt).HasColumnName("created_at");
+            entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+            entity.Property(e => e.IsDeleted).HasColumnName("is_deleted");
+        });
+
+        modelBuilder.Entity<ZAP.Ecosystem.Shared.Entities.EntityFieldDictionary>(entity =>
+        {
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedAt).HasColumnName("created_at");
+            entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+            entity.Property(e => e.IsDeleted).HasColumnName("is_deleted");
+        });
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(EcosystemDbContext).Assembly);
     }
