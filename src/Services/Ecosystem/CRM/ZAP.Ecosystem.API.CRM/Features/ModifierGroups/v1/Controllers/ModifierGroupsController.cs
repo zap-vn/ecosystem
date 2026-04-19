@@ -7,7 +7,7 @@ using ZAP.Ecosystem.Application.CRM.Features.ModifierGroup.v1.Queries;
 namespace ZAP.Ecosystem.API.CRM.Features.ModifierGroups.v1.Controllers;
 
 [ApiController]
-[Route("api/modifiergroups")]
+[Route("api/v1/catalog/modifiergroups")]
 public class ModifierGroupsController : ControllerBase
 {
     private readonly IMediator _mediator;

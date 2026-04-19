@@ -8,7 +8,7 @@ using ZAP.Ecosystem.Application.CRM.Features.Products.v1.Queries;
 namespace ZAP.Ecosystem.API.CRM.Features.Products.v1.Controllers;
 
 [ApiController]
-[Route("api/products")]
+[Route("api/v1/catalog/products")]
 public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;

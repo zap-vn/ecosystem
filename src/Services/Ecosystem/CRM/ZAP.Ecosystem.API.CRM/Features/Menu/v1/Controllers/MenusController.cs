@@ -9,7 +9,7 @@ using ZAP.Ecosystem.Application.CRM.Features.Menu.v1.Queries;
 namespace ZAP.Ecosystem.API.CRM.Features.Menu.v1.Controllers;
 
 [ApiController]
-[Route("api/menus")]
+[Route("api/v1/catalog/menus")]
 public class MenusController : ControllerBase
 {
     private readonly IMediator _mediator;

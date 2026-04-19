@@ -7,7 +7,7 @@ using ZAP.Ecosystem.Application.CRM.Features.GeoCountry.v1.Queries;
 namespace ZAP.Ecosystem.API.CRM.Features.GeoCountry.v1.Controllers;
 
 [ApiController]
-[Route("api/geocountries")]
+[Route("api/v1/catalog/geocountries")]
 public class GeoCountriesController : ControllerBase
 {
     private readonly IMediator _mediator;

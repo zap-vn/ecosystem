@@ -7,7 +7,7 @@ using ZAP.Ecosystem.Application.CRM.Features.ModifierItem.v1.Queries;
 namespace ZAP.Ecosystem.API.CRM.Features.ModifierItem.v1.Controllers;
 
 [ApiController]
-[Route("api/modifieritems")]
+[Route("api/v1/catalog/modifieritems")]
 public class ModifierItemsController : ControllerBase
 {
     private readonly IMediator _mediator;
