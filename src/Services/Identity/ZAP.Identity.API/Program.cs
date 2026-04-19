@@ -100,7 +100,7 @@ builder.Services.AddMediatR(cfg => {
 
 builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Identity") ?? "Host=136.118.121.105;Port=5432;Username=postgres;Password=Pg@Secret2026!;Database=zap_ecosystem_v200");
+    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Identity") ?? "Host=136.118.121.105;Port=5432;Username=postgres;Password=Pg@Secret2026!;Database=zap_ecosystem_v300");
 });
 
 // Configure Generic Repository

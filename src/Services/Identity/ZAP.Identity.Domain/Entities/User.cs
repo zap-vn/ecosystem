@@ -15,7 +15,7 @@ public class User
     [MaxLength(150)]
     public string? email { get; set; }
 
-    [Column("username")]
+    [Column("phone_number")]
     [MaxLength(50)]
     public string? phone_number { get; set; }
 
@@ -27,7 +27,7 @@ public class User
     [MaxLength(200)]
     public string? full_name { get; set; }
 
-    [NotMapped]
+    [Column("avatar_id")]
     [MaxLength(500)]
     public string? avatar_id { get; set; }
 
@@ -37,7 +37,7 @@ public class User
     [Column("tenant_id")]
     public Guid? tenant_id { get; set; }
 
-    [NotMapped]
+    [Column("is_active")]
     public bool is_active { get; set; } = true;
 
     [Column("created_at")]
