@@ -515,3 +515,50 @@ paths:
       x-google-backend:
         address: https://zap-crm-service-204573236312.asia-southeast1.run.app/api/geocountries/list
       responses: { '200': { description: OK } }
+
+  /api/v1/system/dictionaries/entities:
+    get:
+      operationId: get_dictionaries_entities
+      x-google-backend:
+        address: https://zap-crm-service-204573236312.asia-southeast1.run.app/api/v1/system/dictionaries/entities
+      responses: { '200': { description: OK } }
+    post:
+      operationId: post_dictionaries_entities
+      x-google-backend:
+        address: https://zap-crm-service-204573236312.asia-southeast1.run.app/api/v1/system/dictionaries/entities
+      responses: { '200': { description: OK } }
+
+  /api/v1/system/dictionaries/entities/{schema}/{table}:
+    get:
+      operationId: get_dictionary_entity_schema_table
+      parameters: 
+        - name: schema
+          in: path
+          required: true
+          type: string
+        - name: table
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        address: https://zap-crm-service-204573236312.asia-southeast1.run.app/api/v1/system/dictionaries/entities/{schema}/{table}
+      responses: { '200': { description: OK } }
+
+  /api/v1/system/dictionaries/fields:
+    post:
+      operationId: post_dictionaries_fields
+      x-google-backend:
+        address: https://zap-crm-service-204573236312.asia-southeast1.run.app/api/v1/system/dictionaries/fields
+      responses: { '200': { description: OK } }
+
+  /api/v1/system/dictionaries/fields/{id}:
+    put:
+      operationId: put_dictionary_field
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        address: https://zap-crm-service-204573236312.asia-southeast1.run.app/api/v1/system/dictionaries/fields/{id}
+      responses: { '200': { description: OK } }
