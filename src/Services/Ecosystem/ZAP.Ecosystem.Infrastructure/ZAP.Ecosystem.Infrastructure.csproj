@@ -3,8 +3,8 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>2026.4.19.7</AssemblyVersion>
-    <FileVersion>2026.4.19.7</FileVersion>
+    <AssemblyVersion>2026.4.19.9</AssemblyVersion>
+    <FileVersion>2026.4.19.9</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Features\" />
