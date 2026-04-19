@@ -8,7 +8,7 @@ public class CustomerTranslationConfiguration : IEntityTypeConfiguration<Custome
 {
     public void Configure(EntityTypeBuilder<CustomerTranslation> builder)
     {
-        builder.ToTable("crm_customertranslation", "customers");
+        builder.Metadata.SetSchema("customers");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

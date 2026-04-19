@@ -8,7 +8,7 @@ public class DiningOptionConfiguration : IEntityTypeConfiguration<DiningOption>
 {
     public void Configure(EntityTypeBuilder<DiningOption> builder)
     {
-        builder.ToTable("crm_diningoption", "sales");
+        builder.Metadata.SetSchema("sales");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

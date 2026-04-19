@@ -8,7 +8,7 @@ public class StatusItemConfiguration : IEntityTypeConfiguration<StatusItem>
 {
     public void Configure(EntityTypeBuilder<StatusItem> builder)
     {
-        builder.ToTable("crm_statusitem", "core");
+        builder.Metadata.SetSchema("core");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

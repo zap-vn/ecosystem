@@ -8,7 +8,7 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
 {
     public void Configure(EntityTypeBuilder<Location> builder)
     {
-        builder.ToTable("crm_location", "locations");
+        builder.Metadata.SetSchema("locations");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

@@ -8,7 +8,7 @@ public class MenuHeaderConfiguration : IEntityTypeConfiguration<MenuHeader>
 {
     public void Configure(EntityTypeBuilder<MenuHeader> builder)
     {
-        builder.ToTable("crm_menuheader", "sales");
+        builder.Metadata.SetSchema("sales");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

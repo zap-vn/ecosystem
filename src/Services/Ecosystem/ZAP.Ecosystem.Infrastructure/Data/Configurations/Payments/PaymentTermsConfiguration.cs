@@ -8,7 +8,7 @@ public class PaymentTermsConfiguration : IEntityTypeConfiguration<PaymentTerms>
 {
     public void Configure(EntityTypeBuilder<PaymentTerms> builder)
     {
-        builder.ToTable("crm_paymentterms", "payments");
+        builder.Metadata.SetSchema("payments");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

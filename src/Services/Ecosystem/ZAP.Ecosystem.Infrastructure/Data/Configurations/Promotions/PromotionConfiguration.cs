@@ -8,7 +8,7 @@ public class PromotionConfiguration : IEntityTypeConfiguration<Promotion>
 {
     public void Configure(EntityTypeBuilder<Promotion> builder)
     {
-        builder.ToTable("crm_promotion", "promotions");
+        builder.Metadata.SetSchema("promotions");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

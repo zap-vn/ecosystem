@@ -8,7 +8,7 @@ public class OrderEntityConfiguration : IEntityTypeConfiguration<OrderEntity>
 {
     public void Configure(EntityTypeBuilder<OrderEntity> builder)
     {
-        builder.ToTable("crm_orderentity", "sales");
+        builder.Metadata.SetSchema("sales");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

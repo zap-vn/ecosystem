@@ -8,7 +8,7 @@ public class LoyaltyTierConfiguration : IEntityTypeConfiguration<LoyaltyTier>
 {
     public void Configure(EntityTypeBuilder<LoyaltyTier> builder)
     {
-        builder.ToTable("crm_loyaltytier", "customers");
+        builder.Metadata.SetSchema("customers");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

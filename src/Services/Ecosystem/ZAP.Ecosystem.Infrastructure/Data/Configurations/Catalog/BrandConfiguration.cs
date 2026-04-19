@@ -8,7 +8,7 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
 {
     public void Configure(EntityTypeBuilder<Brand> builder)
     {
-        builder.ToTable("crm_brand", "catalog");
+        builder.Metadata.SetSchema("catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

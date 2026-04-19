@@ -8,7 +8,7 @@ public class GeoProvinceTranslationConfiguration : IEntityTypeConfiguration<GeoP
 {
     public void Configure(EntityTypeBuilder<GeoProvinceTranslation> builder)
     {
-        builder.ToTable("crm_geoprovincetranslation", "locations");
+        builder.Metadata.SetSchema("locations");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

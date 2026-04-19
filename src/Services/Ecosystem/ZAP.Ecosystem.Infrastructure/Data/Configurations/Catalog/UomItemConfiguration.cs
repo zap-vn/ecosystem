@@ -8,7 +8,7 @@ public class UomItemConfiguration : IEntityTypeConfiguration<UomItem>
 {
     public void Configure(EntityTypeBuilder<UomItem> builder)
     {
-        builder.ToTable("crm_uomitem", "catalog");
+        builder.Metadata.SetSchema("catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

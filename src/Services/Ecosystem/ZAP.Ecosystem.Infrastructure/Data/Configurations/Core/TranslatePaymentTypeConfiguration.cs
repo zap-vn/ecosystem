@@ -8,7 +8,7 @@ public class TranslatePaymentTypeConfiguration : IEntityTypeConfiguration<Transl
 {
     public void Configure(EntityTypeBuilder<TranslatePaymentType> builder)
     {
-        builder.ToTable("crm_translatepaymenttype", "core");
+        builder.Metadata.SetSchema("core");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

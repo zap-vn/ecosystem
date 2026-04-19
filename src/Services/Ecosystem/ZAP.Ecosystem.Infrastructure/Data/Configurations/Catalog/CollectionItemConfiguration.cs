@@ -8,7 +8,7 @@ public class CollectionItemConfiguration : IEntityTypeConfiguration<CollectionIt
 {
     public void Configure(EntityTypeBuilder<CollectionItem> builder)
     {
-        builder.ToTable("crm_collectionitem", "catalog");
+        builder.Metadata.SetSchema("catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

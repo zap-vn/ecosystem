@@ -8,7 +8,7 @@ public class InventoryItemConfiguration : IEntityTypeConfiguration<InventoryItem
 {
     public void Configure(EntityTypeBuilder<InventoryItem> builder)
     {
-        builder.ToTable("crm_inventoryitem", "inventory");
+        builder.Metadata.SetSchema("inventory");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

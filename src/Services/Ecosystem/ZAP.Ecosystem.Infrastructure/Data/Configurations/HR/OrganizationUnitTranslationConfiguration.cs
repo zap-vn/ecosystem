@@ -8,7 +8,7 @@ public class OrganizationUnitTranslationConfiguration : IEntityTypeConfiguration
 {
     public void Configure(EntityTypeBuilder<OrganizationUnitTranslation> builder)
     {
-        builder.ToTable("crm_organizationunittranslation", "hr");
+        builder.Metadata.SetSchema("hr");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

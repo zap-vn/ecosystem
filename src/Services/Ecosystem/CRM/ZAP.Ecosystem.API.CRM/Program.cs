@@ -65,7 +65,8 @@ builder.Services.AddMediatR(cfg => {
 
 builder.Services.AddDbContext<EcosystemDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Ecosystem"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Ecosystem"))
+           .UseSnakeCaseNamingConvention();
 });
 
 // Configure Generic Repository

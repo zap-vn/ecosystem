@@ -8,7 +8,7 @@ public class ProductTypeItemConfiguration : IEntityTypeConfiguration<ProductType
 {
     public void Configure(EntityTypeBuilder<ProductTypeItem> builder)
     {
-        builder.ToTable("crm_producttypeitem", "catalog");
+        builder.Metadata.SetSchema("catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

@@ -8,7 +8,7 @@ public class ReportTemplateTranslationConfiguration : IEntityTypeConfiguration<R
 {
     public void Configure(EntityTypeBuilder<ReportTemplateTranslation> builder)
     {
-        builder.ToTable("crm_reporttemplatetranslation", "reports");
+        builder.Metadata.SetSchema("reports");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

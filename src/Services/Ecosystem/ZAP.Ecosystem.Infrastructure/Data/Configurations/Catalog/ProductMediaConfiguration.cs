@@ -8,7 +8,7 @@ public class ProductMediaConfiguration : IEntityTypeConfiguration<ProductMedia>
 {
     public void Configure(EntityTypeBuilder<ProductMedia> builder)
     {
-        builder.ToTable("crm_productmedia", "catalog");
+        builder.Metadata.SetSchema("catalog");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }

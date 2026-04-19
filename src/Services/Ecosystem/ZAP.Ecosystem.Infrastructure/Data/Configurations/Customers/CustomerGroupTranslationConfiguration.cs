@@ -8,7 +8,7 @@ public class CustomerGroupTranslationConfiguration : IEntityTypeConfiguration<Cu
 {
     public void Configure(EntityTypeBuilder<CustomerGroupTranslation> builder)
     {
-        builder.ToTable("crm_customergrouptranslation", "customers");
+        builder.Metadata.SetSchema("customers");
         // builder.HasKey(x => x.id); // Disabled due to ID naming variance
     }
 }
