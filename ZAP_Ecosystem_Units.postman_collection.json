@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "8634b6e9-e188-4a06-a9ef-9d404ca21f61",
+		"name": "ZAP Ecosystem - Units Update",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Units",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_index\": 1,\r\n    \"page_size\": 10,\r\n    \"search\": \"\",\r\n    \"status_id\": 0,\r\n    \"precision\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/api/v1/catalog/units/list",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"catalog",
+								"units",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/api/v1/catalog/units/10",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"catalog",
+								"units",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"BOX\",\r\n    \"name\": \"Thùng\",\r\n    \"precision\": 0,\r\n    \"is_active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/api/v1/catalog/units",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"catalog",
+								"units"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 10,\r\n    \"code\": \"KG_UPDATED\",\r\n    \"name\": \"Kilogram (Sửa đổi)\",\r\n    \"precision\": 2,\r\n    \"is_active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/api/v1/catalog/units/10",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"catalog",
+								"units",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/api/v1/catalog/units/10",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"catalog",
+								"units",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

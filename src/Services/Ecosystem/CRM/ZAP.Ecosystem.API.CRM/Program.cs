@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+using Microsoft.EntityFrameworkCore;
+using ZAP.Ecosystem.Infrastructure.Data;
+>>>>>>> 2d05c185d05501e05ba3d75aa9388bc42e71d197
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,7 +12,10 @@ using ZAP.Ecosystem.Shared.Middlewares;
 using Scalar.AspNetCore;
 using ZAP.Ecosystem.Application.CRM.Behaviors;
 using FluentValidation;
+<<<<<<< HEAD
 using ZAP.Ecosystem.Infrastructure.Data;
+=======
+>>>>>>> 2d05c185d05501e05ba3d75aa9388bc42e71d197
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,7 +75,11 @@ builder.Services.AddDbContext<EcosystemDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Ecosystem"));
 });
 
+<<<<<<< HEAD
 // Configure Generic Repository
+=======
+// Generic repository
+>>>>>>> 2d05c185d05501e05ba3d75aa9388bc42e71d197
 builder.Services.AddScoped(typeof(ZAP.Ecosystem.Shared.Data.IBaseRepository<>), typeof(ZAP.Ecosystem.Shared.Data.BaseRepository<>));
 builder.Services.AddScoped<Microsoft.EntityFrameworkCore.DbContext>(provider => provider.GetRequiredService<EcosystemDbContext>());
 
@@ -108,4 +120,5 @@ app.UseAuthorization();
 app.UseSharedAcceptLanguage();
 
 app.MapControllers();
+
 app.Run();

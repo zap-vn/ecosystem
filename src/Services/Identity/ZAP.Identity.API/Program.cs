@@ -73,7 +73,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
         ValidAudience = builder.Configuration["JwtSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"] ?? "a_very_secret_default_key_at_least_32_chars_long"))
+        IssuerSigningKey = new SymmetricSecurityKey(System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"] ?? "a_very_secret_default_key_at_least_32_chars_long")))
     };
 });
 
@@ -100,7 +100,7 @@ builder.Services.AddMediatR(cfg => {
 
 builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Identity") ?? "Host=136.118.121.105;Port=5432;Username=postgres;Password=Pg@Secret2026!;Database=zap_ecosystem_v110");
+    options.UseNpgsql(builder.Configuration.GetConnectionString("ZAP_Identity") ?? "Host=136.118.121.105;Port=5432;Username=postgres;Password=Pg@Secret2026!;Database=zap_ecosystem_v200");
 });
 
 // Configure Generic Repository
@@ -181,7 +181,7 @@ public class RealTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITo
     public async Task<string> GenerateTokenAsync(dynamic user)
     {
         var secretKey = _config["JwtSettings:SecretKey"] ?? "a_very_secret_default_key_at_least_32_chars_long";
-        var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretKey));
+        var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(secretKey)));
         var credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(securityKey, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256);
 
         var claims = new System.Collections.Generic.List<System.Security.Claims.Claim>
@@ -199,9 +199,12 @@ public class RealTokenGenerator : ZAP.Identity.Application.Common.Interfaces.ITo
             new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "MerchantAdmin")
         };
 
+        var issuer = _config["JwtSettings:Issuer"] ?? "ZAP.Identity.Service";
+        var audience = _config["JwtSettings:Audience"] ?? "ZAP.Ecosystem.Clients";
+
         var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
-            issuer: "CRM.Authentication.Api",
-            audience: "CRM.GateWay.Api",
+            issuer: issuer,
+            audience: audience,
             claims: claims,
             expires: System.DateTime.UtcNow.AddMinutes(120),
             signingCredentials: credentials);

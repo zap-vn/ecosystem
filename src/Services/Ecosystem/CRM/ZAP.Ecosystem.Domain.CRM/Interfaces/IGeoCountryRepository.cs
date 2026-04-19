@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ZAP.Ecosystem.Domain.CRM
 {
-    public interface IGeoCountryRepository : ZAP.Ecosystem.Shared.Data.IBaseRepository<GeoCountry>
+    public interface IGeoCountryRepository
     {
         Task<(IEnumerable<GeoCountry> Items, int Total)> GetPagedAsync(
             int page,

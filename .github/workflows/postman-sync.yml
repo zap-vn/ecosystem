@@ -1,0 +1,29 @@
+name: ZAP Postman Live Sync
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ZAP_Ecosystem_Units.postman_collection.json'
+      - 'ZAP_GCP_Environment.postman_environment.json'
+      - 'sync_postman.js'
+  workflow_dispatch:
+
+jobs:
+  sync-to-postman:
+    name: Publish to Postman Cloud
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Postman Sync Script
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: node sync_postman.js
