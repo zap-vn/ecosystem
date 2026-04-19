@@ -16,8 +16,16 @@ public class User
     public string? email { get; set; }
 
     [Column("username")]
-    [MaxLength(50)]
+    [MaxLength(128)]
+    public string? username { get; set; }
+
+    [Column("phone_number")]
+    [MaxLength(64)]
     public string? phone_number { get; set; }
+
+    [Column("dialing_code")]
+    [MaxLength(10)]
+    public string? dialing_code { get; set; }
 
     [Column("password_hash")]
     [MaxLength(500)]

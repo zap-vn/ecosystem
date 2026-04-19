@@ -65,9 +65,21 @@ namespace ZAP.Identity.Application.Features.Auth.Login.v1.Commands.LoginUser
             }
 
             var hashedInput = HashLegacyPassword(request.Password ?? "");
-            bool isPasswordValid = user.password_hash == hashedInput || 
+            bool isPasswordValid = false;
+            
+            if (!string.IsNullOrEmpty(user.password_hash) && (user.password_hash.StartsWith("$2a$") || user.password_hash.StartsWith("$2b$") || user.password_hash.StartsWith("$2y$"))) 
+            {
+                try {
+                    isPasswordValid = BCrypt.Net.BCrypt.Verify(request.Password, user.password_hash);
+                } catch { } // Fallback to legacy if malformed
+            }
+            
+            if (!isPasswordValid) 
+            {
+                isPasswordValid = user.password_hash == hashedInput || 
                                  user.password_hash == request.Password ||
                                  (request.Password == "password123" && (user.password_hash.StartsWith("NX7+ndWp8gdh") || user.password_hash == "FnB_data"));
+            }
 
             if (!isPasswordValid)
             {
